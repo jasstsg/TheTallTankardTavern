@@ -1,0 +1,24 @@
+﻿@model TheTallTankardTavern.Models.CharacterModel
+@addTagHelper *, TheTallTankardTavern
+
+<style>
+    #character-items input[type=button] {
+        font-weight: bold;
+    }
+</style>
+
+<div id="character-items">
+    <div class="row">
+        <div class="col-md-10">
+            <partial name="/Views/Character/Details/_Items/_EquippedPartial.cshtml" model="Model" />
+        </div>
+        <div class="col-md-2">
+            <partial name="/Views/Character/Details/_Items/_CoinsPartial.cshtml" model="Model" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10">
+            <partial name="/Views/Character/Details/_Items/_InventoryPartial.cshtml" model="Model" />
+        </div>
+    </div>
+</div>

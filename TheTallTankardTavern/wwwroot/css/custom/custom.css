@@ -1,0 +1,82 @@
+﻿.table-hover > tbody > tr:hover,
+.row-hover:hover, 
+.hoverable:hover {
+    background-color: #d0d0ff;
+}
+
+input[type=number],
+input[type=text] {
+    height: 26px;
+}
+
+input.form-control,
+select.form-control {
+    height: 30px;
+    padding: 5px;
+    font-size: small;
+}
+
+header > nav.navbar {
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+footer.footer {
+    line-height: 40px;
+}
+
+table * {
+    font-size: 14px;
+}
+
+th, td {
+    white-space: nowrap;
+}
+
+.action-btn {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 5px;
+}
+
+a.btn.action-btn,
+a.btn.td-action-btn,
+input.btn {
+    font-weight: bold;
+}
+
+.td-action-btn {
+    width: 70px;
+}
+
+label {
+    font-weight: bold;
+}
+
+tr.invalid-row td {
+    background-color: #ffaaaa;
+}
+
+tr.invalid-row:hover td {
+    background-color: #cc7777;
+}
+
+td.skill-proficient {
+    color: blue;
+    font-weight: bold;
+}
+
+td.skill-expert {
+    color: green;
+    font-weight: bold;
+}
+
+.title {
+    margin: 1px;
+}
+
+.subtitle {
+    color: slategrey;
+    font-style: italic;
+    font-size: small;
+}

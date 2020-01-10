@@ -1,0 +1,14 @@
+﻿@model TheTallTankardTavern.Models.CharacterModel
+@addTagHelper *, TheTallTankardTavern
+
+<div id="character-spells">
+    <buttonlink class="action-btn" asp-controller="Spell" asp-action="Index" text="Go to Spells"></buttonlink>
+    <div class="row">
+        <div class="col-md-10">
+            <partial name="/Views/Character/Details/_Spells/_SpellListPartial.cshtml" model="Model" />
+        </div>
+        <div class="col-md-2">
+            <partial name="/Views/Character/Details/_Spells/_SpellSlotsPartial.cshtml" model="Model" />
+        </div>
+    </div>
+</div>

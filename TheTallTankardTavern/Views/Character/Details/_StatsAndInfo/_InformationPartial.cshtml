@@ -1,0 +1,40 @@
+﻿@model TheTallTankardTavern.Models.CharacterModel
+@addTagHelper *, TheTallTankardTavern
+
+<div id="accordion">
+    <div class="card">
+        <div class="card-header hoverable" data-toggle="collapse" data-target="#collapse-information">
+            <strong>Click to toggle Character Information</strong>
+        </div>
+        <div class="collapse" id="collapse-information" data-parent="#accordion">
+            <div class="card-body">
+                <table>
+                    <thead>
+                        <tr>
+                            <th><label>Player</label></th>
+                            <th><label>Character</label></th>
+                            <th><label>Level</label></th>
+                            <th><label>Race</label></th>
+                            <th><label>Class</label></th>
+                            <th><label>Alignment</label></th>
+                            <th><label>Background</label></th>
+                            <th><label>Experience</label></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>@Model.Player_Name</td>
+                            <td>@Model.Name</td>
+                            <td>@Model.Level</td>
+                            <td>@Model.Race @Model.Subrace.AddBraces()</td>
+                            <td>@Model.Class @Model.Subclass.AddBraces()</td>
+                            <td>@Model.Alignment</td>
+                            <td>@(Model.Background ?? "")</td>
+                            <td>@Model.Experience_Points / @Model.NextLevelXP XP</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

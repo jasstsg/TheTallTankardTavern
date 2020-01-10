@@ -1,0 +1,29 @@
+﻿@addTagHelper *, TheTallTankardTavern
+@model TheTallTankardTavern.Models.UserModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+<h1>Login</h1>
+
+<p>@(ViewData["Message"] ?? "")</p>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="Login" asp-action="Login" method="post">
+            <div id="hidden">
+                <hidden asp-for="ID" />
+                <hidden asp-for="Message" />
+                <hidden asp-for="MessageUpdated" />
+            </div>
+            <div class="form-group">
+                <label>Enter your username:</label>
+                <textbox asp-for="Username"></textbox>
+            </div>
+            <submit class="action-btn" text="Log in"></submit>
+            <buttonlink class="action-btn" text="Cancel" asp-controller="Home" asp-action="Index"></buttonlink>
+        </form>
+    </div>
+</div>
+
+

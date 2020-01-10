@@ -1,0 +1,38 @@
+﻿@model IEnumerable<TheTallTankardTavern.Models.BackgroundModel>
+@using TheTallTankardTavern.Configuration
+@using static TheTallTankardTavern.Configuration.Constants
+@addTagHelper *, TheTallTankardTavern
+@{
+    ViewData["Title"] = "Backgrounds";
+}
+
+<partial name="/Views/Shared/Custom/_PopupModalPartial.cshtml" />
+
+<h1>@ViewData["Title"]</h1>
+<partial name="/Views/Shared/Custom/ActionButtons/_CreatePartial.cshtml" />
+
+<table table-hover="true">
+    <thead>
+        <tr>
+            <th><label>Name</label></th>
+            <th><label>Skill Proficiencies</label></th>
+            <th><label>Tool Proficiencies</label></th>
+            <th><label>Languages</label></th>
+            <th><label>Feature</label></th>
+            <partial name="/Views/Shared/Custom/ActionButtons/_ColumnHeaderAddEditDelete.cshtml" />
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (BackgroundModel b in Model)
+        {
+        <tr data-toggle="modal" data-target="#popup-modal" data-title="@b.Name" data-desc="@b.Desc">
+            <td>@b.Name</td>
+            <td>@b.Skill_Proficiencies</td>
+            <td>@b.Tool_Proficiencies</td>
+            <td>@b.Languages</td>
+            <td>@b.Feature</td>
+            <partial name="/Views/Shared/Custom/ActionButtons/_ColumnAddEditDelete.cshtml" model="b" />
+        </tr>
+        }
+    </tbody>
+</table>

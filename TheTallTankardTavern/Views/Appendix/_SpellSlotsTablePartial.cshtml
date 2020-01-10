@@ -1,0 +1,51 @@
+﻿@addTagHelper *, TheTallTankardTavern
+@model int[,]
+
+@{
+    string DisableClass(int slots)
+    {
+        return slots <= 0 ? "slots-0" : "";
+    }
+}
+
+<style type="text/css">
+    .slots-0 {
+        color: #cccccc;
+    }
+
+    th, td {
+        text-align: center;
+    }
+</style>
+
+<table>
+    <thead>
+        <tr>
+            <th class="col-md-1" rowspan="2" style="vertical-align:middle">CHARACTER LEVEL</th>
+            <th colspan="9">SPELL LEVEL</th>
+        </tr>
+        <tr>
+            <th>1</th>
+            <th>2</th>
+            <th>3</th>
+            <th>4</th>
+            <th>5</th>
+            <th>6</th>
+            <th>7</th>
+            <th>8</th>
+            <th>9</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < Model.GetLength(0); i++)
+        {
+            <tr>
+                <td><strong>@(i + 1)</strong></td>
+                @for (int j = 0; j < Model.GetLength(1); j++)
+                {
+                    <td class="@DisableClass(Model[i, j])">@Model[i, j]</td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>

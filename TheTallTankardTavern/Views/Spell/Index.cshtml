@@ -1,0 +1,55 @@
+﻿@model IEnumerable<TheTallTankardTavern.Models.SpellModel>
+@using TheTallTankardTavern.Configuration
+@using static TheTallTankardTavern.Configuration.Constants
+@addTagHelper *, TheTallTankardTavern
+@{
+    ViewData["Title"] = "Spells";
+}
+
+<partial name="/Views/Shared/Custom/_PopupModalPartial.cshtml" />
+
+<h1>@ViewData["Title"]</h1>
+
+
+<partial name="/Views/Shared/Custom/_FilterByClassPartial.cshtml" />
+
+<partial name="/Views/Shared/Custom/ActionButtons/_CreatePartial.cshtml" />
+<table table-hover="true">
+    <thead>
+        <tr>
+            <th><label>Name</label></th>
+            <th><label>School</label></th>
+            <th><label>Level</label></th>
+            <th><label>Range</label></th>
+            <th><label>V</label></th>
+            <th><label>S</label></th>
+            <th><label>M</label></th>
+            <th><label>Duration</label></th>
+            <th><label>Cast Time</label></th>
+            <th><label>Focus</label></th>
+            <th><label>Ritual</label></th>
+            <th><label>Class</label></th>
+            <partial name="/Views/Shared/Custom/ActionButtons/_ColumnHeaderAddEditDelete.cshtml" />
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (SpellModel s in Model)
+        {
+            <tr data-toggle="modal" data-target="#popup-modal" data-title="@s.Name" data-desc="@s.Desc" data-higher-level="@s.Higher_Level_Desc">
+                <td>@s.Name</td>
+                <td>@s.School</td>
+                <td>@s.Level</td>
+                <td>@s.Range</td>
+                <td>@s.V</td>
+                <td>@s.S</td>
+                <td>@s.M</td>
+                <td>@s.Duration</td>
+                <td>@s.Casting_Time</td>
+                <td>@s.Concentration</td>
+                <td>@s.Ritual</td>
+                <td>@s.ClassStringList</td>
+                <partial name="/Views/Shared/Custom/ActionButtons/_ColumnAddEditDelete.cshtml" model="s" />
+            </tr>
+        }
+    </tbody>
+</table>

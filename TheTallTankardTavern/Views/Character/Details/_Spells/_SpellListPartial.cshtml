@@ -1,0 +1,46 @@
+﻿@model TheTallTankardTavern.Models.CharacterModel
+@addTagHelper *, TheTallTankardTavern
+
+@{ 
+    IEnumerable<SpellModel> CharacterSpells = SpellDataContext.Where(spell => Model.Spells.Contains(spell.ID))
+        .OrderBy(s => s.Level).ThenBy(s => s.Name);
+}
+
+<div>KNOWN SPELLS</div>
+<table id="character-spells-list" table-hover="true">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>School</th>
+            <th>Level</th>
+            <th>Range</th>
+            <th>V</th>
+            <th>S</th>
+            <th>M</th>
+            <th>Duration</th>
+            <th>Cast Time</th>
+            <th>Focus</th>
+            <th>Ritual</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(SpellModel Spell in CharacterSpells)
+        {
+        <tr data-toggle="modal" data-target="#popup-modal" data-title="@Spell.Name" data-desc="@Spell.Desc">
+            <td>@Spell.Name</td>
+            <td>@Spell.School</td>
+            <td>@Spell.Level</td>
+            <td>@Spell.Range</td>
+            <td>@Spell.V</td>
+            <td>@Spell.S</td>
+            <td>@Spell.M</td>
+            <td>@Spell.Duration</td>
+            <td>@Spell.Casting_Time</td>
+            <td>@Spell.Concentration</td>
+            <td>@Spell.Ritual</td>
+            <td><button class="td-action-btn" value="Forget" onclick="removeSpell('@Model.ID', '@Spell.ID', this)"></button></td>
+        </tr>
+        }
+    </tbody>
+</table>

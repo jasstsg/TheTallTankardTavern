@@ -1,0 +1,27 @@
+﻿@model TheTallTankardTavern.Models.CharacterModel
+@using TTT.Enumerator
+@using TheTallTankardTavern.Enumerators
+@addTagHelper *, TheTallTankardTavern
+
+<style>
+    #character-other-stats label {
+        font-weight: bold;
+    }
+</style>
+
+<table id="character-other-stats">
+    <thead>
+        <tr>
+            <th>Known Languages</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (LANGUAGES lang in ModelListHelper.AllValues<LANGUAGES>())
+        {
+            if (Model.Languages[lang])
+            {
+                <tr><td>@lang.EnumToString()</td></tr>
+            }
+        }
+    </tbody>
+</table>

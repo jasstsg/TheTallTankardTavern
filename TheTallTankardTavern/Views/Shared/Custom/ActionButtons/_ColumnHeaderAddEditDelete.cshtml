@@ -1,0 +1,8 @@
+﻿@using TheTallTankardTavern.Configuration
+
+<th class="td-action-btn">&nbsp;</th>
+@if (ContextUser.HasRole(Constants.ROLES.Dungeon_Master))
+{
+    <th class="td-action-btn">&nbsp;</th>
+    <th class="td-action-btn">&nbsp;</th>
+}

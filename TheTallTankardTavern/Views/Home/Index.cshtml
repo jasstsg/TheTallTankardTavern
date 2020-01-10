@@ -1,0 +1,19 @@
+﻿@addTagHelper *, TheTallTankardTavern
+@using TheTallTankardTavern.Configuration
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@if (ContextUser.IsAuthenticated)
+{
+    <div>
+        <buttonlink class="font-weight-bold" asp-controller="Character" asp-action="Index" text="Go to my Characters"></buttonlink>
+    </div>
+}
+else
+{
+    <div>
+        <buttonlink class="font-weight-bold" asp-controller="Login" asp-action="Index" text="Click here to log in"></buttonlink>
+    </div>
+}

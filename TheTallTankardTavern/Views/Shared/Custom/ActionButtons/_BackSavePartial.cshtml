@@ -1,0 +1,17 @@
+﻿@addTagHelper *, TheTallTankardTavern
+@using static TheTallTankardTavern.Configuration.Constants.TAGHELPER.SUBMIT_TEXT
+
+<style>
+    #back-save-buttons a.btn {
+        width: 70px;
+    }
+    #back-save-buttons input[type=submit].btn {
+        width: 130px;
+    }
+</style>
+
+<span id="back-save-buttons">
+    <buttonlink class="action-btn" asp-action="Index" text="Back"></buttonlink>
+    <submit class="action-btn" text="@SAVE_AND_FINISH"></submit>
+    <submit class="action-btn" text="@SAVE_AND_CONTINUE"></submit>
+</span>

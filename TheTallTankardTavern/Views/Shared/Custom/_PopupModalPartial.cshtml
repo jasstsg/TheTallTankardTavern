@@ -1,0 +1,30 @@
+﻿@addTagHelper *, TheTallTankardTavern
+
+<style>
+    .modal-dialog {
+        max-width: 1000px;
+    }
+
+    .modal-body textarea {
+        width: 100%;
+        resize: none;
+        border: none;
+    }
+</style>
+
+<div class="modal fade" id="popup-modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+                <textarea class="modal-desc" readonly="readonly" rows="10"></textarea>
+                <textarea class="modal-higher-level" readonly="readonly" rows="5"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button value="Close" data-dismiss="modal"></button>
+            </div>
+        </div>
+    </div>
+</div>

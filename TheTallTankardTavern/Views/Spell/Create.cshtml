@@ -1,0 +1,73 @@
+﻿@model TheTallTankardTavern.Models.SpellModel
+@addTagHelper *, TheTallTankardTavern
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<form asp-action="Save" method="post">
+    <hidden asp-for="ID"></hidden>
+    <partial name="/Views/Shared/Custom/ActionButtons/_BackSavePartial.cshtml" />
+    <table>
+        <thead>
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><label asp-for="Name"></label></td>
+                <td><textbox asp-for="Name"></textbox></td>
+                <td><label asp-for="Verbal_Components"></label></td>
+                <td><input type="checkbox" asp-for="Verbal_Components" /></td>
+            </tr>
+            <tr>
+                <td><label asp-for="School"></label></td>
+                <td><select asp-for="School" asp-items="SelectListHelper.GetMagicSchoolSelectList()"></select></td>
+                <td><label asp-for="Somatic_Components"></label></td>
+                <td><input type="checkbox" asp-for="Somatic_Components" /></td>
+            </tr>
+            <tr>
+                <td><label asp-for="Level"></label></td>
+                <td><numberbox asp-for="Level" min="0" max="9"></numberbox></td>
+                <td><label asp-for="Material_Components"></label></td>
+                <td><input type="checkbox" asp-for="Material_Components" /></td>
+            </tr>
+            <tr>
+                <td><label asp-for="Range"></label></td>
+                <td><textbox asp-for="Range"></textbox></td>
+                <td><label asp-for="Concentration"></label></td>
+                <td><input type="checkbox" asp-for="Concentration" /></td>
+            </tr>
+            <tr>
+                <td><label asp-for="Duration"></label></td>
+                <td><textbox asp-for="Duration"></textbox></td>
+                <td><label asp-for="Ritual"></label></td>
+                <td><input type="checkbox" asp-for="Ritual" /></td>
+            </tr>
+            <tr>
+                <td><label asp-for="Casting_Time"></label></td>
+                <td><textbox asp-for="Casting_Time"></textbox></td>
+                <td><label asp-for="IsHomebrew"></label></td>
+                <td><input type="checkbox" asp-for="IsHomebrew" /></td>
+            </tr>
+            <tr>
+                <td><label asp-for="Classes"></label></td>
+                <td><textbox asp-for="Classes_Setter"></textbox></td>
+                <td><label asp-for="Subclasses"></label></td>
+                <td><textbox asp-for="Subclasses_Setter"></textbox></td>
+            </tr>
+            <tr>
+                <td><label asp-for="Desc"></label></td>
+                <td colspan="3"><textarea asp-for="Desc" style="width:100%" rows="8"></textarea></td>
+            </tr>
+            <tr>
+                <td><label asp-for="Higher_Level_Desc"></label></td>
+                <td colspan="3"><textarea asp-for="Higher_Level_Desc" style="width:100%" rows="8"></textarea></td>
+            </tr>
+        </tbody>
+    </table>
+</form>
+

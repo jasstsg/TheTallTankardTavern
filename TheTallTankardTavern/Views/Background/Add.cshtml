@@ -1,0 +1,41 @@
+﻿@addTagHelper *, TheTallTankardTavern
+
+@using TheTallTankardTavern.Configuration
+@using static TheTallTankardTavern.Configuration.ApplicationSettings
+@using static TheTallTankardTavern.Configuration.Constants
+
+@{
+    ViewData["Title"] = "Add";
+}
+
+@{
+    BackgroundModel Background = BackgroundDataContext.GetModelFromID((string)ViewData["id"]);
+}
+
+<h5>Add @Background.Name to a Character</h5>
+<buttonlink class="font-weight-bold" asp-action="Index" text="Cancel"></buttonlink>
+<br />
+<br />
+<table>
+    <thead>
+        <tr>
+            <th>Player</th>
+            <th>Character</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (CharacterModel Character in ContextUser.GetContextCharacters)
+        {
+            <tr>
+                <td>@Character.Player_Name</td>
+                <td>@Character.Name</td>
+                <td>
+                    <buttonlink class="td-action-btn" asp-controller="Character" asp-action="AddModel" text="Add"
+                                asp-route-cid="@Character.ID" asp-route-id="@Background.ID" asp-route-type="@MODEL_TYPES.BACKGROUND">
+                    </buttonlink>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

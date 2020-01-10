@@ -1,0 +1,42 @@
+﻿@model TheTallTankardTavern.Models.CharacterModel
+@using TheTallTankardTavern.Helpers
+@using static TheTallTankardTavern.Configuration.ApplicationSettings
+@addTagHelper *, TheTallTankardTavern
+
+@*<partial name="/Views/Shared/Custom/_PopupModalPartial.cshtml" />*@
+
+<div>
+    EQUIPPED ITEMS [Weapon Slots: @Model.Equipment.Weapon_Slots_Used / @Model.Equipment.Weapon_Slots_Max] (Weapon Slots Per Weapon Size: 3 - Large, 2 - Medium, 1 - Small)
+</div>
+<table id="character-items-equipped" table-hover="true">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Attack</th>
+            <th>Damage</th>
+            <th>AC</th>
+            <th>Weight</th>
+            <th>Damage/Resistance Type</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (string iid in Model.Equipment.OrderBy(i => ItemDataContext.GetModelFromID(i).Name))
+        {
+            ItemModel Item = ItemDataContext.GetModelFromID(iid);
+            <tr data-toggle="modal" data-target="#popup-modal" data-title="@Item.Name" data-desc="@(Item.Desc + Item.Weapon_Trait_Desc)">
+                <td>@Item.Name</td>
+                <td>@Item.Type</td>
+                <td>@Item.Attack</td>
+                <td>@Item.Damage</td>
+                <td>@Item.Armour_Class</td>
+                <td>@Item.Weight_Class</td>
+                <td>@Item.Damage_Types.ToString()</td>
+                <td><button class="td-action-btn" value="Unequip" onclick="unequipItem('@Model.ID', '@Item.ID')"></button></td>
+                <td><button class="td-action-btn" value="Remove" onclick="removeItemFromEquipment('@Model.ID', '@Item.ID')"></button></td>
+            </tr>
+        }
+    </tbody>
+</table>

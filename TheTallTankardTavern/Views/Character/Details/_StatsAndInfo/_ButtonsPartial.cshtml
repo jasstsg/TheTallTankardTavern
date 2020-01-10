@@ -1,0 +1,14 @@
+﻿@model TheTallTankardTavern.Models.CharacterModel
+@addTagHelper *, TheTallTankardTavern
+
+<style>
+    #character-buttons a.btn {
+        width: 45%;
+        margin: 7px;
+    }
+</style>
+
+<div id="character-buttons">
+    <buttonlink class="action-btn" asp-action="TakeLongRest" asp-route-id="@Model.ID" text="Take Long Rest"></buttonlink>
+    <buttonlink class="action-btn" asp-action="UseHitDie" asp-route-id="@Model.ID" text="Use Hit Die"></buttonlink>
+</div>

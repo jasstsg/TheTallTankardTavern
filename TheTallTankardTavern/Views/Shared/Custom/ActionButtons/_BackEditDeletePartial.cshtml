@@ -1,0 +1,20 @@
+﻿@using TheTallTankardTavern.Configuration
+@using static TheTallTankardTavern.Configuration.Constants
+
+@addTagHelper *, TheTallTankardTavern
+@model TheTallTankardTavern.Models.BaseModel
+
+<style>
+    #back-edit-delete-buttons .btn {
+        width: 70px;
+    }
+</style>
+
+<span id="back-edit-delete-buttons">
+    <buttonlink class="action-btn" asp-action="Index" text="Back"></buttonlink>
+    @if (ContextUser.IsAdministrator || ContextUser.HasUsername(((Model as CharacterModel)?.Player_Name ?? "")))
+    {
+        <buttonlink class="action-btn" asp-action="Edit" text="Edit" asp-route-id="@Model.ID"></buttonlink>
+        <buttonlink class="action-btn" asp-action="Delete" text="Delete" asp-route-id="@Model.ID"></buttonlink>
+    }
+</span>

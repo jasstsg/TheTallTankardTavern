@@ -1,0 +1,35 @@
+﻿@model IEnumerable<TheTallTankardTavern.Models.UserModel>
+@using TheTallTankardTavern.Configuration
+@using static TheTallTankardTavern.Configuration.Constants
+@addTagHelper *, TheTallTankardTavern
+@{
+    ViewData["Title"] = "Users";
+}
+
+<h1>@ViewData["Title"]</h1>
+<hr />
+<partial name="/Views/Shared/Custom/ActionButtons/_CreatePartial.cshtml" />
+
+<table table-hover="true">
+    <thead>
+        <tr>
+            <th><label>Name</label></th>
+            <th><label>Username</label></th>
+            <th><label>Role</label></th>
+            <th><label>ID</label></th>
+            <partial name="/Views/Shared/Custom/ActionButtons/_ColumnHeaderEditDelete.cshtml" />
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (UserModel u in Model)
+        {
+            <tr onclick="goTo('User', 'Details', '@u.ID')">
+                <td>@u.Name</td>
+                <td>@u.Username</td>
+                <td>@u.Role</td>
+                <td>@u.ID</td>
+                <partial name="/Views/Shared/Custom/ActionButtons/_ColumnEditDelete.cshtml" model="u" />
+            </tr>
+        }
+    </tbody>
+</table>

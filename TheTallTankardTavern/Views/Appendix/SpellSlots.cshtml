@@ -1,0 +1,43 @@
+﻿@{
+    ViewData["Title"] = "SpellSlots";
+}
+@using static TheTallTankardTavern.Configuration.Constants.SPELL_SLOTS
+
+<h1>Spell Slots</h1>
+<br />
+<div class="row">
+    <div class="col-md-12">
+        <ul class="nav nav-tabs">
+            <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#full-caster"><strong>Full Caster</strong></a></li>
+            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#half-caster"><strong>Half Caster</strong></a></li>
+            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#third-caster"><strong>Third Caster</strong></a></li>
+            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#pact-caster"><strong>Pact Caster</strong></a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active" id="full-caster">
+                <br />
+                <p>Bards, Clerics, Druids, Sorcerers, and Wizards are full casters.</p>
+                <br />
+                <partial name="/Views/Appendix/_SpellSlotsTablePartial.cshtml" model="FULL_CASTER" />
+            </div>
+            <div class="tab-pane" id="half-caster">
+                <br />
+                <p>Paladins and Rangers are half casters.</p>
+                <br />
+                <partial name="/Views/Appendix/_SpellSlotsTablePartial.cshtml" model="HALF_CASTER" />
+            </div>
+            <div class="tab-pane" id="third-caster">
+                <br />
+                <p>Elderich Knight Fighters and Arcane Trickster Rogues are third casters.</p>
+                <br />
+                <partial name="/Views/Appendix/_SpellSlotsTablePartial.cshtml" model="THIRD_CASTER" />
+            </div>
+            <div class="tab-pane" id="pact-caster">
+                <br />
+                <p>Warlocks are pact casters.</p>
+                <br />
+                <partial name="/Views/Appendix/_SpellSlotsTablePartial.cshtml" model="PACT_CASTER" />
+            </div>
+        </div>
+    </div>
+</div>

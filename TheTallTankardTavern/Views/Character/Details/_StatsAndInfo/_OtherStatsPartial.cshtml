@@ -1,0 +1,55 @@
+﻿@model TheTallTankardTavern.Models.CharacterModel
+@addTagHelper *, TheTallTankardTavern
+
+<style>
+    #character-other-stats label {
+        font-weight: bold;
+    }
+</style>
+
+<table id="character-other-stats">
+    <thead>
+        <tr>
+            <th>Other Stats</th>
+            <th width="100px"></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><label asp-for="Hit_Points_Remaining"></label></td>
+            <td><numberbox asp-for="Hit_Points_Remaining" min="0" max="@Model.MaxHitPoints" onchange="quickSaveHitPoints('@Model.ID', this)"></numberbox></td>
+            <td>/ @Model.MaxHitPoints HP</td>
+        </tr>
+        <tr>
+            <td><label asp-for="Hit_Dice_Remaining"></label></td>
+            <td><numberbox asp-for="Hit_Dice_Remaining" min="0" max="@Model.Level" onchange="quickSaveHitDice('@Model.ID', this)"></numberbox></td>
+            <td>/ @Model.TotalHitDice</td>
+        </tr>
+        <tr>
+            <td><label asp-for="Temp_Hit_Points"></label></td>
+            <td><numberbox asp-for="Temp_Hit_Points" min="0" onchange="quickSaveTempHitPoints('@Model.ID', this)"></numberbox></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><label asp-for="Proficiency_Bonus"></label></td>
+            <td>@Model.Proficiency_Bonus</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><label asp-for="Passive_Perception"></label></td>
+            <td>@Model.Passive_Perception</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><label asp-for="TotalAC"></label></td>
+            <td>@Model.TotalAC</td>
+            <td>(Base: @Model.BaseAC)</td>
+        </tr>
+        <tr>
+            <td><label asp-for="Initiative"></label></td>
+            <td>@Model.Initiative</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>

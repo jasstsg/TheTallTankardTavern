@@ -1,0 +1,66 @@
+﻿@model TheTallTankardTavern.Models.CharacterModel
+@addTagHelper *, TheTallTankardTavern
+
+<style>
+    label {
+        font-weight: bold;
+    }
+</style>
+
+<div>
+    <table>
+        <thead>
+            <tr>
+                <th width="120px">Character Information</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><label asp-for="Player_Name"></label></td>
+                <td>@Model.Player_Name</td>
+            </tr>
+            <tr>
+                <td><label asp-for="Character_Name"></label></td>
+                <td><textbox asp-for="Character_Name"></textbox></td>
+            </tr>
+            <tr>
+                <td><label asp-for="Level"></label></td>
+                <td>@Model.Level</td>
+            </tr>
+            <tr>
+                <td><label asp-for="Race"></label></td>
+                <td><select asp-for="Race" asp-items="SelectListHelper.GetRaceSelectList()" id="character-race" onchange="updateSubraceDropdown()"></select></td>
+            </tr>
+            <tr>
+                <td><label asp-for="Subrace"></label></td>
+                <td><select asp-for="Subrace" asp-items="@SelectListHelper.GetSubraceSelectList(Model.Race)" id="character-subrace"></select></td>
+            </tr>
+            <tr>
+                <td><label asp-for="Class"></label></td>
+                <td><select asp-for="Class" asp-items="SelectListHelper.GetClassSelectList()" id="character-class" onchange="updateSubclassDropdown()"></select></td>
+            </tr>
+            <tr>
+                <td><label asp-for="Subclass"></label></td>
+                <td><select asp-for="Subclass" asp-items="@SelectListHelper.GetSubclassSelectList(Model.Class)" id="character-subclass"></select></td>
+            </tr>
+            <tr>
+                <td><label asp-for="Alignment"></label></td>
+                <td><select asp-for="Alignment" asp-items="SelectListHelper.GetAlignmentSelectList()"></select></td>
+     
+            </tr>
+            <tr>
+                <td><label asp-for="Experience_Points"></label></td>
+                <td><numberbox asp-for="Experience_Points" min="0"></numberbox></td>
+            </tr>
+            <tr>
+                <td><label asp-for="Speed"></label></td>
+                <td><textbox asp-for="Speed"></textbox></td>
+            </tr>
+            <tr>
+                <td><label asp-for="Backstory_Link"></label></td>
+                <td><textbox asp-for="Backstory_Link"></textbox></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,35 @@
+﻿@model TheTallTankardTavern.Models.CharacterModel
+@addTagHelper *, TheTallTankardTavern
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<div class="col-md-12" id="character-create">
+    <form asp-action="Save" method="post">
+
+        <div id="character-hidden">
+            <hidden asp-for="ID"></hidden>
+            <hidden asp-for="Player_Name"></hidden>
+            <hidden asp-for="Hit_Points_Remaining"></hidden>
+            <hidden asp-for="Hit_Dice_Remaining"></hidden>
+            <hidden asp-for="Temp_Hit_Points"></hidden>
+
+            @for (int i = 0; i < Model.Spells.Count(); i++)
+            {<hidden asp-for="Spells[i]"></hidden>}
+            @for (int i = 0; i < Model.Features.Count(); i++)
+            {<hidden asp-for="Features[i]"></hidden>}
+            @for (int i = 0; i < Model.Equipment.Count(); i++)
+            {<hidden asp-for="Equipment[i]"></hidden>}
+            @for (int i = 0; i < Model.Inventory.Count(); i++)
+            {<hidden asp-for="Inventory[i]"></hidden>}
+            @for (int i = 0; i < Model.SpellSlots.Count(); i++)
+            {<hidden asp-for="SpellSlots[i]"></hidden>}
+        </div>
+
+        <partial name="/Views/Shared/Custom/ActionButtons/_BackSavePartial.cshtml" />
+        <partial name="/Views/Character/Create/_CreatePartial.cshtml" model="Model" />
+    </form>
+</div>
+
+
+

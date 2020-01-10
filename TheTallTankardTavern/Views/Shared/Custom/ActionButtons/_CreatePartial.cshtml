@@ -1,0 +1,15 @@
+﻿@using TheTallTankardTavern.Configuration
+@using static TheTallTankardTavern.Configuration.Constants
+@addTagHelper *, TheTallTankardTavern
+<style>
+    #create-button .action-btn {
+        width: 70px;
+    }
+</style>
+
+@if (ContextUser.HasRole(ROLES.Dungeon_Master) || (Model is IEnumerable<CharacterModel>))
+{
+    <span id="create-button">
+        <buttonlink class="action-btn" asp-action="Create" text="Create"></buttonlink>
+    </span>
+}

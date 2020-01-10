@@ -1,0 +1,19 @@
+﻿@model TheTallTankardTavern.Models.BaseModel
+@using TheTallTankardTavern.Configuration
+@addTagHelper *, TheTallTankardTavern
+
+<td>
+    <buttonlink onclick="event.stopPropagation()" class="td-action-btn" 
+                asp-action="Add" text="Add" asp-route-id="@Model.ID"></buttonlink>
+</td>
+@if (ContextUser.HasRole(Constants.ROLES.Dungeon_Master))
+{
+    <td>
+        <buttonlink onclick="event.stopPropagation()" class="td-action-btn" 
+                asp-action="Edit" text="Edit" asp-route-id="@Model.ID"></buttonlink>
+    </td>
+    <td>
+        <buttonlink onclick="event.stopPropagation()" class="td-action-btn" 
+                asp-action="Delete" text="Delete" asp-route-id="@Model.ID"></buttonlink>
+    </td>
+}

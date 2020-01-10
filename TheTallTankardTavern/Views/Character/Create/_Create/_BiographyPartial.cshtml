@@ -1,0 +1,81 @@
+﻿@model TheTallTankardTavern.Models.CharacterModel
+@addTagHelper *, TheTallTankardTavern
+<style>
+    #character-biography textarea {
+        width: 100%;
+        border: 1px solid lightgray;
+    }
+</style>
+
+<div id="character-biography" class="col-md-6">
+    <table>
+        <thead>
+            <tr>
+                <th style="width:100px">Characteristics</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><label asp-for="Bio.Personality"></label></td>
+                <td><textarea asp-for="Bio.Personality" rows="4"></textarea></td>
+            </tr>
+            <tr>
+                <td><label asp-for="Bio.Ideals"></label></td>
+                <td><textarea asp-for="Bio.Ideals" rows="4"></textarea></td>
+            </tr>
+            <tr>
+                <td><label asp-for="Bio.Bonds"></label></td>
+                <td><textarea asp-for="Bio.Bonds" rows="4"></textarea></td>
+            </tr>
+            <tr>
+                <td><label asp-for="Bio.Flaws"></label></td>
+                <td><textarea asp-for="Bio.Flaws" rows="4"></textarea></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="col-md-6">
+    <table>
+        <thead>
+            <tr>
+                <th style="width:100px">Physical Attributes</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><label asp-for="Bio.Age"></label></td>
+                <td><textbox asp-for="Bio.Age"></textbox></td>
+            </tr>
+            <tr>
+                <td><label asp-for="Bio.Height"></label></td>
+                <td><textbox asp-for="Bio.Height"></textbox></td>
+            </tr>
+            <tr>
+                <td><label asp-for="Bio.Weight"></label></td>
+                <td><textbox asp-for="Bio.Weight"></textbox></td>
+            </tr>
+            <tr>
+                <td><label asp-for="Bio.Skin_Colour"></label></td>
+                <td><textbox asp-for="Bio.Skin_Colour"></textbox></td>
+            </tr>
+            <tr>
+                <td><label asp-for="Bio.Eye_Colour"></label></td>
+                <td><textbox asp-for="Bio.Eye_Colour"></textbox></td>
+            </tr>
+            <tr>
+                <td><label asp-for="Bio.Hair_Colour"></label></td>
+                <td><textbox asp-for="Bio.Hair_Colour"></textbox></td>
+            </tr>
+            <tr>
+                <td><label asp-for="Bio.Clothing"></label></td>
+                <td><textarea asp-for="Bio.Clothing" rows="5"></textarea></td>
+            </tr>
+            <tr>
+                <td><label asp-for="Bio.Other"></label></td>
+                <td><textarea asp-for="Bio.Other" rows="5"></textarea></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

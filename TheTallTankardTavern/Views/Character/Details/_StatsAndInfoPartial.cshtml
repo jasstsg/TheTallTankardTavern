@@ -1,0 +1,29 @@
+﻿@model TheTallTankardTavern.Models.CharacterModel
+@addTagHelper *, TheTallTankardTavern
+
+<div class="row">
+    <div class="col-md-12">
+        @*<partial name="/Views/Character/Details/_StatsAndInfo/_InformationPartial.cshtml" model="Model" />*@
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <partial name="/Views/Character/Details/_StatsAndInfo/_ScoresPartial.cshtml" model="Model" />
+        <partial name="/Views/Character/Details/_StatsAndInfo/_SkillsPartial.cshtml" model="Model" />
+    </div>
+    <div class="col-md-4">
+        <div class="row">
+            <div class="col-md-12">
+                <partial name="/Views/Character/Details/_StatsAndInfo/_ButtonsPartial.cshtml" model="Model" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <partial name="/Views/Character/Details/_StatsAndInfo/_OtherStatsPartial.cshtml" model="Model" />
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <partial name="/Views/Character/Details/_StatsAndInfo/_LanguagesPartial.cshtml" model="Model" />
+    </div>
+</div>

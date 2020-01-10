@@ -1,0 +1,20 @@
+﻿@model TheTallTankardTavern.Models.CharacterModel
+@addTagHelper *, TheTallTankardTavern
+
+<style>
+    #character-notes-textarea {
+        resize: none;
+        border: 1px solid lightgray;
+        background: transparent;
+        width: 100%;
+    }
+</style>
+
+<div>
+    <button class="action-btn" value="Save" onclick="saveNotes('@Model.Notes')"></button>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <span id="save-message"></span>
+</div>
+<div>
+    <textarea id="character-notes-textarea" asp-for="Notes" rows="20"></textarea>
+</div>

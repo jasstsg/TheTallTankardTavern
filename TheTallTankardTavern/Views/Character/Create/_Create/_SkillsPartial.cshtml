@@ -1,0 +1,93 @@
+﻿@model TheTallTankardTavern.Models.CharacterModel
+@using TheTallTankardTavern.Helpers
+@using static TheTallTankardTavern.Configuration.Constants
+@addTagHelper *, TheTallTankardTavern
+
+<style>
+    .skill-label {
+        width: 130px;
+        font-weight: bold;
+    }
+</style>
+
+<table>
+    <thead>
+        <tr>
+            <th colspan="2">Skill Proficiencies</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="skill-label">Acrobatics</td>
+            <td><select asp-for="Acrobatics" asp-items="SelectListHelper.GetSkillSelectList()"></select></td>
+        </tr>
+        <tr>
+            <td class="skill-label">Animal Handling</td>
+            <td><select asp-for="Animal_Handling" asp-items="SelectListHelper.GetSkillSelectList()"></select></td>
+        </tr>
+        <tr>
+            <td class="skill-label">Arcana</td>
+            <td><select asp-for="Arcana" asp-items="SelectListHelper.GetSkillSelectList()"></select></td>
+        </tr>
+        <tr>
+            <td class="skill-label">Athletics</td>
+            <td><select asp-for="Athletics" asp-items="SelectListHelper.GetSkillSelectList()"></select></td>
+        </tr>
+        <tr>
+            <td class="skill-label">Deception</td>
+            <td><select asp-for="Deception" asp-items="SelectListHelper.GetSkillSelectList()"></select></td>
+        </tr>
+        <tr>
+            <td class="skill-label">History</td>
+            <td><select asp-for="History" asp-items="SelectListHelper.GetSkillSelectList()"></select></td>
+        </tr>
+        <tr>
+            <td class="skill-label">Insight</td>
+            <td><select asp-for="Insight" asp-items="SelectListHelper.GetSkillSelectList()"></select></td>
+        </tr>
+        <tr>
+            <td class="skill-label">Intimidation</td>
+            <td><select asp-for="Intimidation" asp-items="SelectListHelper.GetSkillSelectList()"></select></td>
+        </tr>
+        <tr>
+            <td class="skill-label">Investigation</td>
+            <td><select asp-for="Investigation" asp-items="SelectListHelper.GetSkillSelectList()"></select></td>
+        </tr>
+        <tr>
+            <td class="skill-label">Medicine</td>
+            <td><select asp-for="Medicine" asp-items="SelectListHelper.GetSkillSelectList()"></select></td>
+        </tr>
+        <tr>
+            <td class="skill-label">Nature</td>
+            <td><select asp-for="Nature" asp-items="SelectListHelper.GetSkillSelectList()"></select></td>
+        </tr>
+        <tr>
+            <td class="skill-label">Perception</td>
+            <td><select asp-for="Perception" asp-items="SelectListHelper.GetSkillSelectList()"></select></td>
+        </tr>
+        <tr>
+            <td class="skill-label">Performance</td>
+            <td><select asp-for="Performance" asp-items="SelectListHelper.GetSkillSelectList()"></select></td>
+        </tr>
+        <tr>
+            <td class="skill-label">Persuasion</td>
+            <td><select asp-for="Persuasion" asp-items="SelectListHelper.GetSkillSelectList()"></select></td>
+        </tr>
+        <tr>
+            <td class="skill-label">Religion</td>
+            <td><select asp-for="Religion" asp-items="SelectListHelper.GetSkillSelectList()"></select></td>
+        </tr>
+        <tr>
+            <td class="skill-label">Sleight Of Hand</td>
+            <td><select asp-for="Sleight_Of_Hand" asp-items="SelectListHelper.GetSkillSelectList()"></select></td>
+        </tr>
+        <tr>
+            <td class="skill-label">Stealth</td>
+            <td><select asp-for="Stealth" asp-items="SelectListHelper.GetSkillSelectList()"></select></td>
+        </tr>
+        <tr>
+            <td class="skill-label">Survival</td>
+            <td><select asp-for="Survival" asp-items="SelectListHelper.GetSkillSelectList()"></select></td>
+        </tr>
+    </tbody>
+</table>

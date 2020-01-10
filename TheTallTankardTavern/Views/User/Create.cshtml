@@ -1,0 +1,37 @@
+﻿@model TheTallTankardTavern.Models.UserModel
+@addTagHelper *, TheTallTankardTavern
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<div class="col-md-6">
+    <form asp-action="Save" method="post">
+        <hidden asp-for="ID"></hidden>
+        <hidden asp-for="Message"></hidden>
+        <hidden asp-for="MessageUpdated"></hidden>
+        <partial name="/Views/Shared/Custom/ActionButtons/_BackSavePartial.cshtml" />
+        <table>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><label asp-for="Name"></label></td>
+                    <td><textbox asp-for="Name"></textbox></td>
+                </tr>
+                <tr>
+                    <td><label asp-for="Username"></label></td>
+                    <td><textbox asp-for="Username"></textbox></td>
+                </tr>
+                <tr>
+                    <td><label asp-for="Role"></label></td>
+                    <td><select asp-for="Role" asp-items="SelectListHelper.GetRoleSelectList()"></select></td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
+

@@ -1,0 +1,62 @@
+﻿@{
+    ViewData["Title"] = "CharacterAdvancement";
+}
+@addTagHelper *, TheTallTankardTavern
+@model Dictionary<int, int>
+@using TheTallTankardTavern.Helpers
+
+<style type="text/css">
+    th, td {
+        text-align: center;
+    }
+    #character-advancement-classes ul {
+        list-style: none;
+    }
+    #character-advancement-classes a {
+        font-weight: bold;
+    }
+</style>
+
+<h1>Character Advancement</h1>
+
+<div class="row">
+    <div class="col-md-6">
+        <table>
+            <thead>
+                <tr>
+                    <th class="col-md-4">Character Level</th>
+                    <th class="col-md-4">Experience Points</th>
+                    <th class="col-md-4">Proficiency Bonus</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (KeyValuePair<int, int> pair in Model)
+                {
+                    <tr>
+                        <td>@pair.Key</td>
+                        <td>@pair.Value.FormatNumber()</td>
+                        <td>@DnDMathHelper.GetProfBonus(pair.Key)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div id="character-advancement-classes" class="col-md-6">
+        <ul>
+            <li><strong>CLASSES</strong></li>
+            <li><a href="https://www.dndbeyond.com/classes/barbarian">Barbarian</a></li>
+            <li><a href="https://www.dndbeyond.com/classes/bard/">Bard</a></li>
+            <li><a href="https://www.dndbeyond.com/classes/cleric/">Cleric</a></li>
+            <li><a href="https://www.dndbeyond.com/classes/druid">Druid</a></li>
+            <li><a href="https://www.dndbeyond.com/classes/fighter/">Fighter</a></li>
+            <li><a href="https://www.dndbeyond.com/classes/monk/">Monk</a></li>
+            <li><a href="https://www.dndbeyond.com/classes/paladin/">Paladin</a></li>
+            <li><a href="https://www.dndbeyond.com/classes/ranger/">Ranger</a></li>
+            <li><a href="https://www.dndbeyond.com/classes/rogue/">Rogue</a></li>
+            <li><a href="https://www.dndbeyond.com/classes/sorcerer/">Sorcerer</a></li>
+            <li><a href="https://www.dndbeyond.com/classes/warlock/">Warlock</a></li>
+            <li><a href="https://www.dndbeyond.com/classes/wizard/">Wizard</a></li>
+        </ul>
+    </div>
+</div>
+

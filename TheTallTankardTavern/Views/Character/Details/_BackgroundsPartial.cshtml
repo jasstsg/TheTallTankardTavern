@@ -1,0 +1,148 @@
+﻿@model TheTallTankardTavern.Models.CharacterModel
+@addTagHelper *, TheTallTankardTavern
+@using static TheTallTankardTavern.Configuration.ApplicationSettings;
+
+@{
+    BackgroundModel Background = BackgroundDataContext.GetModelFromID(Model.BackgroundID);
+}
+
+<style>
+    #character-background label,
+    #character-biography label {
+        font-weight: bold;
+    }
+
+    #character-background textarea,
+    #character-biography textarea {
+        resize: none;
+        border: none;
+        background: transparent;
+    }
+</style>
+
+<buttonlink class="action-btn" asp-controller="Background" asp-action="Index" text="Go to Backgrounds"></buttonlink>
+<br />
+@if (Background != null)
+{
+
+    <div>BACKGROUND</div>
+    <div class="row" id="character-background">
+        <div class="col-md-12">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width:100px"></th>
+                        <th></th>
+                        <th style="width: 100px "></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><label>Name</label></td>
+                        <td>@Background.Name</td>
+                        <td rowspan="3"><label>Equipment</label></td>
+                        <td rowspan="3"><textarea readonly="readonly" rows="5">@Background.Equipment</textarea></td>
+                    </tr>
+                    <tr>
+                        <td><label>Languages</label></td>
+                        <td>@Background.Languages</td>
+                    </tr>
+                    <tr>
+                        <td><label>Tool Proficiencies</label></td>
+                        <td>@Background.Tool_Proficiencies</td>
+                    </tr>
+                    <tr>
+                        <td><label>Skill Proficiencies</label></td>
+                        <td>@Background.Skill_Proficiencies</td>
+                        <td rowspan="3"><label>Description</label></td>
+                        <td rowspan="3"><textarea readonly="readonly" rows="5">@Background.Desc</textarea></td>
+                    </tr>
+                    <tr>
+                        <td><label>Feature</label></td>
+                        <td>@Background.Feature</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align:center"><label><a href="@Model.Backstory_Link">Click here to go to Backstory Link in OneNote</a></label></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+
+BIOGRAPHY
+<div class="row" id="character-biography">
+    <div class="col-md-6">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width:100px">Characteristics</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><label asp-for="Bio.Personality"></label></td>
+                    <td><textarea readonly="readonly" asp-for="Bio.Personality" rows="5"></textarea></td>
+                </tr>
+                <tr>
+                    <td><label asp-for="Bio.Ideals"></label></td>
+                    <td><textarea readonly="readonly" asp-for="Bio.Ideals" rows="5"></textarea></td>
+                </tr>
+                <tr>
+                    <td><label asp-for="Bio.Bonds"></label></td>
+                    <td><textarea readonly="readonly" asp-for="Bio.Bonds" rows="5"></textarea></td>
+                </tr>
+                <tr>
+                    <td><label asp-for="Bio.Flaws"></label></td>
+                    <td><textarea readonly="readonly" asp-for="Bio.Flaws" rows="5"></textarea></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-6">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width:100px">Physical Attributes</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><label asp-for="Bio.Age"></label></td>
+                    <td>@Model.Bio.Age</td>
+                </tr>
+                <tr>
+                    <td><label asp-for="Bio.Height"></label></td>
+                    <td>@Model.Bio.Height</td>
+                </tr>
+                <tr>
+                    <td><label asp-for="Bio.Weight"></label></td>
+                    <td>@Model.Bio.Weight</td>
+                </tr>
+                <tr>
+                    <td><label asp-for="Bio.Skin_Colour"></label></td>
+                    <td>@Model.Bio.Skin_Colour</td>
+                </tr>
+                <tr>
+                    <td><label asp-for="Bio.Eye_Colour"></label></td>
+                    <td>@Model.Bio.Eye_Colour</td>
+                </tr>
+                <tr>
+                    <td><label asp-for="Bio.Hair_Colour"></label></td>
+                    <td>@Model.Bio.Hair_Colour</td>
+                </tr>
+                <tr>
+                    <td><label asp-for="Bio.Clothing"></label></td>
+                    <td><textarea readonly="readonly" asp-for="Bio.Clothing" rows="5"></textarea></td>
+                </tr>
+                <tr>
+                    <td><label asp-for="Bio.Other"></label></td>
+                    <td><textarea readonly="readonly" asp-for="Bio.Other" rows="5"></textarea></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

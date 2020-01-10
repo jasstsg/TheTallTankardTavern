@@ -1,0 +1,178 @@
+﻿@model TheTallTankardTavern.Models.ItemModel
+@using TTT.Enumerator
+@using TheTallTankardTavern.Enumerators
+@using static TheTallTankardTavern.Enumerators.WEAPON_TRAIT
+@addTagHelper *, TheTallTankardTavern
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<form asp-action="Save" method="post">
+    <hidden asp-for="ID"></hidden>
+    <partial name="/Views/Shared/Custom/ActionButtons/_BackSavePartial.cshtml" />
+    <div class="row">
+        <div class="col-md-3" id="item-properties">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width:100px">Properties</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><label asp-for="Name"></label></td>
+                        <td><textbox asp-for="Name"></textbox></td>
+                    </tr>
+                    <tr>
+                        <td><label asp-for="Item_Type"></label></td>
+                        <td><select asp-for="Item_Type" asp-items="SelectListHelper.GetItemTypesSelectList()"></select></td>
+                    </tr>
+                    <tr>
+                        <td><label asp-for="Material_ID"></label></td>
+                        <td><select asp-for="Material_ID" asp-items="SelectListHelper.GetMaterialsForItemsSelectList()"></select></td>
+                    </tr>
+                    <tr>
+                        <td><label asp-for="Damage_Die"></label></td>
+                        <td><select asp-for="Damage_Die" asp-items="SelectListHelper.GetDamageDieSelectList()"></select></td>
+                    </tr>
+                    <tr>
+                        <td><label asp-for="Units_To_Craft"></label></td>
+                        <td><numberbox asp-for="Units_To_Craft" min="1"></numberbox></td>
+                    </tr>
+                    <tr>
+                        <td><label asp-for="Attack"></label></td>
+                        <td>@Model.Attack</td>
+                    </tr>
+                    <tr>
+                        <td><label asp-for="Damage"></label></td>
+                        <td>@Model.Damage</td>
+                    </tr>
+                    <tr>
+                        <td><label asp-for="Armour_Class"></label></td>
+                        <td>@Model.Armour_Class</td>
+                    </tr>
+                    <tr>
+                        <td><label asp-for="Enchantment_Slots"></label></td>
+                        <td>@Model.Enchantment_Slots</td>
+                    </tr>
+                    <tr>
+                        <td><label asp-for="Weight_Class"></label></td>
+                        <td>@Model.Weight_Class</td>
+                    </tr>
+                    <tr>
+                        <td><label asp-for="Value"></label></td>
+                        <td>@Model.Value.FormatMoney() gp</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-6" id="item-weapon-traits">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Traits</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < ModelListHelper.AllValues<WEAPON_TRAIT>().Length; i++)
+                    {
+                        <tr>
+                            <td><label>@(ModelListHelper.AllValues<WEAPON_TRAIT>()[i].EnumToString())</label></td>
+                            <td><input type="checkbox" asp-for="@Model.Traits[i]" /></td>
+                            <td>
+                                @switch (ModelListHelper.AllValues<WEAPON_TRAIT>()[i])
+                                {
+                                    case Defensive: <numberbox asp-for="Defensive_Value" min="0"></numberbox> break;
+                                    case Ranged: <textbox asp-for="Ranged_Value"></textbox> break;
+                                    case Reach: <textbox asp-for="Reach_Value"></textbox> break;
+                                    case Thrown: <textbox asp-for="Thrown_Value"></textbox> break;
+                                    case Versitile: <select asp-for="Versitile_Value" asp-items="SelectListHelper.GetDamageDieSelectList()"></select> break;
+                                    default: break;
+                                }
+                             </td>
+                        </tr>
+                    }
+                </tbody>
+                @*<tbody>
+                    <tr>
+                        <td><label>@None.EnumToString()</label></td>
+                        <td><input type="checkbox" asp-for="@Model.Traits[0]" /></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><label>@Defensive.EnumToString()</label></td>
+                        <td><input type="checkbox" asp-for="@Model.Traits[1]" /></td>
+                        <td><numberbox asp-for="Defensive_Value" min="0"></numberbox></td>
+                    </tr>
+                    <tr>
+                        <td><label>@Finesse.EnumToString()</label></td>
+                        <td><input type="checkbox" asp-for="@Model.Traits[2]" /></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><label>@Large.EnumToString()</label></td>
+                        <td><input type="checkbox" asp-for="@Model.Traits[3]" /></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><label>@Small.EnumToString()</label></td>
+                        <td><input type="checkbox" asp-for="@Model.Traits[4]" /></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><label>@Ranged.EnumToString()</label></td>
+                        <td><input type="checkbox" asp-for="@Model.Traits[5]" /></td>
+                        <td><textbox asp-for="Ranged_Value"></textbox></td>
+                    </tr>
+                    <tr>
+                        <td><label>@Reach.EnumToString()</label></td>
+                        <td><input type="checkbox" asp-for="@Model.Traits[6]" /></td>
+                        <td><textbox asp-for="Reach_Value"></textbox></td>
+                    </tr>
+                    <tr>
+                        <td><label>@Thrown.EnumToString()</label></td>
+                        <td><input type="checkbox" asp-for="@Model.Traits[7]" /></td>
+                        <td><textbox asp-for="Thrown_Value"></textbox></td>
+                    </tr>
+                    <tr>
+                        <td><label>@Two_Handed.EnumToString()</label></td>
+                        <td><input type="checkbox" asp-for="@Model.Traits[8]" /></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><label>@Versitile.EnumToString()</label></td>
+                        <td><input type="checkbox" asp-for="@Model.Traits[9]" /></td>
+                        <td><select asp-for="Versitile_Value" asp-items="SelectListHelper.GetDamageDieSelectList()"></select></td>
+                    </tr>
+                </tbody>*@
+            </table>
+        </div>
+        <div class="col-md-3" id="item-damage-types">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Damage / Resistance Types</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < ModelListHelper.AllValues<DAMAGE_TYPE>().Length; i++)
+                    {
+                        <tr>
+                            <td><label>@(ModelListHelper.AllValues<DAMAGE_TYPE>()[i].EnumToString())</label></td>
+                            <td><input type="checkbox" asp-for="@Model.Damage_Types[i]" /></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row col-md-12">
+        <label asp-for="Desc"></label>
+        <textarea asp-for="Desc" style="width:100%" rows="5"></textarea>
+    </div>
+</form>
+

@@ -1,0 +1,81 @@
+{
+  "N/A": [
+    "N/A"
+  ],
+  "Barbarian": [
+    "Unspecialized",
+    "Path of the Berserker",
+    "Path of the Totem Warrior"
+  ],
+  "Bard": [
+    "Unspecialized",
+    "College of Lore",
+    "College of Valor"
+  ],
+  "Cleric": [
+    "Unspecialized",
+    "Knowledge Domain",
+    "Life Domain",
+    "Light Domain",
+    "Nature Domain",
+    "Tempest Domain",
+    "Trickery Domain",
+    "War Domain"
+  ],
+  "Druid": [
+    "Unspecialized",
+    "Circle of the Land",
+    "Circle of the Moon"
+  ],
+  "Fighter": [
+    "Unspecialized",
+    "Champion",
+    "Battle Master",
+    "Elderich Knight"
+  ],
+  "Monk": [
+    "Unspecialized",
+    "Way of the Open Hand",
+    "Way of the Shadow",
+    "Way of the Four Elements"
+
+  ],
+  "Paladin": [
+    "Unspecialized",
+    "Oath of Devotion",
+    "Oath of the Ancients",
+    "Oath of Vengence"
+  ],
+  "Ranger": [
+    "Unspecialized",
+    "Hunter",
+    "Beast Master"
+  ],
+  "Rogue": [
+    "Unspecialized",
+    "Thief",
+    "Assassin",
+    "Arcane Trickster"
+  ],
+  "Sorcerer": [
+    "Unspecialized",
+    "Draconic Bloodline",
+    "Wild Magic"
+  ],
+  "Warlock": [
+    "Unspecialized",
+    "The Archfey",
+    "The Fiend",
+    "The Great Old One"
+  ],
+  "Wizard": [
+    "Unspecialized",
+    "School of Abjuration",
+    "School of Conjuration",
+    "School of Divination",
+    "School of Evocation",
+    "School of Illusion",
+    "School of Necromancy",
+    "School of Transmutation"
+  ]
+}

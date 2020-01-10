@@ -1,0 +1,57 @@
+﻿@model TheTallTankardTavern.Models.CharacterModel
+@addTagHelper *, TheTallTankardTavern
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<style>
+    .tab-content * {
+        font-size: 14px;
+    }
+</style>
+
+<partial name="/Views/Shared/Custom/_PopupModalPartial.cshtml" />
+
+<h4 class="title"><a href="@Model.Backstory_Link"><strong>@Model.Name</strong></a></h4>
+<div class="subtitle">
+    Level @Model.Level (@Model.Experience_Points / @Model.NextLevelXP XP),
+    @Model.Alignment,
+    @Model.Race@Model.Subrace.AddBraces(),
+    @Model.Class@Model.Subclass.AddBraces(),
+    @Model.Background
+</div>
+<partial name="/Views/Shared/Custom/ActionButtons/_BackEditDeletePartial.cshtml" model="Model" />
+<em id="long-rest-message">@ViewData["long-rest-message"]</em>
+<em id="auto-save-message"></em>
+<div class="nav nav-tabs">
+    <a class="nav-item nav-link active" data-toggle="tab" href="#character-stats-and-info"><strong>Stats &amp; Info</strong></a>
+    <a class="nav-item nav-link" data-toggle="tab" href="#character-items"><strong>Items</strong></a>
+    <a class="nav-item nav-link" data-toggle="tab" href="#character-spells"><strong>Spells</strong></a>
+    <a class="nav-item nav-link" data-toggle="tab" href="#character-features"><strong>Features</strong></a>
+    <a class="nav-item nav-link" data-toggle="tab" href="#character-background"><strong>Background</strong></a>
+    <a class="nav-item nav-link" data-toggle="tab" href="#character-notes"><strong>Notes</strong></a>
+</div>
+<br />
+<div class="tab-content">
+    <div id="character-stats-and-info" class="tab-pane active">
+        <partial name="/Views/Character/Details/_StatsAndInfoPartial.cshtml" model="Model" />
+    </div>
+    <div id="character-items" class="tab-pane">
+        <partial name="/Views/Character/Details/_ItemsPartial.cshtml" model="Model" />
+    </div>
+    <div id="character-spells" class="tab-pane">
+        <partial name="/Views/Character/Details/_SpellsPartial.cshtml" model="Model" />
+    </div>
+    <div id="character-features" class="tab-pane">
+        <partial name="/Views/Character/Details/_FeaturesPartial.cshtml" model="Model" />
+    </div>
+     <div id="character-background" class="tab-pane">
+        <partial name="/Views/Character/Details/_BackgroundsPartial.cshtml" model="Model" />
+    </div>
+     <div id="character-notes" class="tab-pane">
+        <partial name="/Views/Character/Details/_NotesPartial.cshtml" model="Model" />
+    </div>
+</div>
+
+
+

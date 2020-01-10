@@ -1,0 +1,31 @@
+﻿@addTagHelper *, TheTallTankardTavern
+@model TheTallTankardTavern.Models.BaseModel
+@{
+    BackgroundModel Background = BackgroundDataContext.GetModelFromID(Model.ID);
+    
+    ViewData["Title"] = $"Delete {Background.Name}";
+}
+
+<style>
+    a.btn {
+        font-weight: bold;
+        width: 60px;
+    }
+</style>
+
+<h1>@ViewData["Title"]</h1>
+<h5>Are you sure you want to delete <strong>@Background.Name</strong>?  This cannot be undone.</h5>
+<h6>@(ViewData["msg"] ?? "")</h6>
+
+<div class="col-md-6">
+    <form asp-action="Delete" method="post">
+        <hidden asp-for="ID"></hidden>
+        <div>
+            <label>Enter the background's name and click delete to confirm:</label>
+        </div>
+        <div>
+            <textbox asp-for="Name"></textbox>
+        </div>
+        <partial name="/Views/Shared/Custom/ActionButtons/_DeleteCancelPartial.cshtml" model="Model"/>
+    </form>
+</div>

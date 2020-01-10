@@ -1,0 +1,74 @@
+﻿@model TheTallTankardTavern.Models.CharacterModel
+@using TheTallTankardTavern.Helpers
+@using static TheTallTankardTavern.Configuration.Constants
+@addTagHelper *, TheTallTankardTavern
+
+<style>
+    #character-scores th,
+    #character-scores td {
+        text-align: center;
+    }
+</style>
+
+<table id="character-scores">
+    <thead>
+        <tr>
+            <th></th>
+            <th width="150px">Score</th>
+            <th>Mod</th>
+            <th>Save</th>
+            <th>Save Proficiency</th>
+            <th>DC</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>STR</strong></td>
+            <td><numberbox asp-for="Strength.Score" min="0" max="@(Model.Level <= 20 ? 20 : 30)"></numberbox></td>
+            <td>@Model.Strength.Modifier</td>
+            <td>@Model.GetSaveProficiency(SKILL_CATEGORY.Strength, Model.Strength_Save)</td>
+            <td><select asp-for="Strength_Save" asp-items="SelectListHelper.GetSaveProficiencySelectList()"></select></td>
+            <td>@(Model.Proficiency_Bonus + Model.Strength.Modifier + 8)</td>
+        </tr>
+        <tr>
+            <td><strong>DEX</strong></td>
+            <td><numberbox asp-for="Dexterity.Score" min="0" max="@(Model.Level <= 20 ? 20 : 30)"></numberbox></td>
+            <td>@Model.Dexterity.Modifier</td>
+            <td>@Model.GetSaveProficiency(SKILL_CATEGORY.Dexterity, Model.Dexterity_Save)</td>
+            <td><select asp-for="Dexterity_Save" asp-items="SelectListHelper.GetSaveProficiencySelectList()"></select></td>
+            <td>@(Model.Proficiency_Bonus + Model.Dexterity.Modifier + 8)</td>
+        </tr>
+        <tr>
+            <td><strong>CON</strong></td>
+            <td><numberbox asp-for="Constitution.Score" min="0" max="@(Model.Level <= 20 ? 20 : 30)"></numberbox></td>
+            <td>@Model.Constitution.Modifier</td>
+            <td>@Model.GetSaveProficiency(SKILL_CATEGORY.Constitution, Model.Constitution_Save)</td>
+            <td><select asp-for="Constitution_Save" asp-items="SelectListHelper.GetSaveProficiencySelectList()"></select></td>
+            <td>@(Model.Proficiency_Bonus + Model.Constitution.Modifier + 8)</td>
+        </tr>
+        <tr>
+            <td><strong>INT</strong></td>
+            <td><numberbox asp-for="Intelligence.Score" min="0" max="@(Model.Level <= 20 ? 20 : 30)"></numberbox></td>
+            <td>@Model.Intelligence.Modifier</td>
+            <td>@Model.GetSaveProficiency(SKILL_CATEGORY.Intelligence, Model.Intelligence_Save)</td>
+            <td><select asp-for="Intelligence_Save" asp-items="SelectListHelper.GetSaveProficiencySelectList()"></select></td>
+            <td>@(Model.Proficiency_Bonus + Model.Intelligence.Modifier + 8)</td>
+        </tr>
+        <tr>
+            <td><strong>WIS</strong></td>
+            <td><numberbox asp-for="Wisdom.Score" min="0" max="@(Model.Level <= 20 ? 20 : 30)"></numberbox></td>
+            <td>@Model.Wisdom.Modifier</td>
+            <td>@Model.GetSaveProficiency(SKILL_CATEGORY.Wisdom, Model.Wisdom_Save)</td>
+            <td><select asp-for="Wisdom_Save" asp-items="SelectListHelper.GetSaveProficiencySelectList()"></select></td>
+            <td>@(Model.Proficiency_Bonus + Model.Wisdom.Modifier + 8)</td>
+        </tr>
+        <tr>
+            <td><strong>CHA</strong></td>
+            <td><numberbox asp-for="Charisma.Score" min="0" max="@(Model.Level <= 20 ? 20 : 30)"></numberbox></td>
+            <td>@Model.Charisma.Modifier</td>
+            <td>@Model.GetSaveProficiency(SKILL_CATEGORY.Charisma, Model.Charisma_Save)</td>
+            <td><select asp-for="Charisma_Save" asp-items="SelectListHelper.GetSaveProficiencySelectList()"></select></td>
+            <td>@(Model.Proficiency_Bonus + Model.Charisma.Modifier + 8)</td>
+        </tr>
+    </tbody>
+</table>

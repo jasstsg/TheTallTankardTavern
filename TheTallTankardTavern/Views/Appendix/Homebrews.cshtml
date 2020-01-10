@@ -1,0 +1,50 @@
+﻿@{
+    ViewData["Title"] = "CharacterAdvancement";
+}
+@addTagHelper *, TheTallTankardTavern
+@model Dictionary<int, int>
+@using TheTallTankardTavern.Helpers
+
+<h1>Homebrews</h1>
+
+<br />
+<row>
+    <h3>Mechanics</h3>
+    <row>
+        <h5>Armour Class</h5>
+        <row>
+            AC = Your equipped Armour's AC rating + dexterity bonus based on your armour's weight.<br />
+            If wearing light weight armour, dexterity bonus = Your Dexterity Modifier.<br />
+            If wearing medium weight armour, dexterity bonus = Your Dexterity Modifier (Up to 2).<br />
+            If wearing heavy weight armour, dexterity bonus = 0.
+        </row>
+    </row>
+</row>
+
+<br />
+<row>
+    <h3>Items</h3>
+    <row>
+        <h5>Types of items</h5>
+        <row>
+            Weapons will determine the die (or dice) rolled for damage, its attack and damage bonuses are determined by the material it is made of.<br />
+            Armour class is determined by the material it is made of.<br />
+            All other items will be borrowed from vanilla D&amp;D on a as needed basis.<br />
+        </row>
+    </row>
+    <row>
+        <h5>Weapon Traits</h5>
+        <row>
+            <ul>
+                <li>Defensive: Improves AC by a fixed amount when wielding. Does not stack if wielding more than one defensive weapon.</li>
+                <li>Finesse: You can use your DEX mod instead of your STR mod with this melee weapon.</li>
+                <li>Large: Must be at least a Medium size creature or have 15 STR to wield, otherwise take disadvantage on attack rolls.</li>
+                <li>Small: A creature may dual wield this weapon with another small weapon.</li>
+                <li>Ranged: DEX mod to attack.  Range is X/Y, where X is the max range without disadvantage on attack rolls, and Y is the absolute max range.</li>
+                <li>Thrown: Melee weapon that can be thrown.  When throwing, treat this as a ranged weapon.</li>
+                <li>Two Handed: Must be held with two hands when wielding.</li>
+                <li>Versitile: When held with two hands, use the (larger valued) damage die (or dice) specified.</li>
+            </ul>
+        </row>
+    </row>
+</row>

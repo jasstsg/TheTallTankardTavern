@@ -1,0 +1,47 @@
+﻿@model TheTallTankardTavern.Models.CharacterModel
+@addTagHelper *, TheTallTankardTavern
+
+<style>
+    #character-other-stats label {
+        font-weight: bold;
+    }
+</style>
+
+<table id="character-other-stats">
+    <thead>
+        <tr>
+            <th>Other Stats</th>
+            <th width="100px"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><label asp-for="MaxHitPoints"></label></td>
+            <td>@Model.MaxHitPoints</td>
+        </tr>
+        <tr>
+            <td><label asp-for="TotalHitDice"></label></td>
+            <td>@Model.TotalHitDice</td>
+        </tr>
+        <tr>
+            <td><label asp-for="Temp_Hit_Points"></label></td>
+            <td>@Model.Temp_Hit_Points</td>
+        </tr>
+        <tr>
+            <td><label asp-for="Proficiency_Bonus"></label></td>
+            <td>@Model.Proficiency_Bonus</td>
+        </tr>
+        <tr>
+            <td><label asp-for="Passive_Perception"></label></td>
+            <td>@Model.Passive_Perception</td>
+        </tr>
+        <tr>
+            <td><label asp-for="TotalAC"></label></td>
+            <td>@Model.TotalAC (Base: @Model.BaseAC)</td>
+        </tr>
+        <tr>
+            <td><label asp-for="Initiative"></label></td>
+            <td>@Model.Initiative</td>
+        </tr>
+    </tbody>
+</table>

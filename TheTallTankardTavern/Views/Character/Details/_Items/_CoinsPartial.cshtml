@@ -1,0 +1,38 @@
+﻿@model TheTallTankardTavern.Models.CharacterModel
+@using TheTallTankardTavern.Helpers
+@using static TheTallTankardTavern.Configuration.ApplicationSettings
+@addTagHelper *, TheTallTankardTavern
+
+<div id="character-items-coins">
+    <div>COIN PURSE</div>
+    <table>
+        <thead>
+            <tr>
+                <th>Coin</th>
+                <th width="100px">Pieces</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><label asp-for="Coin_Purse.Copper_Pieces"></label></td>
+                <td><numberbox asp-for="Coin_Purse.Copper_Pieces" min="0" onchange="updateCoinPurse('@Model.ID', 'Copper', this)"></numberbox></td>
+            </tr>
+            <tr>
+                <td><label asp-for="Coin_Purse.Silver_Pieces"></label></td>
+                <td><numberbox asp-for="Coin_Purse.Silver_Pieces" min="0" onchange="updateCoinPurse('@Model.ID', 'Silver', this)"></numberbox></td>
+            </tr>
+            <tr>
+                <td><label asp-for="Coin_Purse.Gold_Pieces"></label></td>
+                <td><numberbox asp-for="Coin_Purse.Gold_Pieces" min="0" onchange="updateCoinPurse('@Model.ID', 'Gold', this)"></numberbox></td>
+            </tr>
+            <tr>
+                <td><label asp-for="Coin_Purse.Platinum_Pieces"></label></td>
+                <td><numberbox asp-for="Coin_Purse.Platinum_Pieces" min="0" onchange="updateCoinPurse('@Model.ID', 'Platinum', this)"></numberbox></td>
+            </tr>
+            <tr>
+                <td><label asp-for="Coin_Purse.Total"></label></td>
+                <td style="text-align:right">@Model.Coin_Purse.Total.FormatMoney() gp&nbsp;&nbsp;</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

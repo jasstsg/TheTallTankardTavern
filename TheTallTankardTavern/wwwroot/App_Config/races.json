@@ -1,0 +1,63 @@
+{
+  "Dwarf": [
+    "Hill Dwarf",
+    "Mountain Dwarf"
+  ],
+  "Elf": [
+    "High Elf",
+    "Wood Elf",
+    "Drow",
+    "Sea Elf",
+    "Eladrin",
+    "Shadar-Kai"
+  ],
+  "Halfling": [
+    "Lightfoot",
+    "Stout"
+  ],
+  "Human": [
+    "Calishite",
+    "Chondathan",
+    "Damaran",
+    "Illuskan",
+    "Mulan",
+    "Rashemi",
+    "Shou",
+    "Tethyrian",
+    "Turami"
+  ],
+  "Dragonborn": [
+    "Black Dragonic Ancestory",
+    "Blue Dragonic Ancestory",
+    "Brass Dragonic Ancestory",
+    "Copper Dragonic Ancestory",
+    "Gold Dragonic Ancestory",
+    "Green Dragonic Ancestory",
+    "Red Dragonic Ancestory",
+    "Silver Dragonic Ancestory",
+    "White Dragonic Ancestory"
+  ],
+  "Genasi" : [
+    "Air",
+    "Earth",
+    "Fire",
+    "Water"
+  ],
+  "Gnome": [
+    "Forest Gnome",
+    "Rock Gnome"
+  ],
+  "Half-Elf": [
+    ""
+  ],
+  "Half-Orc": [
+    ""
+  ],
+  "Tiefling": [
+    ""
+  ],
+  "Warforged": [
+    "Juggernaut",
+    "Scout"
+  ]
+}
