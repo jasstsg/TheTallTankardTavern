@@ -1,7 +1,6 @@
 ﻿@model TheTallTankardTavern.Models.ItemModel
 @using TTT.Enumerator
-@using TheTallTankardTavern.Enumerators
-@using static TheTallTankardTavern.Enumerators.WEAPON_TRAIT
+@using static TheTallTankardTavern.Configuration.Constants
 @addTagHelper *, TheTallTankardTavern
 @{
     ViewData["Title"] = Model.Name;
@@ -85,69 +84,69 @@
                             <td>
                                 @switch (ModelListHelper.AllValues<WEAPON_TRAIT>()[i])
                                 {
-                                    case Defensive: <numberbox asp-for="Defensive_Value" min="0"></numberbox> break;
-                                    case Ranged: <textbox asp-for="Ranged_Value"></textbox> break;
-                                    case Reach: <textbox asp-for="Reach_Value"></textbox> break;
-                                    case Thrown: <textbox asp-for="Thrown_Value"></textbox> break;
-                                    case Versitile: <select asp-for="Versitile_Value" asp-items="SelectListHelper.GetDamageDieSelectList()"></select> break;
+                                    case WEAPON_TRAIT.Defensive:<numberbox asp-for="Defensive_Value" min="0"></numberbox> break;
+                                    case WEAPON_TRAIT.Ranged: <textbox asp-for="Ranged_Value"></textbox> break;
+                                    case WEAPON_TRAIT.Reach: <textbox asp-for="Reach_Value"></textbox> break;
+                                    case WEAPON_TRAIT.Thrown: <textbox asp-for="Thrown_Value"></textbox> break;
+                                    case WEAPON_TRAIT.Versitile: <select asp-for="Versitile_Value" asp-items="SelectListHelper.GetDamageDieSelectList()"></select>break;
                                     default: break;
                                 }
-                             </td>
+                            </td>
                         </tr>
                     }
                 </tbody>
                 @*<tbody>
-                    <tr>
-                        <td><label>@None.EnumToString()</label></td>
-                        <td><input type="checkbox" asp-for="@Model.Traits[0]" /></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td><label>@Defensive.EnumToString()</label></td>
-                        <td><input type="checkbox" asp-for="@Model.Traits[1]" /></td>
-                        <td><numberbox asp-for="Defensive_Value" min="0"></numberbox></td>
-                    </tr>
-                    <tr>
-                        <td><label>@Finesse.EnumToString()</label></td>
-                        <td><input type="checkbox" asp-for="@Model.Traits[2]" /></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td><label>@Large.EnumToString()</label></td>
-                        <td><input type="checkbox" asp-for="@Model.Traits[3]" /></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td><label>@Small.EnumToString()</label></td>
-                        <td><input type="checkbox" asp-for="@Model.Traits[4]" /></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td><label>@Ranged.EnumToString()</label></td>
-                        <td><input type="checkbox" asp-for="@Model.Traits[5]" /></td>
-                        <td><textbox asp-for="Ranged_Value"></textbox></td>
-                    </tr>
-                    <tr>
-                        <td><label>@Reach.EnumToString()</label></td>
-                        <td><input type="checkbox" asp-for="@Model.Traits[6]" /></td>
-                        <td><textbox asp-for="Reach_Value"></textbox></td>
-                    </tr>
-                    <tr>
-                        <td><label>@Thrown.EnumToString()</label></td>
-                        <td><input type="checkbox" asp-for="@Model.Traits[7]" /></td>
-                        <td><textbox asp-for="Thrown_Value"></textbox></td>
-                    </tr>
-                    <tr>
-                        <td><label>@Two_Handed.EnumToString()</label></td>
-                        <td><input type="checkbox" asp-for="@Model.Traits[8]" /></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td><label>@Versitile.EnumToString()</label></td>
-                        <td><input type="checkbox" asp-for="@Model.Traits[9]" /></td>
-                        <td><select asp-for="Versitile_Value" asp-items="SelectListHelper.GetDamageDieSelectList()"></select></td>
-                    </tr>
-                </tbody>*@
+                        <tr>
+                            <td><label>@None.EnumToString()</label></td>
+                            <td><input type="checkbox" asp-for="@Model.Traits[0]" /></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><label>@Defensive.EnumToString()</label></td>
+                            <td><input type="checkbox" asp-for="@Model.Traits[1]" /></td>
+                            <td><numberbox asp-for="Defensive_Value" min="0"></numberbox></td>
+                        </tr>
+                        <tr>
+                            <td><label>@Finesse.EnumToString()</label></td>
+                            <td><input type="checkbox" asp-for="@Model.Traits[2]" /></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><label>@Large.EnumToString()</label></td>
+                            <td><input type="checkbox" asp-for="@Model.Traits[3]" /></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><label>@Small.EnumToString()</label></td>
+                            <td><input type="checkbox" asp-for="@Model.Traits[4]" /></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><label>@Ranged.EnumToString()</label></td>
+                            <td><input type="checkbox" asp-for="@Model.Traits[5]" /></td>
+                            <td><textbox asp-for="Ranged_Value"></textbox></td>
+                        </tr>
+                        <tr>
+                            <td><label>@Reach.EnumToString()</label></td>
+                            <td><input type="checkbox" asp-for="@Model.Traits[6]" /></td>
+                            <td><textbox asp-for="Reach_Value"></textbox></td>
+                        </tr>
+                        <tr>
+                            <td><label>@Thrown.EnumToString()</label></td>
+                            <td><input type="checkbox" asp-for="@Model.Traits[7]" /></td>
+                            <td><textbox asp-for="Thrown_Value"></textbox></td>
+                        </tr>
+                        <tr>
+                            <td><label>@Two_Handed.EnumToString()</label></td>
+                            <td><input type="checkbox" asp-for="@Model.Traits[8]" /></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><label>@Versitile.EnumToString()</label></td>
+                            <td><input type="checkbox" asp-for="@Model.Traits[9]" /></td>
+                            <td><select asp-for="Versitile_Value" asp-items="SelectListHelper.GetDamageDieSelectList()"></select></td>
+                        </tr>
+                    </tbody>*@
             </table>
         </div>
         <div class="col-md-3" id="item-damage-types">

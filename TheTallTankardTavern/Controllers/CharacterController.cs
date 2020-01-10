@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using TheTallTankardTavern.Attributes;
 using TheTallTankardTavern.Configuration;
-using TheTallTankardTavern.Enumerators;
 using TheTallTankardTavern.Helpers;
 using TheTallTankardTavern.Models;
 using static TheTallTankardTavern.Configuration.ApplicationSettings;

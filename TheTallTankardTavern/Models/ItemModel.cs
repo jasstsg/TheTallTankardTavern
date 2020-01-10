@@ -2,11 +2,10 @@ using Newtonsoft.Json;
 using System.ComponentModel;
 using System.Text;
 using TheTallTankardTavern.Configuration;
-using TheTallTankardTavern.Enumerators;
 using TheTallTankardTavern.Helpers;
 using TTT.Enumerator;
 using static TheTallTankardTavern.Configuration.Constants;
-using static TheTallTankardTavern.Enumerators.WEAPON_TRAIT;
+using static TheTallTankardTavern.Configuration.Constants.WEAPON_TRAIT;
 
 namespace TheTallTankardTavern.Models
 {

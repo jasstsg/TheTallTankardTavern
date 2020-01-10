@@ -1,6 +1,5 @@
 using Newtonsoft.Json;
 using System.ComponentModel;
-using TheTallTankardTavern.Enumerators;
 using static TheTallTankardTavern.Configuration.Constants;
 
 namespace TheTallTankardTavern.Models

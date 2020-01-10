@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
-using TheTallTankardTavern.Enumerators;
 using TheTallTankardTavern.Models;
 using TheTallTankardTavern.Providers;
 using TTT.Enumerator;
@@ -15,6 +14,7 @@ namespace TheTallTankardTavern.Configuration
 {
 	public static class ApplicationSettings
 	{
+		#region Properties
 		public static IHttpContextAccessor HttpContextAccessor { get; private set; }
         public static IWebHostEnvironment WebHostEnvironment { get; private set; }
 
@@ -32,8 +32,9 @@ namespace TheTallTankardTavern.Configuration
 		public static List<FeatureModel> FeatureDataContext { get; private set; } = new List<FeatureModel>();
 		public static List<SpellModel> SpellDataContext { get; private set; } = new List<SpellModel>();
 		public static List<UserModel> UserDataContext { get; private set; } = new List<UserModel>();
+        #endregion
 
-		public static void Initialize(IWebHostEnvironment webHostEnvironment, IHttpContextAccessor httpContextAccessor)
+        public static void Initialize(IWebHostEnvironment webHostEnvironment, IHttpContextAccessor httpContextAccessor)
 		{
 			HttpContextAccessor = httpContextAccessor;
             WebHostEnvironment = webHostEnvironment;
@@ -86,7 +87,8 @@ namespace TheTallTankardTavern.Configuration
 			BackupData();
 		}
 
-		private static Dictionary<K, V> GetJsonConfig<K, V>(string jsonConfigFileName)
+        #region Private Methods
+        private static Dictionary<K, V> GetJsonConfig<K, V>(string jsonConfigFileName)
 		{
 			return DataSerializer.JsonFileToObject<Dictionary<K, V>>(AppConfigFolder + "\\" + jsonConfigFileName + ".json");
 		}
@@ -104,5 +106,6 @@ namespace TheTallTankardTavern.Configuration
 			}
 			ZipFile.CreateFromDirectory(AppDataFolder, BackupDataFolder + "\\" + DateTime.Now.ToString("yyyyMMddThhmmss") + ".zip", CompressionLevel.Optimal, includeBaseDirectory: false);
 		}
-	}
+        #endregion
+    }
 }

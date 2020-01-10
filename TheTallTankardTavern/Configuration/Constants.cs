@@ -7,6 +7,83 @@ namespace TheTallTankardTavern.Configuration
 {
 	public static class Constants
 	{
+        #region Enumerators
+        public enum DAMAGE_TYPE
+        {
+            None,
+            Acid,
+            Blugeoning,
+            Cold,
+            Fire,
+            Force,
+            Lightening,
+            Necrotic,
+            Piercing,
+            Poison,
+            Psychic,
+            Radiant,
+            Slashing,
+            Thunder
+        }
+        public enum DIE
+        {
+            NONE,
+            _1D4,
+            _1D6,
+            _1D8,
+            _1D10,
+            _1D12,
+            _1D20,
+            _2D4,
+            _2D6,
+            _2D8,
+            _2D10,
+            _2D12,
+            _2D20,
+            _3D4,
+            _3D6,
+            _3D8,
+            _3D10,
+            _3D12,
+            _3D20
+        }
+        public enum FOLDER
+        {
+            Backgrounds,
+            Characters,
+            Imported_Features,
+            Imported_Spells,
+            Items,
+            Materials,
+            Spells,
+            User,
+            Features
+        }
+        public enum LANGUAGES
+        {
+            Common,
+            Abyssal,
+            Aquan,
+            Auran,
+            Celestial,
+            Deep_Speech,
+            Draconic,
+            Druidic,
+            Dwarven,
+            Elven,
+            Giant,
+            Gnomish,
+            Goblin,
+            Gnoll,
+            Halfling,
+            Ignan,
+            Infernal,
+            Orcish,
+            Primordial,
+            Sylvan,
+            Terran,
+            Undercommon
+        }
         public enum MAGIC_SCHOOLS
         {
             Abjuration,
@@ -18,6 +95,43 @@ namespace TheTallTankardTavern.Configuration
             Necromancy,
             Transmutation,
         }
+        public enum MODEL_TYPES
+        {
+            BACKGROUND,
+            FEATURE,
+            ITEM,
+            SPELL
+        }
+		public enum ROLES
+		{
+			Administrator = 0xFF,
+			Dungeon_Master = 3,
+			Dungeon_Master_Readonly = 2,
+			Player = 1
+		}
+		public enum SKILL_CATEGORY
+		{
+			Strength,
+			Dexterity,
+			Constitution,
+			Intelligence,
+			Wisdom,
+			Charisma
+		}
+        public enum WEAPON_TRAIT
+        {
+            None,
+            Defensive,
+            Finesse,
+            Large,
+            Small,
+            Ranged,
+            Reach,
+            Thrown,
+            Two_Handed,
+            Versitile
+        }
+        #endregion
 
         public static class SpecialFeatures
         {
@@ -44,46 +158,6 @@ namespace TheTallTankardTavern.Configuration
 
             }
         }
-
-        public enum FOLDER
-        {
-            Backgrounds,
-            Characters,
-            Imported_Features,
-            Imported_Spells,
-            Items,
-            Materials,
-            Spells,
-            User,
-            Features
-        }
-
-        public enum MODEL_TYPES
-        {
-            BACKGROUND,
-            FEATURE,
-            ITEM,
-            SPELL
-        }
-
-		public enum ROLES
-		{
-			Administrator = 0xFF,
-			Dungeon_Master = 3,
-			Dungeon_Master_Readonly = 2,
-			Player = 1
-		}
-
-		public enum SKILL_CATEGORY
-		{
-			Strength,
-			Dexterity,
-			Constitution,
-			Intelligence,
-			Wisdom,
-			Charisma
-		}
-
         public static class ITEM_TYPES
         {
             public const string ARMOUR = "Armour";
@@ -96,21 +170,18 @@ namespace TheTallTankardTavern.Configuration
             public const string WEAPON = "Weapon";
             public const string MISC = "Miscellaneous";
         }
-
         public static class WEAPON_SIZE
         {
             public const string SMALL = "Small";
             public const string MEDIUM = "Medium";
             public const string LARGE = "Large";
         }
-
         public static class WEIGHT
 		{
 			public const string LIGHT = "Light";
 			public const string MEDIUM = "Medium";
 			public const string HEAVY = "Heavy";
 		}
-
         public static class PROFICIENCY
         {
             public const string NOT_PROFICIENT = "Not Proficient";

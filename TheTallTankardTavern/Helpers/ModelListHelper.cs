@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using TheTallTankardTavern.Configuration;
-using TheTallTankardTavern.Enumerators;
 using TheTallTankardTavern.Models;
 using TTT.Enumerator;
 using static TheTallTankardTavern.Configuration.Constants;
