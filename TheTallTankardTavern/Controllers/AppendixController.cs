@@ -10,24 +10,10 @@ namespace TheTallTankardTavern.Controllers
 {
     public class AppendixController : Controller
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-        public IActionResult CharacterAdvancement()
-        {
-            return View(ConfigurationSettings.CharacterAdvancement);
-        }
-
-        public IActionResult SpellSlots()
-        {
-            return View();
-        }
-
-        public IActionResult Homebrews()
-        {
-            return View();
-        }
+        public IActionResult Index() {  return View(); }
+        public IActionResult CharacterAdvancement() { return View(ConfigurationSettings.CharacterAdvancement); }
+        public IActionResult SpellSlots() { return View(); }
+        public IActionResult Homebrews() { return View(); }
+        public IActionResult Calendar() { return View(); }
     }
 }

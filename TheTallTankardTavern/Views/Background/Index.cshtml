@@ -25,14 +25,17 @@
     <tbody>
         @foreach (BackgroundModel b in Model)
         {
-        <tr data-toggle="modal" data-target="#popup-modal" data-title="@b.Name" data-desc="@b.Desc">
-            <td>@b.Name</td>
-            <td>@b.Skill_Proficiencies</td>
-            <td>@b.Tool_Proficiencies</td>
-            <td>@b.Languages</td>
-            <td>@b.Feature</td>
-            <partial name="/Views/Shared/Custom/ActionButtons/_ColumnAddEditDelete.cshtml" model="b" />
-        </tr>
+            if (!b.IsHidden || ContextUser.IsAdminOrDM)
+            {
+                <tr data-toggle="modal" data-target="#popup-modal" data-title="@b.Name" data-desc="@b.Desc">
+                    <td>@b.Name</td>
+                    <td>@b.Skill_Proficiencies</td>
+                    <td>@b.Tool_Proficiencies</td>
+                    <td>@b.Languages</td>
+                    <td>@b.Feature</td>
+                    <partial name="/Views/Shared/Custom/ActionButtons/_ColumnAddEditDelete.cshtml" model="b" />
+                </tr>
+            }
         }
     </tbody>
 </table>

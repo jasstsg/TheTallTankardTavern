@@ -11,5 +11,8 @@ namespace TheTallTankardTavern.Models
 
 		[DisplayName("Is Homebrew")]
         public bool IsHomebrew { get; set; }
-    }
+
+		[DisplayName("Is Hidden")]
+		public bool IsHidden { get; set; }
+	}
 }
