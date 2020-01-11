@@ -61,14 +61,19 @@
                         <td>@Member.Character.Class @Member.Character.Subclass.AddBraces()</td>
                         @if (ContextUser.IsAdminOrDM)
                         {
-                            <td>@Member.Character.Armour_Class</td>
+                            <td>@Member.Character.GetTotalAC()</td>
                             <td>@Member.Character.Passive_Perception</td>
                             <td>@Member.Character.Languages.ToString()</td>
                         }
                         <td>@Member.Character.Hit_Points_Remaining / @Member.Character.MaxHitPoints</td>
                         <td>@Member.Character.Temp_Hit_Points</td>
                         <td>@Member.Character.Initiative</td>
-                        <td><buttonlink asp-action="Remove" asp-route-cid="@Member.CharacterId" text="Remove"></buttonlink></td>
+                        <td>
+                            @if (ContextUser.IsAdminOrDM)
+                            {
+                                <buttonlink class="td-action-btn" asp-action="Remove" asp-route-cid="@Member.CharacterId" text="Remove"></buttonlink>
+                            }
+                        </td>
                     </tr>
                 }
             </tbody>

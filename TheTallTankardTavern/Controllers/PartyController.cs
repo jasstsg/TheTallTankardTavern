@@ -5,9 +5,11 @@ using TheTallTankardTavern.Helpers;
 using static TheTallTankardTavern.Configuration.ApplicationSettings;
 using static TheTallTankardTavern.Configuration.Constants;
 using System;
+using TheTallTankardTavern.Attributes;
 
 namespace TheTallTankardTavern.Controllers
 {
+    [Authenticated]
     public class PartyController : Controller
     {
         public IActionResult Index()
