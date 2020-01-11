@@ -29,6 +29,7 @@ namespace TheTallTankardTavern
             //Added for the TheTallTankardTavern
             services.AddSession(options =>
             {
+                options.IdleTimeout = TimeSpan.FromHours(3);
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });

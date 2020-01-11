@@ -31,7 +31,7 @@
     <br />
 }
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-8">
         <table>
             <thead>
                 <tr>
@@ -45,9 +45,6 @@
                         <th>PP</th>
                         <th>Languages</th>
                     }
-                    <th>HP</th>
-                    <th>Temp HP</th>
-                    <th>Initiative</th>
                     <th></th>
                 </tr>
             </thead>
@@ -65,9 +62,6 @@
                             <td>@Member.Character.Passive_Perception</td>
                             <td>@Member.Character.Languages.ToString()</td>
                         }
-                        <td>@Member.Character.Hit_Points_Remaining / @Member.Character.MaxHitPoints</td>
-                        <td>@Member.Character.Temp_Hit_Points</td>
-                        <td>@Member.Character.Initiative</td>
                         <td>
                             @if (ContextUser.IsAdminOrDM)
                             {
@@ -78,5 +72,35 @@
                 }
             </tbody>
         </table>
-    </div>
+    </div><div class="col-md-4">
+    <table>
+        <thead>
+            <tr>
+                <th>Member</th>
+                @if (ContextUser.IsAdminOrDM)
+                {
+                    <th>AC</th>
+                }
+                <th>HP</th>
+                <th>Temp HP</th>
+                <th>Initiative</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (MemberModel Member in Model.Members.OrderBy(m => m.Character.Name))
+            {
+                <tr>
+                    <td>@Member.Character.Name</td>
+                        @if (ContextUser.IsAdminOrDM)
+                        {
+                            <td>@Member.Character.GetTotalAC()</td>
+                        }
+                    <td>@Member.Character.Hit_Points_Remaining / @Member.Character.MaxHitPoints</td>
+                    <td>@Member.Character.Temp_Hit_Points</td>
+                    <td>@Member.Initiative</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 </div>
