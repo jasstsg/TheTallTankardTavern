@@ -10,7 +10,7 @@
 <table id="character-other-stats">
     <thead>
         <tr>
-            <th>Other Stats</th>
+            <th></th>
             <th width="100px"></th>
             <th></th>
         </tr>
@@ -32,8 +32,18 @@
             <td></td>
         </tr>
         <tr>
-            <td><label asp-for="Proficiency_Bonus"></label></td>
-            <td>@Model.Proficiency_Bonus</td>
+            <td><label asp-for="TotalAC"></label></td>
+            <td>@Model.TotalAC</td>
+            <td>(Base: @Model.BaseAC)</td>
+        </tr>
+        <tr>
+            <td><label asp-for="Speed"></label></td>
+            <td>@Model.Speed</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><label asp-for="Initiative"></label></td>
+            <td>@Model.Initiative</td>
             <td></td>
         </tr>
         <tr>
@@ -42,13 +52,8 @@
             <td></td>
         </tr>
         <tr>
-            <td><label asp-for="TotalAC"></label></td>
-            <td>@Model.TotalAC</td>
-            <td>(Base: @Model.BaseAC)</td>
-        </tr>
-        <tr>
-            <td><label asp-for="Initiative"></label></td>
-            <td>@Model.Initiative</td>
+            <td><label asp-for="Proficiency_Bonus"></label></td>
+            <td>@Model.Proficiency_Bonus</td>
             <td></td>
         </tr>
     </tbody>

@@ -13,9 +13,12 @@ namespace TheTallTankardTavern.Helpers
 
 		public static int GetTotalHP(this CharacterModel Character)
 		{
+			//n = Character Level
+			//HP = (Hit Die Total) + (CON Mod) + (n-1)*[(Hit Die Avg) + (CON Mod)]
 			string hitDie = Character.GetHitDice();
 			int hitDieValue = int.Parse(hitDie.Substring(hitDie.IndexOf("D") + 1));
-			return hitDieValue + (hitDieValue / 2 + 1 + Character.Constitution.Modifier) * (Character.Level - 1);
+			int hitDieAvg = (hitDieValue / 2) + 1;
+			return hitDieValue + Character.Constitution.Modifier + ((Character.Level - 1) * (hitDieAvg + Character.Constitution.Modifier));
 		}
 
 		public static int GetBaseAC(this CharacterModel Character)
