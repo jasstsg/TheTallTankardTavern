@@ -20,7 +20,7 @@ namespace TheTallTankardTavern.Helpers
 		/// </summary>
 		public static T GetModelFromID<T>(this IEnumerable<T> ModelList, string ID) where T : BaseModel
 		{
-			return ModelList?.First(m => m.ID.Equals(ID)) ?? NewTModel<T>();
+			return ModelList?.FirstOrDefault(m => m.ID.Equals(ID)) ?? NewTModel<T>();
 		}
 
 		public static string GetNameFromID<T>(this IEnumerable<T> ModelList, string ID) where T : BaseModel

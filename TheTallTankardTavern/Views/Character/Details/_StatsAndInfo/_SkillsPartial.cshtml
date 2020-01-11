@@ -1,19 +1,8 @@
 ﻿@model TheTallTankardTavern.Models.CharacterModel
 @using TheTallTankardTavern.Helpers
+@using static TheTallTankardTavern.Helpers.ViewHelper
 @using static TheTallTankardTavern.Configuration.Constants
 @addTagHelper *, TheTallTankardTavern
-
-@{ 
-        string SkillHighlight(string skill)
-        {
-            switch (skill)
-            {
-                case PROFICIENCY.EXPERTISE: return "skill-expert";
-                case PROFICIENCY.PROFICIENT: return "skill-proficient";
-                default: return "";
-            }
-        }
-    }
 
 <style>
     .skill-label {

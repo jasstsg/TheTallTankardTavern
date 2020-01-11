@@ -1,6 +1,6 @@
 ﻿@model TheTallTankardTavern.Models.CharacterModel
 @using TheTallTankardTavern.Helpers
-@using static TheTallTankardTavern.Configuration.Constants
+@using static TheTallTankardTavern.Helpers.ViewHelper
 @addTagHelper *, TheTallTankardTavern
 
 <style>
@@ -18,76 +18,76 @@
     </thead>
     <tbody>
         <tr>
-            <td class="skill-label">Acrobatics</td>
-            <td><select asp-for="Acrobatics" asp-items="SelectListHelper.GetSkillSelectList()"></select></td>
+            <td class="skill-label @SkillHighlight(Model.Acrobatics)">Acrobatics</td>
+            <td class="@SkillHighlight(Model.Acrobatics)"><select asp-for="Acrobatics" asp-items="SelectListHelper.GetSkillSelectList()"></select></td>
         </tr>
         <tr>
-            <td class="skill-label">Animal Handling</td>
-            <td><select asp-for="Animal_Handling" asp-items="SelectListHelper.GetSkillSelectList()"></select></td>
+            <td class="skill-label @SkillHighlight(Model.Animal_Handling)">Animal Handling</td>
+            <td class="@SkillHighlight(Model.Animal_Handling)"><select asp-for="Animal_Handling" asp-items="SelectListHelper.GetSkillSelectList()"></select></td>
         </tr>
         <tr>
-            <td class="skill-label">Arcana</td>
-            <td><select asp-for="Arcana" asp-items="SelectListHelper.GetSkillSelectList()"></select></td>
+            <td class="skill-label @SkillHighlight(Model.Arcana)">Arcana</td>
+            <td class="@SkillHighlight(Model.Arcana)"><select asp-for="Arcana" asp-items="SelectListHelper.GetSkillSelectList()"></select></td>
         </tr>
         <tr>
-            <td class="skill-label">Athletics</td>
-            <td><select asp-for="Athletics" asp-items="SelectListHelper.GetSkillSelectList()"></select></td>
+            <td class="skill-label @SkillHighlight(Model.Athletics)">Athletics</td>
+            <td class="@SkillHighlight(Model.Athletics)"><select asp-for="Athletics" asp-items="SelectListHelper.GetSkillSelectList()"></select></td>
         </tr>
         <tr>
-            <td class="skill-label">Deception</td>
-            <td><select asp-for="Deception" asp-items="SelectListHelper.GetSkillSelectList()"></select></td>
+            <td class="skill-label @SkillHighlight(Model.Deception)">Deception</td>
+            <td class="@SkillHighlight(Model.Deception)"><select asp-for="Deception" asp-items="SelectListHelper.GetSkillSelectList()"></select></td>
         </tr>
         <tr>
-            <td class="skill-label">History</td>
-            <td><select asp-for="History" asp-items="SelectListHelper.GetSkillSelectList()"></select></td>
+            <td class="skill-label @SkillHighlight(Model.History)">History</td>
+            <td class="@SkillHighlight(Model.History)"><select asp-for="History" asp-items="SelectListHelper.GetSkillSelectList()"></select></td>
         </tr>
         <tr>
-            <td class="skill-label">Insight</td>
-            <td><select asp-for="Insight" asp-items="SelectListHelper.GetSkillSelectList()"></select></td>
+            <td class="skill-label @SkillHighlight(Model.Insight)">Insight</td>
+            <td class="@SkillHighlight(Model.Insight)"><select asp-for="Insight" asp-items="SelectListHelper.GetSkillSelectList()"></select></td>
         </tr>
         <tr>
-            <td class="skill-label">Intimidation</td>
-            <td><select asp-for="Intimidation" asp-items="SelectListHelper.GetSkillSelectList()"></select></td>
+            <td class="skill-label @SkillHighlight(Model.Intimidation)">Intimidation</td>
+            <td class="@SkillHighlight(Model.Intimidation)"><select asp-for="Intimidation" asp-items="SelectListHelper.GetSkillSelectList()"></select></td>
         </tr>
         <tr>
-            <td class="skill-label">Investigation</td>
-            <td><select asp-for="Investigation" asp-items="SelectListHelper.GetSkillSelectList()"></select></td>
+            <td class="skill-label @SkillHighlight(Model.Investigation)">Investigation</td>
+            <td class="@SkillHighlight(Model.Investigation)"><select asp-for="Investigation" asp-items="SelectListHelper.GetSkillSelectList()"></select></td>
         </tr>
         <tr>
-            <td class="skill-label">Medicine</td>
-            <td><select asp-for="Medicine" asp-items="SelectListHelper.GetSkillSelectList()"></select></td>
+            <td class="skill-label @SkillHighlight(Model.Medicine)">Medicine</td>
+            <td class="@SkillHighlight(Model.Medicine)"><select asp-for="Medicine" asp-items="SelectListHelper.GetSkillSelectList()"></select></td>
         </tr>
         <tr>
-            <td class="skill-label">Nature</td>
-            <td><select asp-for="Nature" asp-items="SelectListHelper.GetSkillSelectList()"></select></td>
+            <td class="skill-label @SkillHighlight(Model.Nature)">Nature</td>
+            <td class="@SkillHighlight(Model.Nature)"><select asp-for="Nature" asp-items="SelectListHelper.GetSkillSelectList()"></select></td>
         </tr>
         <tr>
-            <td class="skill-label">Perception</td>
-            <td><select asp-for="Perception" asp-items="SelectListHelper.GetSkillSelectList()"></select></td>
+            <td class="skill-label @SkillHighlight(Model.Perception)">Perception</td>
+            <td class="@SkillHighlight(Model.Perception)"><select asp-for="Perception" asp-items="SelectListHelper.GetSkillSelectList()"></select></td>
         </tr>
         <tr>
-            <td class="skill-label">Performance</td>
-            <td><select asp-for="Performance" asp-items="SelectListHelper.GetSkillSelectList()"></select></td>
+            <td class="skill-label @SkillHighlight(Model.Performance)">Performance</td>
+            <td class="@SkillHighlight(Model.Performance)"><select asp-for="Performance" asp-items="SelectListHelper.GetSkillSelectList()"></select></td>
         </tr>
         <tr>
-            <td class="skill-label">Persuasion</td>
-            <td><select asp-for="Persuasion" asp-items="SelectListHelper.GetSkillSelectList()"></select></td>
+            <td class="skill-label @SkillHighlight(Model.Persuasion)">Persuasion</td>
+            <td class="@SkillHighlight(Model.Persuasion)"><select asp-for="Persuasion" asp-items="SelectListHelper.GetSkillSelectList()"></select></td>
         </tr>
         <tr>
-            <td class="skill-label">Religion</td>
-            <td><select asp-for="Religion" asp-items="SelectListHelper.GetSkillSelectList()"></select></td>
+            <td class="skill-label @SkillHighlight(Model.Religion)">Religion</td>
+            <td class="@SkillHighlight(Model.Religion)"><select asp-for="Religion" asp-items="SelectListHelper.GetSkillSelectList()"></select></td>
         </tr>
         <tr>
-            <td class="skill-label">Sleight Of Hand</td>
-            <td><select asp-for="Sleight_Of_Hand" asp-items="SelectListHelper.GetSkillSelectList()"></select></td>
+            <td class="skill-label @SkillHighlight(Model.Sleight_Of_Hand)">Sleight Of Hand</td>
+            <td class="@SkillHighlight(Model.Sleight_Of_Hand)"><select asp-for="Sleight_Of_Hand" asp-items="SelectListHelper.GetSkillSelectList()"></select></td>
         </tr>
         <tr>
-            <td class="skill-label">Stealth</td>
-            <td><select asp-for="Stealth" asp-items="SelectListHelper.GetSkillSelectList()"></select></td>
+            <td class="skill-label @SkillHighlight(Model.Stealth)">Stealth</td>
+            <td class="@SkillHighlight(Model.Stealth)"><select asp-for="Stealth" asp-items="SelectListHelper.GetSkillSelectList()"></select></td>
         </tr>
         <tr>
-            <td class="skill-label">Survival</td>
-            <td><select asp-for="Survival" asp-items="SelectListHelper.GetSkillSelectList()"></select></td>
+            <td class="skill-label @SkillHighlight(Model.Survival)">Survival</td>
+            <td class="@SkillHighlight(Model.Survival)"><select asp-for="Survival" asp-items="SelectListHelper.GetSkillSelectList()"></select></td>
         </tr>
     </tbody>
 </table>
