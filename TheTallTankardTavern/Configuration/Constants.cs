@@ -51,13 +51,14 @@ namespace TheTallTankardTavern.Configuration
         {
             Backgrounds,
             Characters,
+            Features,
             Imported_Features,
-            Imported_Spells,
             Items,
             Materials,
+            Party,
+            Imported_Spells,
             Spells,
-            User,
-            Features
+            User
         }
         public enum LANGUAGES
         {

@@ -1,0 +1,77 @@
+﻿@addTagHelper *, TheTallTankardTavern
+@model TheTallTankardTavern.Models.PartyModel
+@using TheTallTankardTavern.Configuration
+@using static TheTallTankardTavern.Configuration.ApplicationSettings
+
+@{
+    ViewData["Title"] = "Party";
+}
+
+<h1>@ViewData["Title"]</h1>
+<br />
+@if (ContextUser.IsAdminOrDM)
+{
+    <div class="row">
+        <div class="col-md-4">
+            <form class="form-inline" asp-action="Add" method="post">
+                <div class="form-group">
+                    <hidden asp-for="ID"></hidden>
+                    @for (int i = 0; i < Model.Members.Count; i++)
+                    {
+                        <hidden asp-for="Members[i].CharacterId"></hidden>
+                        <hidden asp-for="Members[i].Initiative"></hidden>
+                    }
+                    <select style="width:200px" asp-for="NewMemberId" asp-items="SelectListHelper.GetDataContextSelectList<CharacterModel>(CharacterDataContext)"></select>
+                    &nbsp;&nbsp;
+                    <submit text="Add to Party"></submit>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br />
+}
+<div class="row">
+    <div class="col-md-12">
+        <table>
+            <thead>
+                <tr>
+                    <th>Member</th>
+                    <th>Level</th>
+                    <th>Race</th>
+                    <th>Class</th>
+                    @if (ContextUser.IsAdminOrDM)
+                    {
+                        <th>AC</th>
+                        <th>PP</th>
+                        <th>Languages</th>
+                    }
+                    <th>HP</th>
+                    <th>Temp HP</th>
+                    <th>Initiative</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (MemberModel Member in Model.Members.OrderBy(m => m.Character.Name))
+                {
+                    <tr>
+                        <td>@Member.Character.Name</td>
+                        <td>@Member.Character.Level</td>
+                        <td>@Member.Character.Race @Member.Character.Subrace.AddBraces()</td>
+                        <td>@Member.Character.Class @Member.Character.Subclass.AddBraces()</td>
+                        @if (ContextUser.IsAdminOrDM)
+                        {
+                            <td>@Member.Character.Armour_Class</td>
+                            <td>@Member.Character.Passive_Perception</td>
+                            <td>@Member.Character.Languages.ToString()</td>
+                        }
+                        <td>@Member.Character.Hit_Points_Remaining / @Member.Character.MaxHitPoints</td>
+                        <td>@Member.Character.Temp_Hit_Points</td>
+                        <td>@Member.Character.Initiative</td>
+                        <td><buttonlink asp-action="Remove" asp-route-cid="@Member.CharacterId" text="Remove"></buttonlink></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

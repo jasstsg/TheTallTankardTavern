@@ -6,7 +6,6 @@ using System.IO;
 using System.IO.Compression;
 using TheTallTankardTavern.Models;
 using TheTallTankardTavern.Providers;
-using TTT.Enumerator;
 using TTT.Json;
 using static TheTallTankardTavern.Configuration.Constants;
 
@@ -27,9 +26,10 @@ namespace TheTallTankardTavern.Configuration
 		
         public static List<BackgroundModel> BackgroundDataContext { get; private set; } = new List<BackgroundModel>();
 		public static List<CharacterModel> CharacterDataContext { get; private set; } = new List<CharacterModel>();
-		public static List<ItemModel> ItemDataContext { get; private set; } = new List<ItemModel>();
-		public static List<MaterialModel> MaterialDataContext { get; private set; } = new List<MaterialModel>();
 		public static List<FeatureModel> FeatureDataContext { get; private set; } = new List<FeatureModel>();
+		public static List<ItemModel> ItemDataContext { get; private set; } = new List<ItemModel>();
+		public static List<PartyModel> PartyDataContext { get; private set; } = new List<PartyModel>();
+		public static List<MaterialModel> MaterialDataContext { get; private set; } = new List<MaterialModel>();
 		public static List<SpellModel> SpellDataContext { get; private set; } = new List<SpellModel>();
 		public static List<UserModel> UserDataContext { get; private set; } = new List<UserModel>();
         #endregion
@@ -69,17 +69,19 @@ namespace TheTallTankardTavern.Configuration
 			BackgroundDataContext.Clear();
 			CharacterDataContext.Clear();
 			ItemDataContext.Clear();
-			MaterialDataContext.Clear();
 			FeatureDataContext.Clear();
+			PartyDataContext.Clear();
+			MaterialDataContext.Clear();
 			SpellDataContext.Clear();
 			UserDataContext.Clear();
 
 			BackgroundDataContext.LoadDataContext(FOLDER.Backgrounds);
 			CharacterDataContext.LoadDataContext(FOLDER.Characters);
 			ItemDataContext.LoadDataContext(FOLDER.Items);
-			MaterialDataContext.LoadDataContext(FOLDER.Materials);
 			FeatureDataContext.LoadDataContext(FOLDER.Features);
 			FeatureDataContext.LoadDataContext(FOLDER.Imported_Features);
+			PartyDataContext.LoadDataContext(FOLDER.Party);
+			MaterialDataContext.LoadDataContext(FOLDER.Materials);
 			SpellDataContext.LoadDataContext(FOLDER.Spells);
 			SpellDataContext.LoadDataContext(FOLDER.Imported_Spells);
 			UserDataContext.LoadDataContext(FOLDER.User);
