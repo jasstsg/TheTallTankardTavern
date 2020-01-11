@@ -67,7 +67,7 @@ namespace TheTallTankardTavern.Helpers
 			return typeof(TEnum).EnumToEnumArray<TEnum>();
 		}
 
-		private static T NewTModel<T>()
+		private static T NewTModel<T>() where T : BaseModel
 		{
 			return (T)Activator.CreateInstance(typeof(T));
 		}

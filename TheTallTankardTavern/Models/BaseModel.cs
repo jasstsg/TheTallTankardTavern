@@ -4,15 +4,15 @@ namespace TheTallTankardTavern.Models
 {
 	public class BaseModel
 	{
-		public string ID { get; set; }
+		public string ID { get; set; } = "";
 
 		[DisplayName("Name")]
-		public string Name { get; set; }
+		public string Name { get; set; } = "";
 
 		[DisplayName("Is Homebrew")]
-        public bool IsHomebrew { get; set; }
+        public bool IsHomebrew { get; set; } = false;
 
 		[DisplayName("Is Hidden")]
-		public bool IsHidden { get; set; }
+		public bool IsHidden { get; set; } = false;
 	}
 }
