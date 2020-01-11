@@ -27,7 +27,7 @@
     <tbody>
         @foreach(SpellModel Spell in CharacterSpells)
         {
-        <tr data-toggle="modal" data-target="#popup-modal" data-title="@Spell.Name" data-desc="@Spell.Desc">
+        <tr data-toggle="modal" data-target="#popup-modal" data-title="@Spell.Name" data-desc="@Spell.Desc" data-higher-level="@Spell.Higher_Level_Desc">
             <td>@Spell.Name</td>
             <td>@Spell.School</td>
             <td>@Spell.Level</td>
