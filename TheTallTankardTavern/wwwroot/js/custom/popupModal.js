@@ -8,14 +8,15 @@
     var title = button.data('title')
     var desc = button.data('desc')
     var higherLevel = button.data('higher-level')
+    var equipment = button.data('equipment')
 
     // Set the data-* attributes
     var modal = $(this)
     modal.find('.modal-title').text(title)
     modal.find('.modal-desc').text(desc)
 
-    //Used for Spells only
     _hideIfEmpty(higherLevel, $('.modal-higher-level'));
+    _hideIfEmpty(equipment, $('.modal-equipment'));
 })
 
 function _hideIfEmpty(value, node) {

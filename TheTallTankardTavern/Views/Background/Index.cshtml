@@ -1,6 +1,5 @@
 ﻿@model IEnumerable<TheTallTankardTavern.Models.BackgroundModel>
 @using TheTallTankardTavern.Configuration
-@using static TheTallTankardTavern.Configuration.Constants
 @addTagHelper *, TheTallTankardTavern
 @{
     ViewData["Title"] = "Backgrounds";
@@ -27,7 +26,7 @@
         {
             if (!b.IsHidden || ContextUser.IsAdminOrDM)
             {
-                <tr data-toggle="modal" data-target="#popup-modal" data-title="@b.Name" data-desc="@b.Desc">
+                <tr data-toggle="modal" data-target="#popup-modal" data-title="@b.Name" data-desc="@b.Desc" data-equipment="@("Equipment:\n" + b.Equipment)">
                     <td>@b.Name</td>
                     <td>@b.Skill_Proficiencies</td>
                     <td>@b.Tool_Proficiencies</td>
