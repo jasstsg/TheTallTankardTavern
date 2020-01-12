@@ -1,0 +1,53 @@
+﻿@addTagHelper *, TheTallTankardTavern
+@model TheTallTankardTavern.Models.PartyModel
+@using TheTallTankardTavern.Configuration
+
+<table>
+    <thead>
+        <tr>
+            <th>Member</th>
+            @if (ContextUser.IsAdminOrDM)
+            {
+                <th>AC</th>
+            }
+            <th width="150px" colspan="2">HP</th>
+            <th width="150px">Temp HP</th>
+            <th width="150px">Initiative</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (MemberModel Member in Model.Members.OrderByDescending(m => m.Initiative).ThenBy(m => m.Character.Name))
+        {
+        <tr>
+            <td>@Member.Character.Name</td>
+            @if (ContextUser.IsAdminOrDM)
+            {
+                <td>@Member.Character.GetTotalAC()</td>
+            }
+            @if (ContextUser.HasUsername(Member.Character.Player_Name) || ContextUser.IsAdminOrDM)
+            {
+                <td>
+                    <numberbox asp-for="@Member.Character.Hit_Points_Remaining" min="0" max="@Member.Character.MaxHitPoints"
+                               onchange="quickSaveHitPoints('@Member.CharacterId', this)"></numberbox>
+                </td>
+                <td> / @Member.Character.MaxHitPoints</td>
+                <td>
+                    <numberbox asp-for="@Member.Character.Temp_Hit_Points" min="0"
+                               onchange="quickSaveTempHitPoints('@Member.CharacterId', this)"></numberbox>
+                </td>
+                <td>
+                    <numberbox asp-for="@Member.Initiative" min="0"
+                               onchange="quickSaveMemberInitiative('@Member.CharacterId', this)"></numberbox>
+                </td>
+            }
+            else
+            {
+                <td>@Member.Character.Hit_Points_Remaining</td>
+                <td> / @Member.Character.MaxHitPoints</td>
+                <td>@Member.Character.Temp_Hit_Points</td>
+                <td>@Member.Initiative</td>
+            }
+        </tr>
+        }
+    </tbody>
+</table>

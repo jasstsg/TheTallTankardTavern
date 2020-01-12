@@ -1,7 +1,4 @@
-﻿
-
-
-function quickSaveRemoveFeature(cid, featureName, thisElement) {
+﻿function quickSaveRemoveFeature(cid, featureName, thisElement) {
     event.stopPropagation();
     var data = {
         CharacterID: cid,

@@ -1,0 +1,45 @@
+﻿@addTagHelper *, TheTallTankardTavern
+@model TheTallTankardTavern.Models.PartyModel
+@using TheTallTankardTavern.Configuration
+@using static TheTallTankardTavern.Configuration.Constants
+
+<table>
+    <thead>
+        <tr>
+            <th>Member</th>
+            <th>Level</th>
+            <th>Race</th>
+            <th>Class</th>
+            @if (ContextUser.IsAdminOrDM)
+            {
+                <th>AC</th>
+                <th>PP</th>
+                <th>Languages</th>
+            }
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (MemberModel Member in Model.Members.OrderBy(m => m.Character.Name))
+        {
+            <tr>
+                <td>@Member.Character.Name</td>
+                <td>@Member.Character.Level</td>
+                <td>@Member.Character.Race @Member.Character.Subrace.AddBraces()</td>
+                <td>@Member.Character.Class @Member.Character.Subclass.AddBraces()</td>
+                @if (ContextUser.IsAdminOrDM)
+                {
+                    <td>@Member.Character.GetTotalAC()</td>
+                    <td>@Member.Character.Passive_Perception</td>
+                    <td>@Member.Character.Languages.ToString(LANGUAGES.Common)</td>
+                }
+                <td>
+                    @if (ContextUser.IsAdminOrDM)
+                    {
+                        <buttonlink class="td-action-btn" asp-action="Remove" asp-route-cid="@Member.CharacterId" text="Remove"></buttonlink>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

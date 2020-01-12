@@ -1,6 +1,5 @@
 using System;
 using TTT.Enumerator;
-using TheTallTankardTavern.Helpers;
 using System.Collections.Generic;
 
 namespace TheTallTankardTavern.Models
@@ -21,10 +20,16 @@ namespace TheTallTankardTavern.Models
 
 		public override string ToString()
 		{
+			return this.ToString(new TEnum[] { });
+		}
+
+		public string ToString(params TEnum[] ignoreValues)
+		{
+			List<TEnum> IgnoreValues = new List<TEnum>(ignoreValues);
 			List<string> StringList = new List<string>(); 
 			foreach (TEnum value in typeof(TEnum).EnumToEnumArray<TEnum>())
 			{
-				if (this[value])
+				if (this[value] && !IgnoreValues.Contains(value))
 				{
 					StringList.Add(value.EnumToString());
 				}

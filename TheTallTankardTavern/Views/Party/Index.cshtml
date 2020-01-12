@@ -7,100 +7,38 @@
     ViewData["Title"] = "Party";
 }
 
+<style>
+    #party-combat td:not(:first-child) {
+        text-align: right;
+    }
+</style>
+
 <h1>@ViewData["Title"]</h1>
 <br />
-@if (ContextUser.IsAdminOrDM)
-{
-    <div class="row">
-        <div class="col-md-4">
-            <form class="form-inline" asp-action="Add" method="post">
-                <div class="form-group">
-                    <hidden asp-for="ID"></hidden>
-                    @for (int i = 0; i < Model.Members.Count; i++)
-                    {
-                        <hidden asp-for="Members[i].CharacterId"></hidden>
-                        <hidden asp-for="Members[i].Initiative"></hidden>
-                    }
-                    <select style="width:200px" asp-for="NewMemberId" asp-items="SelectListHelper.GetDataContextSelectList<CharacterModel>(CharacterDataContext)"></select>
-                    &nbsp;&nbsp;
-                    <submit text="Add to Party"></submit>
-                </div>
-            </form>
+<partial name="/Views/Party/_PartyMemberAdd.cshtml" model="Model" />
+
+<buttonlink class="font-weight-bold" asp-action="Index" text="Refresh"></buttonlink>
+&nbsp;&nbsp;
+<buttonlink class="font-weight-bold" asp-action="ResetInitiative" text="Reset Initiative"></buttonlink>
+&nbsp;&nbsp;
+<em id="auto-save-message"></em>
+<br />
+<br />
+
+<div class="nav nav-tabs">
+    <a class="nav-item nav-link active" data-toggle="tab" href="#party-combat"><strong>Combat</strong></a>
+    <a class="nav-item nav-link" data-toggle="tab" href="#party-details"><strong>Details</strong></a>
+</div>
+
+<div class="tab-content">
+    <div id="party-combat" class="tab-pane active">
+        <div class="row col-md-6">
+            <partial name="/Views/Party/_PartyCombat.cshtml" model="Model" />
         </div>
     </div>
-    <br />
-}
-<div class="row">
-    <div class="col-md-8">
-        <table>
-            <thead>
-                <tr>
-                    <th>Member</th>
-                    <th>Level</th>
-                    <th>Race</th>
-                    <th>Class</th>
-                    @if (ContextUser.IsAdminOrDM)
-                    {
-                        <th>AC</th>
-                        <th>PP</th>
-                        <th>Languages</th>
-                    }
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (MemberModel Member in Model.Members.OrderBy(m => m.Character.Name))
-                {
-                    <tr>
-                        <td>@Member.Character.Name</td>
-                        <td>@Member.Character.Level</td>
-                        <td>@Member.Character.Race @Member.Character.Subrace.AddBraces()</td>
-                        <td>@Member.Character.Class @Member.Character.Subclass.AddBraces()</td>
-                        @if (ContextUser.IsAdminOrDM)
-                        {
-                            <td>@Member.Character.GetTotalAC()</td>
-                            <td>@Member.Character.Passive_Perception</td>
-                            <td>@Member.Character.Languages.ToString()</td>
-                        }
-                        <td>
-                            @if (ContextUser.IsAdminOrDM)
-                            {
-                                <buttonlink class="td-action-btn" asp-action="Remove" asp-route-cid="@Member.CharacterId" text="Remove"></buttonlink>
-                            }
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div><div class="col-md-4">
-    <table>
-        <thead>
-            <tr>
-                <th>Member</th>
-                @if (ContextUser.IsAdminOrDM)
-                {
-                    <th>AC</th>
-                }
-                <th>HP</th>
-                <th>Temp HP</th>
-                <th>Initiative</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (MemberModel Member in Model.Members.OrderBy(m => m.Character.Name))
-            {
-                <tr>
-                    <td>@Member.Character.Name</td>
-                        @if (ContextUser.IsAdminOrDM)
-                        {
-                            <td>@Member.Character.GetTotalAC()</td>
-                        }
-                    <td>@Member.Character.Hit_Points_Remaining / @Member.Character.MaxHitPoints</td>
-                    <td>@Member.Character.Temp_Hit_Points</td>
-                    <td>@Member.Initiative</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-</div>
+    <div id="party-details" class="tab-pane">
+        <div class="row col-md-6">
+            <partial name="/Views/Party/_PartyDetails.cshtml" model="Model" />
+        </div>
+    </div>
 </div>

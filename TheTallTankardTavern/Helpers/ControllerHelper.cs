@@ -38,5 +38,15 @@ namespace TheTallTankardTavern.Helpers
 			}
 			return result.Success;
 		}
+
+		public static JsonResult JsonSuccessTrue(this Controller controller)
+		{
+			return controller.Json(new { success = true });
+		}
+
+		public static JsonResult JsonSuccessFalse(this Controller controller)
+		{
+			return controller.Json(new { success = false });
+		}
 	}
 }

@@ -12,9 +12,6 @@ namespace TheTallTankardTavern.Controllers
     [Authenticated]
     public class CharacterController : BaseController<CharacterModel>
     {
-        private JsonResult JsonSuccessTrue => Json(new { success = true });
-        private JsonResult JsonSuccessFalse => Json(new { success = false });
-
         public class SpellSlotsInfo
         {
             public string ID { get; set; }
@@ -86,11 +83,11 @@ namespace TheTallTankardTavern.Controllers
                 CharacterModel Character = DataContext.GetModelFromID(cid);
                 Character.Hit_Points_Remaining = hitPointsRemaining;
                 DataContext.Save(Character, Folder);
-                return JsonSuccessTrue;
+                return this.JsonSuccessTrue();
             }
             catch
             {
-                return JsonSuccessFalse;
+                return this.JsonSuccessFalse();
             }
         }
 
@@ -102,11 +99,11 @@ namespace TheTallTankardTavern.Controllers
                 CharacterModel Character = CharacterDataContext.GetModelFromID(cid);
                 Character.Hit_Dice_Remaining = hitDiceRemaining;
                 CharacterDataContext.Save(Character, Folder);
-                return JsonSuccessTrue;
+                return this.JsonSuccessTrue();
             }
             catch
             {
-                return JsonSuccessFalse;
+                return this.JsonSuccessFalse();
             }
         }
 
@@ -118,11 +115,11 @@ namespace TheTallTankardTavern.Controllers
                 CharacterModel Character = CharacterDataContext.GetModelFromID(cid);
                 Character.Temp_Hit_Points = tempHitPoints;
                 CharacterDataContext.Save(Character, Folder);
-                return JsonSuccessTrue;
+                return this.JsonSuccessTrue();
             }
             catch
             {
-                return JsonSuccessFalse;
+                return this.JsonSuccessFalse();
             }
         }
         #endregion
@@ -180,11 +177,11 @@ namespace TheTallTankardTavern.Controllers
                     case "Platinum": Character.Coin_Purse.Platinum_Pieces = pieces; break;
                 }
                 CharacterDataContext.Save(Character, Folder);
-                return JsonSuccessTrue;
+                return this.JsonSuccessTrue();
             }
             catch
             {
-                return JsonSuccessFalse;
+                return this.JsonSuccessFalse();
             }           
         }
 
@@ -212,11 +209,11 @@ namespace TheTallTankardTavern.Controllers
                 CharacterModel Character = DataContext.GetModelFromID(cid);
                 Character.Spells.Remove(sid);
                 DataContext.Save(Character, Folder);
-                return JsonSuccessTrue;
+                return this.JsonSuccessTrue();
             }
             catch
             {
-                return JsonSuccessFalse;
+                return this.JsonSuccessFalse();
             }
         }
 
@@ -228,11 +225,11 @@ namespace TheTallTankardTavern.Controllers
                 CharacterModel Character = CharacterDataContext.GetModelFromID(spellSlotsInfo.ID);
                 Character.SpellSlots[spellSlotsInfo.SpellSlotLevel - 1] = spellSlotsInfo.SpellSlotsRemaining;
                 CharacterDataContext.Save(Character, Folder);
-                return JsonSuccessTrue;
+                return this.JsonSuccessTrue();
             }
             catch
             {
-                return JsonSuccessFalse;
+                return this.JsonSuccessFalse();
             }
         }
         #endregion
@@ -246,11 +243,11 @@ namespace TheTallTankardTavern.Controllers
                 CharacterModel Character = DataContext.GetModelFromID(cid);
                 Character.Features.Remove(fid);
                 DataContext.Save(Character, Folder);
-                return JsonSuccessTrue;
+                return this.JsonSuccessTrue();
             }
             catch
             {
-                return JsonSuccessFalse;
+                return this.JsonSuccessFalse();
             }
         }
         #endregion
@@ -263,11 +260,11 @@ namespace TheTallTankardTavern.Controllers
                 CharacterModel Character = CharacterDataContext.GetModelFromID(cid);
                 Character.Notes = notes;
                 CharacterDataContext.Save(Character, Folder);
-                return JsonSuccessTrue;
+                return this.JsonSuccessTrue();
             }
             catch
             {
-                return JsonSuccessFalse;
+                return this.JsonSuccessFalse();
             }
         }
         #endregion

@@ -44,5 +44,33 @@ namespace TheTallTankardTavern.Controllers
 
             return View("Index", Party);
         }
+
+        [HttpPost]
+        public JsonResult QuickSaveMemberInitiative(string cid, int initiative)
+        {
+            try
+            {
+                PartyModel Party = PartyDataContext.Single();
+                Party.Members.Find(m => m.CharacterId.Equals(cid)).Initiative = initiative;
+                PartyDataContext.Save(Party, FOLDER.Party);
+                return this.JsonSuccessTrue();
+            }
+            catch
+            {
+                return this.JsonSuccessFalse();
+            }
+        }
+
+        public IActionResult ResetInitiative()
+        {
+            PartyModel Party = PartyDataContext.Single();
+            foreach (MemberModel Member in Party.Members)
+            {
+                Member.Initiative = 0;
+            }
+            PartyDataContext.Save(Party, FOLDER.Party);
+
+            return View("Index", Party);
+        }
     }
 }
