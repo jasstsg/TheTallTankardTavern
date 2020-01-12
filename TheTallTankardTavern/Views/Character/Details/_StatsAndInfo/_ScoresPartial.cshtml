@@ -15,10 +15,11 @@
     <thead>
         <tr>
             <th></th>
-            <th>Score</th>
-            <th>Mod</th>
-            <th>Save</th>
-            <th>DC</th>
+            <th width="18%">Score</th>
+            <th width="18%">Mod</th>
+            <th width="18%">Save</th>
+            <th width="18%">Spell Mod</th>
+            <th width="18%">Spell DC</th>
         </tr>
     </thead>
     <tbody>
@@ -27,20 +28,23 @@
             <td>@Model.Strength.Score</td>
             <td>@Model.Strength.Modifier</td>
             <td class="@SkillHighlight(Model.Strength_Save)">@Model.GetSaveProficiency(SKILL_CATEGORY.Strength, Model.Strength_Save)</td>
-            <td>@(Model.Proficiency_Bonus + Model.Strength.Modifier + 8)</td>
+            <td></td>
+            <td></td>
         </tr>
         <tr>
             <td><strong>DEX</strong></td>
             <td>@Model.Dexterity.Score</td>
             <td>@Model.Dexterity.Modifier</td>
             <td class="@SkillHighlight(Model.Dexterity_Save)">@Model.GetSaveProficiency(SKILL_CATEGORY.Dexterity, Model.Dexterity_Save)</td>
-            <td>@(Model.Proficiency_Bonus + Model.Dexterity.Modifier + 8)</td>
+            <td></td>
+            <td></td>
         </tr>
         <tr>
             <td><strong>CON</strong></td>
             <td>@Model.Constitution.Score</td>
             <td>@Model.Constitution.Modifier</td>
             <td class="@SkillHighlight(Model.Constitution_Save)">@Model.GetSaveProficiency(SKILL_CATEGORY.Constitution, Model.Constitution_Save)</td>
+            <td>@(Model.Proficiency_Bonus + Model.Constitution.Modifier)</td>
             <td>@(Model.Proficiency_Bonus + Model.Constitution.Modifier + 8)</td>
         </tr>
         <tr>
@@ -48,6 +52,7 @@
             <td>@Model.Intelligence.Score</td>
             <td>@Model.Intelligence.Modifier</td>
             <td class="@SkillHighlight(Model.Intelligence_Save)">@Model.GetSaveProficiency(SKILL_CATEGORY.Intelligence, Model.Intelligence_Save)</td>
+            <td>@(Model.Proficiency_Bonus + Model.Intelligence.Modifier)</td>
             <td>@(Model.Proficiency_Bonus + Model.Intelligence.Modifier + 8)</td>
         </tr>
         <tr>
@@ -55,6 +60,7 @@
             <td>@Model.Wisdom.Score</td>
             <td>@Model.Wisdom.Modifier</td>
             <td class="@SkillHighlight(Model.Wisdom_Save)">@Model.GetSaveProficiency(SKILL_CATEGORY.Wisdom, Model.Wisdom_Save)</td>
+            <td>@(Model.Proficiency_Bonus + Model.Wisdom.Modifier)</td>
             <td>@(Model.Proficiency_Bonus + Model.Wisdom.Modifier + 8)</td>
         </tr>
         <tr>
@@ -62,6 +68,7 @@
             <td>@Model.Charisma.Score</td>
             <td>@Model.Charisma.Modifier</td>
             <td class="@SkillHighlight(Model.Charisma_Save)">@Model.GetSaveProficiency(SKILL_CATEGORY.Charisma, Model.Charisma_Save)</td>
+            <td>@(Model.Proficiency_Bonus + Model.Charisma.Modifier)</td>
             <td>@(Model.Proficiency_Bonus + Model.Charisma.Modifier + 8)</td>
         </tr>
     </tbody>
