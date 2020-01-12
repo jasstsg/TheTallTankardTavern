@@ -8,8 +8,9 @@
         },
         success: function (response) {
             var saveMessage = $('#save-message');
+            saveMessage.show();
             saveMessage.text(response.success ? "Notes Saved!" : "Notes failed to save!");
-            saveMessage.delay(2000).fadeOut();
+            saveMessage.delay(1000).fadeOut();
         }
     })
 }
