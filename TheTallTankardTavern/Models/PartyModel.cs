@@ -15,7 +15,6 @@ namespace TheTallTankardTavern.Models
 
     public class MemberModel
     {
-        private CharacterModel _character = null;
         public string CharacterId { get; set; } = "";
         public int Initiative { get; set; } = 0;
 
@@ -24,11 +23,7 @@ namespace TheTallTankardTavern.Models
         {
             get
             {
-                if (_character == null)
-                {
-                    _character = CharacterDataContext.GetModelFromID(this.CharacterId);
-                }
-                return _character;
+                return CharacterDataContext.GetModelFromID(this.CharacterId);
             }
         }
     }
