@@ -1,13 +1,14 @@
 using System.Collections.Generic;
-using TheTallTankardTavern.Configuration;
 using TheTallTankardTavern.Helpers;
 using static TheTallTankardTavern.Configuration.Constants;
 using static TheTallTankardTavern.Configuration.ApplicationSettings;
+using Newtonsoft.Json;
 
 namespace TheTallTankardTavern.Models
 {
 	public class EquipmentModel : BaseListModel<string>
 	{
+		[JsonProperty]
 		public int Weapon_Slots_Used { get; set; } = 0;
 
 		public int Weapon_Slots_Max { get; set; } = 11;
