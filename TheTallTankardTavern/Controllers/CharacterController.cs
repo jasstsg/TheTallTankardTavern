@@ -6,7 +6,6 @@ using TheTallTankardTavern.Models;
 using static TheTallTankardTavern.Configuration.ApplicationSettings;
 using static TheTallTankardTavern.Configuration.Constants;
 
-
 namespace TheTallTankardTavern.Controllers
 {
     [Authenticated]
@@ -135,12 +134,22 @@ namespace TheTallTankardTavern.Controllers
 
         public IActionResult EquipItem(string cid, string iid)
         {
-            string errorMessage = "";
             CharacterModel Character = DataContext.GetModelFromID(cid);
-            if (Character.Equipment.TryEquip(iid, ref errorMessage))
+            EquipResult EquipItemResult = Character.Equipment.TryEquip(iid);
+            switch (EquipItemResult.Result)
             {
-                Character.Inventory.Remove(iid);
+                case ITEM_EQUIP_RESULT.EQUIPPED: 
+                    Character.Inventory.Remove(iid);
+                    break;
+                case ITEM_EQUIP_RESULT.REPLACED:
+                    Character.Inventory.Remove(iid);
+                    Character.Inventory.Add(EquipItemResult.ReplacedItemId);
+                    break;
+                case ITEM_EQUIP_RESULT.NO_ACTION:
+                default:
+                    break;
             }
+
             return SaveAndReturnToItemsPartialView(Character);
         }
 

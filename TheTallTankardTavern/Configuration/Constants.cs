@@ -133,6 +133,13 @@ namespace TheTallTankardTavern.Configuration
             Two_Handed,
             Versitile
         }
+
+        public enum ITEM_EQUIP_RESULT
+        {
+            EQUIPPED,
+            REPLACED,
+            NO_ACTION
+        }
         #endregion
 
         public static class SpecialFeatures
@@ -171,6 +178,8 @@ namespace TheTallTankardTavern.Configuration
             public const string RING = "Ring";
             public const string WEAPON = "Weapon";
             public const string MISC = "Miscellaneous";
+
+            public static string[] ACCESSORIES { get { return new string[] { BRACERS, FOOTWEAR, GLOVES, HEADGEAR, NECKLACE, RING }; } }
         }
         public static class WEAPON_SIZE
         {

@@ -19,24 +19,28 @@ namespace TheTallTankardTavern.Models
 		{
 			get
 			{
-				StringBuilder sb = new StringBuilder();
-				for (int i = 0; i < Traits.Count; i++)
+				if (Traits != null)
 				{
-					if (Traits[i])
+					StringBuilder sb = new StringBuilder();
+					for (int i = 0; i < Traits.Count; i++)
 					{
-						WEAPON_TRAIT trait = (WEAPON_TRAIT)i;
-						switch (trait)
+						if (Traits[i])
 						{
-							case Defensive: sb.Append($"\n{trait.EnumToString()} ({this.Defensive_Value})"); break;
-							case Ranged: sb.Append($"\n{trait.EnumToString()} ({this.Ranged_Value})"); break;
-							case Reach: sb.Append($"\n{trait.EnumToString()} ({this.Reach_Value})"); break;
-							case Thrown: sb.Append($"\n{trait.EnumToString()} ({this.Thrown_Value})"); break;
-							case Versitile: sb.Append($"\n{trait.EnumToString()} ({this.Versitile_Value})"); break;
-							default: sb.Append($"\n{trait.EnumToString()}"); break;
+							WEAPON_TRAIT trait = (WEAPON_TRAIT)i;
+							switch (trait)
+							{
+								case Defensive: sb.Append($"\n{trait.EnumToString()} ({this.Defensive_Value})"); break;
+								case Ranged: sb.Append($"\n{trait.EnumToString()} ({this.Ranged_Value})"); break;
+								case Reach: sb.Append($"\n{trait.EnumToString()} ({this.Reach_Value})"); break;
+								case Thrown: sb.Append($"\n{trait.EnumToString()} ({this.Thrown_Value})"); break;
+								case Versitile: sb.Append($"\n{trait.EnumToString()} ({this.Versitile_Value})"); break;
+								default: sb.Append($"\n{trait.EnumToString()}"); break;
+							}
 						}
 					}
+					return sb.ToString();
 				}
-				return sb.ToString();
+				return "";
 			}
 		}
 
@@ -48,7 +52,7 @@ namespace TheTallTankardTavern.Models
             {
                 if (this.Item_Type.Equals(ITEM_TYPES.WEAPON))
                 {
-                    return $"{this.Size} {this.Item_Type}";
+                    return $"{this.Item_Type} ({this.Size.Substring(0, 1)})";
                 }
                 return this.Item_Type;
             }
@@ -132,7 +136,7 @@ namespace TheTallTankardTavern.Models
 
 		[JsonIgnore]
 		[DisplayName("Weight Class")]
-		public string Weight_Class => Material.Weight_Class;
+		public string Weight_Class { get { return (Item_Type.Equals(ITEM_TYPES.MISC)) ? "" : Material.Weight_Class; } }
 
 		[JsonIgnore]
 		[DisplayName("Value")]
