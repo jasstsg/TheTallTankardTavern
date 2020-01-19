@@ -5,8 +5,17 @@
 @using TTT.String
 @addTagHelper *, TheTallTankardTavern
 
-<div>
-    EQUIPPED ITEMS [Weapon Slots: @Model.Equipment.Weapon_Slots_Used / @Model.Equipment.Weapon_Slots_Max] (Weapon Slots Per Weapon Size: 3 - Large, 2 - Medium, 1 - Small)
+<style>
+    #equipped-armour-and-weapons-header p {
+        margin: 0px;
+        padding: 0px;
+    }
+</style>
+
+<div id="equipped-armour-and-weapons-header">
+    <p>EQUIPPED ITEMS [Weapon Slots: @Model.Equipment.Weapon_Slots_Used / @Model.Equipment.Weapon_Slots_Max]</p>
+    <p>Weapon Slots Per Weapon Size: 3 - Large, 2 - Medium, 1 - Small</p>
+    <p><em>See the <a href="~/Appendix/Homebrews">Homebrews</a> page for help with weapon traits</em></p>
 </div>
 <table id="character-items-equipped-armour-and-weapons" table-hover="true">
     <thead>
@@ -27,7 +36,7 @@
            .OrderBy(i => ItemDataContext.GetModelFromID(i).Name))
         {
             ItemModel Item = ItemDataContext.GetModelFromID(iid);
-            <tr data-toggle="modal" data-target="#popup-modal" data-title="@Item.Name" data-desc="@(Item.Desc + Item.Weapon_Trait_Desc)">
+            <tr data-toggle="modal" data-target="#popup-modal" data-title="@Item.Name" data-desc="@Item.Desc" data-traits="@Item.Weapon_Trait_Desc">
                 <td>@Item.Name</td>
                 <td>@Item.Type</td>
                 <td>@Item.Attack</td>

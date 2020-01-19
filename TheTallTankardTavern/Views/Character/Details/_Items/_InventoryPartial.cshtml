@@ -57,7 +57,7 @@
                     @foreach (string iid in Model.Inventory.OrderBy(i => ItemDataContext.GetModelFromID(i).Name))
                     {
                         ItemModel Item = ItemDataContext.GetModelFromID(iid);
-                        <tr class="@ValidateInventory(Item)" data-toggle="modal" data-target="#popup-modal" data-title="@Item.Name" data-desc="@(Item.Desc + Item.Weapon_Trait_Desc)">
+                        <tr class="@ValidateInventory(Item)" data-toggle="modal" data-target="#popup-modal" data-title="@Item.Name" data-desc="@Item.Desc" data-traits="@Item.Weapon_Trait_Desc">
                             <td>@Item.Name</td>
                             <td>@Item.Type</td>
                             <td>@Item.Attack</td>
@@ -99,7 +99,7 @@
                      .OrderBy(i => ItemDataContext.GetModelFromID(i).Name))
                     {
                         ItemModel Item = ItemDataContext.GetModelFromID(iid);
-                        <tr class="invalid-row" data-toggle="modal" data-target="#popup-modal" data-title="@Item.Name" data-desc="@(Item.Desc + Item.Weapon_Trait_Desc)">
+                        <tr class="invalid-row" data-toggle="modal" data-target="#popup-modal" data-title="@Item.Name" data-desc="@Item.Desc" data-traits="@Item.Weapon_Trait_Desc">
                             <td>@Item.Name</td>
                             <td>@Item.Type</td>
                             <td>@Item.Attack</td>
@@ -134,7 +134,7 @@
                      .OrderBy(i => ItemDataContext.GetModelFromID(i).Name))
                     {
                         ItemModel Item = ItemDataContext.GetModelFromID(iid);
-                        <tr class="@ValidateInventory(Item)" data-toggle="modal" data-target="#popup-modal" data-title="@Item.Name" data-desc="@(Item.Desc + Item.Weapon_Trait_Desc)">
+                        <tr data-toggle="modal" data-target="#popup-modal" data-title="@Item.Name" data-desc="@Item.Desc" data-traits="@Item.Weapon_Trait_Desc">
                             <td>@Item.Name</td>
                             <td>@Item.Type</td>
                             <td>@Item.Attack</td>
@@ -169,7 +169,7 @@
                      .OrderBy(i => ItemDataContext.GetModelFromID(i).Name))
                     {
                         ItemModel Item = ItemDataContext.GetModelFromID(iid);
-                        <tr class="@ValidateInventory(Item)" data-toggle="modal" data-target="#popup-modal" data-title="@Item.Name" data-desc="@(Item.Desc + Item.Weapon_Trait_Desc)">
+                        <tr data-toggle="modal" data-target="#popup-modal" data-title="@Item.Name" data-desc="@Item.Desc" data-traits="@Item.Weapon_Trait_Desc">
                             <td>@Item.Name</td>
                             <td>@Item.Type</td>
                             <td>@Item.Attack</td>

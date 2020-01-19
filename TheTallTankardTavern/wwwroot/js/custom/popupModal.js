@@ -7,6 +7,7 @@
     // Extract info from data-* attributes
     var title = button.data('title')
     var desc = button.data('desc')
+    var traits = button.data('traits')
     var higherLevel = button.data('higher-level')
     var equipment = button.data('equipment')
 
@@ -15,8 +16,10 @@
     modal.find('.modal-title').text(title)
     modal.find('.modal-desc').text(desc)
 
+    _hideIfEmpty(traits, $('.modal-traits'));
     _hideIfEmpty(higherLevel, $('.modal-higher-level'));
     _hideIfEmpty(equipment, $('.modal-equipment'));
+
 })
 
 function _hideIfEmpty(value, node) {

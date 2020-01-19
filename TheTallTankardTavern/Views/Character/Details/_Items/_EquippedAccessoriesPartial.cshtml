@@ -21,7 +21,7 @@
            .OrderBy(i => ItemDataContext.GetModelFromID(i).Name))
         {
             ItemModel Item = ItemDataContext.GetModelFromID(iid);
-            <tr data-toggle="modal" data-target="#popup-modal" data-title="@Item.Name" data-desc="@(Item.Desc + Item.Weapon_Trait_Desc)">
+            <tr data-toggle="modal" data-target="#popup-modal" data-title="@Item.Name" data-desc="@Item.Desc" data-traits="@Item.Weapon_Trait_Desc">
                 <td>@Item.Name</td>
                 <td>@Item.Type</td>
                 <td>@Item.Weight_Class</td>
