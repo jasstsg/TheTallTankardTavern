@@ -13,9 +13,15 @@
 </style>
 
 <div id="equipped-armour-and-weapons-header">
-    <p>EQUIPPED ITEMS [Weapon Slots: @Model.Equipment.Weapon_Slots_Used / @Model.Equipment.Weapon_Slots_Max]</p>
-    <p>Weapon Slots Per Weapon Size: 3 - Large, 2 - Medium, 1 - Small</p>
-    <p><em>See the <a href="~/Appendix/Homebrews">Homebrews</a> page for help with weapon traits</em></p>
+    <div class="row">
+        <div class="col-md-6">
+            <p>EQUIPPED ARMOUR &amp; WEAPONS [Weapon Slots: @Model.Equipment.Weapon_Slots_Used / @Model.Equipment.Weapon_Slots_Max]</p>
+        </div>
+        <div class="col-md-6">
+            <p>Weapon Slots Per Weapon Size: 3 - Large, 2 - Medium, 1 - Small</p>
+            <p><em>See the <a href="~/Appendix/Homebrews">Homebrews</a> page for help with weapon traits</em></p>
+        </div>
+    </div>
 </div>
 <table id="character-items-equipped-armour-and-weapons" table-hover="true">
     <thead>
