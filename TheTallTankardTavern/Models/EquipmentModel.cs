@@ -66,7 +66,7 @@ namespace TheTallTankardTavern.Models
 			EquipResult FinalResult = Equip(Item);
 
 			//If there was an item of the same type we will want to replace it, so unequip it and pass it back up
-			if (string.IsNullOrEmpty(itemIdToReplace))
+			if (!string.IsNullOrEmpty(itemIdToReplace))
 			{
 				Unequip(itemIdToReplace);
 				FinalResult.Result = ITEM_EQUIP_RESULT.REPLACED;
