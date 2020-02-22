@@ -30,3 +30,14 @@ function quickSaveTempHitPoints(cid, thisElement) {
         console.log("Quick save temporary hit points request completed with success status: " + response.success);
     });
 };
+
+function quickSaveKiPoints(cid, thisElement) {
+    var data = {
+        cid: cid,
+        kiPoints: $(thisElement).val()
+    };
+    $.post("/Character/QuickSaveKiPoints", data, function (response) {
+        showAutoSaveMessage(response.success);
+        console.log("Quick save ki points request completed with success status: " + response.success);
+    });
+};

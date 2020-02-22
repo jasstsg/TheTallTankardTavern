@@ -121,6 +121,21 @@ namespace TheTallTankardTavern.Controllers
                 return this.JsonSuccessFalse();
             }
         }
+
+        public JsonResult QuickSaveKiPoints(string cid, int kiPoints)
+        {
+            try
+            {
+                CharacterModel Character = CharacterDataContext.GetModelFromID(cid);
+                Character.Ki_Points = kiPoints;
+                CharacterDataContext.Save(Character, Folder);
+                return this.JsonSuccessTrue();
+            }
+            catch
+            {
+                return this.JsonSuccessFalse();
+            }
+        }
         #endregion
 
         #region Manage Items

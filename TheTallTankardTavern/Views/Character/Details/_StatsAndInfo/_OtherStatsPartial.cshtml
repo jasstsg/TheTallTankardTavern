@@ -31,6 +31,14 @@
             <td><numberbox asp-for="Temp_Hit_Points" min="0" onchange="quickSaveTempHitPoints('@Model.ID', this)"></numberbox></td>
             <td></td>
         </tr>
+        @if (@Model.Class.ToLower().Contains("monk") && @Model.Level > 1)
+        {
+            <tr>
+                <td><label asp-for="Ki_Points"></label></td>
+                <td><numberbox asp-for="Ki_Points" min="0" max="@Model.Level" onchange="quickSaveKiPoints('@Model.ID', this)"></numberbox></td>
+                <td>/ @Model.Level</td>
+            </tr>
+        }
         <tr>
             <td><label asp-for="TotalAC"></label></td>
             <td>@Model.TotalAC</td>

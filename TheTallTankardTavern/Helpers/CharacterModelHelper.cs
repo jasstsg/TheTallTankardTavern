@@ -95,13 +95,14 @@ namespace TheTallTankardTavern.Helpers
 
 		public static void TakeLongRest(this CharacterModel Character)
 		{
-			Character.Hit_Points_Remaining = Character.GetTotalHP();
-			Character.Hit_Dice_Remaining = Character.Level;
-			for (int i = 0; i < Character.SpellSlots.Length; i++)
+			Character.Hit_Points_Remaining = Character.GetTotalHP();    //Reset HP
+			Character.Hit_Dice_Remaining = Character.Level;             //Reset Hit Dice
+			for (int i = 0; i < Character.SpellSlots.Length; i++)       //Reset Spell Slots
 			{
 				Character.SpellSlots[i] = Character.SpellSlotsMax[i];
 			}
-            Character.Temp_Hit_Points = 0;
+            Character.Temp_Hit_Points = 0;								//Reset Temporary Hit Points
+            Character.Ki_Points = Character.Level;								//Reset Ki Points
 		}
 
 		public static void UseHitDie(this CharacterModel Character)
