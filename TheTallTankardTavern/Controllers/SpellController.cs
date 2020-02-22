@@ -45,6 +45,8 @@ namespace TheTallTankardTavern.Controllers
 	{
 		public static bool IsMatch(this SpellModel spell, string searchtext)
 		{
+			searchtext = searchtext.ToLower();
+
 			return spell.Name.SafeContains(searchtext) ||
 				spell.School.SafeContains(searchtext) ||
 				spell.Classes.Any(c => c.SafeContains(searchtext));
