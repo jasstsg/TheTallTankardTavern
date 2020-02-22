@@ -1,0 +1,36 @@
+﻿@addTagHelper *, TheTallTankardTavern
+
+
+<style>
+    #filters .btn {
+        font-weight: bold;
+        width: 150px;
+        margin-bottom: 2px;
+    }
+</style>
+
+<div class="row" id="filters">
+    <div class="col-md-12">
+        <form asp-action="FilteredIndex" method="post">
+            <div class="row">
+                <div class="col-md-4">
+                    <label>Search: </label>
+                    <input class="form-control" name="searchtext" value="@(ViewData["searchtext"] ?? "")" />
+                </div>
+                <div class="col-md-4">
+                    <label>Filter by:</label>
+                    <select name="filter-dropdown">
+                        <option value="All">No Filter</option>
+                        <option value="ClassFeature">Class Features Only</option>
+                        <option value="ClassFeature">Non-Class Features Only</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <br>
+                    <submit text="Apply Filters"></submit>
+                    <buttonlink asp-action="Index" text="Clear Filters"></buttonlink>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

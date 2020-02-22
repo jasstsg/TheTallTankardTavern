@@ -2,8 +2,6 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 using TheTallTankardTavern.Attributes;
-using TheTallTankardTavern.Configuration;
-using TheTallTankardTavern.Helpers;
 using TheTallTankardTavern.Models;
 using static TheTallTankardTavern.Configuration.ApplicationSettings;
 using static TheTallTankardTavern.Configuration.Constants;
@@ -22,18 +20,41 @@ namespace TheTallTankardTavern.Controllers
             });
         }
 
-        public IActionResult FilteredIndex(string filtertext)
+        [HttpPost]
+        public IActionResult FilteredIndex(string searchtext)
         {
-            IEnumerable<FeatureModel> Features;
+            string selectedFilter = Request.Form["filter-dropdown"];
 
-            switch (filtertext)
+            IEnumerable<FeatureModel> Features = !string.IsNullOrEmpty(searchtext) ?
+                DataContext.Where(f => f.IsMatch(searchtext)).ToList() :
+                Features = DataContext.Where(f => true);
+
+            switch (selectedFilter)
             {
-                case "All": return Index();
-                case "ClassFeatures": Features = DataContext.Where(f => f.IsClassFeature); break;
-                case "NonClassFeatures": Features = DataContext.Where(f => !f.IsClassFeature); break;
-                default: Features = DataContext.Where(f => f.Class.Equals(filtertext)); break;
+                case "ClassFeatures": Features = Features.Where(f => f.IsClassFeature); break;
+                case "NonClassFeatures": Features = Features.Where(f => !f.IsClassFeature); break;
+                default: break;
             }
+
+            ViewData["searchtext"] = searchtext;
+
             return View("Index", Features.OrderBy(f => f.Name).ToList());
         }
 	}
+
+    public static class FeatureControllerExtensions
+    {
+        public static bool IsMatch(this FeatureModel feature, string searchtext)
+        {
+            return feature.Name.SafeContains(searchtext) ||
+                feature.Prerequisite.SafeContains(searchtext) ||
+                feature.Class.SafeContains(searchtext) ||
+                feature.Subclass.SafeContains(searchtext);
+        }
+
+        private static bool SafeContains(this string searchProperty, string searchtext)
+        {
+            return string.IsNullOrEmpty(searchProperty) ? false : searchProperty.ToLower().Contains(searchtext);
+        }
+    }
 }

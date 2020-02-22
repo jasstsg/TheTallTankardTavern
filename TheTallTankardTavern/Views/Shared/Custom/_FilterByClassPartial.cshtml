@@ -1,21 +1,17 @@
 ﻿@using TheTallTankardTavern.Configuration
 @addTagHelper *, TheTallTankardTavern
 
-<div class="row">
-    <div class="col-md-12">
-        <table>
-            <thead>
-                <tr><th colspan="@(ApplicationSettings.ConfigurationSettings.Classes.Keys.Count + 1)">Filter By Class</th></tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><buttonlink style="font-weight:bold" asp-action="FilteredIndex" asp-route-filtertext="All" text="All"></buttonlink></td>
-                    @foreach (string ClassName in ApplicationSettings.ConfigurationSettings.Classes.Keys)
-                    {
-                        <td><buttonlink style="font-weight:bold" asp-action="FilteredIndex" asp-route-filtertext="@ClassName" text="@ClassName"></buttonlink></td>
-                    }
-                </tr>
-            </tbody>
-        </table>
+
+
+<div id="filter-by-class">
+    <div>
+        <buttonlink asp-action="FilteredIndex" asp-route-filtertext="All" text="All"></buttonlink>
     </div>
+
+    @foreach (string ClassName in ApplicationSettings.ConfigurationSettings.Classes.Keys)
+    {
+        <div>
+            <buttonlink asp-action="FilteredIndex" asp-route-filtertext="@ClassName" text="@ClassName"></buttonlink>
+        </div>
+    }
 </div>

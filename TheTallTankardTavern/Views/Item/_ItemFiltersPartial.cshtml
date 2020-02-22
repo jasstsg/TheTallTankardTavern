@@ -1,0 +1,21 @@
+﻿@addTagHelper *, TheTallTankardTavern
+
+
+<style>
+    #filters .btn {
+        font-weight: bold;
+        width: 100px;
+        margin-bottom: 2px;
+    }
+</style>
+
+<div id="filters">
+    <form asp-action="FilteredIndex" method="post">
+        <strong>Search:</strong>
+        <div>
+            <input class="form-control" name="searchtext" style="min-width:200px;max-width:400px;margin-bottom:5px" value="@(ViewData["searchtext"] ?? "")" />
+        </div>
+        <submit text="Search"></submit>
+        <buttonlink asp-action="Index" text="Clear"></buttonlink>
+    </form>
+</div>

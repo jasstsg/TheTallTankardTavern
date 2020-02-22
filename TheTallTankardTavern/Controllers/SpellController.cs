@@ -28,14 +28,31 @@ namespace TheTallTankardTavern.Controllers
 			return View("Create", Spell);
 		}
 
-		public IActionResult FilteredIndex(string filtertext)
+		[HttpPost]
+		public IActionResult FilteredIndex(string searchtext)
 		{
-			if (filtertext.Equals("All"))
-			{
-				return Index();
-			}
+			IEnumerable<SpellModel> Spells = !string.IsNullOrEmpty(searchtext) ?
+				DataContext.Where(s => s.IsMatch(searchtext)).ToList() :
+				Spells = DataContext.Where(s => true);
 
-			return View("Index", DataContext.Where(s => s.Classes.Contains(filtertext)).OrderBy(s => s.Name).ToList());
+			ViewData["searchtext"] = searchtext;
+
+			return View("Index", Spells.OrderBy(s => s.Name).ToList());
+		}
+	}
+
+	public static class SpellControllerExtensions
+	{
+		public static bool IsMatch(this SpellModel spell, string searchtext)
+		{
+			return spell.Name.SafeContains(searchtext) ||
+				spell.School.SafeContains(searchtext) ||
+				spell.Classes.Any(c => c.SafeContains(searchtext));
+		}
+
+		private static bool SafeContains(this string searchProperty, string searchtext)
+		{
+			return string.IsNullOrEmpty(searchProperty) ? false : searchProperty.ToLower().Contains(searchtext);
 		}
 	}
 }

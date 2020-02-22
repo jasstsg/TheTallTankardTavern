@@ -1,33 +1,14 @@
 ﻿@model IEnumerable<TheTallTankardTavern.Models.FeatureModel>
-@using TheTallTankardTavern.Configuration
 @addTagHelper *, TheTallTankardTavern
 @{
     ViewData["Title"] = "Features";
 }
 
 <partial name="/Views/Shared/Custom/_PopupModalPartial.cshtml" />
-
 <h1>@ViewData["Title"]</h1>
 
-<partial name="/Views/Shared/Custom/_FilterByClassPartial.cshtml" />
-
-<div class="row">
-    <div class="col-md-4">
-        <table>
-            <thead>
-                <tr><th colspan="3">Filter By Feature Type</th></tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><buttonlink style="font-weight:bold" asp-action="FilteredIndex" asp-route-filtertext="All" text="All"></buttonlink></td>
-                    <td><buttonlink style="font-weight:bold" asp-action="FilteredIndex" asp-route-filtertext="ClassFeatures" text="Class Features"></buttonlink></td>
-                    <td><buttonlink style="font-weight:bold" asp-action="FilteredIndex" asp-route-filtertext="NonClassFeatures" text="Non-Class Features"></buttonlink></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
-
+<partial name="/Views/Feature/_FeatureFiltersPartial.cshtml" />
+    
 <partial name="/Views/Shared/Custom/ActionButtons/_CreatePartial.cshtml" />
 <div class="row">
     <div class="col-md-12">
