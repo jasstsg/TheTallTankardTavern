@@ -228,7 +228,10 @@ namespace TheTallTankardTavern.Models
 		[DisplayName("Ki Points")]
 		public int Ki_Points { get; set; } = 0;
 
-        [JsonIgnore]
+		[DisplayName("Sorcery Points")]
+		public int Sorcery_Points { get; set; } = 0;
+
+		[JsonIgnore]
         [DisplayName("Base AC")]
         public int BaseAC { get { return this.GetBaseAC(); } }
 

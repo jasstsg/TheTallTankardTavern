@@ -136,6 +136,21 @@ namespace TheTallTankardTavern.Controllers
                 return this.JsonSuccessFalse();
             }
         }
+
+        public JsonResult QuickSaveSorceryPoints(string cid, int sorceryPoints)
+        {
+            try
+            {
+                CharacterModel Character = CharacterDataContext.GetModelFromID(cid);
+                Character.Sorcery_Points = sorceryPoints;
+                CharacterDataContext.Save(Character, Folder);
+                return this.JsonSuccessTrue();
+            }
+            catch
+            {
+                return this.JsonSuccessFalse();
+            }
+        }
         #endregion
 
         #region Manage Items

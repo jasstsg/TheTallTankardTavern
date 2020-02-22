@@ -41,3 +41,14 @@ function quickSaveKiPoints(cid, thisElement) {
         console.log("Quick save ki points request completed with success status: " + response.success);
     });
 };
+
+function quickSaveSorceryPoints(cid, thisElement) {
+    var data = {
+        cid: cid,
+        sorceryPoints: $(thisElement).val()
+    };
+    $.post("/Character/QuickSaveSorceryPoints", data, function (response) {
+        showAutoSaveMessage(response.success);
+        console.log("Quick save sorcery points request completed with success status: " + response.success);
+    });
+};

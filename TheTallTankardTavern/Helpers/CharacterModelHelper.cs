@@ -102,7 +102,8 @@ namespace TheTallTankardTavern.Helpers
 				Character.SpellSlots[i] = Character.SpellSlotsMax[i];
 			}
             Character.Temp_Hit_Points = 0;								//Reset Temporary Hit Points
-            Character.Ki_Points = Character.Level;								//Reset Ki Points
+            Character.Ki_Points = Character.Level;						//Reset Ki Points
+            Character.Sorcery_Points = Character.Level;                 //Reset Sorcery Points
 		}
 
 		public static void UseHitDie(this CharacterModel Character)

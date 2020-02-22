@@ -39,6 +39,14 @@
                 <td>/ @Model.Level</td>
             </tr>
         }
+        @if (@Model.Class.ToLower().Contains("sorcerer") && @Model.Level > 1)
+        {
+            <tr>
+                <td><label asp-for="Sorcery_Points"></label></td>
+                <td><numberbox asp-for="Sorcery_Points" min="0" max="@Model.Level" onchange="quickSaveSorceryPoints('@Model.ID', this)"></numberbox></td>
+                <td>/ @Model.Level</td>
+            </tr>
+        }
         <tr>
             <td><label asp-for="TotalAC"></label></td>
             <td>@Model.TotalAC</td>
