@@ -1,15 +1,11 @@
 ﻿@model IEnumerable<TheTallTankardTavern.Models.ItemModel>
-@using TheTallTankardTavern.Configuration
-@using static TheTallTankardTavern.Configuration.Constants
 @addTagHelper *, TheTallTankardTavern
 @{
     ViewData["Title"] = "Items";
 }
 
 <partial name="/Views/Shared/Custom/_PopupModalPartial.cshtml" />
-
 <h1>@ViewData["Title"]</h1>
-
 
 <partial name="/Views/Item/_ItemFiltersPartial.cshtml" />
 
