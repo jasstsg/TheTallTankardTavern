@@ -11,6 +11,8 @@ namespace TheTallTankardTavern.Models
 
         [JsonIgnore]
         public string NewMemberId { get; set; } = "";
+
+        public string Date { get; set; } = "";
     }
 
     public class MemberModel

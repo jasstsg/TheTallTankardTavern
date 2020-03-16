@@ -61,6 +61,22 @@ namespace TheTallTankardTavern.Controllers
             }
         }
 
+        [HttpPost]
+        public JsonResult QuickSaveDate(string date)
+        {
+            try
+            {
+                PartyModel Party = PartyDataContext.Single();
+                Party.Date = date;
+                PartyDataContext.Save(Party, FOLDER.Party);
+                return this.JsonSuccessTrue();
+            }
+            catch
+            {
+                return this.JsonSuccessFalse();
+            }
+        }
+
         public IActionResult ResetInitiative()
         {
             PartyModel Party = PartyDataContext.Single();
