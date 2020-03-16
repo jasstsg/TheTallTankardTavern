@@ -54,9 +54,12 @@
 <strong>Date (See <a asp-controller="Appendix" asp-action="Calendar">Calendar</a>):</strong>
 @if (ContextUser.IsAdminOrDM)
 {
-    <textbox style="width:300px" asp-for="Date" oninput="quickSaveDate(this)"></textbox>
+    <textbox style="" asp-for="Date" oninput="quickSaveDate(this)"></textbox>
 }
-else {  <input type="text" readonly /> }
+else
+{  
+    <textbox style="width:300px;border:none;background:none;" asp-for="Date" readonly></textbox>
+}
 <br />
 
 <buttonlink class="font-weight-bold" asp-action="Index" text="Refresh"></buttonlink>

@@ -141,17 +141,17 @@ namespace TheTallTankardTavern.Models
         [DisplayName("Languages")]
         public CheckBoxListModel<LANGUAGES> Languages { get; set; }
 
-        public class Stat
-        {
-            public Stat(int score)
-            {
-                this.Score = score;
-            }
-            
-            public int Score { get; set; } = 10;
-            
-            [JsonIgnore]
-            public int Modifier { get { return (this.Score / 2) - 5; } }
-        }
+		public class Stat
+		{
+			public Stat(int score)
+			{
+				this.Score = score;
+			}
+
+			public int Score { get; set; } = 10;
+
+			[JsonIgnore]
+			public int Modifier { get { return (this.Score / 2) - 5; } }
+		}
 	}
 }

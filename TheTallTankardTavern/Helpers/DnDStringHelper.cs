@@ -46,5 +46,10 @@ namespace TheTallTankardTavern.Helpers
 		{
 			return new HtmlString(str).Value;
 		}
+
+		public static string AddSign(this int num)
+		{
+			return (num > 0) ? $"+{num}" : $"{num}";
+		}
 	}
 }

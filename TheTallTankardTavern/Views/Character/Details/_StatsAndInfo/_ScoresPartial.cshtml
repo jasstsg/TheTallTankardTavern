@@ -26,49 +26,49 @@
         <tr>
             <td><strong>STR</strong></td>
             <td>@Model.Strength.Score</td>
-            <td>@Model.Strength.Modifier</td>
-            <td class="@SkillHighlight(Model.Strength_Save)">@Model.GetSaveProficiency(SKILL_CATEGORY.Strength, Model.Strength_Save)</td>
+            <td>@Model.Strength.Modifier.AddSign()</td>
+            <td class="@SkillHighlight(Model.Strength_Save)">@Model.GetSaveProficiency(SKILL_CATEGORY.Strength, Model.Strength_Save).AddSign()</td>
             <td></td>
             <td></td>
         </tr>
         <tr>
             <td><strong>DEX</strong></td>
             <td>@Model.Dexterity.Score</td>
-            <td>@Model.Dexterity.Modifier</td>
-            <td class="@SkillHighlight(Model.Dexterity_Save)">@Model.GetSaveProficiency(SKILL_CATEGORY.Dexterity, Model.Dexterity_Save)</td>
+            <td>@Model.Dexterity.Modifier.AddSign()</td>
+            <td class="@SkillHighlight(Model.Dexterity_Save)">@Model.GetSaveProficiency(SKILL_CATEGORY.Dexterity, Model.Dexterity_Save).AddSign()</td>
             <td></td>
             <td></td>
         </tr>
         <tr>
             <td><strong>CON</strong></td>
             <td>@Model.Constitution.Score</td>
-            <td>@Model.Constitution.Modifier</td>
-            <td class="@SkillHighlight(Model.Constitution_Save)">@Model.GetSaveProficiency(SKILL_CATEGORY.Constitution, Model.Constitution_Save)</td>
-            <td>@(Model.Proficiency_Bonus + Model.Constitution.Modifier)</td>
+            <td>@Model.Constitution.Modifier.AddSign()</td>
+            <td class="@SkillHighlight(Model.Constitution_Save)">@Model.GetSaveProficiency(SKILL_CATEGORY.Constitution, Model.Constitution_Save).AddSign()</td>
+            <td>@((Model.Proficiency_Bonus + Model.Constitution.Modifier).AddSign())</td>
             <td>@(Model.Proficiency_Bonus + Model.Constitution.Modifier + 8)</td>
         </tr>
         <tr>
             <td><strong>INT</strong></td>
             <td>@Model.Intelligence.Score</td>
-            <td>@Model.Intelligence.Modifier</td>
-            <td class="@SkillHighlight(Model.Intelligence_Save)">@Model.GetSaveProficiency(SKILL_CATEGORY.Intelligence, Model.Intelligence_Save)</td>
-            <td>@(Model.Proficiency_Bonus + Model.Intelligence.Modifier)</td>
+            <td>@Model.Intelligence.Modifier.AddSign()</td>
+            <td class="@SkillHighlight(Model.Intelligence_Save)">@Model.GetSaveProficiency(SKILL_CATEGORY.Intelligence, Model.Intelligence_Save).AddSign()</td>
+            <td>@((Model.Proficiency_Bonus + Model.Intelligence.Modifier).AddSign())</td>
             <td>@(Model.Proficiency_Bonus + Model.Intelligence.Modifier + 8)</td>
         </tr>
         <tr>
             <td><strong>WIS</strong></td>
             <td>@Model.Wisdom.Score</td>
-            <td>@Model.Wisdom.Modifier</td>
-            <td class="@SkillHighlight(Model.Wisdom_Save)">@Model.GetSaveProficiency(SKILL_CATEGORY.Wisdom, Model.Wisdom_Save)</td>
-            <td>@(Model.Proficiency_Bonus + Model.Wisdom.Modifier)</td>
+            <td>@Model.Wisdom.Modifier.AddSign()</td>
+            <td class="@SkillHighlight(Model.Wisdom_Save)">@Model.GetSaveProficiency(SKILL_CATEGORY.Wisdom, Model.Wisdom_Save).AddSign()</td>
+            <td>@((Model.Proficiency_Bonus + Model.Wisdom.Modifier).AddSign())</td>
             <td>@(Model.Proficiency_Bonus + Model.Wisdom.Modifier + 8)</td>
         </tr>
         <tr>
             <td><strong>CHA</strong></td>
             <td>@Model.Charisma.Score</td>
-            <td>@Model.Charisma.Modifier</td>
-            <td class="@SkillHighlight(Model.Charisma_Save)">@Model.GetSaveProficiency(SKILL_CATEGORY.Charisma, Model.Charisma_Save)</td>
-            <td>@(Model.Proficiency_Bonus + Model.Charisma.Modifier)</td>
+            <td>@Model.Charisma.Modifier.AddSign()</td>
+            <td class="@SkillHighlight(Model.Charisma_Save)">@Model.GetSaveProficiency(SKILL_CATEGORY.Charisma, Model.Charisma_Save).AddSign()</td>
+            <td>@((Model.Proficiency_Bonus + Model.Charisma.Modifier).AddSign())</td>
             <td>@(Model.Proficiency_Bonus + Model.Charisma.Modifier + 8)</td>
         </tr>
     </tbody>

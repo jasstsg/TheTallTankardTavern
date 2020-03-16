@@ -59,7 +59,7 @@
         </tr>
         <tr>
             <td><label asp-for="Initiative"></label></td>
-            <td>@Model.Initiative</td>
+            <td>@Model.Initiative.AddSign()</td>
             <td></td>
         </tr>
         <tr>
@@ -69,7 +69,7 @@
         </tr>
         <tr>
             <td><label asp-for="Proficiency_Bonus"></label></td>
-            <td>@Model.Proficiency_Bonus</td>
+            <td>@Model.Proficiency_Bonus.AddSign()</td>
             <td></td>
         </tr>
     </tbody>
