@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = "Combat";
+}
+@addTagHelper *, TheTallTankardTavern
+
+<h1>@ViewData["Title"]</h1>
+
+<em>Official rules can you be found <a href="https://www.dndbeyond.com/sources/basic-rules/combat">here</a>.</em>
+<br />
+<br />
+
+<div id="combat-tables">
+    <div class="row">
+        <div class="col-md-8">
+            <partial name="/Views/Appendix/_Combat/_OrderOfCombat.cshtml" />
+            <partial name="/Views/Appendix/_Combat/_PartsOfYourTurn.cshtml" />
+        </div>
+        <div class="col-md-4">
+            <partial name="/Views/Appendix/_Combat/_Interactions.cshtml" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <partial name="/Views/Appendix/_Combat/_Actions.cshtml" />
+        </div>
+    </div>
+</div>

@@ -23,6 +23,8 @@
     @Model.Class@Model.Subclass.AddBraces(),
     @Model.Background
     @if (!string.IsNullOrEmpty(Model.Bio.Birthday)) {<span>, Born @Model.Bio.Birthday</span>}
+    &nbsp;&nbsp;&nbsp;&nbsp; 
+    More info about Levels, Classes, and Experience <a asp-controller="Appendix" asp-action="CharacterAdvancement">here</a>.
 </div>
 <partial name="/Views/Shared/Custom/ActionButtons/_BackEditDeletePartial.cshtml" model="Model" />
 <em id="long-rest-message">@ViewData["long-rest-message"]</em>
