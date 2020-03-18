@@ -110,6 +110,7 @@ namespace TheTallTankardTavern.Helpers
 		{
 			Character.Ki_Points = Character.Level;                      //Reset Ki Points
 			Character.Sorcery_Points = Character.Level;                 //Reset Sorcery Points
+			Character.Wild_Shapes = 2;					                //Reset wild shapes
 		}
 
 		public static void UseHitDie(this CharacterModel Character)

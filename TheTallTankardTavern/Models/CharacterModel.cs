@@ -231,6 +231,9 @@ namespace TheTallTankardTavern.Models
 		[DisplayName("Sorcery Points")]
 		public int Sorcery_Points { get; set; } = 0;
 
+		[DisplayName("Wild Shapes")]
+		public int Wild_Shapes { get; set; } = 0;
+
 		[JsonIgnore]
         [DisplayName("Base AC")]
         public int BaseAC { get { return this.GetBaseAC(); } }

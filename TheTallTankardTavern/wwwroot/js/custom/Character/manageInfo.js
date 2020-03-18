@@ -52,3 +52,15 @@ function quickSaveSorceryPoints(cid, thisElement) {
         console.log("Quick save sorcery points request completed with success status: " + response.success);
     });
 };
+
+function quickSaveWildShapes(cid, thisElement) {
+    var data = {
+        cid: cid,
+        wildShapes: $(thisElement).val()
+    };
+    $.post("/Character/QuickSaveWildShapes", data, function (response) {
+        showAutoSaveMessage(response.success);
+        console.log(response.success);
+        console.log("Quick save wild shapes request completed with success status: " + response.success);
+    });
+};

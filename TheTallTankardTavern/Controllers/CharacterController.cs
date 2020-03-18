@@ -160,6 +160,21 @@ namespace TheTallTankardTavern.Controllers
                 return this.JsonSuccessFalse();
             }
         }
+
+        public JsonResult QuickSaveWildShapes(string cid, int wildShapes)
+        {
+            try
+            {
+                CharacterModel Character = CharacterDataContext.GetModelFromID(cid);
+                Character.Wild_Shapes = wildShapes;
+                CharacterDataContext.Save(Character, Folder);
+                return this.JsonSuccessTrue();
+            }
+            catch
+            {
+                return this.JsonSuccessFalse();
+            }
+        }
         #endregion
 
         #region Manage Items
