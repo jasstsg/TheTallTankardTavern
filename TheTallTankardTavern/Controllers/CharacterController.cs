@@ -74,6 +74,15 @@ namespace TheTallTankardTavern.Controllers
             return View("Details", Character);
         }
 
+        //For Ki Points, Sorcery Points
+        public IActionResult RestorePoints(string id)
+        {
+            CharacterModel Character = DataContext.GetModelFromID(id);
+            Character.RestorePoints();
+            DataContext.Save(Character, Folder);
+            return View("Details", Character);
+        }
+
         [HttpPost]
         public JsonResult QuickSaveHitPoints(string cid, int hitPointsRemaining)
         {

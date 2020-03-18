@@ -36,7 +36,10 @@
             <tr>
                 <td><label asp-for="Ki_Points"></label></td>
                 <td><numberbox asp-for="Ki_Points" min="0" max="@Model.Level" onchange="quickSaveKiPoints('@Model.ID', this)"></numberbox></td>
-                <td>/ @Model.Level</td>
+                <td>
+                    / @Model.Level&nbsp;&nbsp;
+                    <buttonlink class="action-btn" style="margin:0px" asp-action="RestorePoints" asp-route-id="@Model.ID" text="Restore"></buttonlink>
+                </td>
             </tr>
         }
         @if (@Model.Class.ToLower().Contains("sorcerer") && @Model.Level > 1)
@@ -44,7 +47,10 @@
             <tr>
                 <td><label asp-for="Sorcery_Points"></label></td>
                 <td><numberbox asp-for="Sorcery_Points" min="0" max="@Model.Level" onchange="quickSaveSorceryPoints('@Model.ID', this)"></numberbox></td>
-                <td>/ @Model.Level</td>
+                <td>
+                    / @Model.Level&nbsp;&nbsp;
+                    <buttonlink class="action-btn" style="margin:0px" asp-action="RestorePoints" asp-route-id="@Model.ID" text="Restore"></buttonlink>
+                </td>
             </tr>
         }
         <tr>
