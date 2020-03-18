@@ -44,7 +44,8 @@ namespace TheTallTankardTavern.Helpers
                 int AC = Character.Armour_Class + (Armour.Armour_Class_Value - 10);
 
                 //Special rules
-                AC += Character.Race.Equals("Warforged") ? Character.Proficiency_Bonus : 0;
+                //AC += Character.Race.Equals("Warforged") ? Character.Proficiency_Bonus : 0; //Old WGtE style
+                AC += Character.Race.Equals("Warforged") ? 1 : 0; //New Eberron source book style
 
 				int DEX = Character.Dexterity.Modifier;
 				switch (Armour.Weight_Class)
