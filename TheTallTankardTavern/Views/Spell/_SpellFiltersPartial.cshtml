@@ -1,5 +1,5 @@
-﻿@addTagHelper *, TheTallTankardTavern
-
+﻿@addTagHelper TheTallTankardTavern.TagHelpers.SubmitTagHelper, TheTallTankardTavern
+@addTagHelper TheTallTankardTavern.TagHelpers.ButtonLinkTagHelper, TheTallTankardTavern
 
 <style>
     #filters .btn {
@@ -7,15 +7,43 @@
         width: 100px;
         margin-bottom: 2px;
     }
+
+    #filters .searchbox,
+    #filters .sort-by {
+        border-radius: .25rem;
+        border-style: solid;
+        border-width: 1px;
+        border-color: black;
+        min-width: 280px;
+    }
 </style>
 
 <div id="filters">
     <form asp-action="FilteredIndex" method="post">
-        <strong>Search:</strong>
-        <div>
-            <input class="form-control" name="searchtext" style="min-width:200px;max-width:400px;margin-bottom:5px" value="@(ViewData["searchtext"] ?? "")" />
+        <div class="row">
+            <div class="col-md-4">
+                <div class="d-inline">
+                    <label>Search:</label>&nbsp;
+                    <input class="searchbox" name="searchtext" value="@(ViewData["searchtext"] ?? "")" />
+                </div>
+                <div class="d-inline">
+                    <label>Sort by:</label>
+                    <select class="sort-by" name="sorttext">
+                        <option value="Name">Name</option>
+                        <option value="Level">Level</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div>
+                    <submit text="Apply Filters"></submit>
+                </div>
+                <div>
+                    <buttonlink asp-action="Index" text="Clear Filters"></buttonlink>
+                </div>
+            </div>
         </div>
-        <submit text="Search"></submit>
-        <buttonlink asp-action="Index" text="Clear"></buttonlink>
+        <div>
+        </div>
     </form>
 </div>

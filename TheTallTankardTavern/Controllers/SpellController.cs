@@ -29,15 +29,23 @@ namespace TheTallTankardTavern.Controllers
 		}
 
 		[HttpPost]
-		public IActionResult FilteredIndex(string searchtext)
+		public IActionResult FilteredIndex(string searchtext, string sorttext)
 		{
 			IEnumerable<SpellModel> Spells = !string.IsNullOrEmpty(searchtext) ?
 				DataContext.Where(s => s.IsMatch(searchtext)).ToList() :
 				Spells = DataContext.Where(s => true);
 
 			ViewData["searchtext"] = searchtext;
+			ViewData["sorttext"] = sorttext;
 
-			return View("Index", Spells.OrderBy(s => s.Name).ToList());
+			if (string.Equals("Level", sorttext))
+			{
+				return View("Index", Spells.OrderBy(s => s.Level).ToList());
+			}
+			else
+			{
+				return View("Index", Spells.OrderBy(s => s.Name).ToList());
+			}
 		}
 	}
 
