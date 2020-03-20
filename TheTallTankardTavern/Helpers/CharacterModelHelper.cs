@@ -23,7 +23,7 @@ namespace TheTallTankardTavern.Helpers
 
 		public static int GetBaseAC(this CharacterModel Character)
 		{
-			int AC = Character.Armour_Class + Character.Dexterity.Modifier;
+			int AC = Character.Armour_Class + Character.Dexterity.Modifier + (Character.Race.Equals("Warforged") ? 1 : 0);
 			if (Character.Features.Contains(UNARMOURED_DEFENSE_BARBARIAN.ID))
 			{
 				AC += Character.Constitution.Modifier;
