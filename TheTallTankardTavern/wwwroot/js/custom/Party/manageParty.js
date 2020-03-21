@@ -18,3 +18,34 @@ function quickSaveDate(thisElement) {
         console.log("Quick save date request completed with success status: " + response.success);
     });
 };
+
+function reloadPartyTable() {
+    console.log('reloading party table...')
+    $.ajax({
+        url: '/Party/ReloadPartyTable', 
+        success: function (data) {
+            console.log('reload succeeded!');
+            $('#party-table').html(data);
+        },
+        error: function () {
+            console.log('reload failed!');
+        }
+    })
+}
+
+function quickSavePartyMemberHitPoints(cid, thisElement) {
+    //Save hit points
+    var data = {
+        cid: cid,
+        hitPointsRemaining: $(thisElement).val()
+    };
+    $.post("/Character/QuickSaveHitPoints", data, function (response) {
+        showAutoSaveMessage(response.success);
+        console.log("Quick save hit points request completed with success status: " + response.success);
+
+        if (response.success) {
+            //Reload table
+            reloadPartyTable();
+        }
+    });
+};

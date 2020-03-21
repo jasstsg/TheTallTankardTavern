@@ -1,0 +1,104 @@
+﻿@addTagHelper *, TheTallTankardTavern
+@model TheTallTankardTavern.Models.PartyModel
+@using TheTallTankardTavern.Configuration
+@using static TheTallTankardTavern.Configuration.Constants
+
+
+@{
+    string CheckPCHP(int remainingHP, int maxHP)
+    {
+        if (remainingHP > (maxHP / 2))
+        {
+            return "healthy";
+        }
+        else if (remainingHP > 0)
+        {
+            return "bloodied";
+        }
+        else
+        {
+            return "unconcious";
+        }
+
+    }
+}
+
+<style>
+    .numeric {
+        text-align: right;
+        width: 80px;
+    }
+
+    #party input[type=number] {
+        text-align: right;
+        width: 80px;
+    }
+
+    #party .bloodied {
+        background-color: #ffb3b3;
+    }
+
+    #party .unconcious {
+        background-color: #cc0000;
+    }
+</style>
+
+<table id="party-table">
+    <thead>
+        <tr>
+            <th width="100px">Member</th>
+            <th width="50px">Level</th>
+            <th>Initiative</th>
+            <th colspan="2">Hit Points</th>
+            <th>Temp HP</th>
+            @if (ContextUser.IsAdminOrDM)
+            {
+                <th>AC</th>
+                <th>PP</th>
+                <th>Languages</th>
+            }
+            <th>Race</th>
+            <th>Class</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (MemberModel Member in Model.Members.OrderByDescending(m => m.Initiative).ThenBy(m => m.Character.Name))
+        {
+            <tr class="@CheckPCHP(Member.Character.Hit_Points_Remaining, Member.Character.MaxHitPoints)">
+                <td>@Member.Character.Name</td>
+                <td>@Member.Character.Level</td>
+                @if (ContextUser.HasUsername(Member.Character.Player_Name) || ContextUser.IsAdminOrDM)
+                {
+                    <td class="numeric">
+                        <numberbox asp-for="@Member.Initiative" min="0"
+                                   onchange="quickSaveMemberInitiative('@Member.CharacterId', this)"></numberbox>
+                    </td>
+                    <td class="numeric">
+                        <numberbox asp-for="@Member.Character.Hit_Points_Remaining" min="0" max="@Member.Character.MaxHitPoints"
+                                   onchange="quickSavePartyMemberHitPoints('@Member.CharacterId', this)"></numberbox>
+                    </td>
+                    <td>/ @Member.Character.MaxHitPoints</td>
+                    <td class="numeric">
+                        <numberbox asp-for="@Member.Character.Temp_Hit_Points" min="0"
+                                   onchange="quickSaveTempHitPoints('@Member.CharacterId', this)"></numberbox>
+                    </td>
+                }
+                else
+                {
+                    <td class="numeric">@Member.Initiative</td>
+                    <td class="numeric">@Member.Character.Hit_Points_Remaining</td>
+                    <td> / @Member.Character.MaxHitPoints</td>
+                    <td class="numeric">@Member.Character.Temp_Hit_Points</td>
+                }
+                @if (ContextUser.IsAdminOrDM)
+                {
+                    <td>@Member.Character.GetTotalAC()</td>
+                    <td>@Member.Character.Passive_Perception</td>
+                    <td>@Member.Character.Languages.ToString(LANGUAGES.Common)</td>
+                }
+                <td>@Member.Character.Race @Member.Character.Subrace.AddBraces()</td>
+                <td>@Member.Character.Class @Member.Character.Subclass.AddBraces()</td>
+            </tr>
+        }
+    </tbody>
+</table>

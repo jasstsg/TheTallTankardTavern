@@ -17,6 +17,11 @@ namespace TheTallTankardTavern.Controllers
             return View(PartyDataContext.SingleOrDefault() ?? new PartyModel());
         }
 
+        public IActionResult ReloadPartyTable()
+        {
+            return PartialView("_PartyTable", PartyDataContext.Single());
+        }
+
         [HttpPost]
         public IActionResult Add(PartyModel Party)
         {
