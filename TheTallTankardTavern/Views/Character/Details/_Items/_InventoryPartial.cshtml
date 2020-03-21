@@ -9,7 +9,7 @@
 
     string ValidateInventory(ItemModel Item)
     {
-        if (Item.Item_Type.EqualsAny(ITEM_TYPES.ARMOUR, ITEM_TYPES.WEAPON))
+        if (Item.Item_Type.EqualsAny(ARMOUR, WEAPON))
         {
             return "invalid-row";
         }

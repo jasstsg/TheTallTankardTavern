@@ -1,10 +1,22 @@
 ﻿@model TheTallTankardTavern.Models.CharacterModel
+@using static TheTallTankardTavern.Configuration.Constants.ITEM_TYPES
+@using TTT.String
 @addTagHelper *, TheTallTankardTavern
 
 <div class="nav nav-tabs">
     <a class="nav-item nav-link active" data-toggle="tab" href="#character-items-equipped-armour-and-weapons"><strong>Equipped Armour &amp; Weapons</strong></a>
     <a class="nav-item nav-link" data-toggle="tab" href="#character-items-equipped-accessories"><strong>Equipped Accessories &amp; Money</strong></a>
-    <a class="nav-item nav-link" data-toggle="tab" href="#character-items-inventory"><strong>Inventory</strong></a>
+    <a class="nav-item nav-link" data-toggle="tab" href="#character-items-inventory">
+        <strong>
+            Inventory
+            @if (Model.Inventory.Exists(i => ItemDataContext.GetModelFromID(i).Item_Type.EqualsAny(ARMOUR, WEAPON)))
+            {
+                <span style="color:red;font-weight:bold;font-style:italic;font-size:x-small">
+                    One or more inventory items need to be equipped or removed
+                </span>
+            }
+        </strong>
+    </a>
 </div>
 <div class="tab-content">
     <div id="character-items-equipped-armour-and-weapons" class="tab-pane active">
