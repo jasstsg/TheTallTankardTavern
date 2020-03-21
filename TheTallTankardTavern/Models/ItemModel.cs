@@ -11,6 +11,8 @@ namespace TheTallTankardTavern.Models
 {
 	public class ItemModel : BaseModel
 	{
+		private string _weightClass = "";
+
 		[DisplayName("Description")]
 		public string Desc { get; set; }
 
@@ -136,7 +138,23 @@ namespace TheTallTankardTavern.Models
 
 		[JsonIgnore]
 		[DisplayName("Weight Class")]
-		public string Weight_Class { get { return (Item_Type.Equals(ITEM_TYPES.MISC)) ? "" : Material.Weight_Class; } }
+		public string Weight_Class
+		{
+			get
+			{
+				return _weightClass;
+			}
+			set
+			{
+				switch (Item_Type)
+				{
+					case ITEM_TYPES.WEAPON: _weightClass = value; break;
+					case ITEM_TYPES.ARMOUR: _weightClass = Material.Weight_Class; break;
+					default: _weightClass = ""; break;
+				}
+			}
+		}
+			
 
 		[JsonIgnore]
 		[DisplayName("Value")]

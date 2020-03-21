@@ -7,11 +7,6 @@
 @{
     string[] ItemTypes = ConfigurationSettings.Item_Types["item_types"];
 
-    //string PillId(string itemType)
-    //{
-    //    return $"character-items-inventory-{itemType.ToLower().Replace(" ", "-")}";
-    //}
-
     string ValidateInventory(ItemModel Item)
     {
         if (Item.Item_Type.EqualsAny(ITEM_TYPES.ARMOUR, ITEM_TYPES.WEAPON))

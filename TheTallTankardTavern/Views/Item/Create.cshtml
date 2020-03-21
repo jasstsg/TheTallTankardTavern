@@ -40,6 +40,10 @@
                         <td><numberbox asp-for="Units_To_Craft" min="1"></numberbox></td>
                     </tr>
                     <tr>
+                        <td><label asp-for="Weight_Class"></label></td>
+                        <td><select asp-for="Weight_Class" asp-items="SelectListHelper.GetWeaponWeightClassSelectList()"></select></td>
+                    </tr>
+                    <tr>
                         <td><label asp-for="Attack"></label></td>
                         <td>@Model.Attack</td>
                     </tr>
@@ -54,10 +58,6 @@
                     <tr>
                         <td><label asp-for="Enchantment_Slots"></label></td>
                         <td>@Model.Enchantment_Slots</td>
-                    </tr>
-                    <tr>
-                        <td><label asp-for="Weight_Class"></label></td>
-                        <td>@Model.Weight_Class</td>
                     </tr>
                     <tr>
                         <td><label asp-for="Value"></label></td>
