@@ -1,0 +1,22 @@
+﻿@model TheTallTankardTavern.Models.CharacterModel
+@addTagHelper *, TheTallTankardTavern
+
+<style>
+    #character-proficiencies textarea {
+        resize: none;
+        border: none;
+        background: transparent;
+    }
+</style>
+
+<div id="character-proficiencies">
+    <strong>Proficiencies</strong>
+    @if (!string.IsNullOrEmpty(Model.Proficiencies))
+    {
+        <textarea readonly="readonly" asp-for="Proficiencies" rows="5"></textarea>
+    }
+    else
+    {
+        <textarea readonly="readonly">Wow really? Nothing?</textarea>
+    }
+</div>

@@ -300,5 +300,8 @@ namespace TheTallTankardTavern.Models
 
 		[DisplayName("Notes")]
 		public string Notes { get; set; } = "";
+
+		[DisplayName("Proficiencies")]
+		public string Proficiencies { get; set; } = "";
 	}
 }

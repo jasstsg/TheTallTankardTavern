@@ -1568,7 +1568,6 @@ namespace TheTallTankardTavern.Configuration
             };
         }
 
-
         public static class TAGHELPER
         {
             public static class CSS_CLASSES

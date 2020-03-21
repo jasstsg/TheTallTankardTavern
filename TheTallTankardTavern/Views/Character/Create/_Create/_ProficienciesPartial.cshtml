@@ -1,0 +1,34 @@
+﻿@model TheTallTankardTavern.Models.CharacterModel
+@addTagHelper *, TheTallTankardTavern
+
+<style>
+    #character-proficiencies textarea {
+        resize: none;
+        font-size: smaller;
+        margin: 5px;
+    }
+
+    #character-proficiencies .note {
+        font-size: small;
+        font-style: italic;
+    }
+</style>
+
+<div id="character-proficiencies">
+    <strong>Proficiencies</strong>
+    <span class="note">
+        (<a href="https://www.dndbeyond.com/sources/basic-rules/equipment#ArtisansTools">Artisan's tools</a>,
+        <a href="https://www.dndbeyond.com/sources/basic-rules/equipment#GamingSet">gaming set</a>, 
+        <a href="https://www.dndbeyond.com/sources/basic-rules/equipment#MusicalInstrument">musical instrument</a>,
+        or some <a href="https://www.dndbeyond.com/sources/basic-rules/equipment#OtherTools">other tool</a>) 
+    </span>
+    <div class="row">
+        <div class="col-md-6">
+            <textarea asp-for="Proficiencies" rows="5"></textarea>
+        </div>
+        <div class="col-md-6">
+            <br />
+            <span class="note">Put each proficiency on a separate line</span>
+        </div>
+    </div>
+</div>
