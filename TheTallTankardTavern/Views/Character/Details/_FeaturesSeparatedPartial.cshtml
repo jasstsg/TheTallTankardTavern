@@ -1,0 +1,58 @@
+﻿@model TheTallTankardTavern.Models.CharacterModel
+@addTagHelper *, TheTallTankardTavern
+
+@{
+    IEnumerable<FeatureModel> CharacterFeatures = FeatureDataContext.Where(feature => Model.Features.Contains(feature.ID)).OrderBy(f => f.Name);
+}
+
+<buttonlink class="action-btn" asp-controller="Feature" asp-action="Index" text="Go to Features"></buttonlink>
+<br />
+LEARNED FEATURES
+<table table-hover="true">
+    <thead>
+        <tr>
+            <th><label>Name</label></th>
+            <th><label>Prerequisite</label></th>
+            <th><label>Class</label></th>
+            <th><label>Subclass</label></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (FeatureModel Feature in CharacterFeatures.Where(f => !f.IsClassFeature))
+        {
+            <tr data-toggle="modal" data-target="#popup-modal" data-title="@Feature.Name" data-desc="@Feature.Desc">
+                <td>@Feature.Name</td>
+                <td>@Feature.Prerequisite</td>
+                <td>@Feature.Class</td>
+                <td>@Feature.Subclass</td>
+                <td><button class="td-action-btn" value="Forget" onclick="removeFeature('@Model.ID', '@Feature.ID', this)"></button></td>
+            </tr>
+        }
+    </tbody>
+</table>
+<br />
+CLASS FEATURES (For help with this, see your character's class advancement table on the <a href="~/Appendix/CharacterAdvancement">Character Advancement</a> page)
+<table table-hover="true">
+    <thead>
+        <tr>
+            <th><label>Name</label></th>
+            <th><label>Prerequisite</label></th>
+            <th><label>Class</label></th>
+            <th><label>Subclass</label></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (FeatureModel Feature in CharacterFeatures.Where(f => f.IsClassFeature))
+        {
+            <tr data-toggle="modal" data-target="#popup-modal" data-title="@Feature.Name" data-desc="@Feature.Desc">
+                <td>@Feature.Name</td>
+                <td>@Feature.Prerequisite</td>
+                <td>@Feature.Class</td>
+                <td>@Feature.Subclass</td>
+                <td><button class="td-action-btn" value="Forget" onclick="removeFeature('@Model.ID', '@Feature.ID', this)"></button></td>
+            </tr>
+        }
+    </tbody>
+</table>
