@@ -11,4 +11,12 @@
             <partial name="/Views/Character/Details/_Spells/_SpellSlotsPartial.cshtml" model="Model" />
         </div>
     </div>
+    @if (Model.Class.ToLower().Contains("sorcerer"))
+    {
+    <div class="row">
+        <div class="col-md-12">
+            <partial name="/Views/Character/Details/_Spells/_SorcererPointConversionPartial.cshtml" />
+        </div>
+    </div>
+    }
 </div>

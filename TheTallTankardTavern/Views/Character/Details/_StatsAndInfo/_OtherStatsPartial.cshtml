@@ -42,6 +42,7 @@
                 </td>
             </tr>
         }
+        @* SORCERY POINTS ONLY RESTORE ON LONG RESTS - THIS WAS TO ENABLE ONE-CLICK RESTORATION ON SHORT RESTS
         @if (Model.Class.ToLower().Contains("sorcerer") && @Model.Level > 1)
         {
             <tr>
@@ -53,6 +54,7 @@
                 </td>
             </tr>
         }
+        *@
         @if (Model.Class.ToLower().Contains("druid") && @Model.Level > 1)
         {
             <tr>
