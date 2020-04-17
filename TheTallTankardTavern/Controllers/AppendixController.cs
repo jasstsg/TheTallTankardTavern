@@ -15,7 +15,9 @@ namespace TheTallTankardTavern.Controllers
         public IActionResult CharacterAdvancement() { return View(ConfigurationSettings.CharacterAdvancement); }
         public IActionResult Combat() { return View(); }
         public IActionResult Homebrews() { return View(); }
+        public IActionResult HomebrewConditions() { return View(); }
         public IActionResult Maps() { return View(); }
+        public IActionResult MassiveDamage() { return View(); }
         public IActionResult SpellSlots() { return View(); }
     }
 }

@@ -1,0 +1,49 @@
+﻿@{
+ViewData["Title"] = "Homebrew Conditions";
+}
+@addTagHelper *, TheTallTankardTavern
+
+<h1>@ViewData["Title"]</h1>
+
+<strong>Unconcious</strong>
+<ul>
+    <li>The standard definition for <a href="https://www.dndbeyond.com/sources/basic-rules/appendix-a-conditions#Unconscious">unconscious</a> plus the following</li>
+    <li>If a creature is healed it becomes stabilized immediately and regains consciousness</li>
+    <li>If a creature stabilizes on its own it will regain consciousness once healed or after 1D4 turns</li>
+    <li>A creaturee that regains consciousness also gains levels of exhaustion equal to the number of death saves failed while unconscious</li>
+    <li>A create that is stabilized by a medicine check or on their own must roll on the <a asp-controller="Appendix" asp-action="MassiveDamage">Massive Damage</a> table and take the Serious result</li>
+</ul>
+<br />
+<strong>Weakened</strong>
+<ul>
+    <li>
+        A weakened creature has a negative modifier applied to all rolls
+        <ul>
+            <li>If weakened by serious damage use -3</li>
+            <li>If weakened by lethal damage use -5</li>
+        </ul>
+    </li>
+    <li>
+        A weakened creature must make a saving throw a CON save at the end of their turn to remove the condition
+        <ul>
+            <li>If weakened by serious damage they must beat DC 15</li>
+            <li>If weakened by lethal damage they must beat DC 18</li>
+        </ul>
+    </li>
+</ul>
+<br />
+<strong>Dying</strong>
+<ul>
+    <li>A dying creature takes 1/10th their total HP at the start of their turn (rounded down to the nearest one)</li>
+    <li>
+        A dying creature must make a saving throw a CON save at the end of their turn to remove the condition
+        <ul>
+            <li>If dying by serious damage they must beat DC 15</li>
+            <li>If dying by lethal damage they must beat DC 18</li>
+        </ul>
+    </li>
+    <li>A dying creature may have this condition removed if they are healed, but they will still have the weakened condition</li>
+    <li>A dying creature must remove the dying condition before the weakened condition on separate turns</li>
+    <li>A creature dying from serious damage is also weakened from serious damage</li>
+    <li>A creature dying from lethal damage is also weakened from lethal damage</li>
+</ul>

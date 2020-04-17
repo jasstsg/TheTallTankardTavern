@@ -1,0 +1,62 @@
+﻿@{
+ViewData["Title"] = "Massive Damage";
+}
+@addTagHelper *, TheTallTankardTavern
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="col-md-12">
+    <div class="row">
+        <table>
+            <thead>
+                <tr>
+                    <th>D10</th>
+                    <th>Serious</th>
+                    <th>Lethal</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1-2</td>
+                    <td>
+                        Creature has no reaction and has disadvantage on all rolls during their next turn.
+                    </td>
+                    <td>Same as serious damage but the creature also falls prone</td>
+                </tr>
+                <tr>
+                    <td>3-4</td>
+                    <td>
+                        Creature is <a href="https://www.dndbeyond.com/sources/basic-rules/appendix-a-conditions#Stunned">stunned</a> during their next turn.
+                    </td>
+                    <td>Same as serious damage but the creature also falls prone</td>
+                </tr>
+                <tr>
+                    <td>5-6</td>
+                    <td>
+                        Creature is <a href="">unconcious</a> during their next turn.
+                    </td>
+                    <td>Same as serious damage but the creature is <a href="https://www.dndbeyond.com/sources/basic-rules/appendix-a-conditions#Stunned">stunned</a> during the following turn when they regain consciousness</td>
+                </tr>
+                <tr>
+                    <td>7-8</td>
+                    <td>
+                        Creature is <a href="">weakened</a> by serious damage.
+                    </td>
+                    <td>
+                        Creature is <a href="">weakened</a> by lethal damage.
+                    </td>
+                </tr>
+                <tr>
+                    <td>9-10</td>
+                    <td>
+                        Creature is <a href="">dying</a> from serious damage.
+                    </td>
+                    <td>
+                        Creature is <a href="">dying</a> from lethal damage.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
