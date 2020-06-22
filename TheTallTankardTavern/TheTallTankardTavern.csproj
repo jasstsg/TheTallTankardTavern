@@ -5,12 +5,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\App_Config\**" />
     <Compile Remove="wwwroot\App_Data\**" />
     <Compile Remove="wwwroot\Backup_Data\**" />
+    <Content Remove="wwwroot\App_Config\**" />
     <Content Remove="wwwroot\App_Data\**" />
     <Content Remove="wwwroot\Backup_Data\**" />
+    <EmbeddedResource Remove="wwwroot\App_Config\**" />
     <EmbeddedResource Remove="wwwroot\App_Data\**" />
     <EmbeddedResource Remove="wwwroot\Backup_Data\**" />
+    <None Remove="wwwroot\App_Config\**" />
     <None Remove="wwwroot\App_Data\**" />
     <None Remove="wwwroot\Backup_Data\**" />
   </ItemGroup>
