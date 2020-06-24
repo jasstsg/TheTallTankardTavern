@@ -4,8 +4,8 @@ using System.Text;
 
 namespace TTT.Items.Weapons.Properties
 {
-    class Two_Handed : AbstractWeaponProperty
+    class Two_Handed : BaseWeaponProperty
     {
-        public string Description => "This weapon requires two hands when you Attack with it.";
+        public override string Description => "This weapon requires two hands when you Attack with it.";
     }
 }

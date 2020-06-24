@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TTT.Items.Weapons.Properties
 {
-    class Thrown : AbstractWeaponProperty
+    class Thrown : BaseWeaponProperty
     {
         public override string Description => "If a weapon has the thrown property, you can throw the weapon to make a ranged Attack. If the weapon is a melee weapon, you use the same ability modifier for that Attack roll and damage roll that you would use for a melee Attack with the weapon. For example, if you throw a Handaxe, you use your Strength, but if you throw a Dagger, you can use either your Strength or your Dexterity, since the Dagger has the finesse property.";
 

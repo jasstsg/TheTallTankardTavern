@@ -4,8 +4,8 @@ using System.Text;
 
 namespace TTT.Items.Weapons.Properties
 {
-    class Reach : AbstractWeaponProperty
+    class Reach : BaseWeaponProperty
     {
-        public string Description => "This weapon adds 5 feet to your reach when you Attack with it, as well as when determining your reach for Opportunity Attacks with it.";
+        public override string Description => "This weapon adds 5 feet to your reach when you Attack with it, as well as when determining your reach for Opportunity Attacks with it.";
     }
 }
