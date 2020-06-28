@@ -1,5 +1,6 @@
 using Newtonsoft.Json;
 using System.ComponentModel;
+using TTT.Common.Abstractions;
 using static TheTallTankardTavern.Configuration.Constants;
 
 namespace TheTallTankardTavern.Models

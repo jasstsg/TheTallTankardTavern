@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
-namespace TTT.Common
+namespace TTT.Common.Abstractions
 {
     public abstract class BaseEnumerableCollection<T> : IEnumerable<T>, ICollection<T>
     {

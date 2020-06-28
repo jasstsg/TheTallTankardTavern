@@ -6,13 +6,13 @@ namespace TTT.Items.Weapons
 {
     public static class WeaponExtensions
     {
-        public static string GetDamageString(this Weapon Weapon)
+        public static string GetDamageString(this WeaponModel Weapon)
         {
-            TotalWeaponDamage totalDamage = Weapon.Damage;
+            WeaponDamage totalDamage = Weapon.Damage;
             StringBuilder sb = new StringBuilder();
             if (totalDamage.Count > 0)
             {
-                foreach (WeaponDamage damage in totalDamage)
+                foreach (Damage.Damage damage in totalDamage)
                 {
                     sb.Append($"{damage.Die.ToString()} {damage.Type.ToString()} + ");
                 }
@@ -21,7 +21,7 @@ namespace TTT.Items.Weapons
             return "";
         }
 
-        public static string GetPropertiesString(this Weapon Weapon)
+        public static string GetPropertiesString(this WeaponModel Weapon)
         {
             WeaponProperties properties = Weapon.Properties;
             StringBuilder sb = new StringBuilder();

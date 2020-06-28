@@ -3,12 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using TheTallTankardTavern.Helpers;
-using TheTallTankardTavern.Models;
+using TTT.Common.Abstractions;
 using static TheTallTankardTavern.Configuration.Constants;
 
 namespace TheTallTankardTavern.Controllers
 {
-    public abstract class BaseController<T> : Controller where T : BaseModel//, IBaseController
+    public abstract class BaseController<T> : Controller where T : BaseModel
     {
         protected static string NewGUID { get { return Guid.NewGuid().ToString(); } }
         protected List<T> DataContext { get; private set; }

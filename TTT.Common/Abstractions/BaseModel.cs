@@ -1,6 +1,6 @@
 using System.ComponentModel;
 
-namespace TheTallTankardTavern.Models
+namespace TTT.Common.Abstractions
 {
 	public class BaseModel
 	{

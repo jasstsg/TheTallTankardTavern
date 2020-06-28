@@ -1,4 +1,4 @@
-﻿using TTT.Common;
+﻿using TTT.Common.Abstractions;
 
 namespace TTT.Items.Weapons.Properties
 {

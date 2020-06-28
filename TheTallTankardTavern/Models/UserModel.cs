@@ -1,5 +1,6 @@
 using System.ComponentModel;
 using TheTallTankardTavern.Configuration;
+using TTT.Common.Abstractions;
 
 namespace TheTallTankardTavern.Models
 {

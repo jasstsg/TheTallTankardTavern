@@ -6,6 +6,7 @@ using TheTallTankardTavern.Models;
 using static TheTallTankardTavern.Configuration.ApplicationSettings;
 using static TheTallTankardTavern.Configuration.Constants;
 using TTT.Enumerator;
+using TTT.Common.Abstractions;
 
 namespace TheTallTankardTavern.Helpers
 {

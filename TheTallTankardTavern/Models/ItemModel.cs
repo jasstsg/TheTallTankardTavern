@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Text;
 using TheTallTankardTavern.Configuration;
 using TheTallTankardTavern.Helpers;
+using TTT.Common.Abstractions;
 using TTT.Enumerator;
 using static TheTallTankardTavern.Configuration.Constants;
 using static TheTallTankardTavern.Configuration.Constants.WEAPON_TRAIT;

@@ -6,6 +6,7 @@ using System.IO;
 using System.IO.Compression;
 using TheTallTankardTavern.Models;
 using TheTallTankardTavern.Providers;
+using TTT.Common.Abstractions;
 using TTT.Json;
 using static TheTallTankardTavern.Configuration.Constants;
 

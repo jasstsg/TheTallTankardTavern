@@ -2,6 +2,7 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
+using TTT.Common.Abstractions;
 
 namespace TheTallTankardTavern.Models
 {

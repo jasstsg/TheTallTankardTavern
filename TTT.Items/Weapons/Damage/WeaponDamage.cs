@@ -1,10 +1,9 @@
-﻿using TTT.Common;
+﻿using TTT.Common.Abstractions;
 
 namespace TTT.Items.Weapons.Damage
 {
-    public class WeaponDamage
+    public class WeaponDamage : BaseEnumerableCollection<Damage>
     {
-        public Die Die { get; set; } = Die.None;
-        public Type Type { get; set; } = Type.None;
+
     }
 }

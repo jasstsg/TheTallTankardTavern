@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using TheTallTankardTavern.Configuration;
-using TheTallTankardTavern.Models;
+using TTT.Common.Abstractions;
 using TTT.Enumerator;
 using static TheTallTankardTavern.Configuration.Constants;
 
