@@ -19,6 +19,12 @@ namespace TheTallTankardTavern.Controllers
                 ID = NewGUID
             };
             return View("Create", Material);
-		}
-	}
+        }
+
+        [HttpPost]
+        public IActionResult Save(MaterialModel Model, string submit)
+        {
+            return SaveModel(Model, submit);
+        }
+    }
 }

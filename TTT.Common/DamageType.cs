@@ -1,6 +1,6 @@
 ﻿namespace TTT.Common
 {
-    public enum Type
+    public enum DamageType
     {
         None,
         Acid,

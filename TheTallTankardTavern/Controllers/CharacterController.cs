@@ -31,6 +31,12 @@ namespace TheTallTankardTavern.Controllers
             return View("Create", Character);
         }
 
+        [HttpPost]
+        public IActionResult Save(CharacterModel Model, string submit)
+        {
+            return SaveModel(Model, submit);
+        }
+
         public IActionResult AddModel(string cid, string id, MODEL_TYPES type)
         {
             CharacterModel Character = DataContext.GetModelFromID(cid);
@@ -189,21 +195,7 @@ namespace TheTallTankardTavern.Controllers
         public IActionResult EquipItem(string cid, string iid)
         {
             CharacterModel Character = DataContext.GetModelFromID(cid);
-            EquipResult EquipItemResult = Character.Equipment.TryEquip(iid);
-            switch (EquipItemResult.Result)
-            {
-                case ITEM_EQUIP_RESULT.EQUIPPED: 
-                    Character.Inventory.Remove(iid);
-                    break;
-                case ITEM_EQUIP_RESULT.REPLACED:
-                    Character.Inventory.Remove(iid);
-                    Character.Inventory.Add(EquipItemResult.ReplacedItemId);
-                    break;
-                case ITEM_EQUIP_RESULT.NO_ACTION:
-                default:
-                    break;
-            }
-
+            Character.Equipment.TryEquip(iid);
             return SaveAndReturnToItemsPartialView(Character);
         }
 

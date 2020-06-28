@@ -1,4 +1,5 @@
-﻿@model IEnumerable<TheTallTankardTavern.Models.ItemModel>
+﻿@using TTT.Items
+@model IEnumerable<ItemModel>
 @addTagHelper *, TheTallTankardTavern
 @{
     ViewData["Title"] = "Items";
@@ -15,32 +16,20 @@
     <thead>
         <tr>
             <th><label>Name</label></th>
-            <th><label>Material</label></th>
             <th><label>Type</label></th>
-            <th><label>Attack</label></th>
-            <th><label>Damage</label></th>
-            <th><label>AC</label></th>
             <th><label>Weight</label></th>
-            <td><label>Damage/Resistance Types</label></td>
-            <th><label>Slots</label></th>
-            <th><label>Value</label></th>
+            <th><label>Cost</label></th>
             <partial name="/Views/Shared/Custom/ActionButtons/_ColumnHeaderAddEditDelete.cshtml" />
         </tr>
     </thead>
     <tbody>
         @foreach (ItemModel i in Model)
         {
-            <tr data-toggle="modal" data-target="#popup-modal" data-title="@i.Name" data-desc="@(i.Desc + i.Weapon_Trait_Desc)">
+            <tr data-toggle="modal" data-target="#popup-modal" data-title="@i.Name" data-desc="@(i.Description)">
                 <td>@i.Name</td>
-                <td>@i.Material_Name</td>
                 <td>@i.Type</td>
-                <td>@i.Attack</td>
-                <td>@i.Damage</td>
-                <td>@i.Armour_Class</td>
-                <td>@i.Weight_Class</td>
-                <td>@i.Damage_Types.ToString()</td>
-                <td>@i.Enchantment_Slots</td>
-                <td>@i.Value.FormatMoney() gp</td>
+                <td>@i.Weight</td>
+                <td>@i.Cost cp</td>
                 <partial name="/Views/Shared/Custom/ActionButtons/_ColumnAddEditDelete.cshtml" model="i" />
             </tr>
         }

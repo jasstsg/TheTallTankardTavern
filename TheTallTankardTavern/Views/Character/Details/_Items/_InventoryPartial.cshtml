@@ -3,16 +3,17 @@
 @using static TheTallTankardTavern.Configuration.Constants
 @using static TheTallTankardTavern.Configuration.Constants.ITEM_TYPES
 @using TTT.String
+@using TTT.Items
 
 @{
     string[] ItemTypes = ConfigurationSettings.Item_Types["item_types"];
 
     string ValidateInventory(ItemModel Item)
     {
-        if (Item.Item_Type.EqualsAny(ARMOUR, WEAPON))
-        {
-            return "invalid-row";
-        }
+        //if (Item.Item_Type.EqualsAny(ARMOUR, WEAPON))
+        //{
+        //    return "invalid-row";
+        //}
         return "";
     }
 }
@@ -43,7 +44,6 @@
                         <th>Damage</th>
                         <th>AC</th>
                         <th>Weight</th>
-                        <th>Damage/Resistance Type</th>
                         <th></th>
                         <th></th>
                     </tr>
@@ -52,15 +52,14 @@
                     @foreach (string iid in Model.Inventory.OrderBy(i => ItemDataContext.GetModelFromID(i).Name))
                     {
                         ItemModel Item = ItemDataContext.GetModelFromID(iid);
-                        <tr class="@ValidateInventory(Item)" data-toggle="modal" data-target="#popup-modal" data-title="@Item.Name" data-desc="@Item.Desc" data-traits="@Item.Weapon_Trait_Desc">
+                        <tr class="@ValidateInventory(Item)" data-toggle="modal" data-target="#popup-modal" data-title="@Item.Name" data-desc="@Item.Description" data-traits="">
                             <td>@Item.Name</td>
                             <td>@Item.Type</td>
-                            <td>@Item.Attack</td>
-                            <td>@Item.Damage</td>
-                            <td>@Item.Armour_Class</td>
-                            <td>@Item.Weight_Class</td>
-                            <td>@Item.Damage_Types.ToString()</td>
-                            @if (!Item.Item_Type.Equals(MISC))
+                            <td>@Item.Weapon.Plus</td>
+                            <td>@Item.Weapon.Damage.ToString() + @Item.Weapon.Plus</td>
+                            <td>@Item.Armour.ArmourClass</td>
+                            <td>@Item.Weight</td>
+                            @if (Item.Type.IsArmour)
                             {
                                 <td><button class="td-action-btn" value="Equip" onclick="equipItem('@Model.ID', '@Item.ID')"></button></td>
                             }
@@ -84,24 +83,22 @@
                         <th>Damage</th>
                         <th>AC</th>
                         <th>Weight</th>
-                        <th>Damage/Resistance Type</th>
                         <th></th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (string iid in Model.Inventory.Where(i => ItemDataContext.GetModelFromID(i).Item_Type.EqualsAny(ARMOUR, WEAPON))
+                    @foreach (string iid in Model.Inventory.Where(i => ItemDataContext.GetModelFromID(i).Type.IsArmour)
                      .OrderBy(i => ItemDataContext.GetModelFromID(i).Name))
                     {
                         ItemModel Item = ItemDataContext.GetModelFromID(iid);
-                        <tr class="invalid-row" data-toggle="modal" data-target="#popup-modal" data-title="@Item.Name" data-desc="@Item.Desc" data-traits="@Item.Weapon_Trait_Desc">
+                        <tr class="invalid-row" data-toggle="modal" data-target="#popup-modal" data-title="@Item.Name" data-desc="@Item.Description" data-traits="">
                             <td>@Item.Name</td>
                             <td>@Item.Type</td>
-                            <td>@Item.Attack</td>
-                            <td>@Item.Damage</td>
-                            <td>@Item.Armour_Class</td>
-                            <td>@Item.Weight_Class</td>
-                            <td>@Item.Damage_Types.ToString()</td>
+                            <td>@Item.Weapon.Plus</td>
+                            <td>@Item.Weapon.Damage.ToString() + @Item.Weapon.Plus</td>
+                            <td>@Item.Armour.ArmourClass</td>
+                            <td>@Item.Weight</td>
                             <td><button class="td-action-btn" value="Equip" onclick="equipItem('@Model.ID', '@Item.ID')"></button></td>
                             <td><button class="td-action-btn" value="Remove" onclick="removeItemFromInventory('@Model.ID', '@Item.ID')"></button></td>
                         </tr>
@@ -119,24 +116,22 @@
                         <th>Damage</th>
                         <th>AC</th>
                         <th>Weight</th>
-                        <th>Damage/Resistance Type</th>
                         <th></th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (string iid in Model.Inventory.Where(i => ItemDataContext.GetModelFromID(i).Item_Type.EqualsAny(ACCESSORIES))
+                    @foreach (string iid in Model.Inventory.Where(i => !ItemDataContext.GetModelFromID(i).Type.IsArmour)
                      .OrderBy(i => ItemDataContext.GetModelFromID(i).Name))
                     {
                         ItemModel Item = ItemDataContext.GetModelFromID(iid);
-                        <tr data-toggle="modal" data-target="#popup-modal" data-title="@Item.Name" data-desc="@Item.Desc" data-traits="@Item.Weapon_Trait_Desc">
+                        <tr data-toggle="modal" data-target="#popup-modal" data-title="@Item.Name" data-desc="@Item.Description" data-traits="">
                             <td>@Item.Name</td>
                             <td>@Item.Type</td>
-                            <td>@Item.Attack</td>
-                            <td>@Item.Damage</td>
-                            <td>@Item.Armour_Class</td>
-                            <td>@Item.Weight_Class</td>
-                            <td>@Item.Damage_Types.ToString()</td>
+                            <td>@Item.Weapon.Plus</td>
+                            <td>@Item.Weapon.Damage.ToString() + @Item.Weapon.Plus</td>
+                            <td>@Item.Armour.ArmourClass</td>
+                            <td>@Item.Weight</td>
                             <td><button class="td-action-btn" value="Equip" onclick="equipItem('@Model.ID', '@Item.ID')"></button></td>
                             <td><button class="td-action-btn" value="Remove" onclick="removeItemFromInventory('@Model.ID', '@Item.ID')"></button></td>
                         </tr>
@@ -154,24 +149,22 @@
                         <th>Damage</th>
                         <th>AC</th>
                         <th>Weight</th>
-                        <th>Damage/Resistance Type</th>
                         <th></th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (string iid in Model.Inventory.Where(i => ItemDataContext.GetModelFromID(i).Item_Type.EqualsAny(MISC))
+                    @foreach (string iid in Model.Inventory.Where(i => !ItemDataContext.GetModelFromID(i).Type.IsArmour)
                      .OrderBy(i => ItemDataContext.GetModelFromID(i).Name))
                     {
                         ItemModel Item = ItemDataContext.GetModelFromID(iid);
-                        <tr data-toggle="modal" data-target="#popup-modal" data-title="@Item.Name" data-desc="@Item.Desc" data-traits="@Item.Weapon_Trait_Desc">
+                        <tr data-toggle="modal" data-target="#popup-modal" data-title="@Item.Name" data-desc="@Item.Description" data-traits="">
                             <td>@Item.Name</td>
                             <td>@Item.Type</td>
-                            <td>@Item.Attack</td>
-                            <td>@Item.Damage</td>
-                            <td>@Item.Armour_Class</td>
-                            <td>@Item.Weight_Class</td>
-                            <td>@Item.Damage_Types.ToString()</td>
+                            <td>@Item.Weapon.Plus</td>
+                            <td>@Item.Weapon.Damage.ToString() + @Item.Weapon.Plus</td>
+                            <td>@Item.Armour.ArmourClass</td>
+                            <td>@Item.Weight</td>
                             <td></td>
                             <td><button class="td-action-btn" value="Remove" onclick="removeItemFromInventory('@Model.ID', '@Item.ID')"></button></td>
                         </tr>

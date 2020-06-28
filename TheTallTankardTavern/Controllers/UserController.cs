@@ -23,8 +23,14 @@ namespace TheTallTankardTavern.Controllers
 			});
 		}
 
-        #region User Profile Editing
-        [Authorized(Constants.ROLES.Player)]
+		[HttpPost]
+		public IActionResult Save(UserModel Model, string submit)
+		{
+			return SaveModel(Model, submit);
+		}
+
+		#region User Profile Editing
+		[Authorized(Constants.ROLES.Player)]
 		public IActionResult Profile()
 		{
 			return View("Profile", ApplicationSettings.UserDataContext.GetModelFromID(ContextUser.GetContextUser.ID));

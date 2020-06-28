@@ -37,8 +37,7 @@ namespace TheTallTankardTavern.Controllers
             return View("Create", DataContext.GetModelFromID(id));
         }
 
-        [HttpPost]
-        public virtual IActionResult Save(T Model, string submit)
+        protected virtual IActionResult SaveModel(T Model, string submit)
         {
             DataContext.Save(Model, Folder);
             switch (submit)

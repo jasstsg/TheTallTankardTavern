@@ -1,4 +1,7 @@
-﻿using TTT.Common.Abstractions;
+﻿using System.ComponentModel;
+using TTT.Common.Abstractions;
+using TTT.Items.Armour;
+using TTT.Items.Weapons;
 
 namespace TTT.Items
 {
@@ -17,16 +20,22 @@ namespace TTT.Items
         /// <summary>
         /// Cost of the item in copper pieces
         /// </summary>
-        public int cost { get; set; } = 0;
+        [DisplayName("Cost (cp)")]
+        public int Cost { get; set; } = 0;
 
         /// <summary>
         /// The weight of the item in pounds
         /// </summary>
+        [DisplayName("Weight (lbs)")]
         public int Weight { get; set; } = 0;
 
         /// <summary>
         /// True is the item is a magic item
         /// </summary>
         public bool IsMagic { get; set; } = false;
+
+        public WeaponModel Weapon = new WeaponModel();
+
+        public ArmourModel Armour = new ArmourModel();
     }
 }

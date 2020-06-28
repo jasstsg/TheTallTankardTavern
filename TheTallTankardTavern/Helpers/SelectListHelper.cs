@@ -7,6 +7,10 @@ using static TheTallTankardTavern.Configuration.ApplicationSettings;
 using static TheTallTankardTavern.Configuration.Constants;
 using TTT.Enumerator;
 using TTT.Common.Abstractions;
+using TTT.Items;
+using System.Reflection;
+using System;
+using TTT.Common;
 
 namespace TheTallTankardTavern.Helpers
 {
@@ -82,17 +86,20 @@ namespace TheTallTankardTavern.Helpers
 
 		public static SelectList GetItemTypesSelectList()
 		{
-			return new SelectList(ApplicationSettings.ConfigurationSettings.Item_Types.GetFirstValue());
+			Type type = typeof(ItemType);
+			FieldInfo[] fields = type.GetFields(BindingFlags.Public | BindingFlags.Static);
+			IEnumerable<string> enumerableList = fields.Select(f => f.GetValue(null).ToString());
+			return new SelectList(enumerableList);
 		}
 
 		public static SelectList GetDamageTypeSelectList()
 		{
-			return new SelectList(typeof(DAMAGE_TYPE).EnumToStringArray());
+			return new SelectList(typeof(DamageType).EnumToStringArray());
 		}
 
 		public static SelectList GetDamageDieSelectList()
 		{
-			return new SelectList(typeof(DIE).EnumToStringArray("_", ""));
+			return new SelectList(typeof(Die).EnumToStringArray("_", ""));
 		}
 
 		public static SelectList GetRoleSelectList()

@@ -9,7 +9,7 @@
     <a class="nav-item nav-link" data-toggle="tab" href="#character-items-inventory">
         <strong>
             Inventory
-            @if (Model.Inventory.Exists(i => ItemDataContext.GetModelFromID(i).Item_Type.EqualsAny(ARMOUR, WEAPON)))
+            @if (Model.Inventory.Exists(i => ItemDataContext.GetModelFromID(i).Type.IsArmour))
             {
                 <span style="color:red;font-weight:bold;font-style:italic;font-size:x-small">
                     One or more inventory items need to be equipped or removed

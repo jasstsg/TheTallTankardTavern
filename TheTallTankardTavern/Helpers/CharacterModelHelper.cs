@@ -4,6 +4,7 @@ using TheTallTankardTavern.Models;
 using static TheTallTankardTavern.Configuration.Constants;
 using static TheTallTankardTavern.Configuration.Constants.SpecialFeatures;
 using static TheTallTankardTavern.Configuration.ApplicationSettings;
+using TTT.Items;
 
 namespace TheTallTankardTavern.Helpers
 {
@@ -37,24 +38,21 @@ namespace TheTallTankardTavern.Helpers
 
 		public static int GetTotalAC(this CharacterModel Character)
 		{
-			string ArmourItemID = Character.Equipment.FirstOrDefault((string ItemID) => ItemDataContext.GetModelFromID(ItemID)?.Item_Type == "Armour");
+			string ArmourItemID = Character.Equipment.FirstOrDefault(itemID => ItemDataContext.GetModelFromID(itemID).Type.IsArmour);
 			if (!string.IsNullOrEmpty(ArmourItemID))
 			{
 				ItemModel Armour = ItemDataContext.GetModelFromID(ArmourItemID);
-                int AC = Character.Armour_Class + (Armour.Armour_Class_Value - 10);
+                int AC = Character.Armour_Class + (Armour.Armour.ArmourClass - 10);
 
                 //Special rules
                 //AC += Character.Race.Equals("Warforged") ? Character.Proficiency_Bonus : 0; //Old WGtE style
                 AC += Character.Race.Equals("Warforged") ? 1 : 0; //New Eberron source book style
 
 				int DEX = Character.Dexterity.Modifier;
-				switch (Armour.Weight_Class)
-				{
-				    case "Light": return AC + DEX;
-				    case "Medium": return AC + ((DEX <= 2) ? DEX : 2);
-				    case "Heavy": return AC;
-				    default: return -1;
-				}
+				if (Armour.Type.Equals(ItemType.LightArmour)) { return AC + DEX; }
+				else if (Armour.Type.Equals(ItemType.MediumArmour)) { return AC + ((DEX <= 2) ? DEX : 2); }
+				else if (Armour.Type.Equals(ItemType.HeavyArmour)) { return AC; }
+				else { return 0; }
 			}
 			return Character.GetBaseAC();
 		}

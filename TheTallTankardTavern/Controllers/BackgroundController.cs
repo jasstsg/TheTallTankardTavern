@@ -20,5 +20,11 @@ namespace TheTallTankardTavern.Controllers
             };
             return View("Create", Background);
         }
+
+        [HttpPost]
+        public IActionResult Save(BackgroundModel Model, string submit)
+        {
+            return SaveModel(Model, submit);
+        }
 	}
 }

@@ -21,6 +21,12 @@ namespace TheTallTankardTavern.Controllers
         }
 
         [HttpPost]
+        public IActionResult Save(FeatureModel Model, string submit)
+        {
+            return SaveModel(Model, submit);
+        }
+
+        [HttpPost]
         public IActionResult FilteredIndex(string searchtext)
         {
             searchtext = searchtext.ToLower();
