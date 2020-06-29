@@ -2,7 +2,7 @@
 {
     public enum DamageType
     {
-        None,
+        None = 0,
         Acid,
         Blugeoning,
         Cold,

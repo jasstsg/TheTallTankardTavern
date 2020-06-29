@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel;
+using System.Text;
+using System.Text.Json.Serialization;
 using TTT.Common.Abstractions;
 using TTT.Items.Armour;
 using TTT.Items.Weapons;
@@ -10,6 +12,12 @@ namespace TTT.Items
         /// <summary>
         /// The type of item
         /// </summary>
+        [JsonIgnore]
+        public string TypeAsString
+        {
+            get { return Type.ToString(); }
+            set { Type = ItemType.GetItemType(value); }
+        }
         public ItemType Type { get; set; } = ItemType.Miscellaneous;
 
         /// <summary>
@@ -32,10 +40,23 @@ namespace TTT.Items
         /// <summary>
         /// True is the item is a magic item
         /// </summary>
+        [DisplayName("Magical")]
         public bool IsMagic { get; set; } = false;
 
-        public WeaponModel Weapon = new WeaponModel();
+        public WeaponModel Weapon { get; set; } = new WeaponModel();
 
-        public ArmourModel Armour = new ArmourModel();
+        public ArmourModel Armour { get; set; } = new ArmourModel();
+
+        [JsonIgnore]
+        public string PopUpText
+        {
+            get
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine(this.Description);
+                sb.AppendLine(this.Weapon.Properties.ToString());
+                return sb.ToString();
+            }
+        }
     }
 }

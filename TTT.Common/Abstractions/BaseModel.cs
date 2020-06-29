@@ -9,10 +9,10 @@ namespace TTT.Common.Abstractions
 		[DisplayName("Name")]
 		public string Name { get; set; } = "";
 
-		[DisplayName("Is Homebrew")]
+		[DisplayName("Homebrew")]
         public bool IsHomebrew { get; set; } = false;
 
-		[DisplayName("Is Hidden")]
+		[DisplayName("Hide")]
 		public bool IsHidden { get; set; } = false;
 	}
 }

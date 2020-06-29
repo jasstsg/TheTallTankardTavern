@@ -1,22 +1,20 @@
 ﻿using System.Text;
-using TTT.Common.Abstractions;
 
 namespace TTT.Items.Weapons.Damage
 {
-    public class WeaponDamage : BaseEnumerableCollection<Damage>
+    public class WeaponDamage
     {
+        public Damage Damage1 { get; set; } = new Damage();
+        public Damage Damage2 { get; set; } = new Damage();
+        public Damage Damage3 { get; set; } = new Damage();
+
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            if (this.Count > 0)
-            {
-                foreach (Damage damage in this)
-                {
-                    sb.Append($"{damage.Die.ToString()} {damage.Type.ToString()} + ");
-                }
-                return sb.ToString().Remove(sb.Length - 3);
-            }
-            return "";
+            sb.Append(!this.Damage1.IsEmpty ? $"{Damage1.ToString()}" : "");
+            sb.Append(!this.Damage2.IsEmpty ? $" + {Damage2.ToString()}" : "");
+            sb.Append(!this.Damage3.IsEmpty ? $" + {Damage3.ToString()}" : "");
+            return sb.ToString();
         }
     }
 }

@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Text.Json.Serialization;
 
 namespace TTT.Items.Weapons.Properties
 {
-    class Light : BaseWeaponProperty
+    public class Light : BaseWeaponProperty
     {
+        [JsonIgnore]
         public override string Description => "A light weapon is small and easy to handle, making it ideal for use when fighting with two Weapons.;";
     }
 }

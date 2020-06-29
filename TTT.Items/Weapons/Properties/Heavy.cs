@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Text.Json.Serialization;
 
 namespace TTT.Items.Weapons.Properties
 {
-    class Heavy : BaseWeaponProperty
+    public class Heavy : BaseWeaponProperty
     {
+        [JsonIgnore]
         public override string Description => "Small creatures have disadvantage on Attack rolls with heavy Weapons. A heavy weapon’s size and bulk make it too large for a Small creature to use effectively.";
     }
 }

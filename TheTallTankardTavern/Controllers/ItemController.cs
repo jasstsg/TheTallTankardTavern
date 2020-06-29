@@ -27,44 +27,10 @@ namespace TheTallTankardTavern.Controllers
         }
 
 		[HttpPost]
-		public IActionResult Save(ItemModel Item, string submit,
-			Die die1, Die die2, Die die3, DamageType type1, DamageType type2, DamageType type3)
+		public IActionResult Save(ItemModel Item, string submit)
 		{
-			Item.Weapon.Damage.Add(new Damage(die1, type1));
-			Item.Weapon.Damage.Add(new Damage(die2, type2));
-			Item.Weapon.Damage.Add(new Damage(die3, type3));
-
 			return SaveModel(Item, submit);
 		}
-
-		//[HttpPost]
-		//public override IActionResult Save(ItemModel NewItem, string submit)
-		//{
-		//	ExtendedItemModel newItem = NewItem as ExtendedItemModel;
-		//	if (newItem != null)
-		//	{
-		//		ItemModel Item = new ItemModel()
-		//		{
-		//			ID = newItem.ID,
-		//			Name = newItem.Name,
-		//			Type = newItem.Type,
-		//			Description = newItem.Description,
-		//			Cost = newItem.Cost,
-		//			Weight = newItem.Weight,
-		//			IsHomebrew = newItem.IsHomebrew,
-		//			IsHidden = newItem.IsHidden,
-		//			IsMagic = newItem.IsMagic,
-		//			Armour = newItem.Armour
-		//		};
-		//		Item.Weapon.Plus = newItem.Weapon.Plus;
-		//		Item.Weapon.Damage.Add(new Damage(newItem.Die1, newItem.Type1));
-		//		Item.Weapon.Damage.Add(new Damage(newItem.Die2, newItem.Type2));
-		//		Item.Weapon.Damage.Add(new Damage(newItem.Die3, newItem.Type3));
-
-		//		return base.Save(Item, submit);
-		//	}
-		//	return base.Save(NewItem, submit);
-		//}
 
 		[HttpPost]
 		public IActionResult FilteredIndex(string searchtext)

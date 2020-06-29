@@ -5,6 +5,23 @@
     ViewData["Title"] = "Items";
 }
 
+<style>
+    .disabled-cell{
+        color:lightgray;
+    }
+</style>
+
+@{ 
+    string Disable(bool disableIfTrue)
+    {
+        if (disableIfTrue)
+        {
+            return "disabled-cell";
+        }
+        return "";
+    }
+}
+
 <partial name="/Views/Shared/Custom/_PopupModalPartial.cshtml" />
 <h1>@ViewData["Title"]</h1>
 
@@ -19,17 +36,31 @@
             <th><label>Type</label></th>
             <th><label>Weight</label></th>
             <th><label>Cost</label></th>
+            <th><label>Magic</label></th>
+            <th><label>AC</label></th>
+            <th><label>Str</label></th>
+            <th><label>Noisy</label></th>
+            <th><label>Bonus</label></th>
+            <th><label>Damage</label></th>
+            <th><label>Properties</label></th>
             <partial name="/Views/Shared/Custom/ActionButtons/_ColumnHeaderAddEditDelete.cshtml" />
         </tr>
     </thead>
     <tbody>
         @foreach (ItemModel i in Model)
         {
-            <tr data-toggle="modal" data-target="#popup-modal" data-title="@i.Name" data-desc="@(i.Description)">
+            <tr data-toggle="modal" data-target="#popup-modal" data-title="@i.Name" data-desc="@(i.PopUpText)">
                 <td>@i.Name</td>
                 <td>@i.Type</td>
-                <td>@i.Weight</td>
+                <td>@i.Weight lbs</td>
                 <td>@i.Cost cp</td>
+                <td>@i.IsMagic</td>
+                <td class="@Disable(!i.Type.IsArmour)">@i.Armour.ArmourClass</td>
+                <td class="@Disable(!i.Type.IsArmour)">@i.Armour.StrengthRequired</td>
+                <td class="@Disable(!i.Type.IsArmour)">@i.Armour.DisadvantageOnStealth</td>
+                <td class="@Disable(!i.Type.IsWeapon)">@i.Weapon.Plus</td>
+                <td class="@Disable(!i.Type.IsWeapon)">@i.Weapon.Damage.ToString()</td>
+                <td class="@Disable(!i.Type.IsWeapon)">@i.Weapon.Properties.ToString()</td>
                 <partial name="/Views/Shared/Custom/ActionButtons/_ColumnAddEditDelete.cshtml" model="i" />
             </tr>
         }

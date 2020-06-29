@@ -6,12 +6,14 @@
 
 <form asp-action="Save" method="post">
     <hidden asp-for="ID"></hidden>
+    <hidden asp-for="Armour"></hidden>
+    <hidden asp-for="Weapon"></hidden>
     <partial name="/Views/Shared/Custom/ActionButtons/_BackSavePartial.cshtml" />
-    <br />
 
-    <strong>Basic Properties</strong>
-    <div class="row" id="item-basic-properties">
-        <div class="col-md-12">
+    <div class="row">
+
+        <div class="col-md-8" id="item-basic-info">
+            <strong>Basic Info</strong>
             <table>
                 <thead>
                     <tr>
@@ -28,7 +30,7 @@
                     </tr>
                     <tr>
                         <td><label asp-for="Type"></label></td>
-                        <td><select asp-for="Type" asp-items="SelectListHelper.GetItemTypesSelectList()"></select></td>
+                        <td><select asp-for="TypeAsString" asp-items="SelectListHelper.GetItemTypesSelectList()"></select></td>
                         <td><label asp-for="IsMagic"></label></td>
                         <td><input type="checkbox" asp-for="IsMagic" /></td>
                     </tr>
@@ -44,47 +46,151 @@
                         <td><label asp-for="IsHidden"></label></td>
                         <td><input type="checkbox" asp-for="IsHidden" /></td>
                     </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-md-4" id="item-armour-info">
+            <strong>Armour Info</strong>
+            <table>
+                <thead>
                     <tr>
-                        <td><label asp-for="Description"></label></td>
-                        <td colspan="3"><textarea asp-for="Description" style="width:100%" rows="10"></textarea></td>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><label asp-for="Armour.ArmourClass"></label></td>
+                        <td><numberbox min="0" max="20" asp-for="Armour.ArmourClass"></numberbox></td>
+                    </tr>
+                    <tr>
+                        <td><label asp-for="Armour.StrengthRequired"></label></td>
+                        <td><numberbox min="0" max="20" asp-for="Armour.StrengthRequired"></numberbox></td>
+                    </tr>
+                    <tr>
+                        <td><label asp-for="Armour.DisadvantageOnStealth"></label></td>
+                        <td><input type="checkbox" asp-for="Armour.DisadvantageOnStealth" /></td>
                     </tr>
                 </tbody>
             </table>
         </div>
-    </div>
 
-    <strong>Weapon Properties</strong>
-    <div class="row" id="item-weapon-properties">
-        <div class="col-md-12">
+        <div class="col-md-12" id="item-description">
             <table>
                 <thead>
                     <tr>
-                        <th width="12%"></th>
-                        <th width="8%"></th>
-                        <th width="20%"></th>
-                        <th width="2%"></th>
-                        <th width="8%"></th>
-                        <th width="20%"></th>
-                        <th width="2%"></th>
-                        <th width="8%"></th>
-                        <th width="20%"></th>
+                        <th width="10%"></th>
+                        <th width="90%"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><label asp-for="Description"></label></td>
+                        <td colspan="3"><textarea asp-for="Description" style="width:100%" rows="5"></textarea></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    
+    <strong>Weapon Info</strong>
+    <div class="row" id="item-weapon-info">
+        <div class="col-md-6">
+            <table>
+                <thead>
+                    <tr>
+                        <th width="100px"></th>
+                        <th width="100px"></th>
+                        <th></th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td><label asp-for="Weapon.Plus"></label></td>
-                        <td colspan="8"><numberbox min="0" max="3" asp-for="Weapon.Plus"></numberbox></td>
+                        <td><numberbox min="0" max="3" asp-for="Weapon.Plus"></numberbox></td>
+                        <td></td>
+                        <td></td>
                     </tr>
                     <tr>
-                        <td><label asp-for="Weapon.Damage"></label></td>
-                        <td><select name="die1" asp-items="SelectListHelper.GetDamageDieSelectList()"></select></td>
-                        <td><select name="type1" asp-items="SelectListHelper.GetDamageTypeSelectList()"></select></td>
+                        <td rowspan="4"><label asp-for="Weapon.Damage"></label></td>
+                    </tr>
+                    <tr style="background-color:white">
+                        <td><select asp-for="Weapon.Damage.Damage1.DieAsString" asp-items="SelectListHelper.GetDamageDieSelectList()"></select></td>
+                        <td><select asp-for="Weapon.Damage.Damage1.DamageTypeAsString" asp-items="SelectListHelper.GetDamageTypeSelectList()"></select></td>
                         <td>&nbsp;+&nbsp;</td>
-                        <td><select name="die2" asp-items="SelectListHelper.GetDamageDieSelectList()"></select></td>
-                        <td><select name="type2" asp-items="SelectListHelper.GetDamageTypeSelectList()"></select></td>
+                    </tr>
+                    <tr>
+                        <td><select asp-for="Weapon.Damage.Damage2.DieAsString" asp-items="SelectListHelper.GetDamageDieSelectList()"></select></td>
+                        <td><select asp-for="Weapon.Damage.Damage2.DamageTypeAsString" asp-items="SelectListHelper.GetDamageTypeSelectList()"></select></td>
                         <td>&nbsp;+&nbsp;</td>
-                        <td><select name="die3" asp-items="SelectListHelper.GetDamageDieSelectList()"></select></td>
-                        <td><select name="type3" asp-items="SelectListHelper.GetDamageTypeSelectList()"></select></td>
+                    </tr>
+                    <tr style="background-color:white">
+                        <td><select asp-for="Weapon.Damage.Damage3.DieAsString" asp-items="SelectListHelper.GetDamageDieSelectList()"></select></td>
+                        <td><select asp-for="Weapon.Damage.Damage3.DamageTypeAsString" asp-items="SelectListHelper.GetDamageTypeSelectList()"></select></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-6">
+            <table>
+                <thead>
+                    <tr>
+                        <th colspan="5" width="50%"></th>
+                        <th colspan="5" width="50%"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td rowspan="6"><label asp-for="Weapon.Properties"></label></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" asp-for="Weapon.Properties.Ammunition.Enabled" /></td>
+                        <td><label asp-for="Weapon.Properties.Ammunition"></label></td>
+                        <td><input type="checkbox" asp-for="Weapon.Properties.Loading.Enabled" /></td>
+                        <td><label asp-for="Weapon.Properties.Loading"></label></td>
+                        <td><input type="checkbox" asp-for="Weapon.Properties.Range.Enabled" /></td>
+                        <td><label asp-for="Weapon.Properties.Range"></label></td>
+                        <td><numberbox asp-for="Weapon.Properties.Range.NormalRange"></numberbox></td>
+                        <td> / </td>
+                        <td><numberbox asp-for="Weapon.Properties.Range.LongRange"></numberbox></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" asp-for="Weapon.Properties.Finesse.Enabled" /></td>
+                        <td><label asp-for="Weapon.Properties.Finesse"></label></td>
+                        <td><input type="checkbox" asp-for="Weapon.Properties.Reach.Enabled" /></td>
+                        <td><label asp-for="Weapon.Properties.Reach"></label></td>
+                        <td><input type="checkbox" asp-for="Weapon.Properties.Thrown.Enabled" /></td>
+                        <td><label asp-for="Weapon.Properties.Thrown"></label></td>
+                        <td><numberbox asp-for="Weapon.Properties.Thrown.NormalRange"></numberbox></td>
+                        <td> / </td>
+                        <td><numberbox asp-for="Weapon.Properties.Thrown.LongRange"></numberbox></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" asp-for="Weapon.Properties.Heavy.Enabled" /></td>
+                        <td><label asp-for="Weapon.Properties.Heavy"></label></td>
+                        <td><input type="checkbox" asp-for="Weapon.Properties.Silvered.Enabled" /></td>
+                        <td><label asp-for="Weapon.Properties.Silvered"></label></td>
+                        <td><input type="checkbox" asp-for="Weapon.Properties.Versitile.Enabled" /></td>
+                        <td><label asp-for="Weapon.Properties.Versitile"></label></td>
+                        <td colspan="3"><select asp-for="Weapon.Properties.Versitile.TwoHandedDamageAsString" asp-items="SelectListHelper.GetDamageDieSelectList()"></select></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" asp-for="Weapon.Properties.Improvised.Enabled" /></td>
+                        <td><label asp-for="Weapon.Properties.Improvised"></label></td>
+                        <td><input type="checkbox" asp-for="Weapon.Properties.Special.Enabled" /></td>
+                        <td><label asp-for="Weapon.Properties.Special"></label></td>
+                        <td colspan="5"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" asp-for="Weapon.Properties.Light.Enabled" /></td>
+                        <td><label asp-for="Weapon.Properties.Light"></label></td>
+                        <td><input type="checkbox" asp-for="Weapon.Properties.TwoHanded.Enabled" /></td>
+                        <td><label asp-for="Weapon.Properties.TwoHanded"></label></td>
+                        <td colspan="5"></td>
                     </tr>
                 </tbody>
             </table>

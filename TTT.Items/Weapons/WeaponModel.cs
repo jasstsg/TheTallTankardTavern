@@ -6,7 +6,7 @@ namespace TTT.Items.Weapons
 {
     public class WeaponModel
     {
-        [DisplayName("Maigc Bonus")]
+        [DisplayName("Magic Bonus")]
         public int Plus { get; set; } = 0;
         public WeaponDamage Damage { get; set; } = new WeaponDamage();
         public WeaponProperties Properties { get; set; } = new WeaponProperties();
