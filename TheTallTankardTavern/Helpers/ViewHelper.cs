@@ -13,5 +13,14 @@ namespace TheTallTankardTavern.Helpers
                 default: return "";
             }
         }
+
+        public static string Disable(bool disableIfTrue)
+        {
+            if (disableIfTrue)
+            {
+                return "disabled-cell";
+            }
+            return "";
+        }
     }
 }

@@ -184,32 +184,31 @@ namespace TheTallTankardTavern.Controllers
         #endregion
 
         #region Manage Items
-        public IActionResult UnequipItem(string cid, string iid)
+        public IActionResult UnequipItem(string cid, string instanceID)
         {
             CharacterModel Character = DataContext.GetModelFromID(cid);
-            Character.Inventory.Add(iid);
-            Character.Equipment.Unequip(iid);
+            Character.Equipment.Unequip(instanceID);
             return SaveAndReturnToItemsPartialView(Character);
         }
 
-        public IActionResult EquipItem(string cid, string iid)
+        public IActionResult EquipItem(string cid, string instanceID)
         {
             CharacterModel Character = DataContext.GetModelFromID(cid);
-            Character.Equipment.TryEquip(iid);
+            Character.Equipment.TryEquip(instanceID);
             return SaveAndReturnToItemsPartialView(Character);
         }
 
-        public IActionResult RemoveItemFromEquipment(string cid, string iid)
+        public IActionResult RemoveItemFromEquipment(string cid, string instanceID)
         {
             CharacterModel Character = DataContext.GetModelFromID(cid);
-            Character.Equipment.Unequip(iid);
+            Character.Equipment.Unequip(instanceID);
             return SaveAndReturnToItemsPartialView(Character);
         }
 
-        public IActionResult RemoveItemFromInventory(string cid, string iid)
+        public IActionResult RemoveItemFromInventory(string cid, string instanceID)
         {
             CharacterModel Character = DataContext.GetModelFromID(cid);
-            Character.Inventory.Remove(iid);
+            Character.Inventory.Remove(instanceID);
             return SaveAndReturnToItemsPartialView(Character);
         }
 

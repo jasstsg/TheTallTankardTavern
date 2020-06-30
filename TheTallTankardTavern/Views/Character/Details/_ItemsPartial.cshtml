@@ -1,9 +1,7 @@
 ﻿@model TheTallTankardTavern.Models.CharacterModel
-@using static TheTallTankardTavern.Configuration.Constants.ITEM_TYPES
-@using TTT.String
 @addTagHelper *, TheTallTankardTavern
 
-<div class="nav nav-tabs">
+@*<div class="nav nav-tabs">
     <a class="nav-item nav-link active" data-toggle="tab" href="#character-items-equipped-armour-and-weapons"><strong>Equipped Armour &amp; Weapons</strong></a>
     <a class="nav-item nav-link" data-toggle="tab" href="#character-items-equipped-accessories"><strong>Equipped Accessories &amp; Money</strong></a>
     <a class="nav-item nav-link" data-toggle="tab" href="#character-items-inventory">
@@ -41,6 +39,22 @@
             <div class="col-md-12">
                 <partial name="/Views/Character/Details/_Items/_InventoryPartial.cshtml" model="Model" />
             </div>
+        </div>
+    </div>
+</div>*@
+
+<div>
+    <div class="row">
+        <div class="col-md-10">
+            <partial name="/Views/Character/Details/_Items/_EquippedArmourAndWeaponsPartial.cshtml" model="Model" />
+        </div>
+        <div class="col-md-2">
+            <partial name="/Views/Character/Details/_Items/_CoinsPartial.cshtml" model="Model" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <partial name="/Views/Character/Details/_Items/_InventoryPartial.cshtml" model="Model" />
         </div>
     </div>
 </div>

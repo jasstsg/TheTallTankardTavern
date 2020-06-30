@@ -18,15 +18,15 @@ namespace TheTallTankardTavern.Models
 		public bool TryEquip(string itemID)
 		{
 			ItemModel Item = ItemDataContext.GetModelFromID(itemID);
-			if (!Item.Type.IsArmour)
-			{
-				return false;
-			}
 
-			string CurrentArmourID = this.FirstOrDefault(id => ItemDataContext.GetModelFromID(id).Type.IsArmour);
-			if (!string.IsNullOrEmpty(CurrentArmourID))
+			//If the item is armour, remove any armour that is currently being worn
+			if (Item.Type.IsArmour)
 			{
-				this.Remove(CurrentArmourID);
+				string CurrentArmourID = this.FirstOrDefault(id => ItemDataContext.GetModelFromID(id).Type.IsArmour);
+				if (!string.IsNullOrEmpty(CurrentArmourID))
+				{
+					this.Remove(CurrentArmourID);
+				}
 			}
 
 			this.Add(itemID);

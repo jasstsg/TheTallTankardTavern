@@ -5,23 +5,6 @@
     ViewData["Title"] = "Items";
 }
 
-<style>
-    .disabled-cell{
-        color:lightgray;
-    }
-</style>
-
-@{ 
-    string Disable(bool disableIfTrue)
-    {
-        if (disableIfTrue)
-        {
-            return "disabled-cell";
-        }
-        return "";
-    }
-}
-
 <partial name="/Views/Shared/Custom/_PopupModalPartial.cshtml" />
 <h1>@ViewData["Title"]</h1>
 
@@ -55,12 +38,12 @@
                 <td>@i.Weight lbs</td>
                 <td>@i.Cost cp</td>
                 <td>@i.IsMagic</td>
-                <td class="@Disable(!i.Type.IsArmour)">@i.Armour.ArmourClass</td>
-                <td class="@Disable(!i.Type.IsArmour)">@i.Armour.StrengthRequired</td>
-                <td class="@Disable(!i.Type.IsArmour)">@i.Armour.DisadvantageOnStealth</td>
-                <td class="@Disable(!i.Type.IsWeapon)">@i.Weapon.Plus</td>
-                <td class="@Disable(!i.Type.IsWeapon)">@i.Weapon.Damage.ToString()</td>
-                <td class="@Disable(!i.Type.IsWeapon)">@i.Weapon.Properties.ToString()</td>
+                <td class="@ViewHelper.Disable(!i.Type.IsArmour)">@i.Armour.ArmourClass</td>
+                <td class="@ViewHelper.Disable(!i.Type.IsArmour)">@i.Armour.StrengthRequired</td>
+                <td class="@ViewHelper.Disable(!i.Type.IsArmour)">@i.Armour.DisadvantageOnStealth</td>
+                <td class="@ViewHelper.Disable(!i.Type.IsWeapon)">@i.Weapon.Plus</td>
+                <td class="@ViewHelper.Disable(!i.Type.IsWeapon)">@i.Weapon.Damage.ToString()</td>
+                <td class="@ViewHelper.Disable(!i.Type.IsWeapon)">@i.Weapon.Properties.ToString()</td>
                 <partial name="/Views/Shared/Custom/ActionButtons/_ColumnAddEditDelete.cshtml" model="i" />
             </tr>
         }

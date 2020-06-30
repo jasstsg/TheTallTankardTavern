@@ -1,9 +1,9 @@
-﻿function unequipItem(cid, iid) {
+﻿function unequipItem(cid, instanceID) {
     event.stopPropagation();
     console.log("UnequipItem button pressed");
     $.ajax({
         url: '/Character/UnequipItem',
-        data: { cid: cid, iid: iid },
+        data: { cid: cid, instanceID: instanceID },
         dataType: 'html',
         success: function (response) {
             $('#character-items').html(response);
@@ -11,12 +11,13 @@
     })
 }
 
-function equipItem(cid, iid) {
+function equipItem(cid, instanceID) {
+    console.log(instanceID);
     event.stopPropagation();
     console.log("EquipItem button pressed");
     $.ajax({
         url: '/Character/EquipItem',
-        data: { cid: cid, iid: iid },
+        data: { cid: cid, instanceID: instanceID },
         dataType: 'html',
         success: function (response) {
             $('#character-items').html(response);
@@ -24,12 +25,12 @@ function equipItem(cid, iid) {
     })
 }
 
-function removeItemFromEquipment(cid, iid) {
+function removeItemFromEquipment(cid, instanceID) {
     event.stopPropagation();
     console.log("Remove Equipment button pressed");
     $.ajax({
         url: '/Character/RemoveItemFromEquipment',
-        data: { cid: cid, iid: iid },
+        data: { cid: cid, instanceID: instanceID },
         dataType: 'html',
         success: function (response) {
             $('#character-items').html(response);
@@ -37,12 +38,12 @@ function removeItemFromEquipment(cid, iid) {
     })
 }
 
-function removeItemFromInventory(cid, iid) {
+function removeItemFromInventory(cid, instanceID) {
     event.stopPropagation();
     console.log("Remove Inventory button pressed");
     $.ajax({
         url: '/Character/RemoveItemFromInventory',
-        data: { cid: cid, iid: iid },
+        data: { cid: cid, instanceID: instanceID },
         dataType: 'html',
         success: function (response) {
             $('#character-items').html(response);

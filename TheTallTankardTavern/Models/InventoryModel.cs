@@ -1,6 +1,7 @@
 using TTT.Items;
 using static TheTallTankardTavern.Configuration.ApplicationSettings;
 using TheTallTankardTavern.Helpers;
+using System;
 
 namespace TheTallTankardTavern.Models
 {
@@ -22,6 +23,13 @@ namespace TheTallTankardTavern.Models
 		public bool IsEncumbered(int strengthScore)
 		{
 			return (CurrentWeight > 15 * strengthScore);
+		}
+
+		public override void Add(string itemID)
+		{
+			ItemModel Item = ItemDataContext.GetModelFromID(itemID);
+			Item.InstanceID = $"{Item.ID}&{Guid.NewGuid().ToString()}";
+			base.Add(Item.InstanceID);
 		}
 	}
 }

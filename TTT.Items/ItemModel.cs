@@ -10,6 +10,11 @@ namespace TTT.Items
     public class ItemModel : BaseModel
     {
         /// <summary>
+        /// Used to differenciate separate instances of an item in a characters inventory
+        /// </summary>
+        public string InstanceID { get; set; } = "";
+
+        /// <summary>
         /// The type of item
         /// </summary>
         [JsonIgnore]

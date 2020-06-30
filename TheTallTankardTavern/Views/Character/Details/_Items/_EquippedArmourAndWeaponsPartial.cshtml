@@ -1,48 +1,83 @@
 ﻿@model TheTallTankardTavern.Models.CharacterModel
 @using TheTallTankardTavern.Helpers
 @using static TheTallTankardTavern.Configuration.ApplicationSettings
-@using static TheTallTankardTavern.Configuration.Constants.ITEM_TYPES
-@using TTT.String
 @using TTT.Items
 @addTagHelper *, TheTallTankardTavern
 
-<style>
-    #equipped-armour-and-weapons-header p {
-        margin: 0px;
-        padding: 0px;
-    }
-</style>
+@{
+    IEnumerable<string> Equipment = Model.Equipment.OrderBy(i => ItemDataContext.GetModelFromID(i.Substring(0, i.IndexOf("&"))).Name);
+    IEnumerable<string> Weapons = Equipment.Where(i => ItemDataContext.GetModelFromID(i.Substring(0, i.IndexOf("&"))).Type.IsWeapon);
+    IEnumerable<string> Armour = Equipment.Where(i => ItemDataContext.GetModelFromID(i.Substring(0, i.IndexOf("&"))).Type.IsArmour
+        || ItemDataContext.GetModelFromID(i.Substring(0, i.IndexOf("&"))).Type.IsShield);
+}
 
-<div id="equipped-armour-and-weapons-header">
-    <div class="row">
-        <div class="col-md-12">
-            <p>EQUIPPED ARMOUR</p>
-        </div>
-    </div>
-</div>
-<table id="character-items-equipped-armour-and-weapons" table-hover="true">
+ARMOUR
+<table table-hover="true">
     <thead>
         <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>AC</th>
-            <th>Weight</th>
+            <th><label>Name</label></th>
+            <th><label>Type</label></th>
+            <th><label>Weight</label></th>
+            <th><label>Cost</label></th>
+            <th><label>Magic</label></th>
+            <th><label>AC</label></th>
+            <th><label>Str</label></th>
+            <th><label>Noisy</label></th>
             <th></th>
-            <th></th>
+            @*<th></th>*@
         </tr>
     </thead>
     <tbody>
-        @foreach (string iid in Model.Equipment.Where(i => ItemDataContext.GetModelFromID(i).Type.IsArmour)
-           .OrderBy(i => ItemDataContext.GetModelFromID(i).Name))
+        @foreach (string instanceID in Armour)
         {
-            ItemModel Item = ItemDataContext.GetModelFromID(iid);
-            <tr data-toggle="modal" data-target="#popup-modal" data-title="@Item.Name" data-desc="@Item.Description" data-traits="">
+            ItemModel Item = ItemDataContext.GetModelFromID(instanceID.Substring(0, instanceID.IndexOf("&")));
+            <tr data-toggle="modal" data-target="#popup-modal" data-title="@Item.Name" data-desc="@Item.PopUpText" data-traits="">
                 <td>@Item.Name</td>
                 <td>@Item.Type</td>
+                <td>@Item.Weight lbs</td>
+                <td>@Item.Cost cp</td>
+                <td>@Item.IsMagic</td>
                 <td>@Item.Armour.ArmourClass</td>
-                <td>@Item.Weight</td>
-                <td><button class="td-action-btn" value="Unequip" onclick="unequipItem('@Model.ID', '@Item.ID')"></button></td>
-                <td><button class="td-action-btn" value="Remove" onclick="removeItemFromEquipment('@Model.ID', '@Item.ID')"></button></td>
+                <td>@Item.Armour.StrengthRequired</td>
+                <td>@Item.Armour.DisadvantageOnStealth</td>
+                <td><button class="td-action-btn" value="Unequip" onclick="unequipItem('@Model.ID', '@instanceID')"></button></td>
+                @*<td><button class="td-action-btn" value="Remove" onclick="removeItemFromEquipment('@Model.ID', '@instanceID')"></button></td>*@
+            </tr>
+        }
+    </tbody>
+</table>
+
+WEAPONS
+<table table-hover="true">
+    <thead>
+        <tr>
+            <th><label>Name</label></th>
+            <th><label>Type</label></th>
+            <th><label>Weight</label></th>
+            <th><label>Cost</label></th>
+            <th><label>Magic</label></th>
+            <th><label>Bonus</label></th>
+            <th><label>Damage</label></th>
+            <th><label>Properties</label></th>
+            <th></th>
+            @*<th></th>*@
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (string instanceID in Weapons)
+        {
+            ItemModel Item = ItemDataContext.GetModelFromID(instanceID.Substring(0, instanceID.IndexOf("&")));
+            <tr data-toggle="modal" data-target="#popup-modal" data-title="@Item.Name" data-desc="@Item.PopUpText" data-traits="">
+                <td>@Item.Name</td>
+                <td>@Item.Type</td>
+                <td>@Item.Weight lbs</td>
+                <td>@Item.Cost cp</td>
+                <td>@Item.IsMagic</td>
+                <td>@Item.Weapon.Plus</td>
+                <td>@Item.Weapon.Damage.ToString()</td>
+                <td>@Item.Weapon.Properties.ToString()</td>
+                <td><button class="td-action-btn" value="Unequip" onclick="unequipItem('@Model.ID', '@instanceID')"></button></td>
+                @*<td><button class="td-action-btn" value="Remove" onclick="removeItemFromEquipment('@Model.ID', '@instanceID')"></button></td>*@
             </tr>
         }
     </tbody>
