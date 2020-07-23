@@ -17,6 +17,7 @@ namespace TheTallTankardTavern.Controllers
             public int SpellSlotLevel { get; set; }
             public int SpellSlotsRemaining { get; set; }
         }
+
         public CharacterController() : base(CharacterDataContext, FOLDER.Characters) { }
 
         public override IActionResult Create()
@@ -184,31 +185,31 @@ namespace TheTallTankardTavern.Controllers
         #endregion
 
         #region Manage Items
-        public IActionResult UnequipItem(string cid, string instanceID)
+        public IActionResult UnequipItem(string cid, string inventoryID)
         {
             CharacterModel Character = DataContext.GetModelFromID(cid);
-            Character.Equipment.Unequip(instanceID);
+            Character.Equipment.Unequip(inventoryID);
             return SaveAndReturnToItemsPartialView(Character);
         }
 
-        public IActionResult EquipItem(string cid, string instanceID)
+        public IActionResult EquipItem(string cid, string inventoryID)
         {
             CharacterModel Character = DataContext.GetModelFromID(cid);
-            Character.Equipment.TryEquip(instanceID);
+            Character.Equipment.TryEquip(inventoryID);
             return SaveAndReturnToItemsPartialView(Character);
         }
 
-        public IActionResult RemoveItemFromEquipment(string cid, string instanceID)
+        public IActionResult RemoveItemFromEquipment(string cid, string inventoryID)
         {
             CharacterModel Character = DataContext.GetModelFromID(cid);
-            Character.Equipment.Unequip(instanceID);
+            Character.Equipment.Unequip(inventoryID);
             return SaveAndReturnToItemsPartialView(Character);
         }
 
-        public IActionResult RemoveItemFromInventory(string cid, string instanceID)
+        public IActionResult RemoveItemFromInventory(string cid, string inventoryID)
         {
             CharacterModel Character = DataContext.GetModelFromID(cid);
-            Character.Inventory.Remove(instanceID);
+            Character.Inventory.Remove(inventoryID);
             return SaveAndReturnToItemsPartialView(Character);
         }
 

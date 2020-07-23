@@ -15,6 +15,12 @@ namespace TTT.Items
         public string InstanceID { get; set; } = "";
 
         /// <summary>
+        /// Used for inventory and equipment
+        /// </summary>
+        [JsonIgnore]
+        public string InventoryID { get { return $"{this.ID}&{this.InstanceID}"; } }
+
+        /// <summary>
         /// The type of item
         /// </summary>
         [JsonIgnore]

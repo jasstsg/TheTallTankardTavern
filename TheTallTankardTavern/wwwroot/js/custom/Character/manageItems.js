@@ -1,9 +1,9 @@
-﻿function unequipItem(cid, instanceID) {
+﻿function unequipItem(cid, inventoryID) {
     event.stopPropagation();
     console.log("UnequipItem button pressed");
     $.ajax({
         url: '/Character/UnequipItem',
-        data: { cid: cid, instanceID: instanceID },
+        data: { cid: cid, inventoryID: inventoryID },
         dataType: 'html',
         success: function (response) {
             $('#character-items').html(response);
@@ -11,13 +11,13 @@
     })
 }
 
-function equipItem(cid, instanceID) {
-    console.log(instanceID);
+function equipItem(cid, inventoryID) {
+    console.log(inventoryID);
     event.stopPropagation();
     console.log("EquipItem button pressed");
     $.ajax({
         url: '/Character/EquipItem',
-        data: { cid: cid, instanceID: instanceID },
+        data: { cid: cid, inventoryID: inventoryID },
         dataType: 'html',
         success: function (response) {
             $('#character-items').html(response);
@@ -25,12 +25,12 @@ function equipItem(cid, instanceID) {
     })
 }
 
-function removeItemFromEquipment(cid, instanceID) {
+function removeItemFromEquipment(cid, inventoryID) {
     event.stopPropagation();
     console.log("Remove Equipment button pressed");
     $.ajax({
         url: '/Character/RemoveItemFromEquipment',
-        data: { cid: cid, instanceID: instanceID },
+        data: { cid: cid, inventoryID: inventoryID },
         dataType: 'html',
         success: function (response) {
             $('#character-items').html(response);
@@ -38,12 +38,12 @@ function removeItemFromEquipment(cid, instanceID) {
     })
 }
 
-function removeItemFromInventory(cid, instanceID) {
+function removeItemFromInventory(cid, inventoryID) {
     event.stopPropagation();
     console.log("Remove Inventory button pressed");
     $.ajax({
         url: '/Character/RemoveItemFromInventory',
-        data: { cid: cid, instanceID: instanceID },
+        data: { cid: cid, inventoryID: inventoryID },
         dataType: 'html',
         success: function (response) {
             $('#character-items').html(response);

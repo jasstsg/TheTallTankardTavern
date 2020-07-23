@@ -13,29 +13,30 @@ namespace TheTallTankardTavern.Models
 		/// <summary>
 		/// Currently only Armour can be equipped
 		/// </summary>
-		/// <param name="itemID">Item ID of Armour Item to be equipped</param>
+		/// <param name="inventoryID">The specific instance of the item to be equipped</param>
 		/// <returns></returns>
-		public bool TryEquip(string itemID)
+		public bool TryEquip(string inventoryID)
 		{
-			ItemModel Item = ItemDataContext.GetModelFromID(itemID);
+			ItemModel Item = ItemDataContext.GetModelFromID(inventoryID.Substring(0, inventoryID.IndexOf("&")));
 
 			//If the item is armour, remove any armour that is currently being worn
 			if (Item.Type.IsArmour)
 			{
-				string CurrentArmourID = this.FirstOrDefault(id => ItemDataContext.GetModelFromID(id).Type.IsArmour);
+				string CurrentArmourID = this.InnerCollection.FirstOrDefault(id =>
+					ItemDataContext.GetModelFromID(id.Substring(0, inventoryID.IndexOf("&"))).Type.IsArmour);
 				if (!string.IsNullOrEmpty(CurrentArmourID))
 				{
 					this.Remove(CurrentArmourID);
 				}
 			}
 
-			this.Add(itemID);
+			this.Add(inventoryID);
 			return true;
 		}
 
-		public bool Unequip(string itemID)
+		public bool Unequip(string inventoryID)
 		{
-			return this.Remove(itemID);
+			return this.Remove(inventoryID);
 		}
 	}
 }

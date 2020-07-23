@@ -31,9 +31,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (string instanceID in Model.Inventory.OrderBy(i => ItemDataContext.GetModelFromID(i.Substring(0, i.IndexOf("&"))).Name))
+                    @foreach (string inventoryID in Model.Inventory.OrderBy(i => ItemDataContext.GetModelFromID(i.Substring(0, i.IndexOf("&"))).Name))
                     {
-                        ItemModel Item = ItemDataContext.GetModelFromID(instanceID.Substring(0, instanceID.IndexOf("&")));
+                        ItemModel Item = ItemDataContext.GetModelFromID(inventoryID.Substring(0, inventoryID.IndexOf("&")));
                     <tr data-toggle="modal" data-target="#popup-modal" data-title="@Item.Name" data-desc="@Item.PopUpText" data-traits="">
                         <td>@Item.Name</td>
                         <td>@Item.Type</td>
@@ -48,20 +48,20 @@
                         <td class="@ViewHelper.Disable(!Item.Type.IsWeapon)">@Item.Weapon.Properties.ToString()</td>
                         @if (Item.Type.IsArmour || Item.Type.IsWeapon || Item.Type.IsShield)
                         {
-                            @if (Model.Equipment.Contains(instanceID))
+                            @if (Model.Equipment.Contains(inventoryID))
                             {
                                 <td>Equipped</td>
                             }
                             else
                             {
-                                <td><button class="td-action-btn" value="Equip" onclick="equipItem('@Model.ID', '@instanceID')"></button></td>
+                                <td><button class="td-action-btn" value="Equip" onclick="equipItem('@Model.ID', '@inventoryID')"></button></td>
                             }
                         }
                         else
                         {
                             <td></td>
                         }
-                        <td><button class="td-action-btn" value="Remove" onclick="removeItemFromInventory('@Model.ID', '@instanceID')"></button></td>
+                        <td><button class="td-action-btn" value="Remove" onclick="removeItemFromInventory('@Model.ID', '@inventoryID')"></button></td>
                     </tr>
                     }
                 </tbody>

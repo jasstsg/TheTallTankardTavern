@@ -28,8 +28,8 @@ namespace TheTallTankardTavern.Models
 		public override void Add(string itemID)
 		{
 			ItemModel Item = ItemDataContext.GetModelFromID(itemID);
-			Item.InstanceID = $"{Item.ID}&{Guid.NewGuid().ToString()}";
-			base.Add(Item.InstanceID);
+			Item.InstanceID = Guid.NewGuid().ToString();
+			base.Add($"{Item.ID}&{Item.InstanceID}");
 		}
 	}
 }
