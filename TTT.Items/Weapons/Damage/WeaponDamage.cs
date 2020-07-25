@@ -16,5 +16,15 @@ namespace TTT.Items.Weapons.Damage
             sb.Append(!this.Damage3.IsEmpty ? $" + {Damage3.ToString()}" : "");
             return sb.ToString();
         }
+
+        public WeaponDamage Clone()
+        {
+            return new WeaponDamage()
+            {
+                Damage1 = this.Damage1.Clone(),
+                Damage2 = this.Damage2.Clone(),
+                Damage3 = this.Damage3.Clone()
+            };
+        }
     }
 }

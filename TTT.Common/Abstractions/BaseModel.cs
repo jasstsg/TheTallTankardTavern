@@ -14,5 +14,16 @@ namespace TTT.Common.Abstractions
 
 		[DisplayName("Hide")]
 		public bool IsHidden { get; set; } = false;
+
+		public BaseModel Clone()
+        {
+			return new BaseModel()
+			{
+				ID = this.ID,
+				Name = this.Name,
+				IsHomebrew = this.IsHomebrew,
+				IsHidden = this.IsHidden
+			};
+        }
 	}
 }

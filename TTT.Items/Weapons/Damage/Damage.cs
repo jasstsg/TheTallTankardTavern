@@ -31,5 +31,14 @@ namespace TTT.Items.Weapons.Damage
         {
             return $"{Die.ToString().Replace("_", "")} {Type.ToString()}";
         }
+
+        public Damage Clone()
+        {
+            return new Damage()
+            {
+                Die = this.Die,
+                Type = this.Type
+            };
+        }
     }
 }

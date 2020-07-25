@@ -4,6 +4,7 @@ using System.Text.Json.Serialization;
 using TTT.Common.Abstractions;
 using TTT.Items.Armour;
 using TTT.Items.Weapons;
+using TTT;
 
 namespace TTT.Items
 {
@@ -18,7 +19,15 @@ namespace TTT.Items
         /// Used for inventory and equipment
         /// </summary>
         [JsonIgnore]
-        public string InventoryID { get { return $"{this.ID}&{this.InstanceID}"; } }
+        public string InventoryID
+        { 
+            get { return $"{this.ID}&{this.InstanceID}"; }
+            set
+            {
+                this.ID = value.Substring(0, value.IndexOf("&"));
+                this.InstanceID = value.Substring(value.IndexOf("&") + 1);
+            }
+        }
 
         /// <summary>
         /// The type of item
@@ -68,6 +77,20 @@ namespace TTT.Items
                 sb.AppendLine(this.Weapon.Properties.ToString());
                 return sb.ToString();
             }
+        }
+
+        public new ItemModel Clone()
+        {
+            ItemModel Clone = base.Clone().GenericTypeCast<BaseModel, ItemModel>();
+            Clone.InstanceID = this.InstanceID;
+            Clone.TypeAsString = this.TypeAsString;
+            Clone.Description = this.Description;
+            Clone.Cost = this.Cost;
+            Clone.Weight = this.Weight;
+            Clone.IsMagic = this.IsMagic;
+            Clone.Weapon = this.Weapon.Clone();
+            Clone.Armour = this.Armour.Clone();
+            return Clone;
         }
     }
 }

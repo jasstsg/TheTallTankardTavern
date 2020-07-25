@@ -11,5 +11,13 @@ namespace TTT.Items.Weapons
         public WeaponDamage Damage { get; set; } = new WeaponDamage();
         public WeaponProperties Properties { get; set; } = new WeaponProperties();
 
+        public WeaponModel Clone()
+        {
+            return new WeaponModel()
+            {
+                Damage = this.Damage.Clone(),
+                Properties = this.Properties.Clone()
+            };
+        }
     }
 }

@@ -2,6 +2,8 @@ using TTT.Items;
 using static TheTallTankardTavern.Configuration.ApplicationSettings;
 using TheTallTankardTavern.Helpers;
 using System;
+using System.Linq;
+using static TheTallTankardTavern.Configuration.Constants;
 
 namespace TheTallTankardTavern.Models
 {
@@ -27,9 +29,15 @@ namespace TheTallTankardTavern.Models
 
 		public override void Add(string itemID)
 		{
-			ItemModel Item = ItemDataContext.GetModelFromID(itemID);
+			ItemModel Item = ItemDataContext.GetModelFromID(itemID).Clone();
 			Item.InstanceID = Guid.NewGuid().ToString();
-			base.Add($"{Item.ID}&{Item.InstanceID}");
+			base.Add(Item.InventoryID);
 		}
+
+		public override bool Remove(string inventoryID)
+        {
+			//If the item is in the inventory, and is removed successfully, return true
+			return this.Contains(inventoryID) && base.Remove(inventoryID);
+        }
 	}
 }

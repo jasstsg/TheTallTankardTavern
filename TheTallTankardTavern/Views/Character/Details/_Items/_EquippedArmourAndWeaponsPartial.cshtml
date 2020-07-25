@@ -1,17 +1,7 @@
 ﻿@model TheTallTankardTavern.Models.CharacterModel
-@using TheTallTankardTavern.Helpers
-@using static TheTallTankardTavern.Configuration.ApplicationSettings
-@using TTT.Items
 @addTagHelper *, TheTallTankardTavern
 
-@{
-    IEnumerable<string> Equipment = Model.Equipment.OrderBy(i => ItemDataContext.GetModelFromID(i.Substring(0, i.IndexOf("&"))).Name);
-    IEnumerable<string> Weapons = Equipment.Where(i => ItemDataContext.GetModelFromID(i.Substring(0, i.IndexOf("&"))).Type.IsWeapon);
-    IEnumerable<string> Armour = Equipment.Where(i => ItemDataContext.GetModelFromID(i.Substring(0, i.IndexOf("&"))).Type.IsArmour
-        || ItemDataContext.GetModelFromID(i.Substring(0, i.IndexOf("&"))).Type.IsShield);
-}
-
-ARMOUR
+<strong>Armour &amp; Shield</strong>
 <table table-hover="true">
     <thead>
         <tr>
@@ -28,26 +18,40 @@ ARMOUR
         </tr>
     </thead>
     <tbody>
-        @foreach (string instanceID in Armour)
+        @if (Model.Equipment.Armour != null)
         {
-            ItemModel Item = ItemDataContext.GetModelFromID(instanceID.Substring(0, instanceID.IndexOf("&")));
-            <tr data-toggle="modal" data-target="#popup-modal" data-title="@Item.Name" data-desc="@Item.PopUpText" data-traits="">
-                <td>@Item.Name</td>
-                <td>@Item.Type</td>
-                <td>@Item.Weight lbs</td>
-                <td>@Item.Cost cp</td>
-                <td>@Item.IsMagic</td>
-                <td>@Item.Armour.ArmourClass</td>
-                <td>@Item.Armour.StrengthRequired</td>
-                <td>@Item.Armour.DisadvantageOnStealth</td>
-                <td><button class="td-action-btn" value="Unequip" onclick="unequipItem('@Model.ID', '@instanceID')"></button></td>
+            <tr data-toggle="modal" data-target="#popup-modal" data-title="@Model.Equipment.Armour.Name" data-desc="@Model.Equipment.Armour.PopUpText" data-traits="">
+                <td>@Model.Equipment.Armour.Name</td>
+                <td>@Model.Equipment.Armour.Type</td>
+                <td>@Model.Equipment.Armour.Weight lbs</td>
+                <td>@Model.Equipment.Armour.Cost cp</td>
+                <td>@Model.Equipment.Armour.IsMagic</td>
+                <td>@Model.Equipment.Armour.Armour.ArmourClass</td>
+                <td>@Model.Equipment.Armour.Armour.StrengthRequired</td>
+                <td>@Model.Equipment.Armour.Armour.DisadvantageOnStealth</td>
+                <td><button class="td-action-btn" value="Unequip" onclick="unequipArmour('@Model.ID', '@Model.Equipment.Armour.InventoryID')"></button></td>
+                @*<td><button class="td-action-btn" value="Remove" onclick="removeItemFromEquipment('@Model.ID', '@instanceID')"></button></td>*@
+            </tr>
+
+        }@if (Model.Equipment.Shield != null)
+        {
+            <tr data-toggle="modal" data-target="#popup-modal" data-title="@Model.Equipment.Shield.Name" data-desc="@Model.Equipment.Shield.PopUpText" data-traits="">
+                <td>@Model.Equipment.Shield.Name</td>
+                <td>@Model.Equipment.Shield.Type</td>
+                <td>@Model.Equipment.Shield.Weight lbs</td>
+                <td>@Model.Equipment.Shield.Cost cp</td>
+                <td>@Model.Equipment.Shield.IsMagic</td>
+                <td>@Model.Equipment.Shield.Armour.ArmourClass</td>
+                <td>@Model.Equipment.Shield.Armour.StrengthRequired</td>
+                <td>@Model.Equipment.Shield.Armour.DisadvantageOnStealth</td>
+                <td><button class="td-action-btn" value="Unequip" onclick="unequipShield('@Model.ID', '@Model.Equipment.Shield.InventoryID')"></button></td>
                 @*<td><button class="td-action-btn" value="Remove" onclick="removeItemFromEquipment('@Model.ID', '@instanceID')"></button></td>*@
             </tr>
         }
     </tbody>
 </table>
 
-WEAPONS
+<strong>Weapons</strong>
 <table table-hover="true">
     <thead>
         <tr>
@@ -64,19 +68,48 @@ WEAPONS
         </tr>
     </thead>
     <tbody>
-        @foreach (string instanceID in Weapons)
+        @if (Model.Equipment.TwoHandWeapon != null)
         {
-            ItemModel Item = ItemDataContext.GetModelFromID(instanceID.Substring(0, instanceID.IndexOf("&")));
-            <tr data-toggle="modal" data-target="#popup-modal" data-title="@Item.Name" data-desc="@Item.PopUpText" data-traits="">
-                <td>@Item.Name</td>
-                <td>@Item.Type</td>
-                <td>@Item.Weight lbs</td>
-                <td>@Item.Cost cp</td>
-                <td>@Item.IsMagic</td>
-                <td>@Item.Weapon.Plus</td>
-                <td>@Item.Weapon.Damage.ToString()</td>
-                <td>@Item.Weapon.Properties.ToString()</td>
-                <td><button class="td-action-btn" value="Unequip" onclick="unequipItem('@Model.ID', '@instanceID')"></button></td>
+            <tr data-toggle="modal" data-target="#popup-modal" data-title="@Model.Equipment.TwoHandWeapon.Name" data-desc="@Model.Equipment.TwoHandWeapon.PopUpText" data-traits="">
+                <td>@Model.Equipment.TwoHandWeapon.Name</td>
+                <td>@Model.Equipment.TwoHandWeapon.Type</td>
+                <td>@Model.Equipment.TwoHandWeapon.Weight lbs</td>
+                <td>@Model.Equipment.TwoHandWeapon.Cost cp</td>
+                <td>@Model.Equipment.TwoHandWeapon.IsMagic</td>
+                <td>@Model.Equipment.TwoHandWeapon.Weapon.Plus</td>
+                <td>@Model.Equipment.TwoHandWeapon.Weapon.Damage.ToString()</td>
+                <td>@Model.Equipment.TwoHandWeapon.Weapon.Properties.ToString()</td>
+                <td><button class="td-action-btn" value="Unequip" onclick="unequipTwoHandWeapon('@Model.ID', '@Model.Equipment.TwoHandWeapon.InventoryID')"></button></td>
+                @*<td><button class="td-action-btn" value="Remove" onclick="removeItemFromEquipment('@Model.ID', '@instanceID')"></button></td>*@
+            </tr>
+        }
+        @if (Model.Equipment.WeaponOne != null)
+        {
+            <tr data-toggle="modal" data-target="#popup-modal" data-title="@Model.Equipment.WeaponOne.Name" data-desc="@Model.Equipment.WeaponOne.PopUpText" data-traits="">
+                <td>@Model.Equipment.WeaponOne.Name</td>
+                <td>@Model.Equipment.WeaponOne.Type</td>
+                <td>@Model.Equipment.WeaponOne.Weight lbs</td>
+                <td>@Model.Equipment.WeaponOne.Cost cp</td>
+                <td>@Model.Equipment.WeaponOne.IsMagic</td>
+                <td>@Model.Equipment.WeaponOne.Weapon.Plus</td>
+                <td>@Model.Equipment.WeaponOne.Weapon.Damage.ToString()</td>
+                <td>@Model.Equipment.WeaponOne.Weapon.Properties.ToString()</td>
+                <td><button class="td-action-btn" value="Unequip" onclick="unequipWeaponOne('@Model.ID', '@Model.Equipment.WeaponOne.InventoryID')"></button></td>
+                @*<td><button class="td-action-btn" value="Remove" onclick="removeItemFromEquipment('@Model.ID', '@instanceID')"></button></td>*@
+            </tr>
+        }
+        @if (Model.Equipment.WeaponTwo != null)
+        {
+            <tr data-toggle="modal" data-target="#popup-modal" data-title="@Model.Equipment.WeaponTwo.Name" data-desc="@Model.Equipment.WeaponTwo.PopUpText" data-traits="">
+                <td>@Model.Equipment.WeaponTwo.Name</td>
+                <td>@Model.Equipment.WeaponTwo.Type</td>
+                <td>@Model.Equipment.WeaponTwo.Weight lbs</td>
+                <td>@Model.Equipment.WeaponTwo.Cost cp</td>
+                <td>@Model.Equipment.WeaponTwo.IsMagic</td>
+                <td>@Model.Equipment.WeaponTwo.Weapon.Plus</td>
+                <td>@Model.Equipment.WeaponTwo.Weapon.Damage.ToString()</td>
+                <td>@Model.Equipment.WeaponTwo.Weapon.Properties.ToString()</td>
+                <td><button class="td-action-btn" value="Unequip" onclick="unequipWeaponTwo('@Model.ID', '@Model.Equipment.WeaponTwo.InventoryID')"></button></td>
                 @*<td><button class="td-action-btn" value="Remove" onclick="removeItemFromEquipment('@Model.ID', '@instanceID')"></button></td>*@
             </tr>
         }

@@ -25,5 +25,12 @@ namespace TTT.Items.Weapons.Properties
                 return $"{this.Name} ({TwoHandedDamage.ToString().Replace("_", "")})";
             }
         }
+
+        public new Versitile Clone()
+        {
+            Versitile Clone = base.Clone().GenericTypeCast<BaseWeaponProperty, Versitile>();
+            Clone.TwoHandedDamage = this.TwoHandedDamage;
+            return Clone;
+        }
     }
 }

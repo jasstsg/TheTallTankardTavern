@@ -12,5 +12,15 @@ namespace TTT.Items.Armour
 
         [DisplayName("Disadvantage On Stealth")]
         public bool DisadvantageOnStealth { get; set; } = false;
+
+        public ArmourModel Clone()
+        {
+            return new ArmourModel()
+            {
+                ArmourClass = this.ArmourClass,
+                StrengthRequired = this.StrengthRequired,
+                DisadvantageOnStealth = this.DisadvantageOnStealth
+            };
+        }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace TTT.Items.Weapons.Properties
 {
-    public abstract class BaseWeaponProperty
+    public class BaseWeaponProperty
     {
         [JsonIgnore]
         public virtual string Name { get { return this.GetType().Name.Replace("_", "-"); } }
@@ -12,5 +12,13 @@ namespace TTT.Items.Weapons.Properties
         public virtual string QuickInfo { get { return this.Name; } }
 
         public virtual bool Enabled { get; set; } = false;
+
+        protected BaseWeaponProperty Clone()
+        {
+            return new BaseWeaponProperty()
+            {
+                Enabled = this.Enabled
+            };
+        }
     }
 }

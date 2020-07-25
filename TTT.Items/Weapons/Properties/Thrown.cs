@@ -25,5 +25,13 @@ namespace TTT.Items.Weapons.Properties
                 return $"{this.Name} ({NormalRange}/{LongRange})";
             }
         }
+
+        public new Thrown Clone()
+        {
+            Thrown Clone = base.Clone().GenericTypeCast<BaseWeaponProperty, Thrown>();
+            Clone.NormalRange = this.NormalRange;
+            Clone.LongRange = this.LongRange;
+            return Clone;
+        }
     }
 }

@@ -39,5 +39,25 @@ namespace TTT.Items.Weapons.Properties
             }
             return sb.ToString();
         }
+
+        public WeaponProperties Clone()
+        {
+            return new WeaponProperties()
+            {
+                Ammunition = this.Ammunition.Clone(),
+                Finesse = this.Finesse.Clone(),
+                Heavy = this.Heavy.Clone(),
+                Improvised = this.Improvised.Clone(),
+                Light = this.Light.Clone(),
+                Loading = this.Loading.Clone(),
+                Range = this.Range.Clone(),
+                Reach = this.Reach.Clone(),
+                Silvered = this.Silvered.Clone(),
+                Special = this.Special.Clone(),
+                Thrown = this.Thrown.Clone(),
+                TwoHanded = this.TwoHanded.Clone(),
+                Versitile = this.Versitile.Clone()
+            };
+        }
     }
 }

@@ -1,13 +1,55 @@
-﻿function unequipItem(cid, inventoryID) {
+﻿function unequipArmour(cid, inventoryID) {
     event.stopPropagation();
-    console.log("UnequipItem button pressed");
+    console.log("UnequipArmour button pressed");
     $.ajax({
-        url: '/Character/UnequipItem',
+        url: '/Character/UnequipArmour',
         data: { cid: cid, inventoryID: inventoryID },
         dataType: 'html',
-        success: function (response) {
-            $('#character-items').html(response);
-        }
+        success: refreshCharacterItems(response)
+    })
+}
+
+function unequipShield(cid, inventoryID) {
+    event.stopPropagation();
+    console.log("UnequipShield button pressed");
+    $.ajax({
+        url: '/Character/UnequipShield',
+        data: { cid: cid, inventoryID: inventoryID },
+        dataType: 'html',
+        success: refreshCharacterItems(response)
+    })
+}
+
+function unequipTwoHandWeapon(cid, inventoryID) {
+    event.stopPropagation();
+    console.log("UnequipTwoHandWeapon button pressed");
+    $.ajax({
+        url: '/Character/UnequipTwoHandWeapon',
+        data: { cid: cid, inventoryID: inventoryID },
+        dataType: 'html',
+        success: refreshCharacterItems(response)
+    })
+}
+
+function unequipWeaponOne(cid, inventoryID) {
+    event.stopPropagation();
+    console.log("UnequipWeaponOne button pressed");
+    $.ajax({
+        url: '/Character/UnequipWeaponOne',
+        data: { cid: cid, inventoryID: inventoryID },
+        dataType: 'html',
+        success: refreshCharacterItems(response)
+    })
+}
+
+function unequipWeaponTwo(cid, inventoryID) {
+    event.stopPropagation();
+    console.log("UnequipWeaponTwo button pressed");
+    $.ajax({
+        url: '/Character/UnequipWeaponTwo',
+        data: { cid: cid, inventoryID: inventoryID },
+        dataType: 'html',
+        success: refreshCharacterItems(response)
     })
 }
 
@@ -19,9 +61,7 @@ function equipItem(cid, inventoryID) {
         url: '/Character/EquipItem',
         data: { cid: cid, inventoryID: inventoryID },
         dataType: 'html',
-        success: function (response) {
-            $('#character-items').html(response);
-        }
+        success: refreshCharacterItems(response)
     })
 }
 
@@ -32,9 +72,7 @@ function removeItemFromEquipment(cid, inventoryID) {
         url: '/Character/RemoveItemFromEquipment',
         data: { cid: cid, inventoryID: inventoryID },
         dataType: 'html',
-        success: function (response) {
-            $('#character-items').html(response);
-        }
+        success: refreshCharacterItems(response)
     })
 }
 
@@ -45,10 +83,12 @@ function removeItemFromInventory(cid, inventoryID) {
         url: '/Character/RemoveItemFromInventory',
         data: { cid: cid, inventoryID: inventoryID },
         dataType: 'html',
-        success: function (response) {
-            $('#character-items').html(response);
-        }
+        success: refreshCharacterItems(response)
     })
+}
+
+function refreshCharacterItems(response) {
+    $('#character-items').html(response);
 }
 
 /* 

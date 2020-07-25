@@ -10,7 +10,9 @@ namespace TTT.Json
 		{
 			NullValueHandling = NullValueHandling.Include,
 			MissingMemberHandling = MissingMemberHandling.Ignore,
-			Formatting = Formatting.Indented
+			Formatting = Formatting.Indented,
+			ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+			
 		};
 
 		public static T JsonStringToObject<T>(string json_string)

@@ -185,33 +185,61 @@ namespace TheTallTankardTavern.Controllers
         #endregion
 
         #region Manage Items
-        public IActionResult UnequipItem(string cid, string inventoryID)
+        public IActionResult UnequipArmour(string cid, string inventoryID)
         {
             CharacterModel Character = DataContext.GetModelFromID(cid);
-            Character.Equipment.Unequip(inventoryID);
+            Character.Equipment.UnequipArmour(inventoryID);
+            return SaveAndReturnToItemsPartialView(Character);
+        }
+
+        public IActionResult UnequipShield(string cid, string inventoryID)
+        {
+            CharacterModel Character = DataContext.GetModelFromID(cid);
+            Character.Equipment.UnequipShield(inventoryID);
+            return SaveAndReturnToItemsPartialView(Character);
+        }
+
+        public IActionResult UnequipTwoHandWeapon(string cid, string inventoryID)
+        {
+            CharacterModel Character = DataContext.GetModelFromID(cid);
+            Character.Equipment.UnequipTwoHandWeapon(inventoryID);
+            return SaveAndReturnToItemsPartialView(Character);
+        }
+
+        public IActionResult UnequipWeaponOne(string cid, string inventoryID)
+        {
+            CharacterModel Character = DataContext.GetModelFromID(cid);
+            Character.Equipment.UnequipWeaponOne(inventoryID);
+            return SaveAndReturnToItemsPartialView(Character);
+        }
+
+        public IActionResult UnequipWeaponTwo(string cid, string inventoryID)
+        {
+            CharacterModel Character = DataContext.GetModelFromID(cid);
+            Character.Equipment.UnequipWeaponTwo(inventoryID);
             return SaveAndReturnToItemsPartialView(Character);
         }
 
         public IActionResult EquipItem(string cid, string inventoryID)
         {
             CharacterModel Character = DataContext.GetModelFromID(cid);
-            Character.Equipment.TryEquip(inventoryID);
+            Character.Equipment.TryEquip(inventoryID, Character.Inventory);
             return SaveAndReturnToItemsPartialView(Character);
         }
 
-        public IActionResult RemoveItemFromEquipment(string cid, string inventoryID)
-        {
-            CharacterModel Character = DataContext.GetModelFromID(cid);
-            Character.Equipment.Unequip(inventoryID);
-            return SaveAndReturnToItemsPartialView(Character);
-        }
+        //public IActionResult RemoveItemFromEquipment(string cid, string inventoryID)
+        //{
+        //    CharacterModel Character = DataContext.GetModelFromID(cid);
+        //    Character.Equipment.Unequip(inventoryID);
+        //    return SaveAndReturnToItemsPartialView(Character);
+        //}
 
-        public IActionResult RemoveItemFromInventory(string cid, string inventoryID)
-        {
-            CharacterModel Character = DataContext.GetModelFromID(cid);
-            Character.Inventory.Remove(inventoryID);
-            return SaveAndReturnToItemsPartialView(Character);
-        }
+        //public IActionResult RemoveItemFromInventory(string cid, string inventoryID)
+        //{
+        //    CharacterModel Character = DataContext.GetModelFromID(cid);
+        //    Character.Inventory.Remove(inventoryID);
+        //    return SaveAndReturnToItemsPartialView(Character);
+        //}
 
         private IActionResult SaveAndReturnToItemsPartialView(CharacterModel Character)
         {
