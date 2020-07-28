@@ -199,31 +199,31 @@ namespace TheTallTankardTavern.Controllers
             return SaveAndReturnToItemsPartialView(Character);
         }
 
-        public IActionResult UnequipTwoHandWeapon(string cid, string inventoryID)
+        public IActionResult UnequipTwoHand(string cid, string inventoryID)
         {
             CharacterModel Character = DataContext.GetModelFromID(cid);
-            Character.Equipment.UnequipTwoHandWeapon(inventoryID);
+            Character.Equipment.UnequipTwoHand(inventoryID);
             return SaveAndReturnToItemsPartialView(Character);
         }
 
-        public IActionResult UnequipWeaponOne(string cid, string inventoryID)
+        public IActionResult UnequipMainHand(string cid, string inventoryID)
         {
             CharacterModel Character = DataContext.GetModelFromID(cid);
-            Character.Equipment.UnequipWeaponOne(inventoryID);
+            Character.Equipment.UnequipMainHand(inventoryID);
             return SaveAndReturnToItemsPartialView(Character);
         }
 
-        public IActionResult UnequipWeaponTwo(string cid, string inventoryID)
+        public IActionResult UnequipOffHand(string cid, string inventoryID)
         {
             CharacterModel Character = DataContext.GetModelFromID(cid);
-            Character.Equipment.UnequipWeaponTwo(inventoryID);
+            Character.Equipment.UnequipOffHand(inventoryID);
             return SaveAndReturnToItemsPartialView(Character);
         }
 
         public IActionResult EquipItem(string cid, string inventoryID)
         {
             CharacterModel Character = DataContext.GetModelFromID(cid);
-            Character.Equipment.TryEquip(inventoryID, Character.Inventory);
+            Character.Equipment.TryEquip(inventoryID, Character.Inventory, Character.HasFeature(SpecialFeatures.DUAL_WIELDER));
             return SaveAndReturnToItemsPartialView(Character);
         }
 

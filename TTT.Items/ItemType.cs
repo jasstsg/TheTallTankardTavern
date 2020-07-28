@@ -15,16 +15,6 @@ namespace TTT.Items
         [JsonIgnore]
         public ItemTypeCategory Category { get; private set; }
 
-        [JsonIgnore]
-        public bool IsArmour { get { return this.Category.Equals(ItemTypeCategory.Armour); } }
-        [JsonIgnore]
-        public bool IsShield { get { return this.Category.Equals(ItemTypeCategory.Shield); } }
-        [JsonIgnore]
-        public bool IsWeapon { get { return this.Category.Equals(ItemTypeCategory.Weapon); } }
-        [JsonIgnore]
-        public bool IsOther { get { return this.Category.Equals(ItemTypeCategory.Other); } }
-
-
         public static readonly ItemType Miscellaneous = new ItemType("Miscellaneous", ItemTypeCategory.Other);
         public static readonly ItemType AdventuringGear = new ItemType("Adventuring Gear", ItemTypeCategory.Other);
         public static readonly ItemType Ammunition = new ItemType("Ammunition", ItemTypeCategory.Other);
@@ -40,9 +30,10 @@ namespace TTT.Items
         public static readonly ItemType VehicleWater = new ItemType("Vehicle (Water)", ItemTypeCategory.Other);
 
         //SpellCasting Focuses
-        public static readonly ItemType ArcaneFocus = new ItemType("Arcane Focus", ItemTypeCategory.Other);
-        public static readonly ItemType DruidicFocus = new ItemType("Druidic Focus", ItemTypeCategory.Other);
-        public static readonly ItemType HolySymbol = new ItemType("Holy Symbol", ItemTypeCategory.Other);
+        public static readonly ItemType ArcaneFocus = new ItemType("Arcane Focus", ItemTypeCategory.SpellCastingFocus);
+        public static readonly ItemType ComponentPouch = new ItemType("Component Pouch", ItemTypeCategory.SpellCastingFocus);
+        public static readonly ItemType DruidicFocus = new ItemType("Druidic Focus", ItemTypeCategory.SpellCastingFocus);
+        public static readonly ItemType HolySymbol = new ItemType("Holy Symbol", ItemTypeCategory.SpellCastingFocus);
 
         //Armour
         public static readonly ItemType LightArmour = new ItemType("Light Armour", ItemTypeCategory.Armour);

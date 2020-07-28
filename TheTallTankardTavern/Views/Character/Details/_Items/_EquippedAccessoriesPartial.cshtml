@@ -18,7 +18,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (string iid in Model.Equipment.Where(i => !ItemDataContext.GetModelFromID(i).Type.IsArmour)
+        @foreach (string iid in Model.Equipment.Where(i => !ItemDataContext.GetModelFromID(i).Is(ItemTypeCategory.Armour))
            .OrderBy(i => ItemDataContext.GetModelFromID(i).Name))
         {
             ItemModel Item = ItemDataContext.GetModelFromID(iid);

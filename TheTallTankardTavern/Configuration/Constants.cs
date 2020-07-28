@@ -146,10 +146,7 @@ namespace TheTallTankardTavern.Configuration
         {
             private static IEnumerable<FeatureModel> UNARMOURED_DEFENSE_FEATURES
             {
-                get
-                {
-                    return FeatureDataContext.Where(f => f.Name.Contains("Unarmored Defense"));
-                }
+                get  { return FeatureDataContext.Where(f => f.Name.Contains("Unarmored Defense")); }
             }
             public static FeatureModel UNARMOURED_DEFENSE_BARBARIAN
             {
@@ -165,6 +162,10 @@ namespace TheTallTankardTavern.Configuration
                     return UNARMOURED_DEFENSE_FEATURES.First(f => f.Class.Contains("Monk"));
                 }
 
+            }
+            public static FeatureModel DUAL_WIELDER
+            {
+                get { return FeatureDataContext.SingleOrDefault(f => f.Name.Contains("Dual Wielder")); }
             }
         }
         public static class ITEM_TYPES

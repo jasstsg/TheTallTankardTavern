@@ -11,7 +11,7 @@
 <div class="character-items-inventory">
     <div class="row">
         <div class="col-md-12" id="character-items-inventory-all">
-            INVENTORY
+            <strong>INVENTORY</strong>
             <table table-hover="true">
                 <thead>
                     <tr>
@@ -40,13 +40,13 @@
                         <td>@Item.Weight lbs</td>
                         <td>@Item.Cost cp</td>
                         <td>@Item.IsMagic</td>
-                        <td class="@ViewHelper.Disable(!Item.Type.IsArmour)">@Item.Armour.ArmourClass</td>
-                        <td class="@ViewHelper.Disable(!Item.Type.IsArmour)">@Item.Armour.StrengthRequired</td>
-                        <td class="@ViewHelper.Disable(!Item.Type.IsArmour)">@Item.Armour.DisadvantageOnStealth</td>
-                        <td class="@ViewHelper.Disable(!Item.Type.IsWeapon)">@Item.Weapon.Plus</td>
-                        <td class="@ViewHelper.Disable(!Item.Type.IsWeapon)">@Item.Weapon.Damage.ToString()</td>
-                        <td class="@ViewHelper.Disable(!Item.Type.IsWeapon)">@Item.Weapon.Properties.ToString()</td>
-                        @if (Item.Type.IsArmour || Item.Type.IsWeapon || Item.Type.IsShield)
+                        <td class="@ViewHelper.Disable(!Item.Is(ItemTypeCategory.Armour))">@Item.Armour.ArmourClass</td>
+                        <td class="@ViewHelper.Disable(!Item.Is(ItemTypeCategory.Armour))">@Item.Armour.StrengthRequired</td>
+                        <td class="@ViewHelper.Disable(!Item.Is(ItemTypeCategory.Armour))">@Item.Armour.DisadvantageOnStealth</td>
+                        <td class="@ViewHelper.Disable(!Item.Is(ItemTypeCategory.Weapon))">@Item.Weapon.Plus</td>
+                        <td class="@ViewHelper.Disable(!Item.Is(ItemTypeCategory.Weapon))">@Item.Weapon.Damage.ToString()</td>
+                        <td class="@ViewHelper.Disable(!Item.Is(ItemTypeCategory.Weapon))">@Item.Weapon.Properties.ToString()</td>
+                        @if (!Item.Is(ItemTypeCategory.Other))
                         {
                             @if (Model.Equipment.Contains(inventoryID))
                             {

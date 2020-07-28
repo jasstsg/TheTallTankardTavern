@@ -25,11 +25,11 @@ namespace TheTallTankardTavern.Helpers
 		public static int GetBaseAC(this CharacterModel Character)
 		{
 			int AC = Character.Armour_Class + Character.Dexterity.Modifier + (Character.Race.Equals("Warforged") ? 1 : 0);
-			if (Character.Features.Contains(UNARMOURED_DEFENSE_BARBARIAN.ID))
+			if (Character.HasFeature(UNARMOURED_DEFENSE_BARBARIAN))
 			{
 				AC += Character.Constitution.Modifier;
 			}
-			else if (Character.Features.Contains(UNARMOURED_DEFENSE_MONK.ID))
+			else if (Character.HasFeature(UNARMOURED_DEFENSE_MONK))
 			{
 				AC += Character.Wisdom.Modifier;
 			}
@@ -38,7 +38,8 @@ namespace TheTallTankardTavern.Helpers
 
 		public static int GetTotalAC(this CharacterModel Character)
 		{
-			string ArmourItemID = Character.Equipment.FirstOrDefault(itemID => ItemDataContext.GetModelFromID(itemID).Type.IsArmour);
+			string ArmourItemID = Character.Equipment.FirstOrDefault(itemID => 
+				ItemDataContext.GetModelFromID(itemID).Is(ItemTypeCategory.Armour));
 			if (!string.IsNullOrEmpty(ArmourItemID))
 			{
 				ItemModel Armour = ItemDataContext.GetModelFromID(ArmourItemID);
@@ -110,6 +111,11 @@ namespace TheTallTankardTavern.Helpers
 			Character.Sorcery_Points = Character.Level;                 //Reset Sorcery Points
 			Character.Wild_Shapes = 2;					                //Reset wild shapes
 		}
+
+		public static bool HasFeature(this CharacterModel Character, FeatureModel Feature)
+        {
+			return Character.Features.Contains(Feature.ID);
+        }
 
 		public static void UseHitDie(this CharacterModel Character)
 		{

@@ -1,7 +1,38 @@
 ﻿@model TheTallTankardTavern.Models.CharacterModel
 @addTagHelper *, TheTallTankardTavern
 
-<strong>Armour &amp; Shield</strong>
+@if (Model.Equipment.SpellCastingFocus != null)
+{
+    <strong>FOCUS</strong>
+    <table table-hover="true">
+        <thead>
+            <tr>
+                <th><label>Name</label></th>
+                <th><label>Type</label></th>
+                <th><label>Weight</label></th>
+                <th><label>Cost</label></th>
+                <th></th>
+                @*<th></th>*@
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Equipment.SpellCastingFocus != null)
+            {
+                <tr data-toggle="modal" data-target="#popup-modal" data-title="@Model.Equipment.SpellCastingFocus.Name" data-desc="@Model.Equipment.SpellCastingFocus.PopUpText" data-traits="">
+                    <td>@Model.Equipment.SpellCastingFocus.Name</td>
+                    <td>@Model.Equipment.SpellCastingFocus.Type</td>
+                    <td>@Model.Equipment.SpellCastingFocus.Weight lbs</td>
+                    <td>@Model.Equipment.SpellCastingFocus.Cost cp</td>
+                    <td><button class="td-action-btn" value="Unequip" onclick="unequipArmour('@Model.ID', '@Model.Equipment.SpellCastingFocus.InventoryID')"></button></td>
+                    @*<td><button class="td-action-btn" value="Remove" onclick="removeItemFromEquipment('@Model.ID', '@instanceID')"></button></td>*@
+                </tr>
+
+            }
+        </tbody>
+    </table>
+}
+
+<strong>ARMOUR &amp; SHIELD</strong>
 <table table-hover="true">
     <thead>
         <tr>
@@ -51,10 +82,11 @@
     </tbody>
 </table>
 
-<strong>Weapons</strong>
+<strong>WEAPONS</strong>
 <table table-hover="true">
     <thead>
         <tr>
+            <th></th>
             <th><label>Name</label></th>
             <th><label>Type</label></th>
             <th><label>Weight</label></th>
@@ -68,48 +100,51 @@
         </tr>
     </thead>
     <tbody>
-        @if (Model.Equipment.TwoHandWeapon != null)
+        @if (Model.Equipment.TwoHand != null)
         {
-            <tr data-toggle="modal" data-target="#popup-modal" data-title="@Model.Equipment.TwoHandWeapon.Name" data-desc="@Model.Equipment.TwoHandWeapon.PopUpText" data-traits="">
-                <td>@Model.Equipment.TwoHandWeapon.Name</td>
-                <td>@Model.Equipment.TwoHandWeapon.Type</td>
-                <td>@Model.Equipment.TwoHandWeapon.Weight lbs</td>
-                <td>@Model.Equipment.TwoHandWeapon.Cost cp</td>
-                <td>@Model.Equipment.TwoHandWeapon.IsMagic</td>
-                <td>@Model.Equipment.TwoHandWeapon.Weapon.Plus</td>
-                <td>@Model.Equipment.TwoHandWeapon.Weapon.Damage.ToString()</td>
-                <td>@Model.Equipment.TwoHandWeapon.Weapon.Properties.ToString()</td>
-                <td><button class="td-action-btn" value="Unequip" onclick="unequipTwoHandWeapon('@Model.ID', '@Model.Equipment.TwoHandWeapon.InventoryID')"></button></td>
+            <tr data-toggle="modal" data-target="#popup-modal" data-title="@Model.Equipment.TwoHand.Name" data-desc="@Model.Equipment.TwoHand.PopUpText" data-traits="">
+                <td><strong>Two Hand</strong></td>
+                <td>@Model.Equipment.TwoHand.Name</td>
+                <td>@Model.Equipment.TwoHand.Type</td>
+                <td>@Model.Equipment.TwoHand.Weight lbs</td>
+                <td>@Model.Equipment.TwoHand.Cost cp</td>
+                <td>@Model.Equipment.TwoHand.IsMagic</td>
+                <td>@Model.Equipment.TwoHand.Weapon.Plus</td>
+                <td>@Model.Equipment.TwoHand.Weapon.Damage.ToString()</td>
+                <td>@Model.Equipment.TwoHand.Weapon.Properties.ToString()</td>
+                <td><button class="td-action-btn" value="Unequip" onclick="unequipTwoHand('@Model.ID', '@Model.Equipment.TwoHand.InventoryID')"></button></td>
                 @*<td><button class="td-action-btn" value="Remove" onclick="removeItemFromEquipment('@Model.ID', '@instanceID')"></button></td>*@
             </tr>
         }
-        @if (Model.Equipment.WeaponOne != null)
+        @if (Model.Equipment.MainHand != null)
         {
-            <tr data-toggle="modal" data-target="#popup-modal" data-title="@Model.Equipment.WeaponOne.Name" data-desc="@Model.Equipment.WeaponOne.PopUpText" data-traits="">
-                <td>@Model.Equipment.WeaponOne.Name</td>
-                <td>@Model.Equipment.WeaponOne.Type</td>
-                <td>@Model.Equipment.WeaponOne.Weight lbs</td>
-                <td>@Model.Equipment.WeaponOne.Cost cp</td>
-                <td>@Model.Equipment.WeaponOne.IsMagic</td>
-                <td>@Model.Equipment.WeaponOne.Weapon.Plus</td>
-                <td>@Model.Equipment.WeaponOne.Weapon.Damage.ToString()</td>
-                <td>@Model.Equipment.WeaponOne.Weapon.Properties.ToString()</td>
-                <td><button class="td-action-btn" value="Unequip" onclick="unequipWeaponOne('@Model.ID', '@Model.Equipment.WeaponOne.InventoryID')"></button></td>
+            <tr data-toggle="modal" data-target="#popup-modal" data-title="@Model.Equipment.MainHand.Name" data-desc="@Model.Equipment.MainHand.PopUpText" data-traits="">
+                <td><strong>Main Hand</strong></td>
+                <td>@Model.Equipment.MainHand.Name</td>
+                <td>@Model.Equipment.MainHand.Type</td>
+                <td>@Model.Equipment.MainHand.Weight lbs</td>
+                <td>@Model.Equipment.MainHand.Cost cp</td>
+                <td>@Model.Equipment.MainHand.IsMagic</td>
+                <td>@Model.Equipment.MainHand.Weapon.Plus</td>
+                <td>@Model.Equipment.MainHand.Weapon.Damage.ToString()</td>
+                <td>@Model.Equipment.MainHand.Weapon.Properties.ToString()</td>
+                <td><button class="td-action-btn" value="Unequip" onclick="unequipMainHand('@Model.ID', '@Model.Equipment.MainHand.InventoryID')"></button></td>
                 @*<td><button class="td-action-btn" value="Remove" onclick="removeItemFromEquipment('@Model.ID', '@instanceID')"></button></td>*@
             </tr>
         }
-        @if (Model.Equipment.WeaponTwo != null)
+        @if (Model.Equipment.OffHand != null)
         {
-            <tr data-toggle="modal" data-target="#popup-modal" data-title="@Model.Equipment.WeaponTwo.Name" data-desc="@Model.Equipment.WeaponTwo.PopUpText" data-traits="">
-                <td>@Model.Equipment.WeaponTwo.Name</td>
-                <td>@Model.Equipment.WeaponTwo.Type</td>
-                <td>@Model.Equipment.WeaponTwo.Weight lbs</td>
-                <td>@Model.Equipment.WeaponTwo.Cost cp</td>
-                <td>@Model.Equipment.WeaponTwo.IsMagic</td>
-                <td>@Model.Equipment.WeaponTwo.Weapon.Plus</td>
-                <td>@Model.Equipment.WeaponTwo.Weapon.Damage.ToString()</td>
-                <td>@Model.Equipment.WeaponTwo.Weapon.Properties.ToString()</td>
-                <td><button class="td-action-btn" value="Unequip" onclick="unequipWeaponTwo('@Model.ID', '@Model.Equipment.WeaponTwo.InventoryID')"></button></td>
+            <tr data-toggle="modal" data-target="#popup-modal" data-title="@Model.Equipment.OffHand.Name" data-desc="@Model.Equipment.OffHand.PopUpText" data-traits="">
+                <td><strong>Off Hand</strong></td>
+                <td>@Model.Equipment.OffHand.Name</td>
+                <td>@Model.Equipment.OffHand.Type</td>
+                <td>@Model.Equipment.OffHand.Weight lbs</td>
+                <td>@Model.Equipment.OffHand.Cost cp</td>
+                <td>@Model.Equipment.OffHand.IsMagic</td>
+                <td>@Model.Equipment.OffHand.Weapon.Plus</td>
+                <td>@Model.Equipment.OffHand.Weapon.Damage.ToString()</td>
+                <td>@Model.Equipment.OffHand.Weapon.Properties.ToString()</td>
+                <td><button class="td-action-btn" value="Unequip" onclick="unequipOffHand('@Model.ID', '@Model.Equipment.OffHand.InventoryID')"></button></td>
                 @*<td><button class="td-action-btn" value="Remove" onclick="removeItemFromEquipment('@Model.ID', '@instanceID')"></button></td>*@
             </tr>
         }

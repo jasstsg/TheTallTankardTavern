@@ -16,6 +16,7 @@ namespace TheTallTankardTavern.Controllers
 		{
 			ApplicationSettings.ReloadConfiguration();
 			ApplicationSettings.ReloadDataContext();
+			ViewData["ReloadMessage"] = $"Configuration and Data reloaded at {System.DateTime.Now}";
 			return View("Index");
 		}
 	}

@@ -2,9 +2,10 @@
 {
     public enum ItemTypeCategory
     {
-        Other,
-        Weapon,
         Armour,
-        Shield
+        Other,
+        Shield,
+        SpellCastingFocus,
+        Weapon
     }
 }

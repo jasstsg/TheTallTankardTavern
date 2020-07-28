@@ -67,6 +67,11 @@ namespace TTT.Items
 
         public ArmourModel Armour { get; set; } = new ArmourModel();
 
+        public bool Is(ItemTypeCategory itemTypeCategory)
+        {
+            return this.Type.Category.Equals(itemTypeCategory);
+        }
+
         [JsonIgnore]
         public string PopUpText
         {

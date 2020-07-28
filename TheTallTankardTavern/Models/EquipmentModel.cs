@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using TheTallTankardTavern.Helpers;
-using static TheTallTankardTavern.Configuration.Constants;
 using static TheTallTankardTavern.Configuration.ApplicationSettings;
 using Newtonsoft.Json;
 using System.Linq;
@@ -11,103 +8,68 @@ namespace TheTallTankardTavern.Models
     public class EquipmentModel : BaseListModel<string>
     {
         [JsonProperty]
+        private ItemModel _spellCastingFocus = null;
+        [JsonProperty]
         private ItemModel _armour = null;
         [JsonProperty]
         private ItemModel _shield = null;
         [JsonProperty]
-        private ItemModel _twoHandWeapon = null;
+        private ItemModel _twoHand = null;
         [JsonProperty]
-        private ItemModel _weaponOne = null;
+        private ItemModel _mainHand = null;
         [JsonProperty]
-        private ItemModel _weaponTwo = null;
+        private ItemModel _offHand = null;
 
+        private void EquipmentSetter(ref ItemModel _privateEquipmentVariable, ItemModel value)
+        {
+            if (_privateEquipmentVariable != null)
+            {
+                Remove(_privateEquipmentVariable.InventoryID);
+            }
+            if (value != null)
+            {
+                Add(value.InventoryID);
+            }
+            _privateEquipmentVariable = value;
+        }
+        [JsonIgnore]
+        public ItemModel SpellCastingFocus
+        {
+            get { return _spellCastingFocus; }
+            set { EquipmentSetter(ref _spellCastingFocus, value); }
+        }
         [JsonIgnore]
         public ItemModel Armour
         {
             get { return _armour; }
-            set
-            {
-                if (_armour != null)
-                {
-                    this.Remove(_armour.InventoryID);
-                }
-                if (value != null)
-                {
-                    this.Add(value.InventoryID);
-                }
-                _armour = value;
-            }
+            set { EquipmentSetter(ref _armour, value); }
         }
         [JsonIgnore]
         public ItemModel Shield
         {
             get { return _shield; }
-            set
-            {
-                if (_shield != null)
-                {
-                    this.Remove(_shield.InventoryID);
-                }
-                if (value != null)
-                {
-                    this.Add(value.InventoryID);
-                }
-                _shield = value;
-            }
+            set { EquipmentSetter(ref _shield, value); }
         }
         [JsonIgnore]
-        public ItemModel TwoHandWeapon
+        public ItemModel TwoHand
         {
-            get { return _twoHandWeapon; }
-            set
-            {
-                if (_twoHandWeapon != null)
-                {
-                    this.Remove(_twoHandWeapon.InventoryID);
-                }
-                if (value != null)
-                {
-                    this.Add(value.InventoryID);
-                }
-                _twoHandWeapon = value;
-            }
+            get { return _twoHand; }
+            set { EquipmentSetter(ref _twoHand, value); }
         }
         [JsonIgnore]
-        public ItemModel WeaponOne
+        public ItemModel MainHand
         {
-            get { return _weaponOne; }
-            set
-            {
-                if (_weaponOne != null)
-                {
-                    this.Remove(_weaponOne.InventoryID);
-                }
-                if (value != null)
-                {
-                    this.Add(value.InventoryID);
-                }
-                _weaponOne = value;
-            }
+            get { return _mainHand; }
+            set { EquipmentSetter(ref _mainHand, value); }
         }
         [JsonIgnore]
-        public ItemModel WeaponTwo
+        public ItemModel OffHand
         {
-            get { return _weaponTwo; }
-            set
-            {
-                if (_weaponTwo != null)
-                {
-                    this.Remove(_weaponTwo.InventoryID);
-                }
-                if (value != null)
-                {
-                    this.Add(value.InventoryID);
-                }
-                _weaponTwo = value;
-            }
+            get { return _offHand; }
+            set { EquipmentSetter(ref _offHand, value); }
         }
 
-        public bool TryEquip(string inventoryID, InventoryModel Inventory)
+        public bool TryEquip(string inventoryID, InventoryModel Inventory, bool isDualWielder)
         {
             if (!Inventory.Contains(inventoryID))
             {
@@ -119,47 +81,86 @@ namespace TheTallTankardTavern.Models
 
             switch (Item.Type.Category)
             {
-                case ItemTypeCategory.Weapon: return EquipWeapon(Item);
+                case ItemTypeCategory.SpellCastingFocus: return EquipSpellCastingFocus(Item);
                 case ItemTypeCategory.Armour: return EquipArmour(Item);
                 case ItemTypeCategory.Shield: return EquipShield(Item);
+                case ItemTypeCategory.Weapon: return EquipWeapon(Item, isDualWielder);
                 default: return false;
             }
         }
 
+        public bool EquipSpellCastingFocus(ItemModel newSpellCastingFocus)
+        {
+            if (MainHand != null)
+            {
+                Shield = null;
+            }
+            TwoHand = null;
+            OffHand = null;
+            SpellCastingFocus = newSpellCastingFocus;
+            return true;
+        }
+
         public bool EquipArmour(ItemModel newArmour)
         {
-            this.Armour = newArmour;
+            Armour = newArmour;
             return true;
         }
 
         public bool EquipShield(ItemModel newShield)
         {
-            this.Shield = newShield;
+            if (MainHand != null)
+            {
+                SpellCastingFocus = null;
+            }
+            TwoHand = null;
+            OffHand = null;
+            Shield = newShield;
             return true;
         }
 
-        public bool EquipWeapon(ItemModel newWeapon)
+        public bool EquipWeapon(ItemModel newWeapon, bool isDualWielder)
         {
             if (newWeapon.Weapon.Properties.TwoHanded.Enabled)
             {
-                WeaponOne = null;
-                WeaponTwo = null;
-                TwoHandWeapon = newWeapon;
+                MainHand = null;
+                OffHand = null;
+                SpellCastingFocus = null;
+                Shield = null;
+                TwoHand = newWeapon;
             }
             else
             {
-                TwoHandWeapon = null;
-                if (WeaponOne == null)
+                TwoHand = null;
+                if (MainHand == null)
                 {
-                    WeaponOne = newWeapon;
+                    MainHand = newWeapon;
                 }
-                else if (WeaponTwo == null)
+                else if (OffHand == null)
                 {
-                    WeaponTwo = newWeapon;
+                    if (isDualWielder || AreBothWeaponsLight(MainHand, newWeapon))
+                    {
+                        SpellCastingFocus = null;
+                        Shield = null;
+                        OffHand = newWeapon;
+                    }
+                    else
+                    {
+                        OffHand = null;
+                        MainHand = newWeapon;
+                    }
                 }
                 else
                 {
-                    return false;
+                    if (isDualWielder || AreBothWeaponsLight(OffHand, newWeapon))
+                    {
+                        MainHand = newWeapon;
+                    }
+                    else
+                    {
+                        OffHand = null;
+                        MainHand = newWeapon;
+                    }
                 }
             }
             return true;
@@ -170,7 +171,7 @@ namespace TheTallTankardTavern.Models
             if (inventoryID.Equals(Armour.InventoryID))
             {
                 Armour = null;
-                this.Remove(inventoryID);
+                Remove(inventoryID);
                 return true;
             }
             return false;
@@ -181,43 +182,56 @@ namespace TheTallTankardTavern.Models
             if (inventoryID.Equals(Shield.InventoryID))
             {
                 Shield = null;
-                this.Remove(inventoryID);
+                Remove(inventoryID);
                 return true;
             }
             return false;
         }
 
-        public bool UnequipTwoHandWeapon(string inventoryID)
+        public bool UnequipTwoHand(string inventoryID)
         {
-            if (inventoryID.Equals(TwoHandWeapon.InventoryID))
+            if (inventoryID.Equals(TwoHand.InventoryID))
             {
-                TwoHandWeapon = null;
-                this.Remove(inventoryID);
+                TwoHand = null;
+                Remove(inventoryID);
                 return true;
             }
             return false;
         }
 
-        public bool UnequipWeaponOne(string inventoryID)
+        public bool UnequipMainHand(string inventoryID)
         {
-            if (inventoryID.Equals(WeaponOne.InventoryID))
+            if (inventoryID.Equals(MainHand.InventoryID))
             {
-                WeaponOne = null;
-                this.Remove(inventoryID);
+                if (OffHand != null && OffHand.Is(ItemTypeCategory.Weapon))
+                {
+                    MainHand = OffHand;
+                    OffHand = null;
+                }
+                else
+                {
+                    MainHand = null;
+                }
+                Remove(inventoryID);
                 return true;
             }
             return false;
         }
 
-        public bool UnequipWeaponTwo(string inventoryID)
+        public bool UnequipOffHand(string inventoryID)
         {
-            if (inventoryID.Equals(WeaponTwo.InventoryID))
+            if (inventoryID.Equals(OffHand.InventoryID))
             {
-                WeaponTwo = null;
-                this.Remove(inventoryID);
+                OffHand = null;
+                Remove(inventoryID);
                 return true;
             }
             return false;
+        }
+
+        private bool AreBothWeaponsLight(ItemModel Weapon1, ItemModel Weapon2)
+        {
+            return Weapon1.Weapon.Properties.Light.Enabled && Weapon2.Weapon.Properties.Light.Enabled;
         }
     }
 }
