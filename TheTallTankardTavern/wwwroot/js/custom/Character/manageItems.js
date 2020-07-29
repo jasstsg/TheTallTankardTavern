@@ -9,6 +9,17 @@
     })
 }
 
+function unequipSpellCastingFocus(cid, inventoryID) {
+    event.stopPropagation();
+    console.log("UnequipSpellCastingFocus button pressed");
+    $.ajax({
+        url: '/Character/UnequipSpellCastingFocus',
+        data: { cid: cid, inventoryID: inventoryID },
+        dataType: 'html',
+        success: function (response) { refreshCharacterItems(response); }
+    })
+}
+
 function unequipShield(cid, inventoryID) {
     event.stopPropagation();
     console.log("UnequipShield button pressed");

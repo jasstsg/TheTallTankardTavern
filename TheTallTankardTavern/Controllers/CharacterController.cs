@@ -191,6 +191,12 @@ namespace TheTallTankardTavern.Controllers
             Character.Equipment.UnequipArmour(inventoryID);
             return SaveAndReturnToItemsPartialView(Character);
         }
+        public IActionResult UnequipSpellCastingFocus(string cid, string inventoryID)
+        {
+            CharacterModel Character = DataContext.GetModelFromID(cid);
+            Character.Equipment.UnequipSpellcastingFocus(inventoryID);
+            return SaveAndReturnToItemsPartialView(Character);
+        }
 
         public IActionResult UnequipShield(string cid, string inventoryID)
         {

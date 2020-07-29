@@ -177,6 +177,17 @@ namespace TheTallTankardTavern.Models
             return false;
         }
 
+        public bool UnequipSpellcastingFocus(string inventoryID)
+        {
+            if (inventoryID.Equals(SpellCastingFocus.InventoryID))
+            {
+                SpellCastingFocus = null;
+                Remove(inventoryID);
+                return true;
+            }
+            return false;
+        }
+
         public bool UnequipShield(string inventoryID)
         {
             if (inventoryID.Equals(Shield.InventoryID))
