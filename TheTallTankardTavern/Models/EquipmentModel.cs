@@ -20,6 +20,17 @@ namespace TheTallTankardTavern.Models
         [JsonProperty]
         private ItemModel _offHand = null;
 
+        public override void Clear()
+        {
+            if (Armour != null) { UnequipArmour(Armour.InventoryID); }
+            if (MainHand != null) { UnequipMainHand(MainHand.InventoryID); }
+            if (OffHand != null) { UnequipOffHand(OffHand.InventoryID); }
+            if (Shield != null) { UnequipShield(Shield.InventoryID); }
+            if (SpellCastingFocus != null) { UnequipSpellcastingFocus(SpellCastingFocus.InventoryID); }
+            if (TwoHand != null) { UnequipTwoHand(TwoHand.InventoryID); }
+            base.Clear();
+        }
+
         private void EquipmentSetter(ref ItemModel _privateEquipmentVariable, ItemModel value)
         {
             if (_privateEquipmentVariable != null)

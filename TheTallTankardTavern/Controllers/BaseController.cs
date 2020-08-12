@@ -40,15 +40,15 @@ namespace TheTallTankardTavern.Controllers
 
         protected virtual IActionResult SaveModel(T Model, string submit)
         {
-            T MergedModel = DataContext.GetModelFromID(Model.ID).Merge(Model);
-            DataContext.Save(MergedModel, Folder);
+            T SavedModel = DataContext.Save(Model, Folder);
+
             switch (submit)
             {
                 case TAGHELPER.SUBMIT_TEXT.SAVE_AND_CONTINUE:
-                    return View("Create", MergedModel);
+                    return View("Create", SavedModel);
                 case TAGHELPER.SUBMIT_TEXT.SAVE_AND_FINISH:
                 default:
-                    return ControllerHelper.ViewExists(this, "Details") ? View("Details", MergedModel) : Index();
+                    return ControllerHelper.ViewExists(this, "Details") ? View("Details", SavedModel) : Index();
             }
         }
 

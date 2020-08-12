@@ -1,4 +1,5 @@
 ﻿@addTagHelper *, TheTallTankardTavern
+@using static TheTallTankardTavern.Configuration.ApplicationSettings
 
 <style>
     #reload-operations a {
@@ -6,9 +7,24 @@
     }
 </style>
 
+<div><em>@ViewData["Message"]</em></div>
 <div id="reload-operations">
-    <div><a asp-action="ReloadConfigsAndData">Reload Configuration and Data files</a></div>
+    <a asp-action="ReloadConfigsAndData">Reload Configuration and Data files</a>
 </div>
-<div>
-    <em>@ViewData["ReloadMessage"]</em>
+<br />
+<div class="row" id="reset-character-items">
+    <div class="col-md-3">
+        <strong>Unequip Equipment</strong>
+        <form asp-action="UnequipAllItems" method="post">
+            <select name="cid" asp-items="CharacterDataContext.GetDataContextSelectList()"></select>
+            <submit text="Confirm"></submit>
+        </form>
+    </div>
+    <div class="col-md-3">
+        <strong>Remove all items</strong>
+        <form asp-action="RemoveAllItems" method="post">
+            <select name="cid" asp-items="CharacterDataContext.GetDataContextSelectList()"></select>
+            <submit text="Confirm"></submit>
+        </form>
+    </div>
 </div>

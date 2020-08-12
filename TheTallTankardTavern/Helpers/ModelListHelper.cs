@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using TheTallTankardTavern.Configuration;
+using TTT;
 using TTT.Common.Abstractions;
 using TTT.Enumerator;
 using static TheTallTankardTavern.Configuration.Constants;
@@ -38,22 +39,31 @@ namespace TheTallTankardTavern.Helpers
 			return ModelList.Remove(ModelList.GetModelFromID(ID));
 		}
 
-		public static void Save<T>(this List<T> ModelList, T Model, FOLDER folder) where T : BaseModel
+		/// <summary>
+		/// Tries to merge the NewModel with an existing model of the same ID, if not it adds it to the list.
+		/// </summary>
+		public static T Save<T>(this List<T> ModelList, T NewModel, FOLDER folder) where T : BaseModel
 		{
 			try
 			{
-				if (ModelList.Exists(Model.ID))
+				if (ModelList.Exists(NewModel.ID))
 				{
-					ModelList.Delete(Model.ID, folder);
+					T Model = ModelList.GetModelFromID(NewModel.ID);
+					Model.Merge(NewModel);
+					ApplicationSettings.JsonDataProvider.ModelToJsonFile(Model, $"{folder.ToString()}\\{Model.ID}.json");
+					return Model;
 				}
-				ModelList.Add(Model);
+                else
+                {
+					ModelList.Add(NewModel);
+					ApplicationSettings.JsonDataProvider.ModelToJsonFile(NewModel, $"{folder.ToString()}\\{NewModel.ID}.json");
+					return NewModel;
+				}
 			}
 			catch (Exception ex)
 			{
-				Model.ID = null;
-				throw new Exception("Error while adding Model to ModelList on Save Action.\nModelList = " + ModelList.ToString() + "\nModel = " + Model.ToString(), ex);
+				throw new Exception("Error while saving Model.\nModelList = " + ModelList.ToString() + "\nModel = " + NewModel.ToString(), ex);
 			}
-			ApplicationSettings.JsonDataProvider.ModelToJsonFile(Model, folder.ToString() + "\\" + Model.ID + ".json");
 		}
 
 		public static void Delete<T>(this List<T> ModelList, string ID, FOLDER folder) where T : BaseModel
