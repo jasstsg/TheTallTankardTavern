@@ -3,12 +3,21 @@
 
 <div>
     <div class="row">
-        <div class="col-md-8">
-            <partial name="/Views/Character/Details/_Items/_EquippedArmourAndShieldPartial.cshtml" model="Model" />
-        </div>
-        <div class="col-md-2">
-            <partial name="/Views/Character/Details/_Items/_EquippedFocusPartial.cshtml" model="Model" />
-        </div>
+        @if (Model.Equipment.SpellCastingFocus != null)
+        {
+            <div class="col-md-8">
+                <partial name="/Views/Character/Details/_Items/_EquippedArmourAndShieldPartial.cshtml" model="Model" />
+            </div>
+            <div class="col-md-2">
+                <partial name="/Views/Character/Details/_Items/_EquippedFocusPartial.cshtml" model="Model" />
+            </div>
+        }
+        else
+        {
+            <div class="col-md-10">
+                <partial name="/Views/Character/Details/_Items/_EquippedArmourAndShieldPartial.cshtml" model="Model" />
+            </div>
+        }
         <div class="col-md-2">
             <partial name="/Views/Character/Details/_Items/_CoinsPartial.cshtml" model="Model" />
         </div>

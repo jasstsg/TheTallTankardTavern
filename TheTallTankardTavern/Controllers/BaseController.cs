@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using TheTallTankardTavern.Helpers;
+using TTT;
 using TTT.Common.Abstractions;
 using static TheTallTankardTavern.Configuration.Constants;
 
@@ -39,14 +40,15 @@ namespace TheTallTankardTavern.Controllers
 
         protected virtual IActionResult SaveModel(T Model, string submit)
         {
-            DataContext.Save(Model, Folder);
+            T MergedModel = DataContext.GetModelFromID(Model.ID).Merge(Model);
+            DataContext.Save(MergedModel, Folder);
             switch (submit)
             {
                 case TAGHELPER.SUBMIT_TEXT.SAVE_AND_CONTINUE:
-                    return View("Create", Model);
+                    return View("Create", MergedModel);
                 case TAGHELPER.SUBMIT_TEXT.SAVE_AND_FINISH:
                 default:
-                    return ControllerHelper.ViewExists(this, "Details") ? View("Details", Model) : Index();
+                    return ControllerHelper.ViewExists(this, "Details") ? View("Details", MergedModel) : Index();
             }
         }
 

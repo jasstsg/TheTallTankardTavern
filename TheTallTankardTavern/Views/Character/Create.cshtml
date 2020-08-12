@@ -9,24 +9,6 @@
 
         <div id="character-hidden">
             <hidden asp-for="ID"></hidden>
-            <hidden asp-for="Player_Name"></hidden>
-            <hidden asp-for="Hit_Points_Remaining"></hidden>
-            <hidden asp-for="Hit_Dice_Remaining"></hidden>
-            <hidden asp-for="Temp_Hit_Points"></hidden>
-            <hidden asp-for="Ki_Points"></hidden>
-            <hidden asp-for="Sorcery_Points"></hidden>
-            <hidden asp-for="Coin_Purse.Copper_Pieces"></hidden>
-            <hidden asp-for="Coin_Purse.Silver_Pieces"></hidden>
-            <hidden asp-for="Coin_Purse.Gold_Pieces"></hidden>
-            <hidden asp-for="Coin_Purse.Platinum_Pieces"></hidden>
-            <hidden asp-for="Notes"></hidden>
-            <hidden asp-for="BackgroundID"></hidden>
-
-            @for (int i = 0; i < Model.Spells.Count(); i++) {<hidden asp-for="Spells[i]"></hidden>}
-            @for (int i = 0; i < Model.Features.Count(); i++) {<hidden asp-for="Features[i]"></hidden>}
-            @for (int i = 0; i < Model.Equipment.Count(); i++) {<hidden asp-for="Equipment[i]"></hidden>}
-            @for (int i = 0; i < Model.Inventory.Count(); i++) {<hidden asp-for="Inventory[i]"></hidden>}
-            @for (int i = 0; i < Model.SpellSlots.Count(); i++) {<hidden asp-for="SpellSlots[i]"></hidden>}
         </div>
 
         <partial name="/Views/Shared/Custom/ActionButtons/_BackSavePartial.cshtml" />

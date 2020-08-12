@@ -50,18 +50,19 @@
                         {
                             @if (Model.Equipment.Contains(inventoryID))
                             {
-                                <td>Equipped</td>
+                                <td colspan="2">Equipped</td>
                             }
                             else
                             {
                                 <td><button class="td-action-btn" value="Equip" onclick="equipItem('@Model.ID', '@inventoryID')"></button></td>
+                                <td><button class="td-action-btn" value="Remove" onclick="removeItemFromInventory('@Model.ID', '@inventoryID')"></button></td>
                             }
                         }
                         else
                         {
                             <td></td>
+                            <td><button class="td-action-btn" value="Remove" onclick="removeItemFromInventory('@Model.ID', '@inventoryID')"></button></td>
                         }
-                        <td><button class="td-action-btn" value="Remove" onclick="removeItemFromInventory('@Model.ID', '@inventoryID')"></button></td>
                     </tr>
                     }
                 </tbody>

@@ -240,12 +240,12 @@ namespace TheTallTankardTavern.Controllers
         //    return SaveAndReturnToItemsPartialView(Character);
         //}
 
-        //public IActionResult RemoveItemFromInventory(string cid, string inventoryID)
-        //{
-        //    CharacterModel Character = DataContext.GetModelFromID(cid);
-        //    Character.Inventory.Remove(inventoryID);
-        //    return SaveAndReturnToItemsPartialView(Character);
-        //}
+        public IActionResult RemoveItemFromInventory(string cid, string inventoryID)
+        {
+            CharacterModel Character = DataContext.GetModelFromID(cid);
+            Character.Inventory.Remove(inventoryID);
+            return SaveAndReturnToItemsPartialView(Character);
+        }
 
         private IActionResult SaveAndReturnToItemsPartialView(CharacterModel Character)
         {
