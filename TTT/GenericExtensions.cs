@@ -29,10 +29,15 @@ namespace TTT
             foreach(PropertyInfo property in Properties)
             {
                 var updatedValue = property.GetValue(UpdatedObject);
-                if (updatedValue != null)
+                if (updatedValue == null)
                 {
-                    property.SetValue(OriginalObject, updatedValue);
+                    continue;   //If property is null, skip to the next property
                 }
+                if ((updatedValue is string) && string.IsNullOrEmpty((string)updatedValue))
+                {
+                    continue;   //If the property is a string, but the string is empty, skip to the next property
+                }
+                property.SetValue(OriginalObject, updatedValue);
             }
 
             return OriginalObject;
