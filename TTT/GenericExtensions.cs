@@ -23,7 +23,8 @@ namespace TTT
         public static T Merge<T>(this T OriginalObject, T UpdatedObject)
         {
             Type ObjectType = typeof(T);
-            IEnumerable<PropertyInfo> Properties = ObjectType.GetProperties(BindingFlags.Public).Where(p => p.CanRead && p.CanWrite);
+            IEnumerable<PropertyInfo> Properties = 
+                ObjectType.GetProperties(BindingFlags.Public | BindingFlags.Instance).Where(p => p.CanWrite);
 
             foreach(PropertyInfo property in Properties)
             {
