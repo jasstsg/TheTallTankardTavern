@@ -163,5 +163,15 @@ namespace TheTallTankardTavern.Helpers
 				return 0;
 			}
 		}
+
+		public static int CarryCapacity(this CharacterModel Character)
+        {
+			return Character.Strength.Score * 8;
+        }
+
+		public static bool IsEncumbered(this CharacterModel Character)
+        {
+			return Character.Inventory.CurrentWeight > Character.CarryCapacity();
+        }
 	}
 }

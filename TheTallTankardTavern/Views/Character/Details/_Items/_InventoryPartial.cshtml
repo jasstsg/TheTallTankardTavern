@@ -11,7 +11,13 @@
 <div class="character-items-inventory">
     <div class="row">
         <div class="col-md-12" id="character-items-inventory-all">
-            <strong>INVENTORY</strong>
+            <strong>
+                INVENTORY (@Model.Inventory.CurrentWeight/@Model.CarryCapacity() lbs)
+                @if (Model.IsEncumbered())
+                {
+                    <span style="color:darkred">ENCUMBERED! Speed halved, disadvantage on all checks, attacks, and Str/Dex/Con saving throws</span>
+                }
+            </strong>
             <table table-hover="true">
                 <thead>
                     <tr>
