@@ -1,0 +1,17 @@
+﻿@model TheTallTankardTavern.Models.CharacterModel
+@addTagHelper *, TheTallTankardTavern
+
+<div id="character-weapon-armour-proficiencies">
+    <strong><label asp-for="WeaponArmourProficiencies"></label></strong>
+    <table>
+        <tbody>
+            @foreach (string prof in Model.WeaponArmourProficiencies.Keys)
+            {
+                <tr>
+                    <td><input type="checkbox" asp-for="WeaponArmourProficiencies[prof]" /></td>
+                    <td><label>@prof</label></td>
+                </tr>
+            }
+            </tbody>
+    </table>
+</div>

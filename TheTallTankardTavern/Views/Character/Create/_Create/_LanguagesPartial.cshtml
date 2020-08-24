@@ -12,16 +12,15 @@
 <table id="character-languages">
     <thead>
         <tr>
-            <th>Languages</th>
-            <th></th>
+            <th colspan="2">Languages</th>
         </tr>
     </thead>
     <tbody>
         @for (int i = 0; i < ModelListHelper.AllValues<LANGUAGES>().Length; i++)
         {
             <tr>
-                <td><label>@(ModelListHelper.AllValues<LANGUAGES>()[i].EnumToString())</label></td>
                 <td><input type="checkbox" asp-for="@Model.Languages[i]" /></td>
+                <td><label>@(ModelListHelper.AllValues<LANGUAGES>()[i].EnumToString())</label></td>
             </tr>
         }
     </tbody>

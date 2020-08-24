@@ -46,7 +46,7 @@ namespace TTT.Items
         public static readonly ItemType SimpleRangedWeapon = new ItemType("Simple Ranged Weapon", ItemTypeCategory.Weapon);
         public static readonly ItemType MartialMeleeWeapon = new ItemType("Martial Melee Weapon", ItemTypeCategory.Weapon);
         public static readonly ItemType MartialRangedWeapon = new ItemType("Martial Ranged Weapon", ItemTypeCategory.Weapon);
-        public static readonly ItemType FirearmsRangedWeapon = new ItemType("Firearms Ranged Weapon", ItemTypeCategory.Weapon);
+        //public static readonly ItemType FirearmsRangedWeapon = new ItemType("Firearms Ranged Weapon", ItemTypeCategory.Weapon);
 
         public static ItemType GetItemType(string stringName)
         {

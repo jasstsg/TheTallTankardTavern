@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.ComponentModel;
 using TheTallTankardTavern.Configuration;
 using TheTallTankardTavern.Helpers;
@@ -303,5 +304,8 @@ namespace TheTallTankardTavern.Models
 
 		[DisplayName("Proficiencies")]
 		public string Proficiencies { get; set; } = "";
+
+		[DisplayName("Weapon & Armour Proficiencies")]
+		public WeaponArmourProficienciesModel WeaponArmourProficiencies { get; set; } = new WeaponArmourProficienciesModel();
 	}
 }

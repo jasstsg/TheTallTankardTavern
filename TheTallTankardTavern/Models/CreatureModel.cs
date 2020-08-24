@@ -140,7 +140,7 @@ namespace TheTallTankardTavern.Models
 		public string Speed { get; set; } = "30 ft.";
 
         [DisplayName("Languages")]
-        public CheckBoxListModel<LANGUAGES> Languages { get; set; }
+        public CheckboxEnumListModel<LANGUAGES> Languages { get; set; }
 
 		public class Stat
 		{

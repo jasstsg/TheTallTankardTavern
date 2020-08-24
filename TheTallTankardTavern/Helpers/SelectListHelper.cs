@@ -76,7 +76,7 @@ namespace TheTallTankardTavern.Helpers
 
 		public static SelectList GetSaveProficiencySelectList()
 		{
-			return new SelectList(Constants.SAVE_PROFICIENCIES.Keys);
+			return new SelectList(SAVE_PROFICIENCIES.Keys);
 		}
 
 		public static SelectList GetWeaponWeightClassSelectList()

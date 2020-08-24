@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace TheTallTankardTavern.Models
 {
-	public class CheckBoxListModel<TEnum> : BaseListModel<bool> where TEnum : Enum
+	public class CheckboxEnumListModel<TEnum> : BaseListModel<bool> where TEnum : Enum
 	{
 		public bool this[TEnum enumValue]
 		{
@@ -37,10 +37,10 @@ namespace TheTallTankardTavern.Models
 			return string.Join(",", StringList);
 		}
 
-		public static CheckBoxListModel<TEnum> Empty()
+		public static CheckboxEnumListModel<TEnum> Empty()
 		{
 			TEnum[] AllValues = typeof(TEnum).EnumToEnumArray<TEnum>();
-			CheckBoxListModel<TEnum> Empty = new CheckBoxListModel<TEnum>();
+			CheckboxEnumListModel<TEnum> Empty = new CheckboxEnumListModel<TEnum>();
 			foreach (TEnum value in AllValues)
 			{
 				Empty.Add(false);

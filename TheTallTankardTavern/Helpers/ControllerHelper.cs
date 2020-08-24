@@ -9,19 +9,6 @@ namespace TheTallTankardTavern.Helpers
 {
 	public static class ControllerHelper
 	{
-		public static void InitializeCheckBoxes(this BaseListModel<CheckBoxModel> CheckBoxList, Type enumType)
-		{
-			string[] array = enumType.EnumToStringArray();
-			foreach (string s in array)
-			{
-				CheckBoxList.Add(new CheckBoxModel
-				{
-					Name = s,
-					IsChecked = false
-				});
-			}
-		}
-
 		/* 
 		 * ViewExists shamelessly stolen from:
 		 * https://stackoverflow.com/questions/946990/does-a-view-exist-in-asp-net-mvc

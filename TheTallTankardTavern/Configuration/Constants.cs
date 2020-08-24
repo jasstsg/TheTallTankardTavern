@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 using TheTallTankardTavern.Models;
+using TTT.Items;
 using static TheTallTankardTavern.Configuration.ApplicationSettings;
 
 namespace TheTallTankardTavern.Configuration
@@ -229,6 +230,18 @@ namespace TheTallTankardTavern.Configuration
 				3
 			}
 		};
+        public static readonly string[] AllWeaponArmourProficiencies = new string[]
+        {
+            ItemType.Shield,
+            ItemType.LightArmour,
+            ItemType.MediumArmour,
+            ItemType.HeavyArmour,
+            ItemType.SimpleMeleeWeapon,
+            ItemType.SimpleRangedWeapon,
+            ItemType.MartialMeleeWeapon,
+            ItemType.MartialRangedWeapon,
+        };
+
 
         public static class SPELL_SLOTS
         {
