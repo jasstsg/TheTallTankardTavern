@@ -2,18 +2,34 @@
 @addTagHelper *, TheTallTankardTavern
 
 <style>
-    #character-proficiencies textarea {
+    #character-other-proficiencies textarea {
         resize: none;
         border: none;
         background: transparent;
     }
 </style>
-
-<div id="character-proficiencies">
-    <strong>Proficiencies</strong>
+<strong>Proficiencies</strong>
+<div class="character-weapon-armour-proficiencies">
+    <u>Weapon &amp; Armour</u>
+    <table>
+        <tbody>
+            @foreach (string prof in Model.WeaponArmourProficiencies.Keys)
+            {
+                if (Model.WeaponArmourProficiencies[prof])
+                {
+                    <tr>
+                        <td>@prof</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+<div id="character-other-proficiencies">
+    <u>Other</u>
     @if (!string.IsNullOrEmpty(Model.Proficiencies))
     {
-        <textarea readonly="readonly" asp-for="Proficiencies" rows="8"></textarea>
+        <textarea readonly="readonly" asp-for="Proficiencies" rows="10"></textarea>
     }
     else
     {
