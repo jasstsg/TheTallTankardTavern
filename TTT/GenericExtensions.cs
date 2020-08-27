@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -29,13 +30,9 @@ namespace TTT
             foreach(PropertyInfo property in Properties)
             {
                 var updatedValue = property.GetValue(UpdatedObject);
-                if (updatedValue == null)
+                if (updatedValue == null || ((updatedValue is string @string) && string.IsNullOrEmpty(@string)))
                 {
-                    continue;   //If property is null, skip to the next property
-                }
-                if ((updatedValue is string) && string.IsNullOrEmpty((string)updatedValue))
-                {
-                    continue;   //If the property is a string, but the string is empty, skip to the next property
+                    continue;   //Then skip updating this value
                 }
                 property.SetValue(OriginalObject, updatedValue);
             }

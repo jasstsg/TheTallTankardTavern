@@ -2,6 +2,7 @@ using static TheTallTankardTavern.Configuration.ApplicationSettings;
 using Newtonsoft.Json;
 using System.Linq;
 using TTT.Items;
+using TTT.Common.Abstractions;
 
 namespace TheTallTankardTavern.Models
 {
@@ -87,7 +88,7 @@ namespace TheTallTankardTavern.Models
                 return false;
             }
             ItemModel Item = ItemDataContext.FirstOrDefault(
-                item => item.ID.Equals(inventoryID.Substring(0, inventoryID.IndexOf("&")))).Clone();
+                item => item.ID.Equals(inventoryID.Substring(0, inventoryID.IndexOf("+")))).Clone();
             Item.InventoryID = inventoryID;
 
             switch (Item.Type.Category)

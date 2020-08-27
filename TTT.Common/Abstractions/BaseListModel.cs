@@ -3,7 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace TheTallTankardTavern.Models
+namespace TTT.Common.Abstractions
 {
 	[JsonObject]
 	public abstract class BaseListModel<T> : IEnumerable<T>, IEnumerable, ICollection<T>

@@ -12,10 +12,10 @@
     <div class="row">
         <div class="col-md-12" id="character-items-inventory-all">
             <strong>
-                INVENTORY (@Model.Inventory.CurrentWeight/@Model.CarryCapacity() lbs)
+                INVENTORY @Model.Inventory.CurrentWeight/@Model.CarryCapacity() lbs)
                 @if (Model.IsEncumbered())
                 {
-                    <span style="color:darkred">ENCUMBERED! Speed halved, disadvantage on all checks, attacks, and Str/Dex/Con saving throws</span>
+                    <span style="color:red">ENCUMBERED! Speed halved, disadvantage on all checks, attacks, and Str/Dex/Con saving throws</span>
                 }
             </strong>
             <table table-hover="true">
@@ -37,9 +37,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (string inventoryID in Model.Inventory.OrderBy(i => ItemDataContext.GetModelFromID(i.Substring(0, i.IndexOf("&"))).Name))
+                    @foreach (string inventoryID in Model.Inventory.OrderBy(i => ItemDataContext.GetModelFromID(i.Substring(0, i.IndexOf("+"))).Name))
                     {
-                        ItemModel Item = ItemDataContext.GetModelFromID(inventoryID.Substring(0, inventoryID.IndexOf("&")));
+                        ItemModel Item = ItemDataContext.GetModelFromID(inventoryID.Substring(0, inventoryID.IndexOf("+")));
                     <tr data-toggle="modal" data-target="#popup-modal" data-title="@Item.Name" data-desc="@Item.PopUpText" data-traits="">
                         <td>@Item.Name</td>
                         <td>@Item.Type</td>

@@ -21,11 +21,11 @@ namespace TTT.Items
         [JsonIgnore]
         public string InventoryID
         { 
-            get { return $"{this.ID}&{this.InstanceID}"; }
+            get { return $"{this.ID}+{this.InstanceID}"; }
             set
             {
-                this.ID = value.Substring(0, value.IndexOf("&"));
-                this.InstanceID = value.Substring(value.IndexOf("&") + 1);
+                this.ID = value.Substring(0, value.IndexOf("+"));
+                this.InstanceID = value.Substring(value.IndexOf("+") + 1);
             }
         }
 

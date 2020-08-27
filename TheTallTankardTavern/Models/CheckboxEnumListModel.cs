@@ -1,6 +1,7 @@
 using System;
 using TTT.Enumerator;
 using System.Collections.Generic;
+using TTT.Common.Abstractions;
 
 namespace TheTallTankardTavern.Models
 {

@@ -45,7 +45,7 @@ namespace TheTallTankardTavern.Controllers
             switch (type)
             {
                 case MODEL_TYPES.SPELL: Character.Spells.AddSingle(id); break;
-                case MODEL_TYPES.ITEM: Character.Inventory.Add(id); break;
+                case MODEL_TYPES.ITEM: Character.Inventory.AddItemInstance(id); break;
                 case MODEL_TYPES.FEATURE: Character.Features.AddSingle(id); break;
                 case MODEL_TYPES.BACKGROUND:
                     BackgroundModel Background = BackgroundDataContext.GetModelFromID(id);

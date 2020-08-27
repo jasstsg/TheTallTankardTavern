@@ -5,6 +5,7 @@ using static TheTallTankardTavern.Configuration.Constants;
 using static TheTallTankardTavern.Configuration.Constants.SpecialFeatures;
 using static TheTallTankardTavern.Configuration.ApplicationSettings;
 using TTT.Items;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace TheTallTankardTavern.Helpers
 {
@@ -173,5 +174,52 @@ namespace TheTallTankardTavern.Helpers
         {
 			return Character.Inventory.CurrentWeight > Character.CarryCapacity();
         }
+
+		public static bool IsProficientWith(this CharacterModel Character, ItemModel Item)
+        {
+			if (Item.Type.Equals(ItemTypeCategory.Shield) || 
+				Item.Type.Equals(ItemTypeCategory.Armour) ||
+                Item.Type.Equals(ItemTypeCategory.Weapon))
+            {
+				return Character.WeaponArmourProficiencies[Item.Type];
+			}
+			else
+            {
+				return false;
+            }
+        }
+
+		public static int GetAttackBonus(this CharacterModel Character, ItemModel Weapon)
+        {
+			return Character.GetDamageBonus(Weapon) + (Character.IsProficientWith(Weapon) ? Character.Proficiency_Bonus : 0);
+        }
+
+		private static int GetDamageBonus(this CharacterModel Character, ItemModel Weapon)
+		{
+			int damage = Weapon.Weapon.Plus;
+
+			if (Weapon.Type.Equals(ItemType.SimpleRangedWeapon) || Weapon.Type.Equals(ItemType.MartialRangedWeapon) ||
+				(Weapon.Weapon.Properties.Finesse.Enabled && (Character.Dexterity.Modifier > Character.Strength.Modifier)))
+			{
+				damage += Character.Dexterity.Modifier;
+			}
+			else if (Weapon.Type.Equals(ItemType.SimpleMeleeWeapon) || Weapon.Type.Equals(ItemType.MartialMeleeWeapon))
+			{
+				damage += Character.Strength.Modifier;
+			}
+			return damage;
+		}
+
+		public static string GetDamageString(this CharacterModel Character, ItemModel Weapon, bool isOffHand = false)
+        {
+			if (isOffHand)
+            {
+				return $"{Weapon.Weapon.Damage} + {Weapon.Weapon.Plus}";
+			}
+            else
+			{
+				return $"{Weapon.Weapon.Damage} + {Character.GetDamageBonus(Weapon)}";
+			}
+		}
 	}
 }

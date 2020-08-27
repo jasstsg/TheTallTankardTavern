@@ -1,3 +1,5 @@
+using TTT.Common.Abstractions;
+
 namespace TheTallTankardTavern.Models
 {
 	public class SpellListModel : BaseListModel<string>

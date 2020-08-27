@@ -1,14 +1,17 @@
 using TTT.Items;
+using TTT.Common.Abstractions;
 using static TheTallTankardTavern.Configuration.ApplicationSettings;
 using TheTallTankardTavern.Helpers;
 using System;
 using System.Linq;
 using static TheTallTankardTavern.Configuration.Constants;
+using Newtonsoft.Json;
 
 namespace TheTallTankardTavern.Models
 {
 	public class InventoryModel : BaseListModel<string>
 	{
+		[JsonIgnore]
 		public int CurrentWeight
 		{
 			get
@@ -16,7 +19,7 @@ namespace TheTallTankardTavern.Models
 				int weight = 0;
 				foreach (string inventoryID in this)
 				{
-					weight += ItemDataContext.GetModelFromID(inventoryID.Substring(0, inventoryID.IndexOf('&'))).Weight;
+					weight += ItemDataContext.GetModelFromID(inventoryID.Substring(0, inventoryID.IndexOf('+'))).Weight;
 				}
 				return weight;
 			}
@@ -27,7 +30,7 @@ namespace TheTallTankardTavern.Models
 			return (CurrentWeight > 15 * strengthScore);
 		}
 
-		public override void Add(string itemID)
+		public void AddItemInstance(string itemID)
 		{
 			ItemModel Item = ItemDataContext.GetModelFromID(itemID).Clone();
 			Item.InstanceID = Guid.NewGuid().ToString();
