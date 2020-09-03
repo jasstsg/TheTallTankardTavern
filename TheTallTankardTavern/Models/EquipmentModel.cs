@@ -3,23 +3,25 @@ using Newtonsoft.Json;
 using System.Linq;
 using TTT.Items;
 using TTT.Common.Abstractions;
+using TheTallTankardTavern.Helpers;
+using System;
 
 namespace TheTallTankardTavern.Models
 {
     public class EquipmentModel : BaseListModel<string>
     {
         [JsonProperty]
-        private ItemModel _spellCastingFocus = null;
+        public string _spellCastingFocus { get; set; } = null;
         [JsonProperty]
-        private ItemModel _armour = null;
+        public string _armour { get; set; } = null;
         [JsonProperty]
-        private ItemModel _shield = null;
+        public string _shield { get; set; } = null;
         [JsonProperty]
-        private ItemModel _twoHand = null;
+        public string _twoHand { get; set; } = null;
         [JsonProperty]
-        private ItemModel _mainHand = null;
+        public string _mainHand { get; set; } = null;
         [JsonProperty]
-        private ItemModel _offHand = null;
+        public string _offHand { get; set; } = null;
 
         public override void Clear()
         {
@@ -32,53 +34,65 @@ namespace TheTallTankardTavern.Models
             base.Clear();
         }
 
-        private void EquipmentSetter(ref ItemModel _privateEquipmentVariable, ItemModel value)
+        private string EquipmentSetter(string _innerEquipmentVar, ItemModel value)
         {
-            if (_privateEquipmentVariable != null)
+            string str = Environment.StackTrace;
+            if (!string.IsNullOrEmpty(_innerEquipmentVar ))
             {
-                Remove(_privateEquipmentVariable.InventoryID);
+                Remove(_innerEquipmentVar);
             }
             if (value != null)
             {
                 Add(value.InventoryID);
             }
-            _privateEquipmentVariable = value;
+            return value?.InventoryID;
         }
+
+        private ItemModel EquipmentGetter(string _innerEquipmentVar)
+        {
+            if (string.IsNullOrEmpty(_innerEquipmentVar))
+            {
+                return null;
+            }
+            ItemModel Item = ItemDataContext.GetModelFromID(_innerEquipmentVar.Substring(0, _innerEquipmentVar.IndexOf("+"))).Clone();
+            Item.InstanceID = _innerEquipmentVar.Substring(_innerEquipmentVar.IndexOf("+") + 1);
+            return Item;
+        }
+
         [JsonIgnore]
         public ItemModel SpellCastingFocus
         {
-            get { return _spellCastingFocus; }
-            set { EquipmentSetter(ref _spellCastingFocus, value); }
+            get { return EquipmentGetter(_spellCastingFocus); }
+            set { _spellCastingFocus = EquipmentSetter(_spellCastingFocus, value); }
         }
         [JsonIgnore]
         public ItemModel Armour
         {
-            get { return _armour; }
-            set { EquipmentSetter(ref _armour, value); }
+            get { return EquipmentGetter(_armour); }
+            set { _armour = EquipmentSetter(_armour, value); }
         }
         [JsonIgnore]
         public ItemModel Shield
         {
-            get { return _shield; }
-            set { EquipmentSetter(ref _shield, value); }
+            get { return EquipmentGetter(_shield); }
+            set { _shield = EquipmentSetter(_shield, value); }
         }
         [JsonIgnore]
         public ItemModel TwoHand
         {
-            get { return _twoHand; }
-            set { EquipmentSetter(ref _twoHand, value); }
+            get { return EquipmentGetter(_twoHand); }
+            set { _twoHand = EquipmentSetter(_twoHand, value); }
         }
         [JsonIgnore]
         public ItemModel MainHand
         {
-            get { return _mainHand; }
-            set { EquipmentSetter(ref _mainHand, value); }
+            get { return EquipmentGetter(_mainHand); }
+            set { _mainHand = EquipmentSetter(_mainHand, value); }
         }
-        [JsonIgnore]
         public ItemModel OffHand
         {
-            get { return _offHand; }
-            set { EquipmentSetter(ref _offHand, value); }
+            get { return EquipmentGetter(_offHand); }
+            set { _offHand = EquipmentSetter(_offHand, value); }
         }
 
         public bool TryEquip(string inventoryID, InventoryModel Inventory, bool isDualWielder)

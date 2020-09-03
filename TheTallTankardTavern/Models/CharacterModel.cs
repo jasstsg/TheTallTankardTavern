@@ -251,6 +251,20 @@ namespace TheTallTankardTavern.Models
 		public EquipmentModel Equipment { get; set; } = new EquipmentModel();
 
 
+		[JsonIgnore]
+		public string SpellCastingFocus { get { return this.Equipment._spellCastingFocus; } set { this.Equipment._spellCastingFocus = value; } }
+		[JsonIgnore]
+		public string Armour { get { return this.Equipment._armour; } set { this.Equipment._armour = value; } }
+		[JsonIgnore]
+		public string Shield { get { return this.Equipment._shield; } set { this.Equipment._shield = value; } }
+		[JsonIgnore]
+		public string TwoHand { get { return this.Equipment._twoHand; } set { this.Equipment._twoHand = value; } }
+		[JsonIgnore]
+		public string MainHand { get { return this.Equipment._mainHand; } set { this.Equipment._mainHand = value; } }
+		[JsonIgnore]
+		public string OffHand { get { return this.Equipment._offHand; } set { this.Equipment._offHand = value; } }
+
+
 		[DisplayName("Inventory")]
 		public InventoryModel Inventory { get; set; } = new InventoryModel();
 
