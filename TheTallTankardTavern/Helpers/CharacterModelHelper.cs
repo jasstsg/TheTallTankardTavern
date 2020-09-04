@@ -1,11 +1,8 @@
 using System;
-using System.Linq;
 using TheTallTankardTavern.Models;
 using static TheTallTankardTavern.Configuration.Constants;
 using static TheTallTankardTavern.Configuration.Constants.SpecialFeatures;
-using static TheTallTankardTavern.Configuration.ApplicationSettings;
 using TTT.Items;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace TheTallTankardTavern.Helpers
 {
@@ -180,17 +177,23 @@ namespace TheTallTankardTavern.Helpers
 
 		public static bool IsProficientWith(this CharacterModel Character, ItemModel Item)
         {
-			if (Item.Type.Category.Equals(ItemTypeCategory.Shield) || 
+			if (Item != null && 
+				(Item.Type.Category.Equals(ItemTypeCategory.Shield) || 
 				Item.Type.Category.Equals(ItemTypeCategory.Armour) ||
-                Item.Type.Category.Equals(ItemTypeCategory.Weapon))
+                Item.Type.Category.Equals(ItemTypeCategory.Weapon)))
             {
-				return Character.WeaponArmourProficiencies[Item.Type];
+				return Character.IsProficientWith(Item.Type);
 			}
 			else
             {
 				return false;
             }
         }
+
+		public static bool IsProficientWith(this CharacterModel Character, ItemType itemType)
+        {
+			return Character.WeaponArmourProficiencies[itemType];
+		}
 
 		public static int GetAttackBonus(this CharacterModel Character, ItemModel Weapon)
         {
@@ -224,5 +227,10 @@ namespace TheTallTankardTavern.Helpers
 				return $"{Weapon.Weapon.Damage} + {Character.GetDamageBonus(Weapon)}";
 			}
 		}
+
+		public static bool IsArmourTooHeavy(this CharacterModel Character, ItemModel Armour)
+        {
+			return Character.Strength.Score < Armour.Armour.StrengthRequired;
+        }
 	}
 }

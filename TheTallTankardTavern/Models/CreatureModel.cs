@@ -137,7 +137,7 @@ namespace TheTallTankardTavern.Models
 		public int Initiative => Dexterity.Modifier;
 
 		[DisplayName("Speed")]
-		public string Speed { get; set; } = "30 ft.";
+		public string Speed { get; set; } = "30 ft";
 
         [DisplayName("Languages")]
         public CheckboxEnumListModel<LANGUAGES> Languages { get; set; }

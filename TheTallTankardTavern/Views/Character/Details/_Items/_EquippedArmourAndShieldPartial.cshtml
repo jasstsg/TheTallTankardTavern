@@ -1,13 +1,22 @@
 ﻿@model TheTallTankardTavern.Models.CharacterModel
 @addTagHelper *, TheTallTankardTavern
 
+@{
+    string warning = "";
+    if ((Model.Equipment.Armour != null && !Model.IsProficientWith(Model.Equipment.Armour)) ||
+        (Model.Equipment.Shield != null && !Model.IsProficientWith(Model.Equipment.Shield)))
+    {
+        warning += " Disadvantage on STR/DEX checks/saves/attacks, and cannot cast spells.";
+    }
+    if (Model.Equipment.Armour != null && (Model.Strength.Score < Model.Equipment.Armour.Armour.StrengthRequired))
+    {
+        warning += " Armour too heavy, -10ft to speed.";
+    }
+}
+
 <strong>
     ARMOUR &amp; SHIELD
-    @if ((Model.Equipment.Armour != null && !Model.IsProficientWith(Model.Equipment.Armour)) ||
-     (Model.Equipment.Shield != null && !Model.IsProficientWith(Model.Equipment.Shield)))
-    {
-    <span style="color:red">Unsuitable Armour/Shield: Disadvantage on STR/DEX checks/saves/attacks. Cannot cast Spells.</span>
-    }
+    <span style="color:red">@warning</span>
 </strong>
 <table table-hover="true">
     <thead>
@@ -29,7 +38,9 @@
         {
             <tr data-toggle="modal" data-target="#popup-modal" data-title="@Model.Equipment.Armour.Name" data-desc="@Model.Equipment.Armour.PopUpText" data-traits="">
                 <td>@Model.Equipment.Armour.Name</td>
-                <td>@Model.Equipment.Armour.Type</td>
+                <td class=" @(Model.IsProficientWith(Model.Equipment.Armour) ? "skill-proficient" : "" )">
+                    @Model.Equipment.Armour.Type
+                </td>
                 <td>@Model.Equipment.Armour.Weight lbs</td>
                 <td>@Model.Equipment.Armour.Cost cp</td>
                 <td>@Model.Equipment.Armour.IsMagic</td>
@@ -40,20 +51,23 @@
                 @*<td><button class="td-action-btn" value="Remove" onclick="removeItemFromEquipment('@Model.ID', '@instanceID')"></button></td>*@
             </tr>
 
-        }@if (Model.Equipment.Shield != null)
+        }
+        @if (Model.Equipment.Shield != null)
         {
-    <tr data-toggle="modal" data-target="#popup-modal" data-title="@Model.Equipment.Shield.Name" data-desc="@Model.Equipment.Shield.PopUpText" data-traits="">
-        <td>@Model.Equipment.Shield.Name</td>
-        <td>@Model.Equipment.Shield.Type</td>
-        <td>@Model.Equipment.Shield.Weight lbs</td>
-        <td>@Model.Equipment.Shield.Cost cp</td>
-        <td>@Model.Equipment.Shield.IsMagic</td>
-        <td>@Model.Equipment.Shield.Armour.ArmourClass</td>
-        <td>@Model.Equipment.Shield.Armour.StrengthRequired</td>
-        <td>@(Model.Equipment.Armour.Armour.DisadvantageOnStealth ? "Disadvatage" : "")</td>
-        <td><button class="td-action-btn" value="Unequip" onclick="unequipShield('@Model.ID', '@Model.Equipment.Shield.InventoryID')"></button></td>
-        @*<td><button class="td-action-btn" value="Remove" onclick="removeItemFromEquipment('@Model.ID', '@instanceID')"></button></td>*@
-    </tr>
+            <tr data-toggle="modal" data-target="#popup-modal" data-title="@Model.Equipment.Shield.Name" data-desc="@Model.Equipment.Shield.PopUpText" data-traits="">
+                <td>@Model.Equipment.Shield.Name</td>
+                <td class=" @(Model.IsProficientWith(Model.Equipment.Shield) ? "skill-proficient" : "" )">
+                    @Model.Equipment.Shield.Type
+                </td>
+                <td>@Model.Equipment.Shield.Weight lbs</td>
+                <td>@Model.Equipment.Shield.Cost cp</td>
+                <td>@Model.Equipment.Shield.IsMagic</td>
+                <td>@Model.Equipment.Shield.Armour.ArmourClass</td>
+                <td>@Model.Equipment.Shield.Armour.StrengthRequired</td>
+                <td>@(Model.Equipment.Armour.Armour.DisadvantageOnStealth ? "Disadvatage" : "")</td>
+                <td><button class="td-action-btn" value="Unequip" onclick="unequipShield('@Model.ID', '@Model.Equipment.Shield.InventoryID')"></button></td>
+                @*<td><button class="td-action-btn" value="Remove" onclick="removeItemFromEquipment('@Model.ID', '@instanceID')"></button></td>*@
+            </tr>
         }
     </tbody>
 </table>

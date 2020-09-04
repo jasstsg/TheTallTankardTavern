@@ -87,7 +87,10 @@
         </tr>
         <tr>
             <td><label asp-for="Speed"></label></td>
-            <td>@Model.Speed</td>
+            <td>
+                @Model.Speed
+                @if (Model.IsArmourTooHeavy(Model.Equipment.Armour)) { <strong style="color:red"> - 10ft</strong> }
+            </td>
             <td></td>
         </tr>
         <tr>

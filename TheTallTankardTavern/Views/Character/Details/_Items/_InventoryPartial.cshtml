@@ -42,7 +42,7 @@
                         ItemModel Item = ItemDataContext.GetModelFromID(inventoryID.Substring(0, inventoryID.IndexOf("+")));
                     <tr data-toggle="modal" data-target="#popup-modal" data-title="@Item.Name" data-desc="@Item.PopUpText" data-traits="">
                         <td>@Item.Name</td>
-                        <td>@Item.Type</td>
+                        <td class="@(Model.IsProficientWith(Item) ? "skill-proficient" : "" )">@Item.Type</td>
                         <td>@Item.Weight lbs</td>
                         <td>@Item.Cost cp</td>
                         <td>@Item.IsMagic</td>

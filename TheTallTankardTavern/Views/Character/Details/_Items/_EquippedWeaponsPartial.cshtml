@@ -24,14 +24,17 @@
             <tr data-toggle="modal" data-target="#popup-modal" data-title="@Model.Equipment.TwoHand.Name" data-desc="@Model.Equipment.TwoHand.PopUpText" data-traits="">
                 <td><strong>Two Hand</strong></td>
                 <td>@Model.Equipment.TwoHand.Name</td>
-                <td>@Model.Equipment.TwoHand.Type</td>
-                <td>@Model.Equipment.TwoHand.Weight lbs</td>
-                <td>@Model.Equipment.TwoHand.Cost cp</td>
-                <td>@Model.Equipment.TwoHand.IsMagic</td>
-                <td>+@Model.GetAttackBonus(Model.Equipment.TwoHand)</td>
-                <td>@Model.GetDamageString(Model.Equipment.TwoHand)</td>
-                <td>@Model.Equipment.TwoHand.Weapon.Properties.ToString()</td>
-                <td><button class="td-action-btn" value="Unequip" onclick="unequipTwoHand('@Model.ID', '@Model.Equipment.TwoHand.InventoryID')"></button></td>
+                <td class=" @(Model.IsProficientWith(Model.Equipment.TwoHand) ? "skill-proficient" : "" )">
+                    @Model.Equipment.TwoHand.Type
+                </td>
+               <td>@Model.Equipment.TwoHand.Weight lbs</td>
+               <td>@Model.Equipment.TwoHand.Cost cp</td>
+               <td>@Model.Equipment.TwoHand.IsMagic</td>
+               <td>+@Model.GetAttackBonus(Model.Equipment.TwoHand)</td>
+               <td>@Model.GetDamageString(Model.Equipment.TwoHand)</td>
+               <td>@Model.Equipment.TwoHand.Weapon.Properties.ToString()</td>
+
+               <td><button class="td-action-btn" value="Unequip" onclick="unequipTwoHand('@Model.ID', '@Model.Equipment.TwoHand.InventoryID')"></button></td>
                 @*<td><button class="td-action-btn" value="Remove" onclick="removeItemFromEquipment('@Model.ID', '@instanceID')"></button></td>*@
             </tr>
         }
@@ -40,7 +43,9 @@
             <tr data-toggle="modal" data-target="#popup-modal" data-title="@Model.Equipment.MainHand.Name" data-desc="@Model.Equipment.MainHand.PopUpText" data-traits="">
                 <td><strong>Main Hand</strong></td>
                 <td>@Model.Equipment.MainHand.Name</td>
-                <td>@Model.Equipment.MainHand.Type</td>
+                <td class=" @(Model.IsProficientWith(Model.Equipment.MainHand) ? "skill-proficient" : "" )">
+                    @Model.Equipment.MainHand.Type
+                </td>
                 <td>@Model.Equipment.MainHand.Weight lbs</td>
                 <td>@Model.Equipment.MainHand.Cost cp</td>
                 <td>@Model.Equipment.MainHand.IsMagic</td>
@@ -56,7 +61,9 @@
             <tr data-toggle="modal" data-target="#popup-modal" data-title="@Model.Equipment.OffHand.Name" data-desc="@Model.Equipment.OffHand.PopUpText" data-traits="">
                 <td><strong>Off Hand</strong></td>
                 <td>@Model.Equipment.OffHand.Name</td>
-                <td>@Model.Equipment.OffHand.Type</td>
+                <td class=" @(Model.IsProficientWith(Model.Equipment.OffHand) ? "skill-proficient" : "" )">
+                    @Model.Equipment.OffHand.Type
+                </td>
                 <td>@Model.Equipment.OffHand.Weight lbs</td>
                 <td>@Model.Equipment.OffHand.Cost cp</td>
                 <td>@Model.Equipment.OffHand.IsMagic</td>
