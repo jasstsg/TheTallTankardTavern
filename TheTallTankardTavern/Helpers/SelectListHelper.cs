@@ -11,6 +11,8 @@ using TTT.Items;
 using System.Reflection;
 using System;
 using TTT.Common;
+using Microsoft.EntityFrameworkCore.Metadata;
+using System.Security.Cryptography.X509Certificates;
 
 namespace TheTallTankardTavern.Helpers
 {
@@ -91,10 +93,27 @@ namespace TheTallTankardTavern.Helpers
 
 		public static SelectList GetItemTypesSelectList()
 		{
-			Type type = typeof(ItemType);
-			FieldInfo[] fields = type.GetFields(BindingFlags.Public | BindingFlags.Static);
-			IEnumerable<string> enumerableList = fields.Select(f => f.GetValue(null).ToString());
-			return new SelectList(enumerableList);
+			FieldInfo[] fields = typeof(ItemType).GetFields(BindingFlags.Public | BindingFlags.Static);
+			IEnumerable<ItemType> ItemTypes = fields.Select(f => (ItemType)f.GetValue(null))
+				.Where(itemTypes => !itemTypes.ToString().Contains("Weapon"));  //Skip weapon parent item types
+			IEnumerable<string> ItemTypeStrings = ItemTypes.Select(it => it.ToString());
+
+			SelectListGroup Other = new SelectListGroup() { Name = "Other" };
+			SelectListGroup SimpleMeleeWeapons = new SelectListGroup() { Name = "Simple Melee Weapons" };
+			SelectListGroup SimpleRangedWeapons = new SelectListGroup() { Name = "Simple Ranged Weapons" };
+			SelectListGroup MartialMeleeWeapons = new SelectListGroup() { Name = "Martial Melee Weapons" };
+			SelectListGroup MartialRangedWeapons = new SelectListGroup() { Name = "Martial Ranged Weapons" };
+
+			SelectList ItemTypeSelectList = new SelectList(ItemTypeStrings);
+			foreach (SelectListItem sli in ItemTypeSelectList)
+            {
+				ItemType i = ItemTypes.First(x => x.ToString().Equals(sli.Text));
+				sli.Group = i.ParentType == ItemType.SimpleMeleeWeapon ? SimpleMeleeWeapons :
+					i.ParentType == ItemType.SimpleRangedWeapon ? SimpleRangedWeapons :
+					i.ParentType == ItemType.MartialMeleeWeapon ? MartialMeleeWeapons :
+					i.ParentType == ItemType.MartialRangedWeapon ? MartialRangedWeapons : Other;
+			}
+			return ItemTypeSelectList;
 		}
 
 		public static SelectList GetDamageTypeSelectList()

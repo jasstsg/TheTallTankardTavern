@@ -39,5 +39,34 @@ namespace TTT
 
             return OriginalObject;
         }
+
+        public static bool EqualsAny<T>(this T obj, params T[] objs)
+        {
+            foreach (T o in objs)
+            {
+                if (obj.Equals(o))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Returns all fields of type T in an IEnumerable object
+        /// </summary>
+        /// <typeparam name="T">The type of fields to return</typeparam>
+        /// <param name="obj">The source object</param>
+        /// <returns>IEnumerable<typeparamref name="T"/></returns>
+        public static IEnumerable<T> GetAllPublicStaticFields<T>(this object obj)
+        {
+            return obj.GetType().GetFields(BindingFlags.Public | BindingFlags.Static)
+                .Where(f => f.FieldType == typeof(T)).Select(f => (T)f.GetValue(null));
+        }
+
+        public static T GetPropertyValue<T>(this object obj, string propertyName)
+        {
+            return (T)obj.GetType().GetProperty(propertyName).GetValue(obj, null);
+        }
     }
 }
