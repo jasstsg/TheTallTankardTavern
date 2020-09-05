@@ -1,0 +1,27 @@
+﻿@using TTT.Items
+@model TheTallTankardTavern.Models.CharacterModel
+@addTagHelper *, TheTallTankardTavern
+@{
+    ViewData["Title"] = "Give Item";
+    string inventoryId = ((string)ViewData["inventoryId"]);
+    inventoryId = inventoryId.Replace(" ", "+");    //Javascript GET request interprets "+" as url encoding for a " ", and so we have to swap back
+    string itemId = inventoryId.Substring(0, inventoryId.IndexOf("+"));
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="row col-md-6">
+    <form asp-action="GiveItem" method="post">
+        <div>
+            <input type="hidden" id="giverId" name="giverId" value="@Model.ID" />
+            <input type="hidden" id="inventoryId" name="inventoryId" value="@inventoryId" />
+        </div>
+        <div>
+            <strong>@Model.Name</strong> wants to give a <strong>@ItemDataContext.GetModelFromID(itemId).Name</strong> to
+            <select id="receiverId" name="receiverId" asp-items="SelectListHelper.GetPartyMembers()"></select>
+        </div>
+        <div>
+            <partial name="/Views/Shared/Custom/ActionButtons/_ConfirmCancelPartial.cshtml" model="Model" />
+        </div>
+    </form>
+</div>

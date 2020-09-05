@@ -167,7 +167,7 @@ namespace TheTallTankardTavern.Helpers
 
 		public static int CarryCapacity(this CharacterModel Character)
         {
-			return Character.Strength.Score * 8;
+			return (Character.Strength.Score + Character.Constitution.Score) * 5;
         }
 
 		public static bool IsEncumbered(this CharacterModel Character)
@@ -230,7 +230,8 @@ namespace TheTallTankardTavern.Helpers
 
 		public static bool IsArmourTooHeavy(this CharacterModel Character, ItemModel Armour)
         {
-			return Character.Strength.Score < Armour.Armour.StrengthRequired;
+
+			return Armour != null && Character.Strength.Score < Armour.Armour.StrengthRequired;
         }
 	}
 }

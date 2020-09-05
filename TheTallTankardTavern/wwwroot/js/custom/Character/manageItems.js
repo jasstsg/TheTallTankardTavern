@@ -65,7 +65,6 @@ function unequipOffHand(cid, inventoryID) {
 }
 
 function equipItem(cid, inventoryID) {
-    console.log(inventoryID);
     event.stopPropagation();
     console.log("EquipItem button pressed");
     $.ajax({
@@ -97,6 +96,22 @@ function removeItemFromInventory(cid, inventoryID) {
         success: function (response) { refreshCharacterItems(response); }
     })
 }
+
+function giveItem(cid, inventoryId) {
+    event.stopPropagation();
+    console.log("Give Item button pressed");
+    location.href = '/Character/GiveItem?cid=' + cid + '&inventoryId=' + inventoryId;
+
+    //$.get('/Character/GiveItem', { cid: cid, inventoryId: inventoryId });
+
+    //$.get({
+    //    url: '/Character/GiveItem',
+    //    data: { cid: cid, inventoryId: inventoryId },
+    //    dataType: 'html',
+    //    success: function (response) { refreshCharacterItems(response); }
+    //})
+}
+
 
 function refreshCharacterItems(response) {
     $('#character-items').html(response);

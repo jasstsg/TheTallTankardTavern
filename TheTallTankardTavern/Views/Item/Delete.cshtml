@@ -22,11 +22,11 @@
     <form asp-action="Delete" method="post">
         <hidden asp-for="ID"></hidden>
         <div>
-            <label>Enter the item's name and click delete to confirm:</label>
+            <label>Enter the item's name and click confirm to delete</label>
         </div>
         <div>
             <textbox asp-for="Name"></textbox>
         </div>
-        <partial name="/Views/Shared/Custom/ActionButtons/_DeleteCancelPartial.cshtml" model="Model"/>
+        <partial name="/Views/Shared/Custom/ActionButtons/_ConfirmCancelPartial.cshtml" model="Model"/>
     </form>
 </div>

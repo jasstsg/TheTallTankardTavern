@@ -48,8 +48,9 @@
                 <td><label asp-for="Sorcery_Points"></label></td>
                 <td><numberbox asp-for="Sorcery_Points" min="0" max="@Model.Level" onchange="quickSaveSorceryPoints('@Model.ID', this)"></numberbox></td>
                 <td>
-                     @* SORCERY POINTS ONLY RESTORE ON LONG RESTS - THIS WAS TO ENABLE ONE-CLICK RESTORATION ON SHORT RESTS
-                    / @Model.Level&nbsp;&nbsp;
+                    / @Model.Level
+                    @* SORCERY POINTS ONLY RESTORE ON LONG RESTS - THIS WAS TO ENABLE ONE-CLICK RESTORATION ON SHORT RESTS
+                    &nbsp;&nbsp;
                     <buttonlink class="action-btn" style="margin:0px" asp-action="RestorePoints" asp-route-id="@Model.ID" text="Restore"></buttonlink>
                     *@
                 </td>
@@ -89,7 +90,11 @@
             <td><label asp-for="Speed"></label></td>
             <td>
                 @Model.Speed
-                @if (Model.IsArmourTooHeavy(Model.Equipment.Armour)) { <strong style="color:red"> - 10ft</strong> }
+                <strong style="color:red">
+                    @if (Model.IsEncumbered()) { <span> / 2</span>}
+                    @if (Model.IsArmourTooHeavy(Model.Equipment.Armour)) { <span> - 10ft</span> }
+                </strong>
+                 
             </td>
             <td></td>
         </tr>

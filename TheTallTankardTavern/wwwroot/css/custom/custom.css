@@ -72,8 +72,13 @@ td.skill-expert select {
     color: green;
 }
 
+td.item-magic {
+    color: darkmagenta;
+}
+
 td.skill-proficient, 
-td.skill-expert {
+td.skill-expert,
+td.item-magic {
     font-weight: bold;
 }
 

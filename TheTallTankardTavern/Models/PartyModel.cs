@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Linq;
 using TheTallTankardTavern.Helpers;
 using TTT.Common.Abstractions;
 using static TheTallTankardTavern.Configuration.ApplicationSettings;
@@ -14,6 +15,11 @@ namespace TheTallTankardTavern.Models
         public string NewMemberId { get; set; } = "";
 
         public string Date { get; set; } = "";
+
+        public List<CharacterModel> GetAllPartyMemberCharacters()
+        {
+            return Members.Select(m => m.Character).OrderBy(c => c.Name).ToList();
+        }
     }
 
     public class MemberModel

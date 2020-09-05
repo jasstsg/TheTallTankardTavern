@@ -19,7 +19,7 @@
             <th><label>Type</label></th>
             <th><label>Weight</label></th>
             <th><label>Cost</label></th>
-            <th><label>Magic</label></th>
+            @*<th><label>Magic</label></th>*@
             <th><label>AC</label></th>
             <th><label>Str</label></th>
             <th><label>Noisy</label></th>
@@ -33,11 +33,11 @@
         @foreach (ItemModel i in Model)
         {
             <tr data-toggle="modal" data-target="#popup-modal" data-title="@i.Name" data-desc="@(i.PopUpText)">
-                <td>@i.Name</td>
+                <td class="@(i.IsMagic ? "item-magic" : "")">@i.Name</td>
                 <td>@i.Type</td>
                 <td>@i.Weight lbs</td>
                 <td>@i.Cost cp</td>
-                <td>@i.IsMagic</td>
+                @*<td>@i.IsMagic</td>*@
                 <td class="@ViewHelper.Disable(!i.Is(ItemTypeCategory.Armour))">@i.Armour.ArmourClass</td>
                 <td class="@ViewHelper.Disable(!i.Is(ItemTypeCategory.Armour))">@i.Armour.StrengthRequired</td>
                 <td class="@ViewHelper.Disable(!i.Is(ItemTypeCategory.Armour))">@i.Armour.DisadvantageOnStealth</td>

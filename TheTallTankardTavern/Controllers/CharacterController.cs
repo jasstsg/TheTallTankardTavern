@@ -185,6 +185,32 @@ namespace TheTallTankardTavern.Controllers
         #endregion
 
         #region Manage Items
+        [HttpGet]
+        public IActionResult GiveItem(string cid, string inventoryId)
+        {
+            ViewData["inventoryId"] = inventoryId;
+            return View("GiveItem", CharacterDataContext.GetModelFromID(cid));
+        }
+
+        [HttpPost]
+        public IActionResult GiveItem(string giverId, string receiverId, string inventoryId)
+        {
+            //Get Characters
+            CharacterModel Giver = CharacterDataContext.GetModelFromID(giverId);
+            CharacterModel Receiver = CharacterDataContext.GetModelFromID(receiverId);
+
+            //Give Item
+            Giver.Inventory.Remove(inventoryId);
+            Receiver.Inventory.Add(inventoryId);
+
+            //Save Characters
+            CharacterDataContext.Save(Giver, FOLDER.Characters);
+            CharacterDataContext.Save(Receiver, FOLDER.Characters);
+
+            //Go back to Giver's page
+            return RedirectToAction("Details", new { id = Giver.ID });
+        }
+
         public IActionResult UnequipArmour(string cid, string inventoryID)
         {
             CharacterModel Character = DataContext.GetModelFromID(cid);

@@ -45,10 +45,12 @@ namespace TheTallTankardTavern.Controllers
             switch (submit)
             {
                 case TAGHELPER.SUBMIT_TEXT.SAVE_AND_CONTINUE:
-                    return View("Create", SavedModel);
+                    return RedirectToAction("Edit", new { id = SavedModel.ID });
                 case TAGHELPER.SUBMIT_TEXT.SAVE_AND_FINISH:
                 default:
-                    return ControllerHelper.ViewExists(this, "Details") ? View("Details", SavedModel) : Index();
+                    //return ControllerHelper.ViewExists(this, "Details") ? View("Details", SavedModel) : Index();
+                    return ControllerHelper.ViewExists(this, "Details") ?
+                        RedirectToAction("Details", new { id = SavedModel.ID }) : RedirectToAction("Index");
             }
         }
 

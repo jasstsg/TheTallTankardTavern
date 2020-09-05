@@ -16,6 +16,11 @@ namespace TheTallTankardTavern.Helpers
 {
 	public static class SelectListHelper
 	{
+		public static SelectList GetPartyMembers()
+        {
+			return new SelectList(PartyDataContext.Single().GetAllPartyMemberCharacters(), "ID", "Name");
+        }
+
 		public static SelectList GetDataContextSelectList<T>(this IEnumerable<T> DataContext) where T : BaseModel
 		{
 			return new SelectList(DataContext.OrderBy(x => x.Name), "ID", "Name");

@@ -24,14 +24,15 @@
                         <th><label>Name</label></th>
                         <th><label>Type</label></th>
                         <th><label>Weight</label></th>
-                        <th><label>Cost</label></th>
-                        <th><label>Magic</label></th>
+                        @*<th><label>Cost</label></th>*@
+                        @*<th><label>Magic</label></th>*@
                         <th><label>AC</label></th>
                         <th><label>Str</label></th>
                         <th><label>Noisy</label></th>
-                        <th><label>Bonus</label></th>
+                        <th><label>Attack</label></th>
                         <th><label>Damage</label></th>
                         <th><label>Properties</label></th>
+                        <th></th>
                         <th></th>
                         <th></th>
                     </tr>
@@ -39,37 +40,37 @@
                 <tbody>
                     @foreach (string inventoryID in Model.Inventory.OrderBy(i => ItemDataContext.GetModelFromID(i.Substring(0, i.IndexOf("+"))).Name))
                     {
-                        ItemModel Item = ItemDataContext.GetModelFromID(inventoryID.Substring(0, inventoryID.IndexOf("+")));
-                    <tr data-toggle="modal" data-target="#popup-modal" data-title="@Item.Name" data-desc="@Item.PopUpText" data-traits="">
-                        <td>@Item.Name</td>
-                        <td class="@(Model.IsProficientWith(Item) ? "skill-proficient" : "" )">@Item.Type</td>
-                        <td>@Item.Weight lbs</td>
-                        <td>@Item.Cost cp</td>
-                        <td>@Item.IsMagic</td>
-                        <td class="@ViewHelper.Disable(!Item.Is(ItemTypeCategory.Armour))">@Item.Armour.ArmourClass</td>
-                        <td class="@ViewHelper.Disable(!Item.Is(ItemTypeCategory.Armour))">@Item.Armour.StrengthRequired</td>
-                        <td class="@ViewHelper.Disable(!Item.Is(ItemTypeCategory.Armour))">@Item.Armour.DisadvantageOnStealth</td>
-                        <td class="@ViewHelper.Disable(!Item.Is(ItemTypeCategory.Weapon))">@Item.Weapon.Plus</td>
-                        <td class="@ViewHelper.Disable(!Item.Is(ItemTypeCategory.Weapon))">@Item.Weapon.Damage.ToString()</td>
-                        <td class="@ViewHelper.Disable(!Item.Is(ItemTypeCategory.Weapon))">@Item.Weapon.Properties.ToString()</td>
-                        @if (!Item.Is(ItemTypeCategory.Other))
+                        if (!Model.Equipment.Contains(inventoryID))
                         {
-                            @if (Model.Equipment.Contains(inventoryID))
-                            {
-                                <td colspan="2">Equipped</td>
-                            }
-                            else
-                            {
-                                <td><button class="td-action-btn" value="Equip" onclick="equipItem('@Model.ID', '@inventoryID')"></button></td>
-                                <td><button class="td-action-btn" value="Remove" onclick="removeItemFromInventory('@Model.ID', '@inventoryID')"></button></td>
-                            }
+                            ItemModel Item = ItemDataContext.GetModelFromID(inventoryID.Substring(0, inventoryID.IndexOf("+")));
+                            <tr data-toggle="modal" data-target="#popup-modal" data-title="@Item.Name" data-desc="@Item.PopUpText" data-traits="">
+                                <td class="@(Item.IsMagic ? "item-magic" : "")">@Item.Name</td>
+                                <td class="@(Model.IsProficientWith(Item) ? "skill-proficient" : "" )">@Item.Type</td>
+                                <td>@Item.Weight lbs</td>
+                                @*<td>@Item.Cost cp</td>*@
+                                @*<td>@Item.IsMagic</td>*@
+                                <td class="@ViewHelper.Disable(!Item.Is(ItemTypeCategory.Armour))">@Item.Armour.ArmourClass</td>
+                                <td class="@ViewHelper.Disable(!Item.Is(ItemTypeCategory.Armour))">@Item.Armour.StrengthRequired</td>
+                                <td class="@ViewHelper.Disable(!Item.Is(ItemTypeCategory.Armour))">@(Item.Armour.DisadvantageOnStealth ? "Disadvantage" : "")</td>
+                                <td class="@ViewHelper.Disable(!Item.Is(ItemTypeCategory.Weapon))">@Model.GetAttackBonus(Item)</td>
+                                <td class="@ViewHelper.Disable(!Item.Is(ItemTypeCategory.Weapon))">@Model.GetDamageString(Item)</td>
+                                <td class="@ViewHelper.Disable(!Item.Is(ItemTypeCategory.Weapon))">@Item.Weapon.Properties.ToString()</td>
+                                @if (!Item.Is(ItemTypeCategory.Other))
+                                {
+                                    @*<td><button asp-action="GiveItem" value="Give" onclick="event.stopPropagation();" 
+                                                asp-route-cid="@Model.ID" asp-route-inventoryId="@inventoryID"></button></td>*@
+                                    <td><button class="td-action-btn" value="Give" onclick="giveItem('@Model.ID', '@inventoryID')"></button></td>
+                                    <td><button class="td-action-btn" value="Equip" onclick="equipItem('@Model.ID', '@inventoryID')"></button></td>
+                                    <td><button class="td-action-btn" value="Remove" onclick="removeItemFromInventory('@Model.ID', '@inventoryID')"></button></td>
+                                }
+                                else
+                                {
+                                    <td></td>
+                                    <td></td>
+                                    <td><button class="td-action-btn" value="Remove" onclick="removeItemFromInventory('@Model.ID', '@inventoryID')"></button></td>
+                                }
+                            </tr>
                         }
-                        else
-                        {
-                            <td></td>
-                            <td><button class="td-action-btn" value="Remove" onclick="removeItemFromInventory('@Model.ID', '@inventoryID')"></button></td>
-                        }
-                    </tr>
                     }
                 </tbody>
             </table>
