@@ -57,10 +57,8 @@
                                 <td class="@ViewHelper.Disable(!Item.Is(ItemTypeCategory.Weapon))">@Item.Weapon.Properties.ToString()</td>
                                 @if (!Item.Is(ItemTypeCategory.Other))
                                 {
-                                    @*<td><button asp-action="GiveItem" value="Give" onclick="event.stopPropagation();" 
-                                                asp-route-cid="@Model.ID" asp-route-inventoryId="@inventoryID"></button></td>*@
-                                    <td><button class="td-action-btn" value="Give" onclick="giveItem('@Model.ID', '@inventoryID')"></button></td>
                                     <td><button class="td-action-btn" value="Equip" onclick="equipItem('@Model.ID', '@inventoryID')"></button></td>
+                                    <td><button class="td-action-btn" value="Give" onclick="giveItem('@Model.ID', '@inventoryID')"></button></td>
                                     <td><button class="td-action-btn" value="Remove" onclick="removeItemFromInventory('@Model.ID', '@inventoryID')"></button></td>
                                 }
                                 else

@@ -192,7 +192,9 @@ namespace TheTallTankardTavern.Helpers
 
 		public static bool IsProficientWith(this CharacterModel Character, ItemType itemType)
         {
-			return Character.WeaponArmourProficiencies[itemType];
+			bool isProficient;
+			Character.WeaponArmourProficiencies.TryGetValue(itemType, out isProficient);
+			return isProficient;
 		}
 
 		public static int GetAttackBonus(this CharacterModel Character, ItemModel Weapon)
@@ -205,9 +207,10 @@ namespace TheTallTankardTavern.Helpers
 			int damage = Weapon.Weapon.Plus;
 
 			if (Weapon.Type.Equals(ItemType.SimpleRangedWeapon) || Weapon.Type.Equals(ItemType.MartialRangedWeapon) ||
-				(Weapon.Weapon.Properties.Finesse.Enabled && (Character.Dexterity.Modifier > Character.Strength.Modifier)))
+				Weapon.Weapon.Properties.Finesse.Enabled || Character.IsMonkAndHoldingMonkWeapon(Weapon))
 			{
-				damage += Character.Dexterity.Modifier;
+				damage += (Character.Dexterity.Modifier > Character.Strength.Modifier) ? 
+					Character.Dexterity.Modifier : Character.Strength.Modifier;
 			}
 			else if (Weapon.Type.Equals(ItemType.SimpleMeleeWeapon) || Weapon.Type.Equals(ItemType.MartialMeleeWeapon))
 			{
@@ -230,8 +233,12 @@ namespace TheTallTankardTavern.Helpers
 
 		public static bool IsArmourTooHeavy(this CharacterModel Character, ItemModel Armour)
         {
-
 			return Armour != null && Character.Strength.Score < Armour.Armour.StrengthRequired;
+        }
+
+		public static bool IsMonkAndHoldingMonkWeapon(this CharacterModel Character, ItemModel Item)
+        {
+			return Character.Class.ToLower().Contains("monk") && MONK_WEAPONS.Contains(Item.Type);
         }
 	}
 }

@@ -2,6 +2,7 @@
 {
     public enum ItemTypeCategory
     {
+        ParentType = 0x00,
         Armour,
         Other,
         Shield,

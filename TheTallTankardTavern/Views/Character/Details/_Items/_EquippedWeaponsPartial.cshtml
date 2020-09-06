@@ -22,7 +22,7 @@
         @if (Model.Equipment.TwoHand != null)
         {
             <tr data-toggle="modal" data-target="#popup-modal" data-title="@Model.Equipment.TwoHand.Name" data-desc="@Model.Equipment.TwoHand.PopUpText" data-traits="">
-                <td><strong>Two Hand</strong></td>
+                <td><strong>Both Hands</strong></td>
                 <td class="@(Model.Equipment.TwoHand.IsMagic ? "item-magic" : "")">@Model.Equipment.TwoHand.Name</td>
                 <td class=" @(Model.IsProficientWith(Model.Equipment.TwoHand) ? "skill-proficient" : "" )">
                     @Model.Equipment.TwoHand.Type

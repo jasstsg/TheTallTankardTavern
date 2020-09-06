@@ -1,6 +1,8 @@
-﻿using System.Reflection;
+﻿using Newtonsoft.Json;
+using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
-using System.Text.Json.Serialization;
 using TTT.Common.Abstractions;
 
 namespace TTT.Items
@@ -8,7 +10,10 @@ namespace TTT.Items
     public class ItemType : BaseStringEnum
     {
         [JsonIgnore]
-        public ItemType ParentType { get; set; } = null;
+        public ItemTypeCategory Category { get; }
+
+        [JsonIgnore]
+        public ItemType ParentType { get; } = null;
 
         public ItemType(string stringValue, ItemTypeCategory category) : base(stringValue)
         {
@@ -19,9 +24,6 @@ namespace TTT.Items
         {
             this.ParentType = ParentType;
         }
-
-        [JsonIgnore]
-        public ItemTypeCategory Category { get; private set; }
 
         public static readonly ItemType Miscellaneous = new ItemType("Miscellaneous", ItemTypeCategory.Other);
         public static readonly ItemType AdventuringGear = new ItemType("Adventuring Gear", ItemTypeCategory.Other);
@@ -50,10 +52,12 @@ namespace TTT.Items
         public static readonly ItemType Shield = new ItemType("Shield", ItemTypeCategory.Shield);
 
         //Weapon parent types
-        public static readonly ItemType SimpleMeleeWeapon = new ItemType("Simple Melee Weapon", ItemTypeCategory.Weapon);
-        public static readonly ItemType SimpleRangedWeapon = new ItemType("Simple Ranged Weapon", ItemTypeCategory.Weapon);
-        public static readonly ItemType MartialMeleeWeapon = new ItemType("Martial Melee Weapon", ItemTypeCategory.Weapon);
-        public static readonly ItemType MartialRangedWeapon = new ItemType("Martial Ranged Weapon", ItemTypeCategory.Weapon);
+        public static readonly ItemType ShieldAndArmour = new ItemType("Shield And Armour", ItemTypeCategory.ParentType);
+        public static readonly ItemType SimpleMeleeWeapon = new ItemType("Simple Melee Weapon", ItemTypeCategory.ParentType);
+        public static readonly ItemType SimpleRangedWeapon = new ItemType("Simple Ranged Weapon", ItemTypeCategory.ParentType);
+        public static readonly ItemType MartialMeleeWeapon = new ItemType("Martial Melee Weapon", ItemTypeCategory.ParentType);
+        public static readonly ItemType MartialRangedWeapon = new ItemType("Martial Ranged Weapon", ItemTypeCategory.ParentType);
+        public static readonly ItemType OtherWeapon = new ItemType("Other Weapon", ItemTypeCategory.ParentType);
         //public static readonly ItemType FirearmsRangedWeapon = new ItemType("Firearms Ranged Weapon", ItemTypeCategory.Weapon);
 
         //Simple Melee Weapons
@@ -101,13 +105,30 @@ namespace TTT.Items
         public static readonly ItemType Longbow = new ItemType("Longbow", ItemTypeCategory.Weapon, MartialRangedWeapon);
         public static readonly ItemType Net = new ItemType("Net", ItemTypeCategory.Weapon, MartialRangedWeapon);
 
+        //Other Weapons
+        public static readonly ItemType BuffItem = new ItemType("Buff Item", ItemTypeCategory.Weapon, OtherWeapon);
+        public static readonly ItemType DebuffItem = new ItemType("Debuff Item", ItemTypeCategory.Weapon, OtherWeapon);
+
         public static ItemType GetItemType(string stringName)
         {
             StringBuilder sb = new StringBuilder(stringName);
             sb.Replace("(", "");
             sb.Replace(")", "");
             sb.Replace(" ", "");
-            return (ItemType)typeof(ItemType).GetField(sb.ToString()).GetValue(null);
+            return (ItemType)typeof(ItemType).GetField(sb.ToString())?.GetValue(null);
+        }
+    }
+
+    public static class ItemTypeExtensions
+    {
+        public static bool HasChildType(this ItemType ParentItemType, ItemType ChildItemType)
+        {
+            return ChildItemType?.ParentType != null && ChildItemType.ParentType.Equals(ParentItemType);
+        }
+
+        public static bool HasChildType(this ItemType ParentItemType, string childItemTypeString)
+        {
+            return ParentItemType.HasChildType(ItemType.GetItemType(childItemTypeString));
         }
     }
 }

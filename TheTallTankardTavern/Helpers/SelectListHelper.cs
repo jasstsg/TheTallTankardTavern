@@ -95,23 +95,27 @@ namespace TheTallTankardTavern.Helpers
 		{
 			FieldInfo[] fields = typeof(ItemType).GetFields(BindingFlags.Public | BindingFlags.Static);
 			IEnumerable<ItemType> ItemTypes = fields.Select(f => (ItemType)f.GetValue(null))
-				.Where(itemTypes => !itemTypes.ToString().Contains("Weapon"));  //Skip weapon parent item types
+				.Where(itemTypes => !itemTypes.Category.Equals(ItemTypeCategory.ParentType));
 			IEnumerable<string> ItemTypeStrings = ItemTypes.Select(it => it.ToString());
 
 			SelectListGroup Other = new SelectListGroup() { Name = "Other" };
+			SelectListGroup ShieldAndArmour = new SelectListGroup() { Name = "Shield & Armour" };
 			SelectListGroup SimpleMeleeWeapons = new SelectListGroup() { Name = "Simple Melee Weapons" };
 			SelectListGroup SimpleRangedWeapons = new SelectListGroup() { Name = "Simple Ranged Weapons" };
 			SelectListGroup MartialMeleeWeapons = new SelectListGroup() { Name = "Martial Melee Weapons" };
 			SelectListGroup MartialRangedWeapons = new SelectListGroup() { Name = "Martial Ranged Weapons" };
+			SelectListGroup OtherWeapons = new SelectListGroup() { Name = "Other Weapons" };
 
 			SelectList ItemTypeSelectList = new SelectList(ItemTypeStrings);
-			foreach (SelectListItem sli in ItemTypeSelectList)
+			foreach (SelectListItem item in ItemTypeSelectList)
             {
-				ItemType i = ItemTypes.First(x => x.ToString().Equals(sli.Text));
-				sli.Group = i.ParentType == ItemType.SimpleMeleeWeapon ? SimpleMeleeWeapons :
+				ItemType i = ItemTypes.First(x => x.ToString().Equals(item.Text));
+				item.Group = i.ParentType == ItemType.ShieldAndArmour ? ShieldAndArmour :
+					i.ParentType == ItemType.SimpleMeleeWeapon ? SimpleMeleeWeapons :
 					i.ParentType == ItemType.SimpleRangedWeapon ? SimpleRangedWeapons :
 					i.ParentType == ItemType.MartialMeleeWeapon ? MartialMeleeWeapons :
-					i.ParentType == ItemType.MartialRangedWeapon ? MartialRangedWeapons : Other;
+					i.ParentType == ItemType.MartialRangedWeapon ? MartialRangedWeapons : 
+					i.ParentType == ItemType.OtherWeapon ? OtherWeapons : Other;
 			}
 			return ItemTypeSelectList;
 		}

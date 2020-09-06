@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace TTT.Collections.Generic.List.Extensions
+namespace TTT.Collections.Generic.Extensions
 {
 	public static class ListExtensions
 	{

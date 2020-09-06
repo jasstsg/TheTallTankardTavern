@@ -12,6 +12,14 @@ namespace TheTallTankardTavern.Models
     {
         public WeaponArmourProficienciesModel()
         {
+            //Parent Item Types
+            //this.Add(ItemType.ShieldAndArmour, false);
+            //this.Add(ItemType.SimpleMeleeWeapon, false);
+            //this.Add(ItemType.SimpleRangedWeapon, false);
+            //this.Add(ItemType.MartialMeleeWeapon, false);
+            //this.Add(ItemType.MartialRangedWeapon, false);
+            //this.Add(ItemType.OtherWeapon, false);
+
             //Shield and Armour
             this.Add(ItemType.Shield, false);
             this.Add(ItemType.LightArmour, false);
@@ -62,35 +70,30 @@ namespace TheTallTankardTavern.Models
             this.Add(ItemType.HeavyCrossbow, false);
             this.Add(ItemType.Longbow, false);
             this.Add(ItemType.Net, false);
+
+            //Other Weapon
+            //this.Add(ItemType.BuffItem, false);
+            //this.Add(ItemType.DebuffItem, false);
         }
 
-        public IEnumerable<string> ShieldAndArmourKeys()
+        public IEnumerable<string> ShieldAndArmourKeys
         {
-            return this.Keys.Where(k => ItemType.GetItemType(k).Category.EqualsAny(ItemTypeCategory.Shield, ItemTypeCategory.Armour));
+            get
+            {
+                return this.Keys.Where(k => ItemType.GetItemType(k).Category
+                .EqualsAny(ItemTypeCategory.Shield, ItemTypeCategory.Armour));
+            }
         }
 
-        public IEnumerable<string> SimpleMeleeWeaponKeys()
-        {
-            return this.Keys.Where(k => ItemType.GetItemType(k).ParentType != null &&
-            ItemType.GetItemType(k).ParentType.Equals(ItemType.SimpleMeleeWeapon));
-        }
+        public IEnumerable<string> SimpleMeleeWeaponKeys { get { return GetWeaponKeys(ItemType.SimpleMeleeWeapon); } }
+        public IEnumerable<string> SimpleRangedWeaponKeys { get { return GetWeaponKeys(ItemType.SimpleRangedWeapon); } }
+        public IEnumerable<string> MartialMeleeWeaponKeys { get { return GetWeaponKeys(ItemType.MartialMeleeWeapon); } }
+        public IEnumerable<string> MartialRangedWeaponKeys { get { return GetWeaponKeys(ItemType.MartialRangedWeapon); } }
+        public IEnumerable<string> OtherWeapons { get { return GetWeaponKeys(ItemType.OtherWeapon); } }
 
-        public IEnumerable<string> SimpleRangedWeaponKeys()
+        private IEnumerable<string> GetWeaponKeys(ItemType ParentItemType)
         {
-            return this.Keys.Where(k => ItemType.GetItemType(k).ParentType != null &&
-             ItemType.GetItemType(k).ParentType.Equals(ItemType.SimpleRangedWeapon));
-        }
-
-        public IEnumerable<string> MartialMeleeWeaponKeys()
-        {
-            return this.Keys.Where(k => ItemType.GetItemType(k).ParentType != null &&
-             ItemType.GetItemType(k).ParentType.Equals(ItemType.MartialMeleeWeapon));
-        }
-
-        public IEnumerable<string> MartialRangedWeaponKeys()
-        {
-            return this.Keys.Where(k => ItemType.GetItemType(k).ParentType != null &&
-             ItemType.GetItemType(k).ParentType.Equals(ItemType.MartialRangedWeapon));
+            return this.Keys.Where(k => ParentItemType.HasChildType(k));
         }
     }
 }

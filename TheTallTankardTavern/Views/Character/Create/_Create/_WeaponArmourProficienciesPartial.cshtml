@@ -12,7 +12,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (string prof in Model.WeaponArmourProficiencies.ShieldAndArmourKeys())
+                    @foreach (string prof in Model.WeaponArmourProficiencies.ShieldAndArmourKeys)
                     {
                         <tr>
                             <td><input type="checkbox" asp-for="WeaponArmourProficiencies[prof]" /></td>
@@ -28,7 +28,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (string prof in Model.WeaponArmourProficiencies.SimpleMeleeWeaponKeys())
+                    @foreach (string prof in Model.WeaponArmourProficiencies.SimpleMeleeWeaponKeys)
                     {
                         <tr>
                             <td><input type="checkbox" asp-for="WeaponArmourProficiencies[prof]" /></td>
@@ -46,7 +46,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (string prof in Model.WeaponArmourProficiencies.MartialMeleeWeaponKeys())
+                    @foreach (string prof in Model.WeaponArmourProficiencies.MartialMeleeWeaponKeys)
                     {
                         <tr>
                             <td><input type="checkbox" asp-for="WeaponArmourProficiencies[prof]" /></td>
@@ -64,7 +64,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (string prof in Model.WeaponArmourProficiencies.SimpleRangedWeaponKeys())
+                    @foreach (string prof in Model.WeaponArmourProficiencies.SimpleRangedWeaponKeys)
                     {
                         <tr>
                             <td><input type="checkbox" asp-for="WeaponArmourProficiencies[prof]" /></td>
@@ -80,7 +80,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (string prof in Model.WeaponArmourProficiencies.MartialRangedWeaponKeys())
+                    @foreach (string prof in Model.WeaponArmourProficiencies.MartialRangedWeaponKeys)
                     {
                         <tr>
                             <td><input type="checkbox" asp-for="WeaponArmourProficiencies[prof]" /></td>
@@ -89,6 +89,22 @@
                     }
                 </tbody>
             </table>
+            @*<table id="other-weapons">
+                <thead>
+                    <tr>
+                        <th colspan="2">Other Weapons</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (string prof in Model.WeaponArmourProficiencies.OtherWeapons)
+                    {
+                        <tr>
+                            <td><input type="checkbox" asp-for="WeaponArmourProficiencies[prof]" /></td>
+                            <td><label>@prof</label></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>*@
         </div>
     </div>
 </div>

@@ -1,5 +1,37 @@
-﻿@model TheTallTankardTavern.Models.CharacterModel
+﻿@using TTT.Items 
+@using TTT.Collections.Generic.Extensions 
+@model TheTallTankardTavern.Models.CharacterModel
 @addTagHelper *, TheTallTankardTavern
+
+@{ 
+    Dictionary<string, bool> ApplicableProficencies = Model.WeaponArmourProficiencies.ToDictionary(k => k.Key, v => v.Value);
+
+    //Only take the ones that are applicable
+    ApplicableProficencies = ApplicableProficencies.Where(kvp => ApplicableProficencies[kvp.Key]).ToDictionary(k => k.Key, v => v.Value);
+
+    //If character has all child weapon types of a parent type, swap the children for the parent
+    if (Model.WeaponArmourProficiencies.SimpleMeleeWeaponKeys.All(k => ApplicableProficencies.ContainsKey(k)))
+    {
+        ApplicableProficencies.RemoveAll((k,v) => ItemType.SimpleMeleeWeapon.HasChildType(k));
+        ApplicableProficencies[ItemType.SimpleMeleeWeapon] = true;
+    }
+    if (Model.WeaponArmourProficiencies.SimpleRangedWeaponKeys.All(k => ApplicableProficencies.ContainsKey(k)))
+    {
+        ApplicableProficencies.RemoveAll((k, v) => ItemType.SimpleRangedWeapon.HasChildType(k));
+        ApplicableProficencies[ItemType.SimpleRangedWeapon] = true;
+    }
+    if (Model.WeaponArmourProficiencies.MartialMeleeWeaponKeys.All(k => ApplicableProficencies.ContainsKey(k)))
+    {
+        ApplicableProficencies.RemoveAll((k, v) => ItemType.MartialMeleeWeapon.HasChildType(k));
+        ApplicableProficencies[ItemType.MartialMeleeWeapon] = true;
+    }
+    if (Model.WeaponArmourProficiencies.MartialRangedWeaponKeys.All(k => ApplicableProficencies.ContainsKey(k)))
+    {
+        ApplicableProficencies.RemoveAll((k, v) => ItemType.MartialRangedWeapon.HasChildType(k));
+        ApplicableProficencies[ItemType.MartialRangedWeapon] = true;
+    }
+
+}
 
 <style>
     #character-other-proficiencies textarea {
@@ -13,14 +45,12 @@
     <u>Weapon &amp; Armour</u>
     <table>
         <tbody>
-            @foreach (string prof in Model.WeaponArmourProficiencies.Keys)
+
+            @foreach (string prof in ApplicableProficencies.Select(kvp => kvp.Key).OrderBy(s => s))
             {
-                if (Model.WeaponArmourProficiencies[prof])
-                {
-                    <tr>
-                        <td>@prof</td>
-                    </tr>
-                }
+                <tr>
+                    <td>@prof</td>
+                </tr>
             }
         </tbody>
     </table>
