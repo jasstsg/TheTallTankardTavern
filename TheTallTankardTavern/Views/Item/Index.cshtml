@@ -34,7 +34,7 @@
         {
             <tr data-toggle="modal" data-target="#popup-modal" data-title="@i.Name" data-desc="@(i.PopUpText)">
                 <td class="@(i.IsMagic ? "item-magic" : "")">@i.Name</td>
-                <td>@i.Type</td>
+                <td>@i.Type (@i.Type.Category.ToString())</td>
                 <td>@i.Weight lbs</td>
                 <td>@i.Cost cp</td>
                 @*<td>@i.IsMagic</td>*@

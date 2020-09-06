@@ -50,7 +50,8 @@ namespace TheTallTankardTavern.Controllers
 		public static bool IsMatch(this ItemModel item, string searchtext)
 		{
 			searchtext = searchtext.ToLower();
-			return item.Name.SafeContains(searchtext) || item.Type.ToString().SafeContains(searchtext);
+			return item.Name.SafeContains(searchtext) || item.Type.ToString().SafeContains(searchtext) ||
+				item.Type.Category.ToString().SafeContains(searchtext);
 		}
 
 		private static bool SafeContains(this string searchProperty, string searchtext)
