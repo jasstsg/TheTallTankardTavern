@@ -1,0 +1,16 @@
+﻿@model TheTallTankardTavern.Models.CharacterModel
+@addTagHelper *, TheTallTankardTavern
+
+<strong>UNARMED STRIKE</strong>
+<table>
+    <tbody>
+        <tr>
+            <td><label>Attack</label></td>
+            <td>+@Model.UnarmedStrikeAttack()</td>
+        </tr>
+        <tr>
+            <td><label>Weight</label></td>
+            <td>@Model.UnarmedStrikeDamageString()</td>
+        </tr>
+    </tbody>
+</table>

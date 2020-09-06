@@ -286,5 +286,33 @@ namespace TheTallTankardTavern.Helpers
 					return false;
 			}
 		}
+
+		public static int UnarmedStrikeAttack(this CharacterModel Character)
+        {
+			if (Character.Class == "Monk" && Character.Dexterity.Score > Character.Strength.Score)
+            {
+				return Character.Proficiency_Bonus + Character.Dexterity.Modifier;
+            }
+			return  Character.Proficiency_Bonus + Character.Strength.Modifier;
+        }
+
+		public static string UnarmedStrikeDamageString(this CharacterModel Character)
+        {
+			if (Character.Class == "Monk")
+            {
+				string damageDie;
+				int damageBonus = Character.Dexterity.Score > Character.Strength.Score ?
+					Character.Dexterity.Modifier : Character.Strength.Modifier;
+				if (Character.Level <= 4) { damageDie = "1D4"; }
+				else if (Character.Level <= 10) { damageDie = "1D6"; }
+				else if (Character.Level <= 16) { damageDie = "1D8"; }
+				else if (Character.Level <= 20) { damageDie = "1D10"; }
+				else if (Character.Level <= 20) { damageDie = "1D10"; }
+				else { damageDie = "1D12"; }
+
+				return $"{damageDie} + {damageBonus} Bludgeoning";
+            }
+			return $"{1 + Character.Strength.Modifier} Bludgeoning";
+        }
 	}
 }

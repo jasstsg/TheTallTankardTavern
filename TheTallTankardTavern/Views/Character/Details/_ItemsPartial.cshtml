@@ -3,19 +3,19 @@
 
 <div>
     <div class="row">
+        <div class="flex-fill">
+            <partial name="/Views/Character/Details/_Items/_EquippedArmourAndShieldPartial.cshtml" model="Model" />
+        </div>
         @if (Model.Equipment.SpellCastingFocus != null)
         {
-            <div class="col-md-7">
-                <partial name="/Views/Character/Details/_Items/_EquippedArmourAndShieldPartial.cshtml" model="Model" />
-            </div>
             <div class="col-md-3">
                 <partial name="/Views/Character/Details/_Items/_EquippedFocusPartial.cshtml" model="Model" />
             </div>
         }
-        else
+        @if (Model.Equipment.SpellCastingFocus == null && Model.Equipment.Shield == null && Model.Equipment.OffHand == null)
         {
-            <div class="col-md-10">
-                <partial name="/Views/Character/Details/_Items/_EquippedArmourAndShieldPartial.cshtml" model="Model" />
+            <div class="col-md-3">
+                <partial name="/Views/Character/Details/_Items/_UnarmedStrikePartial.cshtml" model="Model" />
             </div>
         }
         <div class="col-md-2">
