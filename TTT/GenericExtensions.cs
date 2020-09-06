@@ -30,7 +30,7 @@ namespace TTT
             foreach(PropertyInfo property in Properties)
             {
                 var updatedValue = property.GetValue(UpdatedObject);
-                if (updatedValue == null || ((updatedValue is string @string) && string.IsNullOrEmpty(@string)))
+                if (updatedValue == null)
                 {
                     continue;   //Then skip updating this value
                 }

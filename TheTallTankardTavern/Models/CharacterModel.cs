@@ -61,18 +61,14 @@ namespace TheTallTankardTavern.Models
 
         #region Private Variables
         private string _player_name;
-
 		private string _class;
-
 		private string _subclass;
-
 		private string _race;
-
 		private string _subrace;
-
 		private string _alignment;
-
 		private int[] _spell_slot_max;
+		private string _notes;
+		private string _proficiencies;
         #endregion
 
         [DisplayName("Player Name")]
@@ -314,10 +310,10 @@ namespace TheTallTankardTavern.Models
 		}
 
 		[DisplayName("Notes")]
-		public string Notes { get; set; } = "";
+		public string Notes { get { return _notes; } set { _notes = string.IsNullOrEmpty(value) ? "" : value; } }
 
 		[DisplayName("Proficiencies")]
-		public string Proficiencies { get; set; } = "";
+		public string Proficiencies { get { return _proficiencies; } set { _proficiencies = string.IsNullOrEmpty(value) ? "" : value; } }
 
 		[DisplayName("Weapon & Armour Proficiencies")]
 		public WeaponArmourProficienciesModel WeaponArmourProficiencies { get; set; } = new WeaponArmourProficienciesModel();
