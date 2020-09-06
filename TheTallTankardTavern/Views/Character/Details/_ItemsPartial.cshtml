@@ -6,18 +6,13 @@
         <div class="flex-fill">
             <partial name="/Views/Character/Details/_Items/_EquippedArmourAndShieldPartial.cshtml" model="Model" />
         </div>
-        @if (Model.Equipment.SpellCastingFocus != null)
-        {
-            <div class="col-md-3">
+        <div class="col-md-3">
+            <partial name="/Views/Character/Details/_Items/_UnarmedStrikePartial.cshtml" model="Model" />
+            @if (Model.Equipment.SpellCastingFocus != null)
+            {
                 <partial name="/Views/Character/Details/_Items/_EquippedFocusPartial.cshtml" model="Model" />
-            </div>
-        }
-        @if (Model.Equipment.SpellCastingFocus == null && Model.Equipment.Shield == null && Model.Equipment.OffHand == null)
-        {
-            <div class="col-md-3">
-                <partial name="/Views/Character/Details/_Items/_UnarmedStrikePartial.cshtml" model="Model" />
-            </div>
-        }
+            }
+        </div>
         <div class="col-md-2">
             <partial name="/Views/Character/Details/_Items/_CoinsPartial.cshtml" model="Model" />
         </div>

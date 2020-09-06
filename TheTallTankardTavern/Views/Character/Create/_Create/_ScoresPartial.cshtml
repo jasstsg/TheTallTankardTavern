@@ -19,7 +19,6 @@
             <th>Mod</th>
             <th>Save</th>
             <th>Save Proficiency</th>
-            <th>DC</th>
         </tr>
     </thead>
     <tbody>
@@ -29,7 +28,6 @@
             <td>@Model.Strength.Modifier</td>
             <td>@Model.GetSaveProficiency(SKILL_CATEGORY.Strength, Model.Strength_Save)</td>
             <td class="@SkillHighlight(Model.Strength_Save)"><select asp-for="Strength_Save" asp-items="SelectListHelper.GetSaveProficiencySelectList()"></select></td>
-            <td>@(Model.Proficiency_Bonus + Model.Strength.Modifier + 8)</td>
         </tr>
         <tr>
             <td><strong>DEX</strong></td>
@@ -37,7 +35,6 @@
             <td>@Model.Dexterity.Modifier</td>
             <td>@Model.GetSaveProficiency(SKILL_CATEGORY.Dexterity, Model.Dexterity_Save)</td>
             <td class="@SkillHighlight(Model.Dexterity_Save)"><select asp-for="Dexterity_Save" asp-items="SelectListHelper.GetSaveProficiencySelectList()"></select></td>
-            <td>@(Model.Proficiency_Bonus + Model.Dexterity.Modifier + 8)</td>
         </tr>
         <tr>
             <td><strong>CON</strong></td>
@@ -45,7 +42,6 @@
             <td>@Model.Constitution.Modifier</td>
             <td>@Model.GetSaveProficiency(SKILL_CATEGORY.Constitution, Model.Constitution_Save)</td>
             <td class="@SkillHighlight(Model.Constitution_Save)"><select asp-for="Constitution_Save" asp-items="SelectListHelper.GetSaveProficiencySelectList()"></select></td>
-            <td>@(Model.Proficiency_Bonus + Model.Constitution.Modifier + 8)</td>
         </tr>
         <tr>
             <td><strong>INT</strong></td>
@@ -53,7 +49,6 @@
             <td>@Model.Intelligence.Modifier</td>
             <td>@Model.GetSaveProficiency(SKILL_CATEGORY.Intelligence, Model.Intelligence_Save)</td>
             <td class="@SkillHighlight(Model.Intelligence_Save)"><select asp-for="Intelligence_Save" asp-items="SelectListHelper.GetSaveProficiencySelectList()"></select></td>
-            <td>@(Model.Proficiency_Bonus + Model.Intelligence.Modifier + 8)</td>
         </tr>
         <tr>
             <td><strong>WIS</strong></td>
@@ -61,7 +56,6 @@
             <td>@Model.Wisdom.Modifier</td>
             <td>@Model.GetSaveProficiency(SKILL_CATEGORY.Wisdom, Model.Wisdom_Save)</td>
             <td class="@SkillHighlight(Model.Wisdom_Save)"><select asp-for="Wisdom_Save" asp-items="SelectListHelper.GetSaveProficiencySelectList()"></select></td>
-            <td>@(Model.Proficiency_Bonus + Model.Wisdom.Modifier + 8)</td>
         </tr>
         <tr>
             <td><strong>CHA</strong></td>
@@ -69,7 +63,6 @@
             <td>@Model.Charisma.Modifier</td>
             <td>@Model.GetSaveProficiency(SKILL_CATEGORY.Charisma, Model.Charisma_Save)</td>
             <td class="@SkillHighlight(Model.Charisma_Save)"><select asp-for="Charisma_Save" asp-items="SelectListHelper.GetSaveProficiencySelectList()"></select></td>
-            <td>@(Model.Proficiency_Bonus + Model.Charisma.Modifier + 8)</td>
         </tr>
     </tbody>
 </table>

@@ -21,6 +21,7 @@
 <table table-hover="true">
     <thead>
         <tr>
+            <th></th>
             <th><label>Name</label></th>
             <th><label>Type</label></th>
             <th><label>Weight</label></th>
@@ -29,32 +30,32 @@
             <th><label>AC</label></th>
             <th><label>Str</label></th>
             <th><label>Stealth</label></th>
-            <th></th>
             @*<th></th>*@
         </tr>
     </thead>
     <tbody>
         @if (Model.Equipment.Armour != null)
         {
-            <tr data-toggle="modal" data-target="#popup-modal" data-title="@Model.Equipment.Armour.Name" data-desc="@Model.Equipment.Armour.PopUpText" data-traits="">
-                <td class="@(Model.Equipment.Armour.IsMagic ? "item-magic" : "")">@Model.Equipment.Armour.Name</td>
-                <td class=" @(Model.IsProficientWith(Model.Equipment.Armour) ? "skill-proficient" : "" )">
-                    @Model.Equipment.Armour.Type
-                </td>
-                <td>@Model.Equipment.Armour.Weight lbs</td>
-                @*<td>@Model.Equipment.Armour.Cost cp</td>*@
-                @*<td>@Model.Equipment.Armour.IsMagic</td>*@
-                <td>@Model.Equipment.Armour.Armour.ArmourClass</td>
-                <td>@Model.Equipment.Armour.Armour.StrengthRequired</td>
-                <td>@(Model.Equipment.Armour.Armour.DisadvantageOnStealth ? "Disadvatage" : "")</td>
-                <td><button class="td-action-btn" value="Unequip" onclick="unequipArmour('@Model.ID', '@Model.Equipment.Armour.InventoryID')"></button></td>
-                @*<td><button class="td-action-btn" value="Remove" onclick="removeItemFromEquipment('@Model.ID', '@instanceID')"></button></td>*@
-            </tr>
+        <tr data-toggle="modal" data-target="#popup-modal" data-title="@Model.Equipment.Armour.Name" data-desc="@Model.Equipment.Armour.PopUpText" data-traits="">
+            <td><button class="td-action-btn" value="Unequip" onclick="unequipArmour('@Model.ID', '@Model.Equipment.Armour.InventoryID')"></button></td>
+            <td class="@(Model.Equipment.Armour.IsMagic ? "item-magic" : "")">@Model.Equipment.Armour.Name</td>
+            <td class=" @(Model.IsProficientWith(Model.Equipment.Armour) ? "skill-proficient" : "" )">
+                @Model.Equipment.Armour.Type
+            </td>
+            <td>@Model.Equipment.Armour.Weight lbs</td>
+            @*<td>@Model.Equipment.Armour.Cost cp</td>*@
+            @*<td>@Model.Equipment.Armour.IsMagic</td>*@
+            <td>@Model.Equipment.Armour.Armour.ArmourClass</td>
+            <td>@Model.Equipment.Armour.Armour.StrengthRequired</td>
+            <td>@(Model.Equipment.Armour.Armour.DisadvantageOnStealth ? "Disadvatage" : "")</td>
+            @*<td><button class="td-action-btn" value="Remove" onclick="removeItemFromEquipment('@Model.ID', '@instanceID')"></button></td>*@
+        </tr>
 
         }
         @if (Model.Equipment.Shield != null)
         {
             <tr data-toggle="modal" data-target="#popup-modal" data-title="@Model.Equipment.Shield.Name" data-desc="@Model.Equipment.Shield.PopUpText" data-traits="">
+                <td><button class="td-action-btn" value="Unequip" onclick="unequipShield('@Model.ID', '@Model.Equipment.Shield.InventoryID')"></button></td>
                 <td class="@(Model.Equipment.Shield.IsMagic ? "item-magic" : "")">@Model.Equipment.Shield.Name</td>
                 <td class=" @(Model.IsProficientWith(Model.Equipment.Shield) ? "skill-proficient" : "" )">
                     @Model.Equipment.Shield.Type
@@ -65,7 +66,6 @@
                 <td>@Model.Equipment.Shield.Armour.ArmourClass</td>
                 <td>@Model.Equipment.Shield.Armour.StrengthRequired</td>
                 <td>@(Model.Equipment.Armour.Armour.DisadvantageOnStealth ? "Disadvatage" : "")</td>
-                <td><button class="td-action-btn" value="Unequip" onclick="unequipShield('@Model.ID', '@Model.Equipment.Shield.InventoryID')"></button></td>
                 @*<td><button class="td-action-btn" value="Remove" onclick="removeItemFromEquipment('@Model.ID', '@instanceID')"></button></td>*@
             </tr>
         }

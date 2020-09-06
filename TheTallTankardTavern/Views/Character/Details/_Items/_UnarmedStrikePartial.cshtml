@@ -1,16 +1,21 @@
 ﻿@model TheTallTankardTavern.Models.CharacterModel
 @addTagHelper *, TheTallTankardTavern
 
-<strong>UNARMED STRIKE</strong>
-<table>
-    <tbody>
-        <tr>
-            <td><label>Attack</label></td>
-            <td>+@Model.UnarmedStrikeAttack()</td>
-        </tr>
-        <tr>
-            <td><label>Damage</label></td>
-            <td>@Model.UnarmedStrikeDamageString()</td>
-        </tr>
-    </tbody>
-</table>
+<style>
+    .card#unarmed-strike {
+        margin-top: 10px;
+    }
+    .card#unarmed-strike .card-title {
+        margin: 0px;
+    }
+    .card#unarmed-strike .card-text {
+        margin-top: 5px;
+    }
+</style>
+<div class="card" id="unarmed-strike">
+    <div class="card-body">
+        <div class="card-title">UNARMED STRIKE</div>
+        <div class="card-text">+@Model.UnarmedStrikeAttack() to attack</div>
+        <div class="card-text">@Model.UnarmedStrikeDamageString() damage</div>
+    </div>
+</div>

@@ -1,9 +1,9 @@
-﻿@using TTT.Items 
-@using TTT.Collections.Generic.Extensions 
+﻿@using TTT.Items
+@using TTT.Collections.Generic.Extensions
 @model TheTallTankardTavern.Models.CharacterModel
 @addTagHelper *, TheTallTankardTavern
 
-@{ 
+@{
     Dictionary<string, bool> ApplicableProficencies = Model.WeaponArmourProficiencies.ToDictionary(k => k.Key, v => v.Value);
 
     //Only take the ones that are applicable
@@ -12,7 +12,7 @@
     //If character has all child weapon types of a parent type, swap the children for the parent
     if (Model.WeaponArmourProficiencies.SimpleMeleeWeaponKeys.All(k => ApplicableProficencies.ContainsKey(k)))
     {
-        ApplicableProficencies.RemoveAll((k,v) => ItemType.SimpleMeleeWeapon.HasChildType(k));
+        ApplicableProficencies.RemoveAll((k, v) => ItemType.SimpleMeleeWeapon.HasChildType(k));
         ApplicableProficencies[ItemType.SimpleMeleeWeapon] = true;
     }
     if (Model.WeaponArmourProficiencies.SimpleRangedWeaponKeys.All(k => ApplicableProficencies.ContainsKey(k)))
@@ -41,6 +41,17 @@
     }
 </style>
 <strong>Proficiencies</strong>
+<div id="character-other-proficiencies">
+    <u>Miscellaneous</u>
+    @if (!string.IsNullOrEmpty(Model.Proficiencies))
+    {
+        <textarea readonly="readonly" asp-for="Proficiencies" rows="4"></textarea>
+    }
+    else
+    {
+        <textarea readonly="readonly">Wow really? Nothing?</textarea>
+    }
+</div>
 <div class="character-weapon-armour-proficiencies">
     <u>Weapon &amp; Armour</u>
     <table>
@@ -54,15 +65,4 @@
             }
         </tbody>
     </table>
-</div>
-<div id="character-other-proficiencies">
-    <u>Other</u>
-    @if (!string.IsNullOrEmpty(Model.Proficiencies))
-    {
-        <textarea readonly="readonly" asp-for="Proficiencies" rows="10"></textarea>
-    }
-    else
-    {
-        <textarea readonly="readonly">Wow really? Nothing?</textarea>
-    }
 </div>

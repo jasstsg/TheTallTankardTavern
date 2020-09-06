@@ -9,16 +9,6 @@
     #character-scores td {
         text-align: center;
     }
-    .card {
-        margin-top: 30px;
-    }
-    .card-body {
-        padding: 5px;
-        text-align: center;
-    }
-    .card-title {
-        font-weight: bold;
-    }
 </style>
 
 <div class="row">
@@ -86,8 +76,6 @@
             </tbody>
         </table>
     </div>
-    @if (Model.IsSpellCaster())
-    {
         <div class="col-md-4">
             <div class="card">
                 <div class="card-body">
@@ -102,5 +90,4 @@
                 </div>
             </div>
         </div>
-    }
 </div>

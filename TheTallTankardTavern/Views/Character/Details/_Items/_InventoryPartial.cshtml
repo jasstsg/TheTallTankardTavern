@@ -21,6 +21,7 @@
             <table table-hover="true">
                 <thead>
                     <tr>
+                        <th></th>
                         <th><label>Name</label></th>
                         <th><label>Type</label></th>
                         <th><label>Weight</label></th>
@@ -34,7 +35,6 @@
                         <th><label>Properties</label></th>
                         <th></th>
                         <th></th>
-                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -44,6 +44,12 @@
                         {
                             ItemModel Item = ItemDataContext.GetModelFromID(inventoryID.Substring(0, inventoryID.IndexOf("+")));
                             <tr data-toggle="modal" data-target="#popup-modal" data-title="@Item.Name" data-desc="@Item.PopUpText" data-traits="">
+                                <td>
+                                @if (!Item.Is(ItemTypeCategory.Other))
+                                {
+                                    <button class="td-action-btn" value="Equip" onclick="equipItem('@Model.ID', '@inventoryID')"></button>
+                                }
+                                </td>
                                 <td class="@(Item.IsMagic ? "item-magic" : "")">@Item.Name</td>
                                 <td class="@(Model.IsProficientWith(Item) ? "skill-proficient" : "" )">@Item.Type</td>
                                 <td>@Item.Weight lbs</td>
@@ -57,13 +63,11 @@
                                 <td class="@ViewHelper.Disable(!Item.Is(ItemTypeCategory.Weapon))">@Item.Weapon.Properties.ToString()</td>
                                 @if (!Item.Is(ItemTypeCategory.Other))
                                 {
-                                    <td><button class="td-action-btn" value="Equip" onclick="equipItem('@Model.ID', '@inventoryID')"></button></td>
                                     <td><button class="td-action-btn" value="Give" onclick="giveItem('@Model.ID', '@inventoryID')"></button></td>
                                     <td><button class="td-action-btn" value="Remove" onclick="removeItemFromInventory('@Model.ID', '@inventoryID')"></button></td>
                                 }
                                 else
                                 {
-                                    <td></td>
                                     <td></td>
                                     <td><button class="td-action-btn" value="Remove" onclick="removeItemFromInventory('@Model.ID', '@inventoryID')"></button></td>
                                 }

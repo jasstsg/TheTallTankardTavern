@@ -6,6 +6,7 @@
     <thead>
         <tr>
             <th></th>
+            <th></th>
             <th><label>Name</label></th>
             <th><label>Type</label></th>
             <th><label>Weight</label></th>
@@ -14,33 +15,32 @@
             <th><label>Attack</label></th>
             <th><label>Damage</label></th>
             <th><label>Properties</label></th>
-            <th></th>
             @*<th></th>*@
         </tr>
     </thead>
     <tbody>
         @if (Model.Equipment.TwoHand != null)
         {
-            <tr data-toggle="modal" data-target="#popup-modal" data-title="@Model.Equipment.TwoHand.Name" data-desc="@Model.Equipment.TwoHand.PopUpText" data-traits="">
-                <td><strong>Both Hands</strong></td>
-                <td class="@(Model.Equipment.TwoHand.IsMagic ? "item-magic" : "")">@Model.Equipment.TwoHand.Name</td>
-                <td class=" @(Model.IsProficientWith(Model.Equipment.TwoHand) ? "skill-proficient" : "" )">
-                    @Model.Equipment.TwoHand.Type
-                </td>
-               <td>@Model.Equipment.TwoHand.Weight lbs</td>
-               @*<td>@Model.Equipment.TwoHand.Cost cp</td>*@
-               @*<td>@Model.Equipment.TwoHand.IsMagic</td>*@
-               <td>+@Model.GetAttackBonus(Model.Equipment.TwoHand)</td>
-               <td>@Model.GetDamageString(Model.Equipment.TwoHand)</td>
-               <td>@Model.Equipment.TwoHand.Weapon.Properties.ToString()</td>
-
-               <td><button class="td-action-btn" value="Unequip" onclick="unequipTwoHand('@Model.ID', '@Model.Equipment.TwoHand.InventoryID')"></button></td>
-                @*<td><button class="td-action-btn" value="Remove" onclick="removeItemFromEquipment('@Model.ID', '@instanceID')"></button></td>*@
-            </tr>
+        <tr data-toggle="modal" data-target="#popup-modal" data-title="@Model.Equipment.TwoHand.Name" data-desc="@Model.Equipment.TwoHand.PopUpText" data-traits="">
+            <td><button class="td-action-btn" value="Unequip" onclick="unequipTwoHand('@Model.ID', '@Model.Equipment.TwoHand.InventoryID')"></button></td>
+            <td><strong>Both Hands</strong></td>
+            <td class="@(Model.Equipment.TwoHand.IsMagic ? "item-magic" : "")">@Model.Equipment.TwoHand.Name</td>
+            <td class=" @(Model.IsProficientWith(Model.Equipment.TwoHand) ? "skill-proficient" : "" )">
+                @Model.Equipment.TwoHand.Type
+            </td>
+            <td>@Model.Equipment.TwoHand.Weight lbs</td>
+            @*<td>@Model.Equipment.TwoHand.Cost cp</td>*@
+            @*<td>@Model.Equipment.TwoHand.IsMagic</td>*@
+            <td>+@Model.GetAttackBonus(Model.Equipment.TwoHand)</td>
+            <td>@Model.GetDamageString(Model.Equipment.TwoHand)</td>
+            <td>@Model.Equipment.TwoHand.Weapon.Properties.ToString()</td>
+            @*<td><button class="td-action-btn" value="Remove" onclick="removeItemFromEquipment('@Model.ID', '@instanceID')"></button></td>*@
+        </tr>
         }
         @if (Model.Equipment.MainHand != null)
         {
             <tr data-toggle="modal" data-target="#popup-modal" data-title="@Model.Equipment.MainHand.Name" data-desc="@Model.Equipment.MainHand.PopUpText" data-traits="">
+                <td><button class="td-action-btn" value="Unequip" onclick="unequipMainHand('@Model.ID', '@Model.Equipment.MainHand.InventoryID')"></button></td>
                 <td><strong>Main Hand</strong></td>
                 <td class="@(Model.Equipment.MainHand.IsMagic ? "item-magic" : "")">@Model.Equipment.MainHand.Name</td>
                 <td class=" @(Model.IsProficientWith(Model.Equipment.MainHand) ? "skill-proficient" : "" )">
@@ -52,13 +52,13 @@
                 <td>+@Model.GetAttackBonus(Model.Equipment.MainHand)</td>
                 <td>@Model.GetDamageString(Model.Equipment.MainHand)</td>
                 <td>@Model.Equipment.MainHand.Weapon.Properties.ToString()</td>
-                <td><button class="td-action-btn" value="Unequip" onclick="unequipMainHand('@Model.ID', '@Model.Equipment.MainHand.InventoryID')"></button></td>
                 @*<td><button class="td-action-btn" value="Remove" onclick="removeItemFromEquipment('@Model.ID', '@instanceID')"></button></td>*@
             </tr>
         }
         @if (Model.Equipment.OffHand != null)
         {
             <tr data-toggle="modal" data-target="#popup-modal" data-title="@Model.Equipment.OffHand.Name" data-desc="@Model.Equipment.OffHand.PopUpText" data-traits="">
+                <td><button class="td-action-btn" value="Unequip" onclick="unequipOffHand('@Model.ID', '@Model.Equipment.OffHand.InventoryID')"></button></td>
                 <td><strong>Off Hand</strong></td>
                 <td class="@(Model.Equipment.OffHand.IsMagic ? "item-magic" : "")">@Model.Equipment.OffHand.Name</td>
                 <td class=" @(Model.IsProficientWith(Model.Equipment.OffHand) ? "skill-proficient" : "" )">
@@ -70,7 +70,6 @@
                 <td>+@Model.GetAttackBonus(Model.Equipment.OffHand)</td>
                 <td>@Model.GetDamageString(Model.Equipment.OffHand, true)</td>
                 <td>@Model.Equipment.OffHand.Weapon.Properties.ToString()</td>
-                <td><button class="td-action-btn" value="Unequip" onclick="unequipOffHand('@Model.ID', '@Model.Equipment.OffHand.InventoryID')"></button></td>
                 @*<td><button class="td-action-btn" value="Remove" onclick="removeItemFromEquipment('@Model.ID', '@instanceID')"></button></td>*@
             </tr>
         }
