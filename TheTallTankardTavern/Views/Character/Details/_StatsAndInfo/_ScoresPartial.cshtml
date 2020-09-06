@@ -9,67 +9,98 @@
     #character-scores td {
         text-align: center;
     }
+    .card {
+        margin-top: 30px;
+    }
+    .card-body {
+        padding: 5px;
+        text-align: center;
+    }
+    .card-title {
+        font-weight: bold;
+    }
 </style>
 
-<table id="character-scores">
-    <thead>
-        <tr>
-            <th></th>
-            <th width="18%">Score</th>
-            <th width="18%">Mod</th>
-            <th width="18%">Save</th>
-            <th width="18%">Spell Att Mod</th>
-            <th width="18%">Spell DC</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><strong>STR</strong></td>
-            <td>@Model.Strength.Score</td>
-            <td>@Model.Strength.Modifier.AddSign()</td>
-            <td class="@SkillHighlight(Model.Strength_Save)">@Model.GetSaveProficiency(SKILL_CATEGORY.Strength, Model.Strength_Save).AddSign()</td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td><strong>DEX</strong></td>
-            <td>@Model.Dexterity.Score</td>
-            <td>@Model.Dexterity.Modifier.AddSign()</td>
-            <td class="@SkillHighlight(Model.Dexterity_Save)">@Model.GetSaveProficiency(SKILL_CATEGORY.Dexterity, Model.Dexterity_Save).AddSign()</td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td><strong>CON</strong></td>
-            <td>@Model.Constitution.Score</td>
-            <td>@Model.Constitution.Modifier.AddSign()</td>
-            <td class="@SkillHighlight(Model.Constitution_Save)">@Model.GetSaveProficiency(SKILL_CATEGORY.Constitution, Model.Constitution_Save).AddSign()</td>
-            <td>@((Model.Proficiency_Bonus + Model.Constitution.Modifier).AddSign())</td>
-            <td>@(Model.Proficiency_Bonus + Model.Constitution.Modifier + 8)</td>
-        </tr>
-        <tr>
-            <td><strong>INT</strong></td>
-            <td>@Model.Intelligence.Score</td>
-            <td>@Model.Intelligence.Modifier.AddSign()</td>
-            <td class="@SkillHighlight(Model.Intelligence_Save)">@Model.GetSaveProficiency(SKILL_CATEGORY.Intelligence, Model.Intelligence_Save).AddSign()</td>
-            <td>@((Model.Proficiency_Bonus + Model.Intelligence.Modifier).AddSign())</td>
-            <td>@(Model.Proficiency_Bonus + Model.Intelligence.Modifier + 8)</td>
-        </tr>
-        <tr>
-            <td><strong>WIS</strong></td>
-            <td>@Model.Wisdom.Score</td>
-            <td>@Model.Wisdom.Modifier.AddSign()</td>
-            <td class="@SkillHighlight(Model.Wisdom_Save)">@Model.GetSaveProficiency(SKILL_CATEGORY.Wisdom, Model.Wisdom_Save).AddSign()</td>
-            <td>@((Model.Proficiency_Bonus + Model.Wisdom.Modifier).AddSign())</td>
-            <td>@(Model.Proficiency_Bonus + Model.Wisdom.Modifier + 8)</td>
-        </tr>
-        <tr>
-            <td><strong>CHA</strong></td>
-            <td>@Model.Charisma.Score</td>
-            <td>@Model.Charisma.Modifier.AddSign()</td>
-            <td class="@SkillHighlight(Model.Charisma_Save)">@Model.GetSaveProficiency(SKILL_CATEGORY.Charisma, Model.Charisma_Save).AddSign()</td>
-            <td>@((Model.Proficiency_Bonus + Model.Charisma.Modifier).AddSign())</td>
-            <td>@(Model.Proficiency_Bonus + Model.Charisma.Modifier + 8)</td>
-        </tr>
-    </tbody>
-</table>
+<div class="row">
+    <div class="flex-fill">
+        <table id="character-scores">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Score</th>
+                    <th>Mod</th>
+                    <th>Save</th>
+                    @*<th width="18%">Spell Att Mod</th>
+                        <th width="18%">Spell DC</th>*@
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>STR</strong></td>
+                    <td>@Model.Strength.Score</td>
+                    <td>@Model.Strength.Modifier.AddSign()</td>
+                    <td class="@SkillHighlight(Model.Strength_Save)">@Model.GetSaveProficiency(SKILL_CATEGORY.Strength, Model.Strength_Save).AddSign()</td>
+                    @*<td></td>
+                        <td></td>*@
+                </tr>
+                <tr>
+                    <td><strong>DEX</strong></td>
+                    <td>@Model.Dexterity.Score</td>
+                    <td>@Model.Dexterity.Modifier.AddSign()</td>
+                    <td class="@SkillHighlight(Model.Dexterity_Save)">@Model.GetSaveProficiency(SKILL_CATEGORY.Dexterity, Model.Dexterity_Save).AddSign()</td>
+                    @*<td></td>
+                        <td></td>*@
+                </tr>
+                <tr>
+                    <td><strong>CON</strong></td>
+                    <td>@Model.Constitution.Score</td>
+                    <td>@Model.Constitution.Modifier.AddSign()</td>
+                    <td class="@SkillHighlight(Model.Constitution_Save)">@Model.GetSaveProficiency(SKILL_CATEGORY.Constitution, Model.Constitution_Save).AddSign()</td>
+                    @*<td>@((Model.Proficiency_Bonus + Model.Constitution.Modifier).AddSign())</td>
+                        <td>@(Model.Proficiency_Bonus + Model.Constitution.Modifier + 8)</td>*@
+                </tr>
+                <tr>
+                    <td><strong>INT</strong></td>
+                    <td>@Model.Intelligence.Score</td>
+                    <td>@Model.Intelligence.Modifier.AddSign()</td>
+                    <td class="@SkillHighlight(Model.Intelligence_Save)">@Model.GetSaveProficiency(SKILL_CATEGORY.Intelligence, Model.Intelligence_Save).AddSign()</td>
+                    @*<td>@((Model.Proficiency_Bonus + Model.Intelligence.Modifier).AddSign())</td>
+                        <td>@(Model.Proficiency_Bonus + Model.Intelligence.Modifier + 8)</td>*@
+                </tr>
+                <tr>
+                    <td><strong>WIS</strong></td>
+                    <td>@Model.Wisdom.Score</td>
+                    <td>@Model.Wisdom.Modifier.AddSign()</td>
+                    <td class="@SkillHighlight(Model.Wisdom_Save)">@Model.GetSaveProficiency(SKILL_CATEGORY.Wisdom, Model.Wisdom_Save).AddSign()</td>
+                    @*<td>@((Model.Proficiency_Bonus + Model.Wisdom.Modifier).AddSign())</td>
+                        <td>@(Model.Proficiency_Bonus + Model.Wisdom.Modifier + 8)</td>*@
+                </tr>
+                <tr>
+                    <td><strong>CHA</strong></td>
+                    <td>@Model.Charisma.Score</td>
+                    <td>@Model.Charisma.Modifier.AddSign()</td>
+                    <td class="@SkillHighlight(Model.Charisma_Save)">@Model.GetSaveProficiency(SKILL_CATEGORY.Charisma, Model.Charisma_Save).AddSign()</td>
+                    @*<td>@((Model.Proficiency_Bonus + Model.Charisma.Modifier).AddSign())</td>
+                        <td>@(Model.Proficiency_Bonus + Model.Charisma.Modifier + 8)</td>*@
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    @if (Model.IsSpellCaster())
+    {
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title">Spell Attack Mod</div>
+                    <div class="card-text">@Model.GetSpellCasterAttackModifier()</div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title">Spell Save DC</div>
+                    <div class="card-text">@Model.GetSpellCasterSaveDC()</div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

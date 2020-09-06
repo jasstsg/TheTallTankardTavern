@@ -3,6 +3,7 @@ using TheTallTankardTavern.Models;
 using static TheTallTankardTavern.Configuration.Constants;
 using static TheTallTankardTavern.Configuration.Constants.SpecialFeatures;
 using TTT.Items;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace TheTallTankardTavern.Helpers
 {
@@ -144,24 +145,24 @@ namespace TheTallTankardTavern.Helpers
 		{
 			switch (Character.Class)
 			{
-			case "Barbarian":
-				return 12;
-			case "Bard":
-			case "Cleric":
-			case "Druid":
-			case "Monk":
-			case "Rogue":
-			case "Warlock":
-				return 8;
-			case "Fighter":
-			case "Paladin":
-			case "Ranger":
-				return 10;
-			case "Sorcerer":
-			case "Wizard":
-				return 6;
-			default:
-				return 0;
+				case "Barbarian":
+					return 12;
+				case "Bard":
+				case "Cleric":
+				case "Druid":
+				case "Monk":
+				case "Rogue":
+				case "Warlock":
+					return 8;
+				case "Fighter":
+				case "Paladin":
+				case "Ranger":
+					return 10;
+				case "Sorcerer":
+				case "Wizard":
+					return 6;
+				default:
+					return 0;
 			}
 		}
 
@@ -240,5 +241,50 @@ namespace TheTallTankardTavern.Helpers
         {
 			return Character.Class.ToLower().Contains("monk") && MONK_WEAPONS.Contains(Item.Type);
         }
+
+		public static int GetSpellCasterAttackModifier(this CharacterModel Character)
+        {
+			int modifier = Character.Proficiency_Bonus;
+            switch (Character.Class)
+            {
+				case "Wizard":
+					modifier += Character.Intelligence.Modifier; break;
+				case "Cleric":
+				case "Druid":
+				case "Ranger":
+					modifier += Character.Wisdom.Modifier; break;
+				case "Bard":
+				case "Warlock":
+				case "Paladin":
+				case "Sorcerer":
+					modifier += Character.Charisma.Modifier; break;
+				default:
+					modifier += 0; break;
+			}
+			return modifier;
+        }
+
+		public static int GetSpellCasterSaveDC(this CharacterModel Character)
+        {
+			return Character.GetSpellCasterAttackModifier() + 8;
+        }
+
+		public static bool IsSpellCaster(this CharacterModel Character)
+        {
+			switch (Character.Class)
+			{
+				case "Bard":
+				case "Cleric":
+				case "Druid":
+				case "Paladin":
+				case "Ranger":
+				case "Sorcerer":
+				case "Warlock":
+				case "Wizard":
+					return true;
+				default:
+					return false;
+			}
+		}
 	}
 }
