@@ -130,5 +130,11 @@ namespace TTT.Items
         {
             return ParentItemType.HasChildType(ItemType.GetItemType(childItemTypeString));
         }
+
+        //Checks is the item type is the same, or if one is the parent type of the other
+        public static bool Is(this ItemType itemType1, ItemType itemType2)
+        {
+            return itemType1 == itemType2 || itemType1 == itemType1.ParentType || itemType1.ParentType == itemType2;
+        }
     }
 }
