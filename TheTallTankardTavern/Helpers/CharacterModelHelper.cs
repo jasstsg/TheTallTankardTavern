@@ -307,7 +307,6 @@ namespace TheTallTankardTavern.Helpers
 				else if (Character.Level <= 10) { damageDie = "1D6"; }
 				else if (Character.Level <= 16) { damageDie = "1D8"; }
 				else if (Character.Level <= 20) { damageDie = "1D10"; }
-				else if (Character.Level <= 20) { damageDie = "1D10"; }
 				else { damageDie = "1D12"; }
 
 				return $"{damageDie} + {damageBonus} Bludgeoning";

@@ -58,19 +58,12 @@
                                 <td class="@ViewHelper.Disable(!Item.Is(ItemTypeCategory.Armour))">@Item.Armour.ArmourClass</td>
                                 <td class="@ViewHelper.Disable(!Item.Is(ItemTypeCategory.Armour))">@Item.Armour.StrengthRequired</td>
                                 <td class="@ViewHelper.Disable(!Item.Is(ItemTypeCategory.Armour))">@(Item.Armour.DisadvantageOnStealth ? "Disadvantage" : "")</td>
-                                <td class="@ViewHelper.Disable(!Item.Is(ItemTypeCategory.Weapon))">+@Model.GetAttackBonus(Item)</td>
+                                <td class="@(Model.IsProficientWith(Item) ? "skill-proficient" : "") 
+                                    @ViewHelper.Disable(!Item.Is(ItemTypeCategory.Weapon))">+@Model.GetAttackBonus(Item)</td>
                                 <td class="@ViewHelper.Disable(!Item.Is(ItemTypeCategory.Weapon))">@Model.GetDamageString(Item)</td>
                                 <td class="@ViewHelper.Disable(!Item.Is(ItemTypeCategory.Weapon))">@Item.Weapon.Properties.ToString()</td>
-                                @if (!Item.Is(ItemTypeCategory.Other))
-                                {
-                                    <td><button class="td-action-btn" value="Give" onclick="giveItem('@Model.ID', '@inventoryID')"></button></td>
-                                    <td><button class="td-action-btn" value="Remove" onclick="removeItemFromInventory('@Model.ID', '@inventoryID')"></button></td>
-                                }
-                                else
-                                {
-                                    <td></td>
-                                    <td><button class="td-action-btn" value="Remove" onclick="removeItemFromInventory('@Model.ID', '@inventoryID')"></button></td>
-                                }
+                                <td><button class="td-action-btn" value="Give" onclick="giveItem('@Model.ID', '@inventoryID')"></button></td>
+                                <td><button class="td-action-btn" value="Remove" onclick="removeItemFromInventory('@Model.ID', '@inventoryID')"></button></td>
                             </tr>
                         }
                     }
