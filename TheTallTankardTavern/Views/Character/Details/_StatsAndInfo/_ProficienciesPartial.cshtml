@@ -1,5 +1,6 @@
 ﻿@using TTT.Items
 @using TTT.Collections.Generic.Extensions
+@using System.Collections.Generic;
 @model TheTallTankardTavern.Models.CharacterModel
 @addTagHelper *, TheTallTankardTavern
 
@@ -33,36 +34,28 @@
 
 }
 
-<style>
-    #character-other-proficiencies textarea {
-        resize: none;
-        border: none;
-        background: transparent;
-    }
-</style>
-<strong>Proficiencies</strong>
-<div id="character-other-proficiencies">
-    <u>Miscellaneous</u>
-    @if (!string.IsNullOrEmpty(Model.Proficiencies))
-    {
-        <textarea readonly="readonly" asp-for="Proficiencies" rows="4"></textarea>
-    }
-    else
-    {
-        <textarea readonly="readonly">Wow really? Nothing?</textarea>
-    }
-</div>
-<div class="character-weapon-armour-proficiencies">
-    <u>Weapon &amp; Armour</u>
-    <table>
-        <tbody>
+<div id="character-proficiencies">
+    <strong>Proficiencies</strong>
+    <div id="character-other-proficiencies">
+        <u>Miscellaneous</u>
+        @if (!string.IsNullOrEmpty(Model.Proficiencies))
+        {
+            <textarea class="readonly-textarea" readonly="readonly" asp-for="Proficiencies" rows="@Model.Proficiencies.Split("\n").Length"></textarea>
+        }
+        else
+        {
+            <textarea class="readonly-textarea" readonly="readonly">Wow really? Nothing?</textarea>
+        }
+    </div>
 
-            @foreach (string prof in ApplicableProficencies.Select(kvp => kvp.Key).OrderBy(s => s))
+    <div id="character-weapon-armour-proficiencies">
+        @{ string[] profArray = ApplicableProficencies.Keys.ToArray();}
+        <u>Weapon &amp; Armour</u>
+        <textarea class="readonly-textarea" readonly="readonly" rows="@profArray.Length">
+            @for (int i = 0; i < profArray.Length; i++)
             {
-                <tr>
-                    <td>@prof</td>
-                </tr>
+                @(profArray[i] + (i == profArray.Length - 1 ? "" : "\n"))
             }
-        </tbody>
-    </table>
-</div>
+        </textarea>
+    </div>
+</div> 

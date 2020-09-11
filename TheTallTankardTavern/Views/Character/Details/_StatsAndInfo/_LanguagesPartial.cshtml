@@ -3,19 +3,16 @@
 @using static TheTallTankardTavern.Configuration.Constants
 @addTagHelper *, TheTallTankardTavern
 
-<table id="character-languages">
-    <thead>
-        <tr>
-            <th>Known Languages</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (LANGUAGES lang in ModelListHelper.AllValues<LANGUAGES>())
+<div id="character-languages">
+    <strong>Known Languages</strong>
+    <textarea class="readonly-textarea" readonly="readonly" rows="@Model.Languages.Where(l => l).Count()">
+        @{ LANGUAGES[] langArray = ModelListHelper.AllValues<LANGUAGES>().ToArray();}
+        @for (int i = 0; i < langArray.Length; i++)
         {
-            if (Model.Languages[lang])
+            if (Model.Languages[langArray[i]])
             {
-                <tr><td>@lang.EnumToString()</td></tr>
+                @(langArray[i].EnumToString() + (i == langArray.Length - 1 ? "" : "\n"))
             }
         }
-    </tbody>
-</table>
+    </textarea>
+</div>

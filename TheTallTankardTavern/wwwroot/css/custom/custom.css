@@ -115,3 +115,15 @@ td.item-magic {
 .card-title {
     font-weight: bold;
 }
+
+.form-control:disabled,
+.form-control[readonly], 
+textarea[readonly] {
+    background: transparent;
+}
+
+textarea[readonly] {
+    resize: none;
+    border: none;
+    font-size: smaller;
+}
