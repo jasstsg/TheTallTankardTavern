@@ -1,117 +1,160 @@
 ﻿@model TheTallTankardTavern.Models.CharacterModel
+@using TheTallTankardTavern.Helpers
 @addTagHelper *, TheTallTankardTavern
 
-<style>
-    #character-other-stats label {
-        font-weight: bold;
+<div id="character-other-stats">
+    <div id="hit-points-card" class="card stat-card other-stat-card-three-column">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-5"><div class="stat-card-label">HIT POINTS</div></div>
+                <div class="col-md-2"><div class="stat-card-content"><numberbox asp-for="Hit_Points_Remaining" min="0" max="@Model.MaxHitPoints" onchange="quickSaveHitPoints('@Model.ID', this)"></numberbox></div></div>
+                <div class="col-md-2"><div class="stat-card-label">/ @Model.MaxHitPoints</div></div>
+                <div class="col-md-3"></div>
+            </div>
+        </div>
+    </div>
+    <div id="hit-die-card" class="card stat-card other-stat-card-three-column">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-5"><div class="stat-card-label">HIT DICE</div></div>
+                <div class="col-md-2"><div class="stat-card-content"><numberbox asp-for="Hit_Dice_Remaining" min="0" max="@Model.Level" onchange="quickSaveHitDice('@Model.ID', this)"></numberbox></div></div>
+                <div class="col-md-2"><div class="stat-card-label">/ @Model.TotalHitDice</div></div>
+                <div class="col-md-3"></div>
+            </div>
+        </div>
+    </div>
+    <div id="temporary-hit-points-card" class="card stat-card other-stat-card-three-column">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-5"><div class="stat-card-label">TEMP HP</div></div>
+                <div class="col-md-2"><div class="stat-card-content"><numberbox asp-for="Temp_Hit_Points" min="0" onchange="quickSaveTempHitPoints('@Model.ID', this)"></numberbox></div></div>
+                <div class="col-md-2"></div>
+                <div class="col-md-3"></div>
+            </div>
+        </div>
+    </div>
+    @if (Model.Class.ToLower().Contains("monk") && @Model.Level > 1)
+    {
+        <div id="ki-points-card" class="card stat-card other-stat-card-three-column">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-5"><div class="stat-card-label">KI POINTS</div></div>
+                    <div class="col-md-2"><div class="stat-card-content"><numberbox asp-for="Ki_Points" min="0" max="@Model.Level" onchange="quickSaveKiPoints('@Model.ID', this)"></numberbox></div></div>
+                    <div class="col-md-1"><div class="stat-card-label">/ @Model.Level</div></div>
+                    <div class="col-md-4"><buttonlink class="action-btn" style="margin:0px" asp-action="RestorePoints" asp-route-id="@Model.ID" text="RESTORE"></buttonlink></div>
+                </div>
+            </div>
+        </div>
     }
-</style>
-
-<table id="character-other-stats">
-    <thead>
-        <tr>
-            <th></th>
-            <th width="100px"></th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><label asp-for="Hit_Points_Remaining"></label></td>
-            <td><numberbox asp-for="Hit_Points_Remaining" min="0" max="@Model.MaxHitPoints" onchange="quickSaveHitPoints('@Model.ID', this)"></numberbox></td>
-            <td>/ @Model.MaxHitPoints HP</td>
-        </tr>
-        <tr>
-            <td><label asp-for="Hit_Dice_Remaining"></label></td>
-            <td><numberbox asp-for="Hit_Dice_Remaining" min="0" max="@Model.Level" onchange="quickSaveHitDice('@Model.ID', this)"></numberbox></td>
-            <td>/ @Model.TotalHitDice</td>
-        </tr>
-        <tr>
-            <td><label asp-for="Temp_Hit_Points"></label></td>
-            <td><numberbox asp-for="Temp_Hit_Points" min="0" onchange="quickSaveTempHitPoints('@Model.ID', this)"></numberbox></td>
-            <td></td>
-        </tr>
-        @if (Model.Class.ToLower().Contains("monk") && @Model.Level > 1)
-        {
-            <tr>
-                <td><label asp-for="Ki_Points"></label></td>
-                <td><numberbox asp-for="Ki_Points" min="0" max="@Model.Level" onchange="quickSaveKiPoints('@Model.ID', this)"></numberbox></td>
-                <td>
-                    / @Model.Level&nbsp;&nbsp;
-                    <buttonlink class="action-btn" style="margin:0px" asp-action="RestorePoints" asp-route-id="@Model.ID" text="Restore"></buttonlink>
-                </td>
-            </tr>
-        }
-        @if (Model.Class.ToLower().Contains("sorcerer") && @Model.Level > 1)
-        {
-            <tr>
-                <td><label asp-for="Sorcery_Points"></label></td>
-                <td><numberbox asp-for="Sorcery_Points" min="0" max="@Model.Level" onchange="quickSaveSorceryPoints('@Model.ID', this)"></numberbox></td>
-                <td>
-                    / @Model.Level
-                    @* SORCERY POINTS ONLY RESTORE ON LONG RESTS - THIS WAS TO ENABLE ONE-CLICK RESTORATION ON SHORT RESTS
-                    &nbsp;&nbsp;
-                    <buttonlink class="action-btn" style="margin:0px" asp-action="RestorePoints" asp-route-id="@Model.ID" text="Restore"></buttonlink>
-                    *@
-                </td>
-            </tr>
-        }
-        @if (Model.Class.ToLower().Contains("druid") && @Model.Level > 1)
-        {
-            <tr>
-                <td><label asp-for="Wild_Shapes"></label></td>
-                @if (Model.Level < 20)
-                {
-                    <td><numberbox asp-for="Wild_Shapes" min="0" max="2" onchange="quickSaveWildShapes('@Model.ID', this)"></numberbox></td>
-                    <td>
-                        / 2&nbsp;&nbsp;
-                        <buttonlink class="action-btn" style="margin:0px" asp-action="RestorePoints" asp-route-id="@Model.ID" text="Restore"></buttonlink>
-                    </td>
-                }
-                else
-                {
-                    <td colspan="2">&infin;</td>
-                }
-            </tr>
-        }
-        @if (Model.Class.ToLower().Contains("rogue") && @Model.Level > 1)
-        {
-            <tr>
-                <td><label>Sneak Attack Damage</label></td>
-                <td colspan="2">+@((int)((Model.Level + 1) / 2))D6
-            </tr>
-        }
-        <tr>
-            <td><label asp-for="TotalAC"></label></td>
-            <td>@Model.TotalAC</td>
-            <td>(Base: @Model.BaseAC)</td>
-        </tr>
-        <tr>
-            <td><label asp-for="Speed"></label></td>
-            <td>
-                @Model.Speed
-                <strong style="color:red">
-                    @if (Model.IsEncumbered()) { <span> / 2</span>}
-                    @if (Model.IsArmourTooHeavy(Model.Equipment.Armour)) { <span> - 10ft</span> }
-                </strong>
-                 
-            </td>
-            <td></td>
-        </tr>
-        <tr>
-            <td><label asp-for="Initiative"></label></td>
-            <td>@Model.Initiative.AddSign()</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td><label asp-for="Passive_Perception"></label></td>
-            <td>@Model.Passive_Perception</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td><label asp-for="Proficiency_Bonus"></label></td>
-            <td>@Model.Proficiency_Bonus.AddSign()</td>
-            <td></td>
-        </tr>
-    </tbody>
-</table>
+    @if (Model.Class.ToLower().Contains("sorcerer") && @Model.Level > 1)
+    {
+        <div id="sorcery-points-card" class="card stat-card other-stat-card-three-column">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-5"><div class="stat-card-label">SORCERY POINTS</div></div>
+                    <div class="col-md-2"><div class="stat-card-content"><numberbox asp-for="Sorcery_Points" min="0" max="@Model.Level" onchange="quickSaveSorceryPoints('@Model.ID', this)"></numberbox></div></div>
+                    <div class="col-md-1"><div class="stat-card-label">/ @Model.Level</div></div>
+                    <div class="col-md-4"></div>
+                </div>
+            </div>
+        </div>
+    }
+    @if (Model.Class.ToLower().Contains("druid") && @Model.Level > 1)
+    {
+        <div id="wild-shapes-card" class="card stat-card other-stat-card-three-column">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-5"><div class="stat-card-label">WILD SHAPES</div></div>
+                    @if (Model.Level < 20)
+                    {
+                        <div class="col-md-2"><div class="stat-card-content"><numberbox asp-for="Wild_Shapes" min="0" max="2" onchange="quickSaveWildShapes('@Model.ID', this)"></numberbox></div></div>
+                        <div class="col-md-1"><div class="stat-card-label">/ 2</div></div>
+                        <div class="col-md-4"><buttonlink class="action-btn" style="margin:0px" asp-action="RestorePoints" asp-route-id="@Model.ID" text="RESTORE"></buttonlink></div>
+                    }
+                    else
+                    {
+                        <div class="col-md-2"><div class="stat-card-label">&infin;</div></div>
+                        <div class="col-md-5"></div>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+<div id="single-line-cards">
+    @if (Model.Class.ToLower().Contains("rogue") && @Model.Level > 1)
+    {
+        <div id="sneak-attack-damage-card" class="card stat-card other-stat-card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3"><div class="stat-card-content">+@((int)((Model.Level + 1) / 2))D6</div></div>
+                    <div class="col-md-9"><div class="stat-card-content">SNEAK ATTACK DAMAGE</div></div>
+                </div>
+            </div>
+        </div>
+    }
+    <div id="spell-attack-mod-card" class="card stat-card other-stat-card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-3"><div class="stat-card-content">+@Model.GetSpellCasterAttackModifier()</div></div>
+                <div class="col-md-9"><div class="stat-card-content">SPELL ATTACK MODIFIER</div></div>
+            </div>
+        </div>
+    </div>
+    <div id="spell-save-dc-card" class="card stat-card other-stat-card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-3"><div class="stat-card-content">+@Model.GetSpellCasterSaveDC()</div></div>
+                <div class="col-md-9"><div class="stat-card-content">SPELL SAVE DC</div></div>
+            </div>
+        </div>
+    </div>
+    <div id="proficiency-bonus-card" class="card stat-card other-stat-card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-3"><div class="stat-card-content">+@Model.Proficiency_Bonus</div></div>
+                <div class="col-md-9"><div class="stat-card-content">PROFICIENCY BONUS</div></div>
+            </div>
+        </div>
+    </div>
+    <div id="initiative-bonus-card" class="card stat-card other-stat-card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-3"><div class="stat-card-content">@Model.Initiative.AddSign()</div></div>
+                <div class="col-md-9"><div class="stat-card-content">INITIATIVE BONUS</div></div>
+            </div>
+        </div>
+    </div>
+    <div id="passive-perception-card" class="card stat-card other-stat-card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-3"><div class="stat-card-content">@Model.Passive_Perception</div></div>
+                <div class="col-md-9"><div class="stat-card-content">PASSIVE PERCEPTION</div></div>
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="paired-stats row">
+        <div id="speed-card" class="card stat-card other-stat-card col-md-6">
+            <div class="card-body">
+                <div class="stat-card-label-header">SPEED</div>
+                <div class="stat-card-content">
+                    @Model.Speed
+                    <strong style="color:red">
+                        @if (Model.IsEncumbered())
+                        {<span> / 2</span>}
+                        @if (Model.IsArmourTooHeavy(Model.Equipment.Armour))
+                        {<span> - 10ft</span>}
+                    </strong>
+                </div>
+            </div>
+        </div>
+        <div id="armour-class-card" class="card stat-card other-stat-card col-md-6">
+            <div class="card-body">
+                <div class="stat-card-label-header">ARMOUR CLASS</div>
+                <div class="stat-card-content">
+                    @Model.TotalAC (Base @Model.BaseAC)
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

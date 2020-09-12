@@ -1,23 +1,23 @@
-﻿.strength {
-    color: #ffcccc;
+﻿.strength-background {
+    background-color: #ffcccc;
 }
 
-.deterity {
-    color: #ccffcc;
+.deterity-background {
+    background-color: #ccffcc;
 }
 
-.constitution {
-    color: #ccffff;
+.constitution-background {
+    background-color: #ccffff;
 }
 
-.intelligence {
-    color: #ffccff;
+.intelligence-background {
+    background-color: #ffccff;
 }
 
-.wisdom {
-    color: #ccccff;
+.wisdom-background {
+    background-color: #ccccff;
 }
 
-.charisma {
-    color: #ffcc99;
+.charisma-background {
+    background-color: #ffcc99;
 }

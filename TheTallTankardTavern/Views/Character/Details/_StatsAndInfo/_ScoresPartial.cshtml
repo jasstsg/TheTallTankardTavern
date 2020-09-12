@@ -1,93 +1,108 @@
 ﻿@model TheTallTankardTavern.Models.CharacterModel
 @using TheTallTankardTavern.Helpers
 @using static TheTallTankardTavern.Helpers.ViewHelper
-@using static TheTallTankardTavern.Configuration.Constants
+@using static TheTallTankardTavern.Configuration.Constants.SKILL_CATEGORY
 @addTagHelper *, TheTallTankardTavern
 
-<style>
-    #character-scores th,
-    #character-scores td {
-        text-align: center;
-    }
-</style>
-
-<div class="row">
-    <div class="flex-fill">
-        <table id="character-scores">
-            <thead>
-                <tr>
-                    <th></th>
-                    <th>Score</th>
-                    <th>Mod</th>
-                    <th>Save</th>
-                    @*<th width="18%">Spell Att Mod</th>
-                        <th width="18%">Spell DC</th>*@
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><strong>STR</strong></td>
-                    <td>@Model.Strength.Score</td>
-                    <td>@Model.Strength.Modifier.AddSign()</td>
-                    <td class="@SkillHighlight(Model.Strength_Save)">@Model.GetSaveProficiency(SKILL_CATEGORY.Strength, Model.Strength_Save).AddSign()</td>
-                    @*<td></td>
-                        <td></td>*@
-                </tr>
-                <tr>
-                    <td><strong>DEX</strong></td>
-                    <td>@Model.Dexterity.Score</td>
-                    <td>@Model.Dexterity.Modifier.AddSign()</td>
-                    <td class="@SkillHighlight(Model.Dexterity_Save)">@Model.GetSaveProficiency(SKILL_CATEGORY.Dexterity, Model.Dexterity_Save).AddSign()</td>
-                    @*<td></td>
-                        <td></td>*@
-                </tr>
-                <tr>
-                    <td><strong>CON</strong></td>
-                    <td>@Model.Constitution.Score</td>
-                    <td>@Model.Constitution.Modifier.AddSign()</td>
-                    <td class="@SkillHighlight(Model.Constitution_Save)">@Model.GetSaveProficiency(SKILL_CATEGORY.Constitution, Model.Constitution_Save).AddSign()</td>
-                    @*<td>@((Model.Proficiency_Bonus + Model.Constitution.Modifier).AddSign())</td>
-                        <td>@(Model.Proficiency_Bonus + Model.Constitution.Modifier + 8)</td>*@
-                </tr>
-                <tr>
-                    <td><strong>INT</strong></td>
-                    <td>@Model.Intelligence.Score</td>
-                    <td>@Model.Intelligence.Modifier.AddSign()</td>
-                    <td class="@SkillHighlight(Model.Intelligence_Save)">@Model.GetSaveProficiency(SKILL_CATEGORY.Intelligence, Model.Intelligence_Save).AddSign()</td>
-                    @*<td>@((Model.Proficiency_Bonus + Model.Intelligence.Modifier).AddSign())</td>
-                        <td>@(Model.Proficiency_Bonus + Model.Intelligence.Modifier + 8)</td>*@
-                </tr>
-                <tr>
-                    <td><strong>WIS</strong></td>
-                    <td>@Model.Wisdom.Score</td>
-                    <td>@Model.Wisdom.Modifier.AddSign()</td>
-                    <td class="@SkillHighlight(Model.Wisdom_Save)">@Model.GetSaveProficiency(SKILL_CATEGORY.Wisdom, Model.Wisdom_Save).AddSign()</td>
-                    @*<td>@((Model.Proficiency_Bonus + Model.Wisdom.Modifier).AddSign())</td>
-                        <td>@(Model.Proficiency_Bonus + Model.Wisdom.Modifier + 8)</td>*@
-                </tr>
-                <tr>
-                    <td><strong>CHA</strong></td>
-                    <td>@Model.Charisma.Score</td>
-                    <td>@Model.Charisma.Modifier.AddSign()</td>
-                    <td class="@SkillHighlight(Model.Charisma_Save)">@Model.GetSaveProficiency(SKILL_CATEGORY.Charisma, Model.Charisma_Save).AddSign()</td>
-                    @*<td>@((Model.Proficiency_Bonus + Model.Charisma.Modifier).AddSign())</td>
-                        <td>@(Model.Proficiency_Bonus + Model.Charisma.Modifier + 8)</td>*@
-                </tr>
-            </tbody>
-        </table>
-    </div>
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-body">
-                    <div class="card-title">Spell Attack Mod</div>
-                    <div class="card-text">+@Model.GetSpellCasterAttackModifier()</div>
+<div id="character-stats">
+    <div id="strength-card" class="card stat-card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4 stat-score-card">
+                    <div class="stat-card-label">STR</div>
+                    <div class="stat-card-content">@Model.Strength.Score (@Model.Strength.Modifier.AddSign())</div>
+                    <div class="stat-card-content stat-save @SkillHighlight(Model.Strength_Save)">@Model.GetSaveProficiency(Strength, Model.Strength_Save).AddSign() Save</div>
                 </div>
-            </div>
-            <div class="card">
-                <div class="card-body">
-                    <div class="card-title">Spell Save DC</div>
-                    <div class="card-text">@Model.GetSpellCasterSaveDC()</div>
+                <div class="col-md-8 stat-skills-card">
+                    <div class="stat-card-content @SkillHighlight(Model.Athletics)">@Model.GetSkillModifider(Strength, Model.Athletics).AddSign() Athletics</div>
                 </div>
             </div>
         </div>
+    </div>
+    <div id="dexterity-card" class="card stat-card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4 stat-score-card">
+                    <div class="stat-card-label">DEX</div>
+                    <div class="stat-card-content">@Model.Dexterity.Score (@Model.Dexterity.Modifier.AddSign())</div>
+                    <div class="stat-card-content stat-save @SkillHighlight(Model.Dexterity_Save)">@Model.GetSaveProficiency(Dexterity, Model.Dexterity_Save).AddSign() Save</div>
+                </div>
+                <div class="col-md-8 stat-skills-card">
+                    <div class="stat-card-content @SkillHighlight(Model.Acrobatics)">@Model.GetSkillModifider(Dexterity, Model.Acrobatics).AddSign() Acrobatics</div>
+                    <div class="stat-card-content @SkillHighlight(Model.Sleight_Of_Hand)">@Model.GetSkillModifider(Dexterity, Model.Sleight_Of_Hand).AddSign() Sleight of Hand</div>
+                    <div class="stat-card-content @SkillHighlight(Model.Stealth)">@Model.GetSkillModifider(Dexterity, Model.Stealth).AddSign() Stealth</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="constitution-card" class="card stat-card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4 stat-score-card">
+                    <div class="stat-card-label">CON</div>
+                    <div class="stat-card-content">@Model.Constitution.Score (@Model.Constitution.Modifier.AddSign())</div>
+                    <div class="stat-card-content stat-save @SkillHighlight(Model.Constitution_Save)">@Model.GetSaveProficiency(Constitution, Model.Constitution_Save).AddSign() Save</div>
+                </div>
+                <div class="col-md-8 stat-skills-card">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="intelligence-card" class="card stat-card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4 stat-score-card">
+                    <div>&nbsp;</div>
+                    <div class="stat-card-label">INT</div>
+                    <div class="stat-card-content">@Model.Intelligence.Score (@Model.Intelligence.Modifier.AddSign())</div>
+                    <div class="stat-card-content stat-save @SkillHighlight(Model.Intelligence_Save)">@Model.GetSaveProficiency(Intelligence, Model.Intelligence_Save).AddSign() Save</div>
+                    <div>&nbsp;</div>
+                </div>
+                <div class="col-md-8 stat-skills-card">
+                    <div class="stat-card-content @SkillHighlight(Model.Animal_Handling)">@Model.GetSkillModifider(Intelligence, Model.Animal_Handling).AddSign() Animal Handling</div>
+                    <div class="stat-card-content @SkillHighlight(Model.Arcana)">@Model.GetSkillModifider(Intelligence, Model.Arcana).AddSign() Arcana</div>
+                    <div class="stat-card-content @SkillHighlight(Model.History)">@Model.GetSkillModifider(Intelligence, Model.History).AddSign() History</div>
+                    <div class="stat-card-content @SkillHighlight(Model.Investigation)">@Model.GetSkillModifider(Intelligence, Model.Investigation).AddSign() Investigation</div>
+                    <div class="stat-card-content @SkillHighlight(Model.Nature)">@Model.GetSkillModifider(Intelligence, Model.Nature).AddSign() Nature</div>
+                    <div class="stat-card-content @SkillHighlight(Model.Survival)">@Model.GetSkillModifider(Intelligence, Model.Survival).AddSign() Survival</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="wisdom-card" class="card stat-card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4 stat-score-card">
+                    <div class="stat-card-label">WIS</div>
+                    <div class="stat-card-content">@Model.Wisdom.Score (@Model.Wisdom.Modifier.AddSign())</div>
+                    <div class="stat-card-content stat-save @SkillHighlight(Model.Wisdom_Save)">@Model.GetSaveProficiency(Wisdom, Model.Wisdom_Save).AddSign() Save</div>
+                </div>
+                <div class="col-md-8 stat-skills-card">
+                    <div class="stat-card-content @SkillHighlight(Model.Insight)">@Model.GetSkillModifider(Wisdom, Model.Insight).AddSign() Insight</div>
+                    <div class="stat-card-content @SkillHighlight(Model.Medicine)">@Model.GetSkillModifider(Wisdom, Model.Medicine).AddSign() Medicine</div>
+                    <div class="stat-card-content @SkillHighlight(Model.Perception)">@Model.GetSkillModifider(Wisdom, Model.Perception).AddSign() Perception</div>
+                    <div class="stat-card-content @SkillHighlight(Model.Religion)">@Model.GetSkillModifider(Wisdom, Model.Religion).AddSign() Religion</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="charisma-card" class="card stat-card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4 stat-score-card">
+                    <div class="stat-card-label">CHA</div>
+                    <div class="stat-card-content">@Model.Charisma.Score (@Model.Charisma.Modifier.AddSign())</div>
+                    <div class="stat-card-content stat-save @SkillHighlight(Model.Charisma_Save)">@Model.GetSaveProficiency(Charisma, Model.Charisma_Save).AddSign() Save</div>
+                </div>
+                <div class="col-md-8 stat-skills-card">
+                    <div class="stat-card-content @SkillHighlight(Model.Deception)">@Model.GetSkillModifider(Charisma, Model.Deception).AddSign() Deception</div>
+                    <div class="stat-card-content @SkillHighlight(Model.Intimidation)">@Model.GetSkillModifider(Charisma, Model.Intimidation).AddSign() Intimidation</div>
+                    <div class="stat-card-content @SkillHighlight(Model.Performance)">@Model.GetSkillModifider(Charisma, Model.Performance).AddSign() Performance</div>
+                    <div class="stat-card-content @SkillHighlight(Model.Persuasion)">@Model.GetSkillModifider(Charisma, Model.Persuasion).AddSign() Persuasion</div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+

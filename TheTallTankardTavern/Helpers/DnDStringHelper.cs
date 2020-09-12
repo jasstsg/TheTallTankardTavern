@@ -49,7 +49,7 @@ namespace TheTallTankardTavern.Helpers
 
 		public static string AddSign(this int num)
 		{
-			return (num > 0) ? $"+{num}" : $"{num}";
+			return (num >= 0) ? $"+{num}" : $"{num}";
 		}
 	}
 }

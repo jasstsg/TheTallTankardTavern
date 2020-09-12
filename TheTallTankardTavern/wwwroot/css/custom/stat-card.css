@@ -1,0 +1,102 @@
+﻿
+.stat-card {
+    border: none;
+}
+
+.stat-card .card-body {
+    text-align: center;
+    padding: 0px;
+    border: 1px solid lightgrey;
+    border-radius: 0.5em;
+}
+
+.card-body > .row {
+    align-items: center;
+}
+
+.stat-card-label,
+.stat-card-label-header {
+    color: slategrey;
+    font-weight: bold;
+}
+
+.stat-card-label-header {
+    font-size: x-small;
+    border-bottom: 1px solid lightgrey;
+}
+
+.stat-card .stat-score-card > .stat-card-label {
+    font-size: small;
+}
+
+.stat-card .stat-score-card > .stat-card-content {
+    font-size: medium;
+}
+
+.stat-card .stat-score-card > .stat-card-content.stat-save {
+    font-size: x-small;
+}
+
+.stat-card .stat-skills-card .stat-card-content {
+    font-size: x-small;
+    text-align: left;
+}
+
+.stat-score-card {
+    padding-right: 0px;
+    border-right: 1px solid lightgrey;
+}
+
+.other-stat-card > .card-body > .row > [class*='col-']:first-child,
+.other-stat-card > .card-body > .row > [class*='col-']:last-child {
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+.other-stat-card > .card-body > .row > [class*='col-']:first-child > .stat-card-content {
+    border-right: 1px solid lightgrey;
+    font-size: small;
+}
+
+.other-stat-card > .card-body > .row > [class*='col-']:last-child > .stat-card-content {
+    font-size: x-small;
+    font-weight: bold;
+    color: slategrey;
+    padding-right: 30px;
+}
+
+.paired-stats .stat-card:first-child {
+    padding-right: 0px;
+}
+
+.paired-stats .stat-card:last-child {
+    padding-left: 0px;
+}
+
+.paired-stats .stat-card-content {
+    font-size: small;
+}
+
+.other-stat-card-three-column .stat-card-label,
+.other-stat-card-three-column .stat-card-content {
+    font-size: small;
+}
+
+.other-stat-card-three-column [class*='col-'] {
+    padding-right: 0px;
+    padding-left: 0px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+.other-stat-card-three-column input[type='number'] {
+    border: none;
+    font-weight: bold;
+    background-color: #f4f4f4;
+}
+
+.other-stat-card-three-column a {
+    color: slategrey;
+    border: 1px solid lightgrey;
+    font-size: x-small;
+}

@@ -35,27 +35,35 @@
 }
 
 <div id="character-proficiencies">
-    <strong>Proficiencies</strong>
-    <div id="character-other-proficiencies">
-        <u>Miscellaneous</u>
-        @if (!string.IsNullOrEmpty(Model.Proficiencies))
-        {
-            <textarea class="readonly-textarea" readonly="readonly" asp-for="Proficiencies" rows="@Model.Proficiencies.Split("\n").Length"></textarea>
-        }
-        else
-        {
-            <textarea class="readonly-textarea" readonly="readonly">Wow really? Nothing?</textarea>
-        }
-    </div>
-
-    <div id="character-weapon-armour-proficiencies">
-        @{ string[] profArray = ApplicableProficencies.Keys.ToArray();}
-        <u>Weapon &amp; Armour</u>
-        <textarea class="readonly-textarea" readonly="readonly" rows="@profArray.Length">
-            @for (int i = 0; i < profArray.Length; i++)
-            {
-                @(profArray[i] + (i == profArray.Length - 1 ? "" : "\n"))
-            }
-        </textarea>
+    <div class="paired-stats row">
+        <div id="weapon-armour-proficiency-card" class="card stat-card other-stat-card col-md-6">
+            <div class="card-body">
+                <div class="stat-card-label-header">WEAPONS &amp; ARMOUR</div>
+                <div class="stat-card-content">
+                    @{ string[] profArray = ApplicableProficencies.Keys.ToArray();}
+                    <textarea class="readonly-textarea" readonly="readonly" rows="@profArray.Length">
+                        @for (int i = 0; i < profArray.Length; i++)
+                        {
+                            @(profArray[i] + (i == profArray.Length - 1 ? "" : "\n"))
+                        }
+                    </textarea>
+                </div>
+            </div>
+        </div>    
+        <div id="other-proficiencies-card" class="card stat-card other-stat-card col-md-6">
+            <div class="card-body">
+                <div class="stat-card-label-header">OTHER PROFICIENCIES</div>
+                <div class="stat-card-content">
+                    @if (!string.IsNullOrEmpty(Model.Proficiencies))
+                    {
+                        <textarea class="readonly-textarea" readonly="readonly" asp-for="Proficiencies" rows="@Model.Proficiencies.Split("\n").Length"></textarea>
+                    }
+                    else
+                    {
+                        <textarea class="readonly-textarea" readonly="readonly">Wow really? Nothing?</textarea>
+                    }
+                </div>
+            </div>
+        </div>
     </div>
 </div> 
