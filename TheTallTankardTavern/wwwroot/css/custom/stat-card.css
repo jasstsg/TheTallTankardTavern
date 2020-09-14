@@ -65,15 +65,29 @@
     padding-right: 30px;
 }
 
-.paired-stats .stat-card:first-child {
+/*.grouped-stats .stat-card:first-child {
     padding-right: 0px;
 }
 
-.paired-stats .stat-card:last-child {
+.grouped-stats .stat-card:last-child {
+    padding-left: 0px;
+}*/
+
+.grouped-stats .stat-card:not(:first-child) {
     padding-left: 0px;
 }
 
-.paired-stats .stat-card-content {
+.grouped-stats .stat-card:not(:last-child) {
+    padding-right: 0px;
+}
+
+.grouped-stats-label {
+    color: slategrey;
+    font-weight: bold;
+    font-size: small;
+}
+
+.grouped-stats .stat-card-content {
     font-size: small;
 }
 
