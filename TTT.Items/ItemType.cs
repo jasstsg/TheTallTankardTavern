@@ -102,7 +102,7 @@ namespace TTT.Items
         public static readonly ItemType Blowgun = new ItemType("Blowgun", ItemTypeCategory.Weapon, MartialRangedWeapon);
         public static readonly ItemType HandCrossbow = new ItemType("Hand Crossbow", ItemTypeCategory.Weapon, MartialRangedWeapon);
         public static readonly ItemType HeavyCrossbow = new ItemType("Heavy Crossbow", ItemTypeCategory.Weapon, MartialRangedWeapon);
-        public static readonly ItemType LongBow = new ItemType("Long Bow", ItemTypeCategory.Weapon, MartialRangedWeapon);
+        public static readonly ItemType Longbow = new ItemType("Longbow", ItemTypeCategory.Weapon, MartialRangedWeapon);
         public static readonly ItemType Net = new ItemType("Net", ItemTypeCategory.Weapon, MartialRangedWeapon);
 
         //Other Weapons

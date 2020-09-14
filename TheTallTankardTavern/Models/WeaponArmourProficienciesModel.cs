@@ -68,7 +68,7 @@ namespace TheTallTankardTavern.Models
             this.Add(ItemType.Blowgun, false);
             this.Add(ItemType.HandCrossbow, false);
             this.Add(ItemType.HeavyCrossbow, false);
-            this.Add(ItemType.LongBow, false);
+            this.Add(ItemType.Longbow, false);
             this.Add(ItemType.Net, false);
 
             //Other Weapon
