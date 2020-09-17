@@ -1,0 +1,26 @@
+﻿.action-btn {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 5px;
+}
+
+a.btn.action-btn,
+a.btn.td-action-btn,
+input.btn {
+    font-weight: bold;
+    border: 1px solid var(--custom-light-grey);
+    color: var(--custom-dark-grey);
+}
+
+a.btn:hover {
+    width: 100%;
+    color: white;
+}
+
+.td-action-btn {
+    width: 70px;
+}
+
+#character-buttons a.action-btn {
+    width: 100%;
+}

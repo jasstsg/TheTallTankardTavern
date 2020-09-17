@@ -1,4 +1,10 @@
-﻿
+﻿.card,
+.card-body,
+.card-header,
+.card-footer {
+    background-color: transparent;
+}
+
 .stat-card {
     border: none;
 }
@@ -6,7 +12,7 @@
 .stat-card .card-body {
     text-align: center;
     padding: 0px;
-    border: 1px solid lightgrey;
+    border: 1px solid var(--custom-light-grey);
     border-radius: 0.5em;
 }
 
@@ -16,13 +22,13 @@
 
 .stat-card-label,
 .stat-card-label-header {
-    color: slategrey;
+    color: var(--custom-dark-grey);
     font-weight: bold;
 }
 
 .stat-card-label-header {
     font-size: x-small;
-    border-bottom: 1px solid lightgrey;
+    border-bottom: 1px solid var(--custom-light-grey);
 }
 
 .stat-card .stat-score-card > .stat-card-label {
@@ -44,7 +50,7 @@
 
 .stat-score-card {
     padding-right: 0px;
-    border-right: 1px solid lightgrey;
+    border-right: 1px solid var(--custom-light-grey);
 }
 
 .other-stat-card > .card-body > .row > [class*='col-']:first-child,
@@ -54,24 +60,16 @@
 }
 
 .other-stat-card > .card-body > .row > [class*='col-']:first-child > .stat-card-content {
-    border-right: 1px solid lightgrey;
+    border-right: 1px solid var(--custom-light-grey);
     font-size: small;
 }
 
 .other-stat-card > .card-body > .row > [class*='col-']:last-child > .stat-card-content {
     font-size: x-small;
     font-weight: bold;
-    color: slategrey;
+    color: var(--custom-dark-grey);
     padding-right: 30px;
 }
-
-/*.grouped-stats .stat-card:first-child {
-    padding-right: 0px;
-}
-
-.grouped-stats .stat-card:last-child {
-    padding-left: 0px;
-}*/
 
 .grouped-stats .stat-card:not(:first-child) {
     padding-left: 0px;
@@ -82,7 +80,7 @@
 }
 
 .grouped-stats-label {
-    color: slategrey;
+    color: var(--custom-dark-grey);
     font-weight: bold;
     font-size: small;
 }
@@ -106,11 +104,10 @@
 .other-stat-card-three-column input[type='number'] {
     border: none;
     font-weight: bold;
-    background-color: #f4f4f4;
 }
 
 .other-stat-card-three-column a {
-    color: slategrey;
-    border: 1px solid lightgrey;
+    color: var(--custom-dark-grey);
+    border: 1px solid var(--custom-light-grey);
     font-size: x-small;
 }

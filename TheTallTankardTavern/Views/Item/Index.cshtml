@@ -36,14 +36,14 @@
                 <td class="@(i.IsMagic ? "item-magic" : "")">@i.Name</td>
                 <td>@i.Type (@i.Type.Category.ToString())</td>
                 <td>@i.Weight lbs</td>
-                <td>@i.Cost cp</td>
+                <td>@i.Cost.FormatMoney() gp</td>
                 @*<td>@i.IsMagic</td>*@
                 <td class="@ViewHelper.Disable(!i.Is(ItemTypeCategory.Armour))">@i.Armour.ArmourClass</td>
                 <td class="@ViewHelper.Disable(!i.Is(ItemTypeCategory.Armour))">@i.Armour.StrengthRequired</td>
                 <td class="@ViewHelper.Disable(!i.Is(ItemTypeCategory.Armour))">@i.Armour.DisadvantageOnStealth</td>
                 <td class="@ViewHelper.Disable(!i.Is(ItemTypeCategory.Weapon))">@i.Weapon.Plus</td>
                 <td class="@ViewHelper.Disable(!i.Is(ItemTypeCategory.Weapon))">@i.Weapon.Damage.ToString()</td>
-                <td class="@ViewHelper.Disable(!i.Is(ItemTypeCategory.Weapon))">@i.Weapon.Properties.ToString()</td>
+                <td class="@ViewHelper.Disable(!i.Is(ItemTypeCategory.Weapon))">@i.Weapon.Properties.ToShortString()</td>
                 <partial name="/Views/Shared/Custom/ActionButtons/_ColumnAddEditDelete.cshtml" model="i" />
             </tr>
         }

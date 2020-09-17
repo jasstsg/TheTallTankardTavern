@@ -1,3 +1,31 @@
-﻿body {
+﻿/* Variables */
+:root {
+    --custom-dark-grey: rgb(96, 96, 96);
+    --custom-light-grey: rgb(192, 192, 192);
+}
+
+body {
     font-family: Candara;
+}
+
+body::after {
+  content: "";
+  background: url('/images/custom/dnd_starter_set_art.jpg');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  opacity: 0.1;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;   
+}
+
+.nav-link.nav-item.active {
+    background-color: rgba(0,0,0,0.1);
+}
+
+.form-control {
+    background-color: rgba(255,255,255,0.7);
 }
