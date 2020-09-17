@@ -18,7 +18,7 @@ namespace TTT.Items.Weapons.Properties
         public Two_Handed TwoHanded { get; set; } = new Two_Handed();
         public Versitile Versitile { get; set; } = new Versitile();
 
-        public override string ToString()
+        public string ToShortString()
         {
             StringBuilder sb = new StringBuilder();
             sb.Append(Ammunition.Enabled ? $"{Ammunition.QuickInfo}, " : "");
@@ -36,6 +36,29 @@ namespace TTT.Items.Weapons.Properties
             if (sb.Length >= 2)
             {
                 sb.Remove(sb.Length - 2, 2);
+            }
+            return sb.ToString();
+        }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append(Ammunition.Enabled ? $"{Ammunition.QuickInfo}: {Ammunition.Description}\n" : "");
+            sb.Append(Finesse.Enabled ? $"{Finesse.QuickInfo}: {Finesse.Description}\n" : "");
+            sb.Append(Heavy.Enabled ? $"{Heavy.QuickInfo}: {Heavy.Description}\n" : "");
+            sb.Append(Improvised.Enabled ? $"{Improvised.QuickInfo}: {Improvised.Description}\n" : "");
+            sb.Append(Light.Enabled ? $"{Light.QuickInfo}: {Light.Description}\n" : "");
+            sb.Append(Loading.Enabled ? $"{Loading.QuickInfo}: {Loading.Description}\n" : "");
+            sb.Append(Range.Enabled ? $"{Range.QuickInfo}: {Range.Description}\n" : "");
+            sb.Append(Silvered.Enabled ? $"{Silvered.QuickInfo}: {Silvered.Description}\n" : "");
+            sb.Append(Special.Enabled ? $"{Special.QuickInfo}: {Special.Description}\n" : "");
+            sb.Append(Thrown.Enabled ? $"{Thrown.QuickInfo}: {Thrown.Description}\n" : "");
+            sb.Append(TwoHanded.Enabled ? $"{TwoHanded.QuickInfo}: {TwoHanded.Description}\n" : "");
+            sb.Append(Versitile.Enabled ? $"{Versitile.QuickInfo}: {Versitile.Description}\n" : "");
+
+            if (sb.Length > 0)
+            {
+                sb.Insert(0, "\nProperties:\n", 1);
             }
             return sb.ToString();
         }

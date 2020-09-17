@@ -25,20 +25,22 @@ namespace TheTallTankardTavern.Helpers
 			return $"{num:n0}";
 		}
 
+		/// <param name="num">Number of copper pieces</param>
+		/// <returns>Formatted text of money in gold pieces</returns>
 		public static string FormatMoney(this int num)
 		{
 			string numStr = num.ToString();
 			if (numStr.Length > 2)
 			{
-				return numStr.Insert(numStr.Length - 2, ",");
+				return numStr.Insert(numStr.Length - 2, ".");
 			}
 			else if (numStr.Length == 2)
 			{
-				return $"0,{numStr}";
+				return $"0.{numStr}";
 			}
 			else
 			{
-				return $"0,0{numStr}";
+				return $"0.0{numStr}";
 			}
 		}
 

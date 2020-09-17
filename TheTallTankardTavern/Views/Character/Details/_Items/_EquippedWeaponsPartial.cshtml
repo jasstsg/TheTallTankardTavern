@@ -51,7 +51,7 @@
                 @*<td>@Model.Equipment.MainHand.IsMagic</td>*@
                 <td class="@(Model.IsProficientWith(Model.Equipment.MainHand) ? "skill-proficient" : "")">+@Model.GetAttackBonus(Model.Equipment.MainHand)</td>
                 <td>@Model.GetDamageString(Model.Equipment.MainHand)</td>
-                <td>@Model.Equipment.MainHand.Weapon.Properties.ToString()</td>
+                <td>@Model.Equipment.MainHand.Weapon.Properties.ToShortString()</td>
                 @*<td><button class="td-action-btn" value="Remove" onclick="removeItemFromEquipment('@Model.ID', '@instanceID')"></button></td>*@
             </tr>
         }
@@ -69,7 +69,7 @@
                 @*<td>@Model.Equipment.OffHand.IsMagic</td>*@
                 <td class="@(Model.IsProficientWith(Model.Equipment.OffHand) ? "skill-proficient" : "")">+@Model.GetAttackBonus(Model.Equipment.OffHand)</td>
                 <td>@Model.GetDamageString(Model.Equipment.OffHand, true)</td>
-                <td>@Model.Equipment.OffHand.Weapon.Properties.ToString()</td>
+                <td>@Model.Equipment.OffHand.Weapon.Properties.ToShortString()</td>
                 @*<td><button class="td-action-btn" value="Remove" onclick="removeItemFromEquipment('@Model.ID', '@instanceID')"></button></td>*@
             </tr>
         }

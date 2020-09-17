@@ -61,7 +61,7 @@
                                 <td class="@(Model.IsProficientWith(Item) ? "skill-proficient" : "") 
                                     @ViewHelper.Disable(!Item.Is(ItemTypeCategory.Weapon))">+@Model.GetAttackBonus(Item)</td>
                                 <td class="@ViewHelper.Disable(!Item.Is(ItemTypeCategory.Weapon))">@Model.GetDamageString(Item)</td>
-                                <td class="@ViewHelper.Disable(!Item.Is(ItemTypeCategory.Weapon))">@Item.Weapon.Properties.ToString()</td>
+                                <td class="@ViewHelper.Disable(!Item.Is(ItemTypeCategory.Weapon))">@Item.Weapon.Properties.ToShortString()</td>
                                 <td><button class="td-action-btn" value="Give" onclick="giveItem('@Model.ID', '@inventoryID')"></button></td>
                                 <td><button class="td-action-btn" value="Remove" onclick="removeItemFromInventory('@Model.ID', '@inventoryID')"></button></td>
                             </tr>

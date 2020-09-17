@@ -4,16 +4,6 @@
     </button>
     <div class="dropdown-menu bg-dark">
         <a class="dropdown-item text-white bg-dark" asp-area="" asp-controller="Character" asp-action="Index">Characters</a>
-        @*<div class="btn-group dropright dropdown-submenu">
-            <a class="btn btn-dark text-white bg-dark dropdown-item" asp-controller="Character" asp-action="Index">Character</a>
-            <a class="btn btn-dark text-white bg-dark dropdown-item dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"></a>
-            <div class="dropdown-menu">
-                @foreach (CharacterModel c in CharacterDataContext)
-                {
-                    <a class="dropdown-item" asp-controller="Character" asp-action="Details" asp-route-id="@c.ID">@c.Name</a>
-                }
-            </div>
-        </div>*@
         <a class="dropdown-item text-white bg-dark" asp-area="" asp-controller="Background" asp-action="Index">Backgrounds</a>
         <a class="dropdown-item text-white bg-dark" asp-area="" asp-controller="Feature" asp-action="Index">Features</a>
         <a class="dropdown-item text-white bg-dark" asp-area="" asp-controller="Spell" asp-action="Index">Spells</a>
