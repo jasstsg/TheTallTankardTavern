@@ -16,6 +16,13 @@
     </div>
     <div class="col-md-5">
         <partial name="/Views/Character/Details/_StatsAndInfo/_ProficienciesAndLanguagesPartial.cshtml" model="Model" />
-        <partial name="/Views/Character/Details/_StatsAndInfo/_CoinsPartial.cshtml" model="Model" />
+        <div class="row">
+            <div class="col-md-5">
+                <partial name="/Views/Character/Details/_StatsAndInfo/_CoinsPartial.cshtml" model="Model" />
+            </div>
+            <div class="col-md-7">
+                <partial name="/Views/Character/Details/_StatsAndInfo/_EquipmentPartial.cshtml" model="Model" />
+            </div>
+        </div>
     </div>
 </div>

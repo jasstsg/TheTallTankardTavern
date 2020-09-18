@@ -33,7 +33,7 @@
             @*<td>@Model.Equipment.TwoHand.IsMagic</td>*@
             <td class="@(Model.IsProficientWith(Model.Equipment.TwoHand) ? "skill-proficient" : "")">+@Model.GetAttackBonus(Model.Equipment.TwoHand)</td>
             <td>@Model.GetDamageString(Model.Equipment.TwoHand)</td>
-            <td>@Model.Equipment.TwoHand.Weapon.Properties.ToString()</td>
+            <td>@Model.Equipment.TwoHand.Weapon.Properties.ToShortString()</td>
             @*<td><button class="td-action-btn" value="Remove" onclick="removeItemFromEquipment('@Model.ID', '@instanceID')"></button></td>*@
         </tr>
         }

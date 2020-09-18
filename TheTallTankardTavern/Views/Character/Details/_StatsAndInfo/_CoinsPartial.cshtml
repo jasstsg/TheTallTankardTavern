@@ -2,13 +2,36 @@
 @using TheTallTankardTavern.Helpers
 @addTagHelper *, TheTallTankardTavern
 
+<style>
+    #character-coins input[type='number'] {
+        margin-left: -10px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+    #character-coins .stat-card-label {
+        text-align: left;
+        margin-left: 5px;
+        padding: 0px;
+    }
+    #character-coins .card-body .stat-card-label {
+        font-size: small;
+        margin-left: 10px;
+    }
+    #character-coins .card-body [class*='col-']:not(:first-child) {
+        padding-left: 0px;
+    }
+    #character-coins .card-body [class*='col-']:not(:last-child) {
+        padding-right: 0px;
+    }
+</style>
+
 <div id="character-coins">
     <div class="stat-card-label">COIN PURSE</div>
     <div id="copper-pieces-card" class="card stat-card">
         <div class="card-body">
             <div class="row">
-                <div class="col-md-3"><div class="stat-card-label">CP</div></div>
-                <div class="col-md-9">
+                <div class="col-md-5"><div class="stat-card-label">CP</div></div>
+                <div class="col-md-7">
                     <div class="stat-card-content">
                         <numberbox asp-for="Coin_Purse.Copper_Pieces" min="0" onchange="updateCoinPurse('@Model.ID', 'Copper', this)"></numberbox>
                     </div>
@@ -19,8 +42,8 @@
     <div id="silver-pieces-card" class="card stat-card">
         <div class="card-body">
             <div class="row">
-                <div class="col-md-3"><div class="stat-card-label">SP</div></div>
-                <div class="col-md-9">
+                <div class="col-md-5"><div class="stat-card-label">SP</div></div>
+                <div class="col-md-7">
                     <div class="stat-card-content">
                         <numberbox asp-for="Coin_Purse.Silver_Pieces" min="0" onchange="updateCoinPurse('@Model.ID', 'Silver', this)"></numberbox>
                     </div>
@@ -31,8 +54,8 @@
     <div id="gold-pieces-card" class="card stat-card">
         <div class="card-body">
             <div class="row">
-                <div class="col-md-3"><div class="stat-card-label">GP</div></div>
-                <div class="col-md-9">
+                <div class="col-md-5"><div class="stat-card-label">GP</div></div>
+                <div class="col-md-7">
                     <div class="stat-card-content">
                         <numberbox asp-for="Coin_Purse.Gold_Pieces" min="0" onchange="updateCoinPurse('@Model.ID', 'Gold', this)"></numberbox>
                     </div>
@@ -43,8 +66,8 @@
     <div id="platinum-pieces-card" class="card stat-card">
         <div class="card-body">
             <div class="row">
-                <div class="col-md-3"><div class="stat-card-label">PP</div></div>
-                <div class="col-md-9">
+                <div class="col-md-5"><div class="stat-card-label">PP</div></div>
+                <div class="col-md-7">
                     <div class="stat-card-content">
                         <numberbox asp-for="Coin_Purse.Platinum_Pieces" min="0" onchange="updateCoinPurse('@Model.ID', 'Platinum', this)"></numberbox>
                     </div>
@@ -55,8 +78,8 @@
     <div id="total-coins-card" class="card stat-card">
         <div class="card-body">
             <div class="row">
-                <div class="col-md-3"><div class="stat-card-label">Total</div></div>
-                <div class="col-md-9">
+                <div class="col-md-5"><div class="stat-card-label">Total</div></div>
+                <div class="col-md-7">
                     <div class="stat-card-content" style="text-align:right">
                         @Model.Coin_Purse.Total.FormatMoney() gp&nbsp;&nbsp;
                     </div>
