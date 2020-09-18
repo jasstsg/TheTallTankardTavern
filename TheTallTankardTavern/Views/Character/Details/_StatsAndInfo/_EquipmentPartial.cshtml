@@ -7,7 +7,7 @@
     StringBuilder sb = new StringBuilder();
     if (Equipment.Armour != null) { sb.AppendLine($"{Equipment.Armour.Name} ({Equipment.Armour.Armour.ArmourClass} AC)"); }
     if (Equipment.Shield != null) { sb.AppendLine($"{Equipment.Shield.Name} (+{Equipment.Shield.Armour.ArmourClass} AC)"); }
-    if (Equipment.SpellCastingFocus != null) { sb.AppendLine(Equipment.SpellCastingFocus.Name); }
+    if (Equipment.SpellCastingFocus != null) { sb.AppendLine($"{Equipment.SpellCastingFocus.Name} (Spellcasting)"); }
     if (Equipment.TwoHand != null) { sb.AppendLine($"{Equipment.TwoHand.Name} (+{Model.GetAttackBonus(Equipment.TwoHand)} / {Model.GetDamageString(Equipment.TwoHand)})"); }
     if (Equipment.MainHand != null) { sb.AppendLine($"{Equipment.MainHand.Name} (+{Model.GetAttackBonus(Equipment.MainHand)} / {Model.GetDamageString(Equipment.MainHand)})"); }
     if (Equipment.OffHand != null) { sb.AppendLine($"{Equipment.OffHand.Name} (+{Model.GetAttackBonus(Equipment.OffHand)} / {Model.GetDamageString(Equipment.OffHand, true)})"); }

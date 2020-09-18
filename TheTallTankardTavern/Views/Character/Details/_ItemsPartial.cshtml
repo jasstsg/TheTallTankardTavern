@@ -1,12 +1,30 @@
 ﻿@model TheTallTankardTavern.Models.CharacterModel
 @addTagHelper *, TheTallTankardTavern
 
+@{ 
+    bool hasProtection = Model.Equipment.Armour != null || Model.Equipment.Shield != null;
+    bool hasWeapon = Model.Equipment.TwoHand != null || Model.Equipment.MainHand != null || Model.Equipment.OffHand != null;
+}
+
 <div>
     <div class="row">
-        <div class="flex-fill">
-            <partial name="/Views/Character/Details/_Items/_EquippedArmourAndShieldPartial.cshtml" model="Model" />
-            <partial name="/Views/Character/Details/_Items/_EquippedWeaponsPartial.cshtml" model="Model" />
-        </div>
+        @if (hasProtection || hasWeapon)
+        {
+            <div class="flex-fill">
+                @if (hasProtection)
+                {
+                    <partial name="/Views/Character/Details/_Items/_EquippedArmourAndShieldPartial.cshtml" model="Model" />
+                }
+                @if (hasWeapon)
+                {
+                    <partial name="/Views/Character/Details/_Items/_EquippedWeaponsPartial.cshtml" model="Model" />
+                }
+            </div>
+        }
+        else
+        {
+            <div class="flex-fill" style="text-align:center">No Armour or Weapons currently equipment</div>
+        }
         <div class="col-md-3">
             <partial name="/Views/Character/Details/_Items/_UnarmedStrikePartial.cshtml" model="Model" />
             @if (Model.Equipment.SpellCastingFocus != null)
