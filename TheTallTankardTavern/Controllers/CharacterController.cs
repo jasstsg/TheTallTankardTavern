@@ -215,68 +215,69 @@ namespace TheTallTankardTavern.Controllers
         {
             CharacterModel Character = DataContext.GetModelFromID(cid);
             Character.Equipment.UnequipArmour(inventoryID);
-            return SaveAndReturnToItemsPartialView(Character);
+            return SaveAndReturnToDetailsPartialView(Character);
         }
         public IActionResult UnequipSpellCastingFocus(string cid, string inventoryID)
         {
             CharacterModel Character = DataContext.GetModelFromID(cid);
             Character.Equipment.UnequipSpellcastingFocus(inventoryID);
-            return SaveAndReturnToItemsPartialView(Character);
+            return SaveAndReturnToDetailsPartialView(Character);
         }
 
         public IActionResult UnequipShield(string cid, string inventoryID)
         {
             CharacterModel Character = DataContext.GetModelFromID(cid);
             Character.Equipment.UnequipShield(inventoryID);
-            return SaveAndReturnToItemsPartialView(Character);
+            return SaveAndReturnToDetailsPartialView(Character);
         }
 
         public IActionResult UnequipTwoHand(string cid, string inventoryID)
         {
             CharacterModel Character = DataContext.GetModelFromID(cid);
             Character.Equipment.UnequipTwoHand(inventoryID);
-            return SaveAndReturnToItemsPartialView(Character);
+            return SaveAndReturnToDetailsPartialView(Character);
         }
 
         public IActionResult UnequipMainHand(string cid, string inventoryID)
         {
             CharacterModel Character = DataContext.GetModelFromID(cid);
             Character.Equipment.UnequipMainHand(inventoryID);
-            return SaveAndReturnToItemsPartialView(Character);
+            return SaveAndReturnToDetailsPartialView(Character);
         }
 
         public IActionResult UnequipOffHand(string cid, string inventoryID)
         {
             CharacterModel Character = DataContext.GetModelFromID(cid);
             Character.Equipment.UnequipOffHand(inventoryID);
-            return SaveAndReturnToItemsPartialView(Character);
+            return SaveAndReturnToDetailsPartialView(Character);
         }
 
         public IActionResult EquipItem(string cid, string inventoryID)
         {
             CharacterModel Character = DataContext.GetModelFromID(cid);
             Character.Equipment.TryEquip(inventoryID, Character.Inventory, Character.HasFeature(SpecialFeatures.DUAL_WIELDER));
-            return SaveAndReturnToItemsPartialView(Character);
+            return SaveAndReturnToDetailsPartialView(Character);
         }
 
         //public IActionResult RemoveItemFromEquipment(string cid, string inventoryID)
         //{
         //    CharacterModel Character = DataContext.GetModelFromID(cid);
         //    Character.Equipment.Unequip(inventoryID);
-        //    return SaveAndReturnToItemsPartialView(Character);
+        //    return SaveAndReturnToDetailsPartialView(Character);
         //}
 
         public IActionResult RemoveItemFromInventory(string cid, string inventoryID)
         {
             CharacterModel Character = DataContext.GetModelFromID(cid);
             Character.Inventory.Remove(inventoryID);
-            return SaveAndReturnToItemsPartialView(Character);
+            return SaveAndReturnToDetailsPartialView(Character);
         }
 
-        private IActionResult SaveAndReturnToItemsPartialView(CharacterModel Character)
+        private IActionResult SaveAndReturnToDetailsPartialView(CharacterModel Character)
         {
             DataContext.Save(Character, Folder);
-            return PartialView("Details/_ItemsPartial", Character);
+            //return PartialView("Details/_ItemsPartial", Character);
+            return PartialView("Details/_DetailsPartial", Character);
         }
 
         public JsonResult QuickSaveCoins(string cid, string coin, int pieces)

@@ -11,8 +11,8 @@ body {
 body::after {
   content: "";
   background: url('/images/custom/dnd_starter_set_art.jpg');
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
+  /*background-repeat: no-repeat;*/
+  background-size: 100%;
   opacity: 0.1;
   top: 0;
   left: 0;
@@ -22,8 +22,9 @@ body::after {
   z-index: -1;   
 }
 
-.nav-link.nav-item.active {
-    background-color: rgba(0,0,0,0.1);
+.nav-item.nav-link.active,
+.nav-item .nav-link.active {
+    background-color: rgba(255, 255, 255, 0.5);
 }
 
 .form-control {

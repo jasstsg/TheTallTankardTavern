@@ -5,7 +5,7 @@
         url: '/Character/UnequipArmour',
         data: { cid: cid, inventoryID: inventoryID },
         dataType: 'html',
-        success: function (response) { refreshCharacterItems(response); }
+        success: function (response) { refreshCharacter(response); }
     })
 }
 
@@ -16,7 +16,7 @@ function unequipSpellCastingFocus(cid, inventoryID) {
         url: '/Character/UnequipSpellCastingFocus',
         data: { cid: cid, inventoryID: inventoryID },
         dataType: 'html',
-        success: function (response) { refreshCharacterItems(response); }
+        success: function (response) { refreshCharacter(response); }
     })
 }
 
@@ -27,7 +27,7 @@ function unequipShield(cid, inventoryID) {
         url: '/Character/UnequipShield',
         data: { cid: cid, inventoryID: inventoryID },
         dataType: 'html',
-        success: function (response) { refreshCharacterItems(response); }
+        success: function (response) { refreshCharacter(response); }
     })
 }
 
@@ -38,7 +38,7 @@ function unequipTwoHand(cid, inventoryID) {
         url: '/Character/UnequipTwoHand',
         data: { cid: cid, inventoryID: inventoryID },
         dataType: 'html',
-        success: function (response) { refreshCharacterItems(response); }
+        success: function (response) { refreshCharacter(response); }
     })
 }
 
@@ -49,7 +49,7 @@ function unequipMainHand(cid, inventoryID) {
         url: '/Character/UnequipMainHand',
         data: { cid: cid, inventoryID: inventoryID },
         dataType: 'html',
-        success: function (response) { refreshCharacterItems(response); }
+        success: function (response) { refreshCharacter(response); }
     })
 }
 
@@ -60,7 +60,7 @@ function unequipOffHand(cid, inventoryID) {
         url: '/Character/UnequipOffHand',
         data: { cid: cid, inventoryID: inventoryID },
         dataType: 'html',
-        success: function (response) { refreshCharacterItems(response); }
+        success: function (response) { refreshCharacter(response); }
     })
 }
 
@@ -71,7 +71,7 @@ function equipItem(cid, inventoryID) {
         url: '/Character/EquipItem',
         data: { cid: cid, inventoryID: inventoryID },
         dataType: 'html',
-        success: function (response) { refreshCharacterItems(response); }
+        success: function (response) { refreshCharacter(response); }
     })
 }
 
@@ -82,7 +82,7 @@ function removeItemFromEquipment(cid, inventoryID) {
         url: '/Character/RemoveItemFromEquipment',
         data: { cid: cid, inventoryID: inventoryID },
         dataType: 'html',
-        success: function (response) { refreshCharacterItems(response); }
+        success: function (response) { refreshCharacter(response); }
     })
 }
 
@@ -93,7 +93,7 @@ function removeItemFromInventory(cid, inventoryID) {
         url: '/Character/RemoveItemFromInventory',
         data: { cid: cid, inventoryID: inventoryID },
         dataType: 'html',
-        success: function (response) { refreshCharacterItems(response); }
+        success: function (response) { refreshCharacter(response); }
     })
 }
 
@@ -101,20 +101,20 @@ function giveItem(cid, inventoryId) {
     event.stopPropagation();
     console.log("Give Item button pressed");
     location.href = '/Character/GiveItem?cid=' + cid + '&inventoryId=' + inventoryId;
-
-    //$.get('/Character/GiveItem', { cid: cid, inventoryId: inventoryId });
-
-    //$.get({
-    //    url: '/Character/GiveItem',
-    //    data: { cid: cid, inventoryId: inventoryId },
-    //    dataType: 'html',
-    //    success: function (response) { refreshCharacterItems(response); }
-    //})
 }
 
 
-function refreshCharacterItems(response) {
-    $('#character-items').html(response);
+function refreshCharacter(response) {
+    //Refresh the character's details (this makes the first tab active again)
+    $('#character-details').html(response);
+
+    //Make the first tab inactive
+    $('#character-stats-and-info').removeClass('active');
+    $('#character-stats-and-info-tab').removeClass('active');
+
+    //Make the item tab active
+    $('#character-items').addClass('active');
+    $('#character-items-tab').addClass('active');
 }
 
 /* 
