@@ -82,7 +82,7 @@
 .grouped-stats-label {
     color: var(--custom-dark-grey);
     font-weight: bold;
-    font-size: small;
+    /*font-size: small;*/
 }
 
 .grouped-stats .stat-card-content {

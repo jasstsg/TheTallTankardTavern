@@ -2,21 +2,15 @@
 @addTagHelper *, TheTallTankardTavern
 
 <style>
-    .card#spellcasting-focus {
-        margin-top: 10px;
-    }
-    .card#spellcasting-focus .card-title {
-        margin: 0px;
-    }
-    .card#spellcasting-focus .card-text {
-        margin-top: 5px;
+    #spellcasting-focus .btn {
+        margin: 5px;
     }
 </style>
-<div class="card" id="spellcasting-focus">
+<div class="card stat-card" id="spellcasting-focus">
     <div class="card-body" data-toggle="modal" data-target="#popup-modal" data-title="@Model.Equipment.SpellCastingFocus.Name" data-desc="@Model.Equipment.SpellCastingFocus.PopUpText" data-traits="">
-        <div class="card-title">SPELLCASTING FOCUS</div>
-        <div class="card-text">@Model.Equipment.SpellCastingFocus.Name</div>
-        <div class="card-text">@Model.Equipment.SpellCastingFocus.Type (@Model.Equipment.SpellCastingFocus.Weight lbs)</div>
-        <div class="card-text"><button class="td-action-btn" value="Unequip" onclick="unequipSpellCastingFocus('@Model.ID', '@Model.Equipment.SpellCastingFocus.InventoryID')"></button></div>
+        <div class="stat-card-label">SPELLCASTING FOCUS</div>
+        <div class="stat-card-content">@Model.Equipment.SpellCastingFocus.Name</div>
+        <div class="stat-card-content">@Model.Equipment.SpellCastingFocus.Type (@Model.Equipment.SpellCastingFocus.Weight lbs)</div>
+        <div><button class="td-action-btn" value="Unequip" onclick="unequipSpellCastingFocus('@Model.ID', '@Model.Equipment.SpellCastingFocus.InventoryID')"></button></div>
     </div>
 </div>

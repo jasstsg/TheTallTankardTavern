@@ -28,6 +28,12 @@ namespace TheTallTankardTavern.Controllers
             return View("Index", DataContext.OrderBy(x => x.Name).ToList());
         }
 
+        /* Attribute used to ensure no caching is done when showing the details of something
+           An issue occured when submitting multiple ajax requests (updating coins) then refreshing normally,
+           the coin value would be the same as the result after the first ajax request.
+           The true value would not appear unless the page was refreshed without cache, navigated to a different page, or app restart
+        */
+        [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
 		public virtual IActionResult Details(string id)
         {
             return ControllerHelper.ViewExists(this, "Details") ? View("Details", DataContext.GetModelFromID(id)) : Index();

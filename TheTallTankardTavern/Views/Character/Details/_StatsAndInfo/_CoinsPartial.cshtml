@@ -1,0 +1,67 @@
+﻿@model TheTallTankardTavern.Models.CharacterModel
+@using TheTallTankardTavern.Helpers
+@addTagHelper *, TheTallTankardTavern
+
+<div id="character-coins">
+    <div class="stat-card-label">COIN PURSE</div>
+    <div id="copper-pieces-card" class="card stat-card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-3"><div class="stat-card-label">CP</div></div>
+                <div class="col-md-9">
+                    <div class="stat-card-content">
+                        <numberbox asp-for="Coin_Purse.Copper_Pieces" min="0" onchange="updateCoinPurse('@Model.ID', 'Copper', this)"></numberbox>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="silver-pieces-card" class="card stat-card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-3"><div class="stat-card-label">SP</div></div>
+                <div class="col-md-9">
+                    <div class="stat-card-content">
+                        <numberbox asp-for="Coin_Purse.Silver_Pieces" min="0" onchange="updateCoinPurse('@Model.ID', 'Silver', this)"></numberbox>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="gold-pieces-card" class="card stat-card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-3"><div class="stat-card-label">GP</div></div>
+                <div class="col-md-9">
+                    <div class="stat-card-content">
+                        <numberbox asp-for="Coin_Purse.Gold_Pieces" min="0" onchange="updateCoinPurse('@Model.ID', 'Gold', this)"></numberbox>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="platinum-pieces-card" class="card stat-card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-3"><div class="stat-card-label">PP</div></div>
+                <div class="col-md-9">
+                    <div class="stat-card-content">
+                        <numberbox asp-for="Coin_Purse.Platinum_Pieces" min="0" onchange="updateCoinPurse('@Model.ID', 'Platinum', this)"></numberbox>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="total-coins-card" class="card stat-card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-3"><div class="stat-card-label">Total</div></div>
+                <div class="col-md-9">
+                    <div class="stat-card-content" style="text-align:right">
+                        @Model.Coin_Purse.Total.FormatMoney() gp&nbsp;&nbsp;
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

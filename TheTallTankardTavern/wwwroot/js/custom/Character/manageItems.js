@@ -136,19 +136,3 @@ function quickSaveCoins(cid, coin, thisElement) {
     });
 };
 */
-
-function updateCoinPurse(cid, coin, thisElement) {
-    event.stopPropagation();
-    $.ajax({
-        url: '/Character/UpdateCoinPurse',
-        data: {
-            cid: cid,
-            coin: coin,
-            pieces: $(thisElement).val()
-        },
-        dataType: 'html',
-        success: function (response) {
-            $('#character-items-coins').html(response);
-        }
-    })
-};

@@ -182,6 +182,41 @@ namespace TheTallTankardTavern.Controllers
                 return this.JsonSuccessFalse();
             }
         }
+
+        public JsonResult QuickSaveCoins(string cid, string coin, int pieces)
+        {
+            try
+            {
+                CharacterModel Character = CharacterDataContext.GetModelFromID(cid);
+                switch (coin)
+                {
+                    case "Copper": Character.Coin_Purse.Copper_Pieces = pieces; break;
+                    case "Silver": Character.Coin_Purse.Silver_Pieces = pieces; break;
+                    case "Gold": Character.Coin_Purse.Gold_Pieces = pieces; break;
+                    case "Platinum": Character.Coin_Purse.Platinum_Pieces = pieces; break;
+                }
+                CharacterDataContext.Save(Character, Folder);
+                return this.JsonSuccessTrue();
+            }
+            catch
+            {
+                return this.JsonSuccessFalse();
+            }
+        }
+
+        public IActionResult UpdateCoinPurse(string cid, string coin, int pieces)
+        {
+            CharacterModel Character = CharacterDataContext.GetModelFromID(cid);
+            switch (coin)
+            {
+                case "Copper": Character.Coin_Purse.Copper_Pieces = pieces; break;
+                case "Silver": Character.Coin_Purse.Silver_Pieces = pieces; break;
+                case "Gold": Character.Coin_Purse.Gold_Pieces = pieces; break;
+                case "Platinum": Character.Coin_Purse.Platinum_Pieces = pieces; break;
+            }
+            CharacterDataContext.Save(Character, Folder);
+            return PartialView("Details/_StatsAndInfo/_CoinsPartial", Character);
+        }
         #endregion
 
         #region Manage Items
@@ -278,41 +313,6 @@ namespace TheTallTankardTavern.Controllers
             DataContext.Save(Character, Folder);
             //return PartialView("Details/_ItemsPartial", Character);
             return PartialView("Details/_DetailsPartial", Character);
-        }
-
-        public JsonResult QuickSaveCoins(string cid, string coin, int pieces)
-        {
-            try
-            {
-                CharacterModel Character = CharacterDataContext.GetModelFromID(cid);
-                switch (coin)
-                {
-                    case "Copper": Character.Coin_Purse.Copper_Pieces = pieces; break;
-                    case "Silver": Character.Coin_Purse.Silver_Pieces = pieces; break;
-                    case "Gold":  Character.Coin_Purse.Gold_Pieces = pieces; break;
-                    case "Platinum": Character.Coin_Purse.Platinum_Pieces = pieces; break;
-                }
-                CharacterDataContext.Save(Character, Folder);
-                return this.JsonSuccessTrue();
-            }
-            catch
-            {
-                return this.JsonSuccessFalse();
-            }           
-        }
-
-        public IActionResult UpdateCoinPurse(string cid, string coin, int pieces)
-        {
-            CharacterModel Character = CharacterDataContext.GetModelFromID(cid);
-            switch (coin)
-            {
-                case "Copper": Character.Coin_Purse.Copper_Pieces = pieces; break;
-                case "Silver": Character.Coin_Purse.Silver_Pieces = pieces; break;
-                case "Gold": Character.Coin_Purse.Gold_Pieces = pieces; break;
-                case "Platinum": Character.Coin_Purse.Platinum_Pieces = pieces; break;
-            }
-            CharacterDataContext.Save(Character, Folder);
-            return PartialView("Details/_Items/_CoinsPartial", Character);
         }
         #endregion
 
