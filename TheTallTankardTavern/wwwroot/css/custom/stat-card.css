@@ -27,7 +27,7 @@
 }
 
 .stat-card-label-header {
-    font-size: x-small;
+    font-size: smaller;
     border-bottom: 1px solid var(--custom-light-grey);
 }
 
@@ -40,11 +40,11 @@
 }
 
 .stat-card .stat-score-card > .stat-card-content.stat-save {
-    font-size: x-small;
+    font-size: smaller;
 }
 
 .stat-card .stat-skills-card .stat-card-content {
-    font-size: x-small;
+    font-size: smaller;
     text-align: left;
 }
 
@@ -65,7 +65,7 @@
 }
 
 .other-stat-card > .card-body > .row > [class*='col-']:last-child > .stat-card-content {
-    font-size: x-small;
+    font-size: smaller;
     font-weight: bold;
     color: var(--custom-dark-grey);
     padding-right: 30px;
@@ -109,5 +109,5 @@
 .other-stat-card-three-column a {
     color: var(--custom-dark-grey);
     border: 1px solid var(--custom-light-grey);
-    font-size: x-small;
+    font-size: smaller;
 }
