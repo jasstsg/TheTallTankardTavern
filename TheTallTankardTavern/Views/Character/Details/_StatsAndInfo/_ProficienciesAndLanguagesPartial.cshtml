@@ -40,7 +40,7 @@
 <div id="character-proficiencies">
     <span class="grouped-stats-label">PROFICIENCIES &amp; LANGUAGES</span>
     <div class="grouped-stats row">
-        <div id="weapon-armour-proficiency-card" class="card stat-card other-stat-card col-md-4">
+        <div id="weapon-armour-proficiency-card" class="card stat-card other-stat-card col-md-5">
             <div class="card-body">
                 <div class="stat-card-label-header">WEAPONS &amp; ARMOUR</div>
                 <div class="stat-card-content">
@@ -69,9 +69,9 @@
                 </div>
             </div>
         </div>
-        <div id="languages-card" class="card stat-card other-stat-card col-md-4">
+        <div id="languages-card" class="card stat-card other-stat-card col-md-3">
             <div class="card-body">
-                <div class="stat-card-label-header">KNOWN LANGUAGES</div>
+                <div class="stat-card-label-header">LANGUAGES</div>
                 <div class="stat-card-content">
                     <textarea class="readonly-textarea" readonly="readonly" rows="@Model.Languages.Where(l => l).Count()">
                 @{ LANGUAGES[] langArray = ModelListHelper.AllValues<LANGUAGES>().ToArray();}
