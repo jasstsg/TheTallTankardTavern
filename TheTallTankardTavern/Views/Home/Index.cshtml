@@ -5,28 +5,39 @@
     ViewData["Title"] = "Home Page";
 }
 
-@if (ContextUser.IsAuthenticated)
-{
-    <div>
-        <buttonlink class="font-weight-bold" asp-controller="Character" asp-action="Index" text="My Characters"></buttonlink>
-        &nbsp;&nbsp;
-        <buttonlink class="font-weight-bold" asp-controller="Party" asp-action="Index" text="My Party"></buttonlink>
+<div class="row">
+    <div class="col-md-4 offset-4">
+        <br />
+        <br />
+        <br />
+        @if (ContextUser.IsAuthenticated)
+        {
+            <div style="text-align: center;">
+                <buttonlink small="false" class="action-btn-large" style="width:120px" asp-controller="Character" asp-action="Index" text="Characters"></buttonlink>
+                &nbsp;&nbsp;
+                <buttonlink small="false" class="action-btn-large" style="width:120px" asp-controller="Party" asp-action="Index" text="Party"></buttonlink>
+            </div>
+            <br />
+            <div style="text-align:center;">
+                <strong>
+                    What do the <span class="skill-proficient">c</span>o<span class="skill-expert">l</span>o<span class="item-magic">u</span>r<span style="color:red">s</span> mean?
+                </strong>
+                <div>You are <span class="skill-proficient">proficient</span> with something.</div>
+                <div>You are an <span class="skill-expert">expert</span> at something.</div>
+                <div>Something is <span class="item-magic">magical</span>.</div>
+                <div>Something is <span style="color:red;font-weight:bold">bad</span>.</div>
+            </div>
+        }
+        else
+        {
+            <h2 style="text-align:center">
+                Welcome to<br />
+                The Tall Tankard Tavern!
+            </h2>
+            <br />
+            <div style="text-align:center;">
+                <buttonlink small="false" class="action-btn-large" asp-controller="Login" asp-action="Index" text="Click here to log in!"></buttonlink>
+            </div>
+        }
     </div>
-    <br />
-    <div>
-        <strong>
-            What do the <span class="skill-proficient">c</span>o<span class="skill-expert">l</span>o<span class="item-magic">u</span>r<span style="color:red">s</span> mean?
-        </strong>
-        <div>You are <span class="skill-proficient">proficient</span> with something.</div>
-        <div>You are an <span class="skill-expert">expert</span> at something.</div>
-        <div>Something is <span class="item-magic">magical</span>.</div>
-        <div>Something is <span style="color:red;font-weight:bold">bad</span>.</div>
-    </div>
-}
-else
-{
-    <h2>Welcome to The Tall Tankard Tavern!</h2>
-    <div>
-        <buttonlink class="font-weight-bold" asp-controller="Login" asp-action="Index" text="Click here to log in!"></buttonlink>
-    </div>
-}
+</div>

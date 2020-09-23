@@ -8,13 +8,14 @@ namespace TheTallTankardTavern.TagHelpers
 	[HtmlTargetElement("buttonlink")]
 	public class ButtonLinkTagHelper : AnchorTagHelper
 	{
-        public string Text { get; set; } = "Button Link";
+		public bool Small { get; set; } = true;
+		public string Text { get; set; } = "Button Link";
 		public ButtonLinkTagHelper(IHtmlGenerator generator) : base(generator) { }
 
 		public override void Process(TagHelperContext context, TagHelperOutput output)
 		{
 			output.TagName = "a";
-			output.Attributes.AppendToAttribute("class", "btn btn-outline-dark btn-sm");
+			output.Attributes.AppendToAttribute("class", $"btn btn-outline-dark {(Small ? "btn-sm" : "")}");
             output.Content.SetContent(Text);
 
 			base.Process(context, output);

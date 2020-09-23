@@ -4,9 +4,15 @@
     margin-right: 5px;
 }
 
+.action-btn-large {
+    font-size: large;
+}
+
 a.btn.action-btn,
+a.btn.action-btn-large,
 a.btn.td-action-btn,
-input.btn {
+input.btn,
+input[type='submit'] {
     font-weight: bold;
     border: 1px solid var(--custom-light-grey);
     color: var(--custom-dark-grey);

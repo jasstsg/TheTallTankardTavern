@@ -4,23 +4,44 @@
     ViewData["Title"] = "Login";
 }
 
-<h1>Login</h1>
+<style>
+    .flex-grid {
+        display: flex;
+        justify-content: space-between;
+    }
+    .flex-grid .col {
+        margin: 0px;
+    }
+    .flex-grid .col:not(:first-child) {
+        margin-left: 5px;
+    }
+    .flex-grid .col:not(:last-child) {
+        margin-right: 5px;
+    }
+</style>
 
-<p>@(ViewData["Message"] ?? "")</p>
+<p style="text-align:center;color:red">@(ViewData["Message"] ?? "")</p>
 
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4 offset-4">
+        <br />
+        <br />
+        <br />
+        <h2 style="text-align:center">Login</h2>
+        <br />
         <form asp-controller="Login" asp-action="Login" method="post">
             <div id="hidden">
                 <hidden asp-for="ID" />
                 <hidden asp-for="Message" />
                 <hidden asp-for="MessageUpdated" />
             </div>
-            <div class="form-group">
-                <textbox asp-for="Username" placeholder="Enter your username"></textbox>
+            <div class="form-group px-5">
+                <textbox style="font-size:medium" asp-for="Username" placeholder="Enter your username"></textbox>
             </div>
-            <submit class="action-btn" text="Log in"></submit>
-            <buttonlink class="action-btn" text="Cancel" asp-controller="Home" asp-action="Index"></buttonlink>
+            <div class="px-5 flex-grid">
+                <submit class="action-btn-large col" text="Log in"></submit>
+                <buttonlink small="false" class="action-btn-large col" text="Cancel" asp-controller="Home" asp-action="Index"></buttonlink>
+            </div>
         </form>
     </div>
 </div>
