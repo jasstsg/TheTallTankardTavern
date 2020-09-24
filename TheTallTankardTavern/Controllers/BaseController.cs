@@ -27,6 +27,11 @@ namespace TheTallTankardTavern.Controllers
 
         public virtual IActionResult Index()
         {
+            //For back button when editing user profile
+            if (DataContext is IEnumerable<UserModel> && !ContextUser.IsAdministrator)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return View("Index", DataContext.OrderBy(x => x.Name).ToList());
         }
 
