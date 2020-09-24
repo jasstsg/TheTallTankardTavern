@@ -10,17 +10,14 @@ using static TheTallTankardTavern.Configuration.Constants;
 
 namespace TheTallTankardTavern.Controllers
 {
-	[Authorized(Constants.ROLES.Administrator)]
 	public class UserController : BaseController<UserModel>
 	{
 		public UserController() : base(UserDataContext, FOLDER.User) { }
 
+		[Authorized(ROLES.Administrator)]
 		public override IActionResult Create()
 		{
-			return View("Create", new UserModel
-			{
-				ID = NewGUID
-			});
+			return View("Create", new UserModel { ID = NewGUID });
 		}
 
 		[HttpPost]
@@ -30,24 +27,24 @@ namespace TheTallTankardTavern.Controllers
 		}
 
 		#region User Profile Editing
-		[Authorized(Constants.ROLES.Player)]
+		[Authorized(ROLES.Dungeon_Master, ROLES.Dungeon_Master_Readonly, ROLES.Player)]
 		public IActionResult Profile()
-		{
-			return View("Profile", ApplicationSettings.UserDataContext.GetModelFromID(ContextUser.GetContextUser.ID));
+		{			
+			return View(ContextUser.IsAdministrator ? "Create" : "Profile", ContextUser.GetContextUser);
 		}
 
-		[Authorized(Constants.ROLES.Player)]
+		[Authorized(ROLES.Dungeon_Master, ROLES.Dungeon_Master_Readonly, ROLES.Player)]
 		public JsonResult SaveChanges(string uid, string username, string message)
 		{
 			try
 			{
-				UserModel User = ApplicationSettings.UserDataContext.GetModelFromID(uid);
+				UserModel User = UserDataContext.GetModelFromID(uid);
 				if (User.Username != username)
 				{
-					foreach (CharacterModel Character in ApplicationSettings.CharacterDataContext.Where((CharacterModel u) => u.Player_Name == User.Username))
+					foreach (CharacterModel Character in CharacterDataContext.Where((CharacterModel u) => u.Player_Name == User.Username))
 					{
 						Character.Player_Name = username;
-						ApplicationSettings.CharacterDataContext.Save(Character, FOLDER.Characters);
+						CharacterDataContext.Save(Character, FOLDER.Characters);
 					}
 					User.Username = username;
 					ContextUser.SetContextUser(User);
@@ -57,18 +54,12 @@ namespace TheTallTankardTavern.Controllers
 					User.Message = message;
 					User.MessageUpdated = DateTime.Now.ToString("ddd, MMM dd yyyy");
 				}
-				ApplicationSettings.UserDataContext.Save(User, FOLDER.User);
-				return Json(new
-				{
-					success = true
-				});
+				UserDataContext.Save(User, FOLDER.User);
+				return Json(new { success = true });
 			}
 			catch
 			{
-				return Json(new
-				{
-					success = false
-				});
+				return Json(new { success = false });
 			}
 		}
         #endregion

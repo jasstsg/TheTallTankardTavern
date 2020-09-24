@@ -2,7 +2,9 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TheTallTankardTavern.Configuration;
 using TheTallTankardTavern.Helpers;
+using TheTallTankardTavern.Models;
 using TTT;
 using TTT.Common.Abstractions;
 using static TheTallTankardTavern.Configuration.Constants;
@@ -54,7 +56,10 @@ namespace TheTallTankardTavern.Controllers
                     return RedirectToAction("Edit", new { id = SavedModel.ID });
                 case TAGHELPER.SUBMIT_TEXT.SAVE_AND_FINISH:
                 default:
-                    //return ControllerHelper.ViewExists(this, "Details") ? View("Details", SavedModel) : Index();
+                    if (Model is UserModel)
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
                     return ControllerHelper.ViewExists(this, "Details") ?
                         RedirectToAction("Details", new { id = SavedModel.ID }) : RedirectToAction("Index");
             }
