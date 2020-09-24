@@ -53,10 +53,14 @@ namespace TheTallTankardTavern.Controllers
             switch (submit)
             {
                 case TAGHELPER.SUBMIT_TEXT.SAVE_AND_CONTINUE:
+                    if (Model is UserModel)
+                    {
+                        return View(ContextUser.IsAdministrator ? "Create" : "Profile", SavedModel);
+                    }
                     return RedirectToAction("Edit", new { id = SavedModel.ID });
                 case TAGHELPER.SUBMIT_TEXT.SAVE_AND_FINISH:
                 default:
-                    if (Model is UserModel)
+                    if (Model is UserModel && !ContextUser.IsAdministrator)
                     {
                         return RedirectToAction("Index", "Home");
                     }

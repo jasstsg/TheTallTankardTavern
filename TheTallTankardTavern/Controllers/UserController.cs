@@ -17,7 +17,7 @@ namespace TheTallTankardTavern.Controllers
 		[Authorized(ROLES.Administrator)]
 		public override IActionResult Create()
 		{
-			return View("AdminCreate", new UserModel { ID = NewGUID });
+			return View("Create", new UserModel { ID = NewGUID });
 		}
 
 		[HttpPost]
@@ -30,7 +30,7 @@ namespace TheTallTankardTavern.Controllers
 		[Authorized(ROLES.Dungeon_Master, ROLES.Dungeon_Master_Readonly, ROLES.Player)]
 		public IActionResult Profile()
 		{			
-			return View(ContextUser.IsAdministrator ? "AdminCreate" : "Create", ContextUser.GetContextUser);
+			return View(ContextUser.IsAdministrator ? "Create" : "Profile", ContextUser.GetContextUser);
 		}
 
 		[Authorized(ROLES.Dungeon_Master, ROLES.Dungeon_Master_Readonly, ROLES.Player)]

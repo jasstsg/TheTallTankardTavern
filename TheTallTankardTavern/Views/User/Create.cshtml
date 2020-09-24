@@ -20,10 +20,7 @@
             <tbody>
                 <tr>
                     <td><label asp-for="Name"></label></td>
-                    <td>
-                        <hidden asp-for="Name"></hidden>
-                        @Model.Name
-                    </td>
+                    <td><textbox asp-for="Name"></textbox></td>
                 </tr>
                 <tr>
                     <td><label asp-for="Username"></label></td>
@@ -31,10 +28,7 @@
                 </tr>
                 <tr>
                     <td><label asp-for="Role"></label></td>
-                    <td>
-                        <hidden asp-for="Role"></hidden>
-                        @Model.Role
-                    </td>
+                    <td><select asp-for="Role" asp-items="SelectListHelper.GetRoleSelectList()"></select></td>
                 </tr>
             </tbody>
         </table>
