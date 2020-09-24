@@ -52,12 +52,12 @@ namespace TTT.Items
         public static readonly ItemType Shield = new ItemType("Shield", ItemTypeCategory.Shield);
 
         //Weapon parent types
-        public static readonly ItemType ShieldAndArmour = new ItemType("Shield And Armour", ItemTypeCategory.ParentType);
-        public static readonly ItemType SimpleMeleeWeapon = new ItemType("Simple Melee Weapon", ItemTypeCategory.ParentType);
-        public static readonly ItemType SimpleRangedWeapon = new ItemType("Simple Ranged Weapon", ItemTypeCategory.ParentType);
-        public static readonly ItemType MartialMeleeWeapon = new ItemType("Martial Melee Weapon", ItemTypeCategory.ParentType);
-        public static readonly ItemType MartialRangedWeapon = new ItemType("Martial Ranged Weapon", ItemTypeCategory.ParentType);
-        public static readonly ItemType OtherWeapon = new ItemType("Other Weapon", ItemTypeCategory.ParentType);
+        public static readonly ItemType ShieldAndArmour = new ItemType("Shields And Armour", ItemTypeCategory.ParentType);
+        public static readonly ItemType SimpleMeleeWeapon = new ItemType("Simple Melee Weapons", ItemTypeCategory.ParentType);
+        public static readonly ItemType SimpleRangedWeapon = new ItemType("Simple Ranged Weapons", ItemTypeCategory.ParentType);
+        public static readonly ItemType MartialMeleeWeapon = new ItemType("Martial Melee Weapons", ItemTypeCategory.ParentType);
+        public static readonly ItemType MartialRangedWeapon = new ItemType("Martial Ranged Weapons", ItemTypeCategory.ParentType);
+        public static readonly ItemType OtherWeapon = new ItemType("Other Weapons", ItemTypeCategory.ParentType);
         //public static readonly ItemType FirearmsRangedWeapon = new ItemType("Firearms Ranged Weapon", ItemTypeCategory.Weapon);
 
         //Simple Melee Weapons

@@ -44,7 +44,7 @@
             <div class="card-body">
                 <div class="stat-card-label-header">WEAPONS &amp; ARMOUR</div>
                 <div class="stat-card-content">
-                    @{ string[] profArray = ApplicableProficencies.Keys.ToArray();}
+                    @{ string[] profArray = ApplicableProficencies.Keys.OrderBy(k => k).ToArray();}
                     <textarea class="readonly-textarea" readonly="readonly" rows="@profArray.Length">
                         @for (int i = 0; i < profArray.Length; i++)
                         {
