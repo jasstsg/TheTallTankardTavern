@@ -23,6 +23,10 @@ namespace TheTallTankardTavern.Controllers
 		[HttpPost]
 		public IActionResult Save(UserModel Model, string submit)
 		{
+			if (ContextUser.GetContextUser.ID.Equals(Model.ID))
+            {
+				ContextUser.SetContextUser(Model);
+            }
 			return SaveModel(Model, submit);
 		}
 
