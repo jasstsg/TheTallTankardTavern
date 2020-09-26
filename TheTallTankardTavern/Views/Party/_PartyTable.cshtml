@@ -26,12 +26,12 @@
 <style>
     .numeric {
         text-align: right;
-        width: 80px;
+        /*width: 80px;*/
     }
 
     #party input[type=number] {
-        text-align: right;
-        width: 80px;
+        text-align: center;
+        /*width: 80px;*/
     }
 
     #party .bloodied {
@@ -41,13 +41,21 @@
     #party .unconcious {
         background-color: #aa3333;
     }
+
+    #party-table th {
+        min-width: 50px;
+    }
+
+    #party-table th[colspan='2']{
+        min-width: 100px;
+    }
 </style>
 
 <table id="party-table">
     <thead>
         <tr>
-            <th width="100px">Member</th>
-            <th width="50px">Level</th>
+            <th>Name</th>
+            <th>Description</th>
             <th>Initiative</th>
             <th colspan="2">Hit Points</th>
             <th>Temp HP</th>
@@ -57,8 +65,7 @@
                 <th>PP</th>
                 <th>Languages</th>
             }
-            <th>Race</th>
-            <th>Class</th>
+            <th width="50%">Conditions</th>
         </tr>
     </thead>
     <tbody>
@@ -66,7 +73,7 @@
         {
             <tr class="@CheckPCHP(Member.Character.Hit_Points_Remaining, Member.Character.MaxHitPoints)">
                 <td>@Member.Character.Name</td>
-                <td>@Member.Character.Level</td>
+                <td>Level @Member.Character.Level, @Member.Character.Race @Member.Character.Class</td>
                 @if (ContextUser.HasUsername(Member.Character.Player_Name) || ContextUser.IsAdminOrDM)
                 {
                     <td class="numeric">
@@ -96,8 +103,17 @@
                     <td>@Member.Character.Passive_Perception</td>
                     <td>@Member.Character.Languages.ToString(LANGUAGES.Common)</td>
                 }
-                <td>@Member.Character.Race @Member.Character.Subrace.AddBraces()</td>
-                <td>@Member.Character.Class @Member.Character.Subclass.AddBraces()</td>
+                <td>
+                    @if (ContextUser.IsAdminOrDM)
+                    {
+                        <textbox asp-for="@Member.Conditions" 
+                                onchange="quickSavePartyMemberConditions('@Member.CharacterId', this)"></textbox>
+                    }
+                    else
+                    {
+                        @Member.Conditions
+                    }
+                </td>
             </tr>
         }
     </tbody>

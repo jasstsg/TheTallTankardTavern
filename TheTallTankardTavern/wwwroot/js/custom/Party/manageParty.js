@@ -49,3 +49,18 @@ function quickSavePartyMemberHitPoints(cid, thisElement) {
         }
     });
 };
+function quickSavePartyMemberConditions(cid, thisElement) {
+    var data = {
+        cid: cid,
+        conditions: $(thisElement).val()
+    };
+    $.post("/Party/QuickSaveConditions", data, function (response) {
+        showAutoSaveMessage(response.success);
+        console.log("Quick save conditions request completed with success status: " + response.success);
+
+        if (response.success) {
+            //Reload table
+            reloadPartyTable();
+        }
+    });
+};

@@ -27,6 +27,8 @@ namespace TheTallTankardTavern.Models
         public string CharacterId { get; set; } = "";
         public int Initiative { get; set; } = 0;
 
+        public string Conditions { get; set; } = "";
+
         [JsonIgnore]
         public CharacterModel Character
         {

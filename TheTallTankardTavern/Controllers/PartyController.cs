@@ -93,5 +93,22 @@ namespace TheTallTankardTavern.Controllers
 
             return View("Index", Party);
         }
+
+        [HttpPost]
+        public IActionResult QuickSaveConditions(string cid, string conditions)
+        {
+            try
+            {
+                PartyModel Party = PartyDataContext.Single();
+                MemberModel Member = Party.Members.Where(m => m.CharacterId == cid).Single();
+                Member.Conditions = conditions;
+                PartyDataContext.Save(Party, FOLDER.Party);
+                return this.JsonSuccessTrue();
+            }
+            catch
+            {
+                return this.JsonSuccessFalse();
+            }
+        }
     }
 }
