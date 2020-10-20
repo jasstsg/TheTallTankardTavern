@@ -92,6 +92,17 @@
             </div>
         </div>
     }
+    @if (Model.Class.ToLower().Contains("warlock") && @Model.Level > 1)
+    {
+        <div id="eldritch-invocations-card" class="card stat-card other-stat-card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3"><div class="stat-card-content">@Model.GetEldritchInvocations()</div></div>
+                    <div class="col-md-9"><div class="stat-card-content">ELDRITCH INVOCATIONS</div></div>
+                </div>
+            </div>
+        </div>
+    }
     <div id="spell-attack-mod-card" class="card stat-card other-stat-card">
         <div class="card-body">
             <div class="row">
