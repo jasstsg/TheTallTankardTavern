@@ -11,6 +11,9 @@
     if (Equipment.TwoHand != null) { sb.AppendLine($"{Equipment.TwoHand.Name} (+{Model.GetAttackBonus(Equipment.TwoHand)} / {Model.GetDamageString(Equipment.TwoHand)})"); }
     if (Equipment.MainHand != null) { sb.AppendLine($"{Equipment.MainHand.Name} (+{Model.GetAttackBonus(Equipment.MainHand)} / {Model.GetDamageString(Equipment.MainHand)})"); }
     if (Equipment.OffHand != null) { sb.AppendLine($"{Equipment.OffHand.Name} (+{Model.GetAttackBonus(Equipment.OffHand)} / {Model.GetDamageString(Equipment.OffHand, true)})"); }
+    if (Equipment.AttunedItem1 != null) { sb.AppendLine($"{Equipment.AttunedItem1.Name} (Attuned)"); }
+    if (Equipment.AttunedItem2 != null) { sb.AppendLine($"{Equipment.AttunedItem2.Name} (Attuned)"); }
+    if (Equipment.AttunedItem3 != null) { sb.AppendLine($"{Equipment.AttunedItem3.Name} (Attuned)"); }
 }
 
 <style>
