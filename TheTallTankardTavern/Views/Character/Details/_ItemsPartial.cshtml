@@ -32,7 +32,12 @@
                 <br />
                 <partial name="/Views/Character/Details/_Items/_EquippedFocusPartial.cshtml" model="Model" />
             }
+            @if (Model.Equipment.AttunedItem1 != null)
+            {
+                <partial name="/Views/Character/Details/_Items/_OtherEquippablePartial.cshtml" model="Model" />
+            }
         </div>
+ 
     </div>
     <br />
     <div class="row">

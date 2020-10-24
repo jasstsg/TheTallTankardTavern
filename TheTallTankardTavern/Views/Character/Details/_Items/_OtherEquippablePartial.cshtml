@@ -1,0 +1,29 @@
+﻿@model TheTallTankardTavern.Models.CharacterModel
+@addTagHelper *, TheTallTankardTavern
+
+<strong>Magic Items</strong>
+<table table-hover="true">
+    <tbody>
+        @if (Model.Equipment.AttunedItem1 != null)
+        {
+        <tr data-toggle="modal" data-target="#popup-modal" data-title="@Model.Equipment.AttunedItem1.Name" data-desc="@Model.Equipment.AttunedItem1.PopUpText" data-traits="">
+            <td class="@(Model.Equipment.AttunedItem1.IsMagic ? "item-magic" : "")">@Model.Equipment.AttunedItem1.Name</td>
+            <td><button class="td-action-btn" value="Unequip" onclick="unequipMagicItem('@Model.ID', '@Model.Equipment.AttunedItem1.InventoryID')"></button></td>
+        </tr>
+        }
+        @if (Model.Equipment.AttunedItem2 != null)
+        {
+        <tr data-toggle="modal" data-target="#popup-modal" data-title="@Model.Equipment.AttunedItem2.Name" data-desc="@Model.Equipment.AttunedItem2.PopUpText" data-traits="">
+            <td class="@(Model.Equipment.AttunedItem2.IsMagic ? "item-magic" : "")">@Model.Equipment.AttunedItem2.Name</td>
+            <td><button class="td-action-btn" value="Unequip" onclick="unequipMagicItem('@Model.ID', '@Model.Equipment.AttunedItem2.InventoryID')"></button></td>
+        </tr>
+        }
+        @if (Model.Equipment.AttunedItem3 != null)
+        {
+            <tr data-toggle="modal" data-target="#popup-modal" data-title="@Model.Equipment.AttunedItem3.Name" data-desc="@Model.Equipment.AttunedItem3.PopUpText" data-traits="">
+                <td class="@(Model.Equipment.AttunedItem3.IsMagic ? "item-magic" : "")">@Model.Equipment.AttunedItem3.Name</td>
+                <td><button class="td-action-btn" value="Unequip" onclick="unequipMagicItem('@Model.ID', '@Model.Equipment.AttunedItem3.InventoryID')"></button></td>
+            </tr>
+        }
+    </tbody>
+</table>

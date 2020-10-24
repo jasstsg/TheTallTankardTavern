@@ -4,7 +4,6 @@ using System.Linq;
 using TTT.Items;
 using TTT.Common.Abstractions;
 using TheTallTankardTavern.Helpers;
-using System;
 
 namespace TheTallTankardTavern.Models
 {
@@ -22,6 +21,12 @@ namespace TheTallTankardTavern.Models
         public string _mainHand { get; set; } = null;
         [JsonProperty]
         public string _offHand { get; set; } = null;
+        [JsonProperty]
+        public string _attunedItem1 { get; set; } = null;
+        [JsonProperty]
+        public string _attunedItem2 { get; set; } = null;
+        [JsonProperty]
+        public string _attunedItem3 { get; set; } = null;
 
         public override void Clear()
         {
@@ -31,12 +36,14 @@ namespace TheTallTankardTavern.Models
             if (Shield != null) { UnequipShield(Shield.InventoryID); }
             if (SpellCastingFocus != null) { UnequipSpellcastingFocus(SpellCastingFocus.InventoryID); }
             if (TwoHand != null) { UnequipTwoHand(TwoHand.InventoryID); }
+            if (AttunedItem1 != null) { UnequipMagicItem(AttunedItem1.InventoryID); }
+            if (AttunedItem2 != null) { UnequipMagicItem(AttunedItem2.InventoryID); }
+            if (AttunedItem3 != null) { UnequipMagicItem(AttunedItem3.InventoryID); }
             base.Clear();
         }
 
         private string EquipmentSetter(string _innerEquipmentVar, ItemModel value)
         {
-            string str = Environment.StackTrace;
             if (!string.IsNullOrEmpty(_innerEquipmentVar ))
             {
                 Remove(_innerEquipmentVar);
@@ -94,6 +101,20 @@ namespace TheTallTankardTavern.Models
             get { return EquipmentGetter(_offHand); }
             set { _offHand = EquipmentSetter(_offHand, value); }
         }
+        public ItemModel AttunedItem1
+        {
+            get { return EquipmentGetter(_attunedItem1); }
+            set { _attunedItem1 = EquipmentSetter(_attunedItem1, value); }
+        }
+        public ItemModel AttunedItem2        {
+            get { return EquipmentGetter(_attunedItem2); }
+            set { _attunedItem2 = EquipmentSetter(_attunedItem2, value); }
+        }
+        public ItemModel AttunedItem3
+        {
+            get { return EquipmentGetter(_attunedItem3); }
+            set { _attunedItem3 = EquipmentSetter(_attunedItem3, value); }
+        }
 
         public bool TryEquip(string inventoryID, InventoryModel Inventory, bool isDualWielder)
         {
@@ -111,6 +132,7 @@ namespace TheTallTankardTavern.Models
                 case ItemTypeCategory.Armour: return EquipArmour(Item);
                 case ItemTypeCategory.Shield: return EquipShield(Item);
                 case ItemTypeCategory.Weapon: return EquipWeapon(Item, isDualWielder);
+                case ItemTypeCategory.Equippable: return EquipMagicItem(Item);
                 default: return false;
             }
         }
@@ -192,6 +214,14 @@ namespace TheTallTankardTavern.Models
             return true;
         }
 
+        public bool EquipMagicItem(ItemModel Item)
+        {
+            if (AttunedItem1 == null) { AttunedItem1 = Item; }
+            else if (AttunedItem2 == null) { AttunedItem2 = Item; }
+            else if (AttunedItem3 == null) { AttunedItem3 = Item; }
+            return true;
+        }
+
         public bool UnequipArmour(string inventoryID)
         {
             if (inventoryID.Equals(Armour.InventoryID))
@@ -260,6 +290,32 @@ namespace TheTallTankardTavern.Models
             if (inventoryID.Equals(OffHand.InventoryID))
             {
                 OffHand = null;
+                Remove(inventoryID);
+                return true;
+            }
+            return false;
+        }
+
+        public bool UnequipMagicItem(string inventoryID)
+        {
+            if (inventoryID.Equals(AttunedItem1.InventoryID))
+            {
+                AttunedItem1 = AttunedItem2?.Clone();
+                AttunedItem2 = AttunedItem3?.Clone();
+                AttunedItem3 = null;
+                Remove(inventoryID);
+                return true;
+            }
+            else if (inventoryID.Equals(AttunedItem2.InventoryID))
+            {
+                AttunedItem2 = AttunedItem3?.Clone();
+                AttunedItem3 = null;
+                Remove(inventoryID);
+                return true;
+            }
+            else if (inventoryID.Equals(AttunedItem3.InventoryID))
+            {
+                AttunedItem3 = null;
                 Remove(inventoryID);
                 return true;
             }

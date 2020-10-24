@@ -58,6 +58,7 @@ namespace TTT.Items
         public static readonly ItemType MartialMeleeWeapon = new ItemType("Martial Melee Weapons", ItemTypeCategory.ParentType);
         public static readonly ItemType MartialRangedWeapon = new ItemType("Martial Ranged Weapons", ItemTypeCategory.ParentType);
         public static readonly ItemType OtherWeapon = new ItemType("Other Weapons", ItemTypeCategory.ParentType);
+        public static readonly ItemType OtherEquippableItem = new ItemType("Other Equippable Items", ItemTypeCategory.ParentType);
         //public static readonly ItemType FirearmsRangedWeapon = new ItemType("Firearms Ranged Weapon", ItemTypeCategory.Weapon);
 
         //Simple Melee Weapons
@@ -108,6 +109,9 @@ namespace TTT.Items
         //Other Weapons
         public static readonly ItemType BuffItem = new ItemType("Buff Item", ItemTypeCategory.Weapon, OtherWeapon);
         public static readonly ItemType DebuffItem = new ItemType("Debuff Item", ItemTypeCategory.Weapon, OtherWeapon);
+
+        //Other Equippable Items
+        public static readonly ItemType MagicItem = new ItemType("Magic Item", ItemTypeCategory.Equippable);
 
         public static ItemType GetItemType(string stringName)
         {
