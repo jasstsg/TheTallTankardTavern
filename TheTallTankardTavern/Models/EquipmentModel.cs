@@ -219,6 +219,7 @@ namespace TheTallTankardTavern.Models
             if (AttunedItem1 == null) { AttunedItem1 = Item; }
             else if (AttunedItem2 == null) { AttunedItem2 = Item; }
             else if (AttunedItem3 == null) { AttunedItem3 = Item; }
+            else { return false; }  //Item was not equipped
             return true;
         }
 
