@@ -1,9 +1,27 @@
-﻿@{
-    ViewData["Title"] = "Maps";
+﻿@using static TheTallTankardTavern.Configuration.ApplicationSettings
+
+@model MapModel
+@{
+    ViewData["Title"] = "Map";
 }
 
 <div class="row">
-    <div class="col-md-12">
-        <img src="~/images/custom/maps/Sern_Zoomed_In.PNG" style="width:800px" />
+    <div class="col-md-10">
+        @if (Model.Parent != null && !Model.Parent.Name.Equals("maps"))
+        {
+            <h6>Back to <a asp-action="LoadMap" asp-controller="Appendix" asp-route-folderPath="@Model.Parent.ImageFolder">@Model.Parent.Name</a></h6>
+        }
+        <h3>@Model.Name</h3>
+        <img id="loaded-map" src="@Url.Content(Model.ImageFile)" style="max-width:100%" />
+    </div>
+    <div class="col-md-2">
+        @if (Model.Children.Count > 0)
+        {
+            <h6>Zoom in to:</h6>
+            @foreach (MapModel map in Model.Children)
+            {
+                <a asp-action="LoadMap" asp-controller="Appendix" asp-route-folderPath="@map.ImageFolder">@map.Name</a><br />
+            }
+        }
     </div>
 </div>

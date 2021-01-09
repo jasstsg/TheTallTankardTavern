@@ -19,9 +19,11 @@ namespace TheTallTankardTavern.Configuration
 		public static IHttpContextAccessor HttpContextAccessor { get; private set; }
         public static IWebHostEnvironment WebHostEnvironment { get; private set; }
 
+		public static string WebRoot { get; private set; }
         public static string AppConfigFolder { get; private set; }
         public static string AppDataFolder { get; private set; }
         public static string BackupDataFolder { get; private set; }
+		public static string ImagesFolder { get; private set; }
 
         public static JsonDataProvider JsonDataProvider { get; } = new JsonDataProvider();
 		public static ConfigurationSettings ConfigurationSettings { get; } = new ConfigurationSettings();
@@ -41,9 +43,11 @@ namespace TheTallTankardTavern.Configuration
 			HttpContextAccessor = httpContextAccessor;
             WebHostEnvironment = webHostEnvironment;
 
+			WebRoot = WebHostEnvironment.WebRootPath;
 			AppConfigFolder = Path.Combine(WebHostEnvironment.WebRootPath, "App_Config");
 			AppDataFolder = Path.Combine(WebHostEnvironment.WebRootPath, "App_Data");
 			BackupDataFolder = Path.Combine(WebHostEnvironment.WebRootPath, "Backup_Data");
+			ImagesFolder = Path.Combine(WebHostEnvironment.WebRootPath, "images");
 
 			JsonDataProvider.AppDataRoot = AppDataFolder;
 

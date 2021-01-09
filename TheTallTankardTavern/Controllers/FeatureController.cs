@@ -29,7 +29,7 @@ namespace TheTallTankardTavern.Controllers
         [HttpPost]
         public IActionResult FilteredIndex(string searchtext)
         {
-            searchtext = searchtext.ToLower();
+            searchtext = searchtext?.ToLower();
 
             string selectedFilter = Request.Form["filter-dropdown"];
 
