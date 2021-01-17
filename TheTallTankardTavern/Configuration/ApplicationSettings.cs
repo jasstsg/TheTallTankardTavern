@@ -25,6 +25,8 @@ namespace TheTallTankardTavern.Configuration
         public static string BackupDataFolder { get; private set; }
 		public static string ImagesFolder { get; private set; }
 
+		public static MapTree MapTree { get; private set; }
+
         public static JsonDataProvider JsonDataProvider { get; } = new JsonDataProvider();
 		public static ConfigurationSettings ConfigurationSettings { get; } = new ConfigurationSettings();
 		
@@ -48,6 +50,8 @@ namespace TheTallTankardTavern.Configuration
 			AppDataFolder = Path.Combine(WebHostEnvironment.WebRootPath, "App_Data");
 			BackupDataFolder = Path.Combine(WebHostEnvironment.WebRootPath, "Backup_Data");
 			ImagesFolder = Path.Combine(WebHostEnvironment.WebRootPath, "images");
+
+			MapTree = new MapTree(Constants.MAP_ROOT);
 
 			JsonDataProvider.AppDataRoot = AppDataFolder;
 

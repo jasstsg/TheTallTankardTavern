@@ -1565,5 +1565,7 @@ namespace TheTallTankardTavern.Configuration
                 public const string SAVE_AND_CONTINUE = "Save & Continue";
             }
         }
+
+        public static readonly string MAP_ROOT = ImagesFolder + "\\custom\\maps\\Esidar";
     }
 }

@@ -1,27 +1,45 @@
-﻿@using static TheTallTankardTavern.Configuration.ApplicationSettings
+﻿@using TheTallTankardTavern.Configuration
 
-@model MapModel
+
+@model MapTree
 @{
     ViewData["Title"] = "Map";
+    MapTree Ancestor = Model.Parent;
+    List<MapTree> Ancestors = new List<MapTree>();
+    while (Ancestor != null)
+    {
+        Ancestors.Insert(0, Ancestor);
+        Ancestor = Ancestor.Parent;
+    }
 }
 
 <div class="row">
-    <div class="col-md-10">
-        @if (Model.Parent != null && !Model.Parent.Name.Equals("maps"))
+    <div class="col-md-9">
+        @if (Ancestors.Count > 0)
         {
-            <h6>Back to <a asp-action="LoadMap" asp-controller="Appendix" asp-route-folderPath="@Model.Parent.ImageFolder">@Model.Parent.Name</a></h6>
+            <h6>
+                Back to
+                @foreach (MapTree map in Ancestors)
+                {
+                    <a asp-action="ReloadMap" asp-controller="Appendix" asp-route-imgsrc="@map.ImgSrcAttribute">@map.Name</a>
+                    @if(!map.Equals(Model.Parent))
+                    {
+                        @(">")
+                    }
+                }
+            </h6>
         }
         <h3>@Model.Name</h3>
-        <img id="loaded-map" src="@Url.Content(Model.ImageFile)" style="max-width:100%" />
-    </div>
-    <div class="col-md-2">
-        @if (Model.Children.Count > 0)
-        {
-            <h6>Zoom in to:</h6>
-            @foreach (MapModel map in Model.Children)
+        <img id="loaded-map" src="@Url.Content(Model.ImgSrcAttribute)" style="max-width:100%" />
+        </div>
+        <div class="col-md-3">
+            @if (Model.Children.Count > 0)
             {
-                <a asp-action="LoadMap" asp-controller="Appendix" asp-route-folderPath="@map.ImageFolder">@map.Name</a><br />
+                <h6>Zoom in to:</h6>
+                @foreach (MapTree map in Model.Children)
+                {
+                    <a asp-action="ReloadMap" asp-controller="Appendix" asp-route-imgsrc="@map.ImgSrcAttribute">@map.Name</a><br />
+                }
             }
-        }
+        </div>
     </div>
-</div>

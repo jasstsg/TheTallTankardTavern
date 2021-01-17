@@ -55,9 +55,4 @@
     </Content>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\images\custom\maps\Esidar\Mundis\Nakai\Nakaidan\" />
-    <Folder Include="wwwroot\images\custom\maps\Esidar\Mundis\Nakai\Sern\" />
-  </ItemGroup>
-
 </Project>

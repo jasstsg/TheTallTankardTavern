@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using static TheTallTankardTavern.Configuration.Constants;
-using static TheTallTankardTavern.Configuration.ApplicationSettings;
+using TheTallTankardTavern.Configuration;
 using System.IO;
 using TheTallTankardTavern.Models;
 
@@ -14,36 +13,16 @@ namespace TheTallTankardTavern.Controllers
     {
         public IActionResult Index() { return View(); }
         public IActionResult Calendar() { return View(); }
-        public IActionResult CharacterAdvancement() { return View(ConfigurationSettings.CharacterAdvancement); }
+        public IActionResult CharacterAdvancement() { return View(ApplicationSettings.ConfigurationSettings.CharacterAdvancement); }
         public IActionResult Combat() { return View(); }
         public IActionResult Homebrews() { return View(); }
         public IActionResult HomebrewConditions() { return View(); }
 
-        public IActionResult Maps()
+        public IActionResult Maps() {  return View(ApplicationSettings.MapTree); }
+        public IActionResult ReloadMap(string imgsrc)
         {
-            return LoadMap(ImagesFolder + "\\custom\\maps\\Esidar");
-        }
-
-        public IActionResult LoadMap(string folderPath)
-        {
-            MapModel Map = new MapModel(folderPath) { Parent = new MapModel(Directory.GetParent(folderPath).FullName) };
-            BuildMapTree(Map);
-            return View("Maps", Map);
-        }
-
-        private void BuildMapTree(MapModel Map)
-        {
-            string[] childMaps = Directory.GetDirectories(Map.ImageFolder, "*", SearchOption.TopDirectoryOnly);
-            if (childMaps.Length <= 0)
-            {
-                return;
-            }
-            foreach (string childMap in childMaps)
-            {
-                MapModel ChildMap = new MapModel(childMap);
-                BuildMapTree(ChildMap);
-                Map.Children.Add(ChildMap);
-            }
+            string mapPath = Path.ChangeExtension(imgsrc.Replace("\\images\\custom\\maps\\", ""), null);
+            return View("Maps", MapTree.GetMap(ApplicationSettings.MapTree, new List<string>(mapPath.Split('\\'))));
         }
 
         public IActionResult MassiveDamage() { return View(); }
