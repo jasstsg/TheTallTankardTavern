@@ -37,6 +37,14 @@ namespace TheTallTankardTavern.Models
 			base.Add(Item.InventoryID);
 		}
 
+		public void AddItemInstance(string itemID, int quantity)
+        {
+			for (int i = 0; i < quantity; i++)
+            {
+				AddItemInstance(itemID);
+            }
+        }
+
 		public override bool Remove(string inventoryID)
         {
 			//If the item is in the inventory, and is removed successfully, return true

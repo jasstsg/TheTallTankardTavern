@@ -38,14 +38,14 @@ namespace TheTallTankardTavern.Controllers
             return SaveModel(Model, submit);
         }
 
-        public IActionResult AddModel(string cid, string id, MODEL_TYPES type)
+        public IActionResult AddModel(string cid, string id, MODEL_TYPES type, int quantity = 1)
         {
             CharacterModel Character = DataContext.GetModelFromID(cid);
 
             switch (type)
             {
                 case MODEL_TYPES.SPELL: Character.Spells.AddSingle(id); break;
-                case MODEL_TYPES.ITEM: Character.Inventory.AddItemInstance(id); break;
+                case MODEL_TYPES.ITEM: Character.Inventory.AddItemInstance(id, quantity); break;
                 case MODEL_TYPES.FEATURE: Character.Features.AddSingle(id); break;
                 case MODEL_TYPES.BACKGROUND:
                     BackgroundModel Background = BackgroundDataContext.GetModelFromID(id);

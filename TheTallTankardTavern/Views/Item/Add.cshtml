@@ -7,13 +7,30 @@
 
 @{
     ViewData["Title"] = "Add";
-}
-
-@{
     ItemModel Item = ItemDataContext.GetModelFromID((string)ViewData["id"]);
 }
 
-<h5>Add <strong>@Item.Name</strong> to a Character</h5>
+<script type="text/javascript">
+    function setQuantityParam(node) {
+        var href = node.getAttribute('href');
+        var relativeUrl = href.substring(0, href.indexOf('?'));
+        console.log(relativeUrl);
+
+        var params = href.substring(href.indexOf('?') + 1).split('&');
+        console.log(params);
+
+        for (var i = 0; i < params.length; i++) {
+            var tempArray = params[i].split('=');
+            if (tempArray[0] == 'quantity') {
+                params[i] = 'quantity=' + $('#quantity').val();
+            }
+        }
+
+        node.setAttribute('href', relativeUrl + '?' + params.join('&'));
+    }
+</script>
+
+<h5>Add <strong>@Item.Name (<input type="number" id='quantity' min="1" max="999" value="1" style="width:50px" />)</strong> to a Character</h5>
 <buttonlink class="font-weight-bold" asp-action="Index" text="Cancel"></buttonlink>
 <br />
 <br />
@@ -33,10 +50,11 @@
                 <td>@Character.Name</td>
                 <td>
                     <buttonlink class="td-action-btn" asp-controller="Character" asp-action="AddModel" text="Add"
-                                asp-route-cid="@Character.ID" asp-route-id="@Item.ID" asp-route-type="@MODEL_TYPES.ITEM">
+                                asp-route-cid="@Character.ID" asp-route-id="@Item.ID" asp-route-type="@MODEL_TYPES.ITEM" asp-route-quantity="1" onclick="setQuantityParam(this)">
                     </buttonlink>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+
