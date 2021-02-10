@@ -42,11 +42,21 @@ namespace TheTallTankardTavern.Controllers
         {
             CharacterModel Character = DataContext.GetModelFromID(cid);
 
+            //Call the appropriate add method, save the character, return to where we came from
             switch (type)
             {
-                case MODEL_TYPES.SPELL: Character.Spells.AddSingle(id); break;
-                case MODEL_TYPES.ITEM: Character.Inventory.AddItemInstance(id, quantity); break;
-                case MODEL_TYPES.FEATURE: Character.Features.AddSingle(id); break;
+                case MODEL_TYPES.SPELL: 
+                    Character.Spells.AddSingle(id);
+                    DataContext.Save(Character, Folder);
+                    return RedirectToAction("Index", "Spell");
+                case MODEL_TYPES.ITEM: 
+                    Character.Inventory.AddItemInstance(id, quantity);
+                    DataContext.Save(Character, Folder);
+                    return RedirectToAction("Index", "Item");
+                case MODEL_TYPES.FEATURE: 
+                    Character.Features.AddSingle(id);
+                    DataContext.Save(Character, Folder);
+                    return RedirectToAction("Index", "Feature");
                 case MODEL_TYPES.BACKGROUND:
                     BackgroundModel Background = BackgroundDataContext.GetModelFromID(id);
                     if (!string.IsNullOrEmpty(Character.BackgroundID))
@@ -55,11 +65,13 @@ namespace TheTallTankardTavern.Controllers
                     }
                     Character.BackgroundID = Background.ID;
                     Character.Features.AddSingle(Background.FeatureID);
-                    break;
+                    DataContext.Save(Character, Folder);
+                    return RedirectToAction("Index", "Background");
                 default: break;
             }
-            DataContext.Save(Character, Folder);
 
+            //Redirect to Character (old functionality, still here in case of default case)
+            DataContext.Save(Character, Folder);
             return RedirectToAction("Details", new { id = Character.ID });
         }
 
