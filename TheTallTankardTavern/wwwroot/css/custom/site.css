@@ -2,10 +2,13 @@
 :root {
     --custom-dark-grey: rgb(96, 96, 96);
     --custom-light-grey: rgb(192, 192, 192);
+    --site-font-color: rgb(180, 180, 180);
 }
 
 body {
     font-family: Candara;
+    color: var(--custom-light-grey);
+    background-color: black;
 }
 
 body::after {
@@ -24,9 +27,13 @@ body::after {
 
 .nav-item.nav-link.active,
 .nav-item .nav-link.active {
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(50, 50, 50, 0.5);
+}
+
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    color: var(--site-font-color);
 }
 
 .form-control {
-    background-color: rgba(255,255,255,0.7);
+    background-color: rgba(50, 50, 50, 0.5);
 }

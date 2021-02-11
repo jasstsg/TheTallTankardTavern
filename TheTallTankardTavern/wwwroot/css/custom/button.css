@@ -11,11 +11,12 @@
 a.btn.action-btn,
 a.btn.action-btn-large,
 a.btn.td-action-btn,
+a.btn,
 input.btn,
 input[type='submit'] {
     font-weight: bold;
-    border: 1px solid var(--custom-light-grey);
-    color: var(--custom-dark-grey);
+    border: 1px solid var(--custom-dark-grey);
+    color: var(--site-font-color);
 }
 
 a.btn:hover {

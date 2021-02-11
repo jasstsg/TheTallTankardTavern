@@ -1,7 +1,11 @@
-﻿.table-hover > tbody > tr:hover,
+﻿.bg-dark-custom {
+    background-color: black;
+}
+
+.table-hover > tbody > tr:hover,
 .row-hover:hover, 
 .hoverable:hover {
-    background-color: #d0d0ff;
+    background-color: rgba(80, 80, 80, 1);
 }
 
 .table th,
@@ -12,9 +16,20 @@
     font-size: 14px;
 } 
 
+.table tr th,
+.table tr td {
+    border-color: var(--custom-dark-grey);
+}
+
 input[type=number],
 input[type=text] {
     height: 26px;
+}
+
+.form-control,
+.table,
+.table-hover tbody tr:hover {
+    color: var(--site-font-color);
 }
 
 input.form-control,
@@ -51,12 +66,14 @@ tr.invalid-row:hover td {
 
 .skill-proficient,
 .skill-proficient select {
-    color: blue;
+    /*color: blue;*/
+    color: dodgerblue;
 }
 
 .skill-expert,
 .skill-expert select {
-    color: green;
+    /*color: green;*/
+    color: mediumseagreen;
 }
 
 .item-magic {
@@ -74,13 +91,13 @@ tr.invalid-row:hover td {
 }
 
 .subtitle {
-    color: var(--custom-dark-grey);
+    color: var(--site-font-color);
     font-style: italic;
     font-size: small;
 }
 
 .disabled-cell {
-    color: var(--custom-light-grey);
+    color: var(--custom-dark-grey);
 }
 
 .card-title {

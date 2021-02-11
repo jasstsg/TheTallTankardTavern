@@ -34,11 +34,11 @@
     }
 
     #party .bloodied {
-        background-color: #eeaaaa;
+        background-color: rgba(255, 100, 100, 0.1);
     }
 
     #party .unconcious {
-        background-color: #aa3333;
+        background-color: rgba(255, 0, 0, 0.2);
     }
 
     #party-table th {
@@ -101,7 +101,7 @@
             {
                 <td>@Member.Initiative</td>
                 <td colspan="2">@PCHPStatus</td>
-                <td>@(Member.Character.Temp_Hit_Points > 0 ? "Yes" : "")</td>
+                <td>@(Member.Character.Temp_Hit_Points > 0 ? "+ some extra" : "")</td>
             }
             @if (ContextUser.IsAdminOrDM)
             {

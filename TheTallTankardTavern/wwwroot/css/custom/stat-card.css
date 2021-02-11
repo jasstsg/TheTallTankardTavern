@@ -22,13 +22,13 @@
 
 .stat-card-label,
 .stat-card-label-header {
-    color: var(--custom-dark-grey);
+    color: var(--custom-light-grey);
     font-weight: bold;
 }
 
 .stat-card-label-header {
     font-size: smaller;
-    border-bottom: 1px solid var(--custom-light-grey);
+    border-bottom: 1px solid var(--site-font-color);
 }
 
 .stat-card .stat-score-card > .stat-card-label {
@@ -50,7 +50,7 @@
 
 .stat-score-card {
     padding-right: 0px;
-    border-right: 1px solid var(--custom-light-grey);
+    border-right: 1px solid var(--site-font-color);
 }
 
 .other-stat-card > .card-body > .row > [class*='col-']:first-child,
@@ -60,14 +60,14 @@
 }
 
 .other-stat-card > .card-body > .row > [class*='col-']:first-child > .stat-card-content {
-    border-right: 1px solid var(--custom-light-grey);
+    border-right: 1px solid var(--site-font-color);
     font-size: small;
 }
 
 .other-stat-card > .card-body > .row > [class*='col-']:last-child > .stat-card-content {
     font-size: smaller;
     font-weight: bold;
-    color: var(--custom-dark-grey);
+    color: var(--site-font-color);
     padding-right: 30px;
 }
 
@@ -80,7 +80,7 @@
 }
 
 .grouped-stats-label {
-    color: var(--custom-dark-grey);
+    color: var(--site-font-color);
     font-weight: bold;
     /*font-size: small;*/
 }
@@ -107,7 +107,7 @@
 }
 
 .other-stat-card-three-column a {
-    color: var(--custom-dark-grey);
-    border: 1px solid var(--custom-light-grey);
+    color: var(--site-font-color);
+    border: 1px solid var(--custom-dark-grey);
     font-size: smaller;
 }
