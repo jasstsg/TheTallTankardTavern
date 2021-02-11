@@ -87,6 +87,8 @@ namespace TheTallTankardTavern.Configuration
 
 		public static bool IsAdministrator { get { return GetContextUser?.Role.Equals(ROLES.Administrator) ?? false; } }
 
-		public static bool IsAdminOrDM { get { return IsAdministrator || HasAnyRoles(ROLES.Dungeon_Master, ROLES.Dungeon_Master_Readonly); } }
+		public static bool IsDungeonMaster { get { return HasAnyRoles(ROLES.Dungeon_Master, ROLES.Dungeon_Master_Readonly); } }
+
+		public static bool IsAdminOrDM { get { return IsAdministrator || IsDungeonMaster; } }
 	}
 }
