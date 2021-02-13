@@ -9,6 +9,10 @@ namespace TheTallTankardTavern.Models
     {
 		public string ID { get; set; }
 
+		public string Name { get; set; } = "STORAGE";
+		
+		public bool IsLocked { get; set; } = true;
+		
 		public int MaxCapacity { get; set; } = 1500;
 
 		[JsonIgnore]

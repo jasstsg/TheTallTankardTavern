@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
+using TheTallTankardTavern.Configuration;
 using TheTallTankardTavern.Helpers;
 using TheTallTankardTavern.Models;
 using static TheTallTankardTavern.Configuration.ApplicationSettings;
@@ -16,7 +17,20 @@ namespace TheTallTankardTavern.Controllers
             {
                 StorageDataContext.Add(new StorageModel() { ID = Guid.NewGuid().ToString() });
             }
-            return View(StorageDataContext.Single());
+
+            StorageModel Storage = StorageDataContext.Single();
+            if (!Storage.IsLocked || ContextUser.IsAdminOrDM)
+            {
+                return View(Storage);
+            }
+
+            return RedirectToAction("Locked");
+
+        }
+
+        public IActionResult Locked()
+        {
+            return View();
         }
 
         public IActionResult DepositItem(string cid, string inventoryID)
