@@ -5,26 +5,36 @@
     #reload-operations a {
         font-weight: bold;
     }
+    .table td {
+        border: none;
+    }
 </style>
 
 <div><em>@ViewData["Message"]</em></div>
 <div id="reload-operations">
-    <a asp-action="ReloadConfigsAndData">Reload Configuration and Data files</a>
+    <buttonlink asp-action="ReloadConfigsAndData" text="Reload Configuration and Data files"></buttonlink>
 </div>
 <br />
 <div class="row" id="reset-character-items">
-    <div class="col-md-3">
+    <div class="col-md-6">
         <strong>Unequip Equipment</strong>
         <form asp-action="UnequipAllItems" method="post">
-            <select name="cid" asp-items="CharacterDataContext.GetDataContextSelectList()"></select>
-            <submit text="Confirm"></submit>
+            <table>
+                <tr>
+                    <td><select name="cid" asp-items="CharacterDataContext.GetDataContextSelectList()"></select></td>
+                    <td><submit text="Confirm"></submit></td>
+                </tr>
+            </table>
         </form>
-    </div>
-    <div class="col-md-3">
+        <br />
         <strong>Remove all items</strong>
         <form asp-action="RemoveAllItems" method="post">
-            <select name="cid" asp-items="CharacterDataContext.GetDataContextSelectList()"></select>
-            <submit text="Confirm"></submit>
+            <table>
+                <tr>
+                    <td><select name="cid" asp-items="CharacterDataContext.GetDataContextSelectList()"></select></td>
+                    <td><submit text="Confirm"></submit></td>
+                </tr>
+            </table>
         </form>
     </div>
 </div>
