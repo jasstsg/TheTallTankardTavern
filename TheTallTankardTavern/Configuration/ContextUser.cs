@@ -17,9 +17,9 @@ namespace TheTallTankardTavern.Configuration
 
 		public static bool IsAuthenticated => Session.Get<bool>(IS_AUTHENTICATED);
 
-		public static UserModel GetContextUser => Session.Get<UserModel>(CONTEXT_USER);
+		public static UserModel Current => Session.Get<UserModel>(CONTEXT_USER);
 
-		public static void SetContextUser(UserModel User)
+		public static void Set(UserModel User)
 		{
 			Session.Set(CONTEXT_USER, User);
 		}
@@ -36,7 +36,7 @@ namespace TheTallTankardTavern.Configuration
 
 		public static bool HasRole(ROLES role)
 		{
-			return (GetContextUser != null) ? (IsAdministrator || GetContextUser.Role.Equals(role)) : false;
+			return (Current != null) ? (IsAdministrator || Current.Role.Equals(role)) : false;
 		}
 
 		public static bool HasAnyRoles(params ROLES[] roles)
@@ -65,10 +65,10 @@ namespace TheTallTankardTavern.Configuration
 
 		public static bool HasUsername(string username)
 		{
-			return GetContextUser.Username.Equals(username);
+			return Current.Username.Equals(username);
 		}
 
-		public static List<CharacterModel> GetContextCharacters
+		public static List<CharacterModel> Characters
 		{
 			get
 			{
@@ -83,9 +83,9 @@ namespace TheTallTankardTavern.Configuration
 			}
 		}
 
-		public static bool IsNull { get { return GetContextUser == null; } }
+		public static bool IsNull { get { return Current == null; } }
 
-		public static bool IsAdministrator { get { return GetContextUser?.Role.Equals(ROLES.Administrator) ?? false; } }
+		public static bool IsAdministrator { get { return Current?.Role.Equals(ROLES.Administrator) ?? false; } }
 
 		public static bool IsDungeonMaster { get { return HasAnyRoles(ROLES.Dungeon_Master, ROLES.Dungeon_Master_Readonly); } }
 

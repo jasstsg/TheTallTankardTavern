@@ -1,0 +1,46 @@
+﻿@addTagHelper *, TheTallTankardTavern
+
+@using TheTallTankardTavern.Models
+@using TheTallTankardTavern.Configuration
+@using TTT.Items
+
+@model CargoModel
+
+@{
+    CharacterModel CurrentCharacter = PartyDataContext.First().Members.Where(m => m.Character.Player_Name.Equals(ContextUser.Current.Username)).SingleOrDefault()?.Character;
+}
+
+<div id="cargo-items" class="row">
+    <div class="col-md-5">
+        <table>
+            <tr><th colspan="2">My Inventory</th></tr>
+            @if (CurrentCharacter != null)
+            {
+                @foreach (string inventoryID in CurrentCharacter.Inventory)
+                {
+                    ItemModel Item = new ItemModel() { InventoryID = inventoryID };
+                    <tr>
+                        <td>@ItemDataContext.GetModelFromID(Item.ID).Name</td>
+                        <td><button class="td-action-btn" value="Deposit" onclick="depositItem()"></button></td>
+                    </tr>
+                }
+            }
+        </table>
+    </div>
+    <div class="col-md-2">
+
+    </div>
+    <div class="col-md-5">
+        <table>
+            <tr><th colspan="2">Deposited Items</th></tr>
+            @foreach (string inventoryID in Model)
+            {
+                ItemModel Item = new ItemModel() { InventoryID = inventoryID };
+                <tr>
+                    <td>@ItemDataContext.GetModelFromID(Item.ID).Name</td>
+                    <td><button class="td-action-btn" value="Withdraw" onclick="withdrawItem()"></button></td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>

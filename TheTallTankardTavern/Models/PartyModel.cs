@@ -8,7 +8,7 @@ using static TheTallTankardTavern.Configuration.ApplicationSettings;
 namespace TheTallTankardTavern.Models
 {
     public class PartyModel : BaseModel
-    {
+    { 
         public List<MemberModel> Members { get; set; } = new List<MemberModel>();
 
         [JsonIgnore]

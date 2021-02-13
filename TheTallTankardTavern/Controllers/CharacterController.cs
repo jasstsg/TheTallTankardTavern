@@ -25,7 +25,7 @@ namespace TheTallTankardTavern.Controllers
             CharacterModel Character = new CharacterModel
             {
                 ID = NewGUID,
-                Player_Name = ContextUser.GetContextUser.Username,
+                Player_Name = ContextUser.Current.Username,
                 Languages = CheckboxEnumListModel<LANGUAGES>.Empty()
             };
             Character.TakeLongRest();

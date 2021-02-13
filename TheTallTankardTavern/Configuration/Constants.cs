@@ -14,11 +14,11 @@ namespace TheTallTankardTavern.Configuration
         public enum FOLDER
         {
             Backgrounds,
+            Cargo,
             Characters,
             Features,
             Imported_Features,
             Items,
-            Materials,
             Party,
             Imported_Spells,
             Spells,

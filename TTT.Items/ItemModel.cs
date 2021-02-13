@@ -4,8 +4,6 @@ using System.Text.Json.Serialization;
 using TTT.Common.Abstractions;
 using TTT.Items.Armour;
 using TTT.Items.Weapons;
-using TTT;
-using Microsoft.AspNetCore.Html;
 
 namespace TTT.Items
 {
@@ -17,7 +15,7 @@ namespace TTT.Items
         public string InstanceID { get; set; } = "";
 
         /// <summary>
-        /// Used for inventory and equipment
+        /// Used for inventory and equipment (Uses the format: ID+InstanceID)
         /// </summary>
         [JsonIgnore]
         public string InventoryID

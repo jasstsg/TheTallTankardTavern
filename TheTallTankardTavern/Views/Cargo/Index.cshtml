@@ -1,0 +1,19 @@
+﻿@{
+    ViewData["Title"] = "Cargo";
+}
+
+@using TheTallTankardTavern.Models
+@using TheTallTankardTavern.Configuration
+
+@model CargoModel
+
+<style>
+    th {
+        border-bottom: 1px solid;
+    }
+    .table td {
+        border: none;
+    }
+</style>
+
+<partial name="/Views/Cargo/_CargoItemsPartial.cshtml" model="Model" />

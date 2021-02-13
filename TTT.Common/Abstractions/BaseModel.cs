@@ -2,7 +2,7 @@ using System.ComponentModel;
 
 namespace TTT.Common.Abstractions
 {
-	public class BaseModel
+	public class BaseModel : IFileDataModel
 	{
 		public string ID { get; set; } = "";
 

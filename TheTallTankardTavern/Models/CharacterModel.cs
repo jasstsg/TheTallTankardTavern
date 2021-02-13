@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using TheTallTankardTavern.Configuration;
 using TheTallTankardTavern.Helpers;
+using TTT.Common.Abstractions;
 
 namespace TheTallTankardTavern.Models
 {

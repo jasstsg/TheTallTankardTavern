@@ -6,7 +6,7 @@ using TTT.Common.Abstractions;
 
 namespace TheTallTankardTavern.Models
 {
-	public class SpellModel : BaseModel
+	public class SpellModel : BaseModel, IFileDataModel
 	{
 		[DisplayName("Description")]
 		public string Desc { get; set; } = "";

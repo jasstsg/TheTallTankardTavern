@@ -20,7 +20,7 @@ namespace TheTallTankardTavern.Controllers
 				ViewData["Message"] = "That username does not exist.  Please make sure you typed your username correctly or ask the administrator to create a user for you.";
 				return View("Index");
 			}
-			ContextUser.SetContextUser(User);
+			ContextUser.Set(User);
 			ContextUser.SetAuthentication(isAuthenticated: true);
 			return RedirectToAction("Index", "Home");
 		}

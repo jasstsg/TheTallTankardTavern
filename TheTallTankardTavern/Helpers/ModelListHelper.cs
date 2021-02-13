@@ -19,9 +19,9 @@ namespace TheTallTankardTavern.Helpers
 		/// <summary>
 		/// If ID is null or empty, or if the ID is not found, this returns a new instance of T.
 		/// </summary>
-		public static T GetModelFromID<T>(this IEnumerable<T> ModelList, string ID) where T : BaseModel
+		public static T GetModelFromID<T>(this IEnumerable<T> ModelList, string ID) where T : IFileDataModel
 		{
-			return ModelList?.FirstOrDefault(m => m.ID.Equals(ID)) ?? NewTModel<T>();
+			return ModelList.FirstOrDefault(m => m.ID.Equals(ID)) ?? NewTModel<T>();
 		}
 
 		public static string GetNameFromID<T>(this IEnumerable<T> ModelList, string ID) where T : BaseModel
@@ -29,12 +29,12 @@ namespace TheTallTankardTavern.Helpers
 			return ModelList.GetModelFromID(ID).Name;
 		}
 
-		public static bool Exists<T>(this List<T> ModelList, string ID) where T : BaseModel
+		public static bool Exists<T>(this List<T> ModelList, string ID) where T : IFileDataModel
 		{
 			return ModelList.Exists((T m) => m.ID == ID);
 		}
 
-		public static bool RemoveFirst<T>(this List<T> ModelList, string ID) where T : BaseModel
+		public static bool RemoveFirst<T>(this List<T> ModelList, string ID) where T : IFileDataModel
 		{
 			return ModelList.Remove(ModelList.GetModelFromID(ID));
 		}
@@ -42,11 +42,11 @@ namespace TheTallTankardTavern.Helpers
 		/// <summary>
 		/// Tries to merge the NewModel with an existing model of the same ID, if not it adds it to the list.
 		/// </summary>
-		public static T Save<T>(this List<T> ModelList, T NewModel, FOLDER folder) where T : BaseModel
+		public static T Save<T>(this List<T> ModelList, T NewModel, FOLDER folder) where T : IFileDataModel
 		{
 			try
 			{
-				if (ModelList.Exists(NewModel.ID))
+				if (ModelList.Exists(m => m.ID.Equals(NewModel.ID)))
 				{
 					T Model = ModelList.GetModelFromID(NewModel.ID);
 					Model.Merge(NewModel);
@@ -77,7 +77,7 @@ namespace TheTallTankardTavern.Helpers
 			return typeof(TEnum).EnumToEnumArray<TEnum>();
 		}
 
-		private static T NewTModel<T>() where T : BaseModel
+		private static T NewTModel<T>() where T : IFileDataModel
 		{
 			return (T)Activator.CreateInstance(typeof(T));
 		}

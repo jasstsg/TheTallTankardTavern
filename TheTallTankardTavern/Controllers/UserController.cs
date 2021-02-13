@@ -23,9 +23,9 @@ namespace TheTallTankardTavern.Controllers
 		[HttpPost]
 		public IActionResult Save(UserModel Model, string submit)
 		{
-			if (ContextUser.GetContextUser.ID.Equals(Model.ID))
+			if (ContextUser.Current.ID.Equals(Model.ID))
             {
-				ContextUser.SetContextUser(Model);
+				ContextUser.Set(Model);
             }
 			return SaveModel(Model, submit);
 		}
@@ -34,7 +34,7 @@ namespace TheTallTankardTavern.Controllers
 		[Authorized(ROLES.Dungeon_Master, ROLES.Dungeon_Master_Readonly, ROLES.Player)]
 		public IActionResult Profile()
 		{			
-			return View(ContextUser.IsAdministrator ? "Create" : "Profile", ContextUser.GetContextUser);
+			return View(ContextUser.IsAdministrator ? "Create" : "Profile", ContextUser.Current);
 		}
 
 		[Authorized(ROLES.Dungeon_Master, ROLES.Dungeon_Master_Readonly, ROLES.Player)]
@@ -51,7 +51,7 @@ namespace TheTallTankardTavern.Controllers
 						CharacterDataContext.Save(Character, FOLDER.Characters);
 					}
 					User.Username = username;
-					ContextUser.SetContextUser(User);
+					ContextUser.Set(User);
 				}
 				if (User.Message != message)
 				{

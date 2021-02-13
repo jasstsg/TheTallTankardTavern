@@ -28,11 +28,6 @@ namespace TheTallTankardTavern.Helpers
 			return new SelectList(DataContext.OrderBy(x => x.Name), "ID", "Name");
 		}
 
-		public static SelectList GetMaterialsForItemsSelectList()
-		{
-			return new SelectList(MaterialDataContext.OrderBy(m => m.Cost_Per_Unit), "ID", "Name");
-		}
-
 		public static SelectList GetFeaturesForBackgroundsSelectList()
 		{
 			return GetDataContextSelectList(FeatureDataContext.Where(f => !f.IsClassFeature).ToList());

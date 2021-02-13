@@ -25,7 +25,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (CharacterModel Character in ContextUser.GetContextCharacters)
+        @foreach (CharacterModel Character in ContextUser.Characters)
         {
             <tr>
                 <td>@Character.Player_Name</td>

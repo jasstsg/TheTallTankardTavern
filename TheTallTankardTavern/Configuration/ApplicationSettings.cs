@@ -31,11 +31,11 @@ namespace TheTallTankardTavern.Configuration
 		public static ConfigurationSettings ConfigurationSettings { get; } = new ConfigurationSettings();
 		
         public static List<BackgroundModel> BackgroundDataContext { get; private set; } = new List<BackgroundModel>();
+		public static List<CargoModel> CargoDataContext { get; private set; } = new List<CargoModel>();
 		public static List<CharacterModel> CharacterDataContext { get; private set; } = new List<CharacterModel>();
 		public static List<FeatureModel> FeatureDataContext { get; private set; } = new List<FeatureModel>();
 		public static List<ItemModel> ItemDataContext { get; private set; } = new List<ItemModel>();
 		public static List<PartyModel> PartyDataContext { get; private set; } = new List<PartyModel>();
-		public static List<MaterialModel> MaterialDataContext { get; private set; } = new List<MaterialModel>();
 		public static List<SpellModel> SpellDataContext { get; private set; } = new List<SpellModel>();
 		public static List<UserModel> UserDataContext { get; private set; } = new List<UserModel>();
         #endregion
@@ -51,7 +51,7 @@ namespace TheTallTankardTavern.Configuration
 			BackupDataFolder = Path.Combine(WebHostEnvironment.WebRootPath, "Backup_Data");
 			ImagesFolder = Path.Combine(WebHostEnvironment.WebRootPath, "images");
 
-			MapTree = new MapTree(Constants.MAP_ROOT);
+			MapTree = new MapTree(MAP_ROOT);
 
 			JsonDataProvider.AppDataRoot = AppDataFolder;
 
@@ -77,21 +77,21 @@ namespace TheTallTankardTavern.Configuration
 		public static void ReloadDataContext()
 		{
 			BackgroundDataContext.Clear();
+			CargoDataContext.Clear();
 			CharacterDataContext.Clear();
 			ItemDataContext.Clear();
 			FeatureDataContext.Clear();
 			PartyDataContext.Clear();
-			MaterialDataContext.Clear();
 			SpellDataContext.Clear();
 			UserDataContext.Clear();
 
 			BackgroundDataContext.LoadDataContext(FOLDER.Backgrounds);
+			CargoDataContext.LoadDataContext(FOLDER.Cargo);
 			CharacterDataContext.LoadDataContext(FOLDER.Characters);
 			ItemDataContext.LoadDataContext(FOLDER.Items);
 			FeatureDataContext.LoadDataContext(FOLDER.Features);
 			FeatureDataContext.LoadDataContext(FOLDER.Imported_Features);
 			PartyDataContext.LoadDataContext(FOLDER.Party);
-			MaterialDataContext.LoadDataContext(FOLDER.Materials);
 			SpellDataContext.LoadDataContext(FOLDER.Spells);
 			SpellDataContext.LoadDataContext(FOLDER.Imported_Spells);
 			UserDataContext.LoadDataContext(FOLDER.User);
@@ -108,6 +108,11 @@ namespace TheTallTankardTavern.Configuration
 		private static void LoadDataContext<T>(this List<T> DataContext, FOLDER folder) where T : BaseModel
 		{
 			DataContext.AddRange(JsonDataProvider.JsonFolderToDataContext<T>(folder.ToString()));
+		}
+
+		private static void LoadDataContext(this List<CargoModel> DataContext, FOLDER folder)
+		{
+			DataContext.AddRange(JsonDataProvider.JsonFolderToDataContext<CargoModel>(folder.ToString()));
 		}
 
 		private static void BackupData()
