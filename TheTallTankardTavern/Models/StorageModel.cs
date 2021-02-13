@@ -9,8 +9,7 @@ namespace TheTallTankardTavern.Models
     {
 		public string ID { get; set; }
 
-		[JsonIgnore]
-        public int MaxCapacity { get { return 1500; } }
+		public int MaxCapacity { get; set; } = 1500;
 
 		[JsonIgnore]
 		public int CurrentWeight

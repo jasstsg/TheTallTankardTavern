@@ -12,7 +12,22 @@
 
 <div class="col-md-6">
     <table>
-        <tr><th colspan="2">INVENTORY (@CurrentCharacter.Inventory.CurrentWeight / @CurrentCharacter.CarryCapacity() lbs)</th></tr>
+        <tr><th colspan="2">
+            @if (CurrentCharacter != null)
+            {
+                <span>
+                    INVENTORY (@CurrentCharacter.Inventory.CurrentWeight / @CurrentCharacter.CarryCapacity() lbs)
+                    @if (CurrentCharacter.IsEncumbered())
+                    {
+                        <span style="color:red">ENCUMBERED! Half speed, disadvantage on STR/DEX/CON checks, attacks, and saves</span>
+                    }
+                </span>
+            }
+            else
+            {
+                <span>INVENTORY</span>
+            }
+        </th></tr>
         @if (CurrentCharacter != null)
         {
             @foreach (string inventoryID in CurrentCharacter.Inventory.OrderBy(s => ItemDataContext.GetModelFromID(s.Substring(0, s.IndexOf("+"))).Name))
@@ -28,7 +43,13 @@
 </div>
 <div class="col-md-6">
     <table>
-        <tr><th colspan="2">STORAGE (@Model.CurrentWeight / @Model.MaxCapacity lbs)</th></tr>
+        <tr><th colspan="2">
+            STORAGE (@Model.CurrentWeight / @Model.MaxCapacity lbs)
+            @if (Model.CurrentWeight > Model.MaxCapacity)
+            {
+                <span style="color:red">Storage is overweight, remove some items!</span>
+            }
+        </th></tr>
         @foreach (string inventoryID in Model.OrderBy(s => ItemDataContext.GetModelFromID(s.Substring(0, s.IndexOf("+"))).Name))
         {
             ItemModel Item = new ItemModel() { InventoryID = inventoryID };
