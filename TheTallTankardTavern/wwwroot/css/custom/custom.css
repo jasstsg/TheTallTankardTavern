@@ -108,6 +108,7 @@ tr.invalid-row:hover td {
 .form-control[readonly], 
 textarea[readonly] {
     background: transparent;
+    color: var(--site-font-color);
 }
 
 textarea[readonly] {
