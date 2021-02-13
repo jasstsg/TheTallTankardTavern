@@ -22,5 +22,21 @@ namespace TheTallTankardTavern.Helpers
             }
             return "";
         }
+
+        public static string CheckPCHP(int remainingHP, int maxHP)
+        {
+            if (remainingHP > (maxHP / 2))
+            {
+                return "healthy";
+            }
+            else if (remainingHP > 0)
+            {
+                return "bloodied";
+            }
+            else
+            {
+                return "unconcious";
+            }
+        }
     }
 }

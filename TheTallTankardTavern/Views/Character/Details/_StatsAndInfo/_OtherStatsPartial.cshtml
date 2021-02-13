@@ -1,6 +1,7 @@
-﻿@model TheTallTankardTavern.Models.CharacterModel
+﻿@addTagHelper *, TheTallTankardTavern
+@model TheTallTankardTavern.Models.CharacterModel
 @using TheTallTankardTavern.Helpers
-@addTagHelper *, TheTallTankardTavern
+@using static TheTallTankardTavern.Helpers.ViewHelper
 
 <div id="character-other-stats">
     <div id="hit-points-card" class="card stat-card other-stat-card-three-column">
@@ -80,81 +81,81 @@
             </div>
         </div>
     }
-<div id="single-line-cards">
-    @if (Model.Class.ToLower().Contains("druid") && @Model.Level > 1)
-    {
-        <div id="wild-shape-cr-card" class="card stat-card other-stat-card">
+    <div id="single-line-cards">
+        @if (Model.Class.ToLower().Contains("druid") && @Model.Level > 1)
+        {
+            <div id="wild-shape-cr-card" class="card stat-card other-stat-card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3"><div class="stat-card-content">@Model.GetWildShapeCR()</div></div>
+                        <div class="col-md-9"><div class="stat-card-content">WILD SHAPE CR @Model.GetWildShapeLimits()</div></div>
+                    </div>
+                </div>
+            </div>
+        }
+        @if (Model.Class.ToLower().Contains("rogue") && @Model.Level > 1)
+        {
+            <div id="sneak-attack-damage-card" class="card stat-card other-stat-card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3"><div class="stat-card-content">+@((int)((Model.Level + 1) / 2))D6</div></div>
+                        <div class="col-md-9"><div class="stat-card-content">SNEAK ATTACK DAMAGE</div></div>
+                    </div>
+                </div>
+            </div>
+        }
+        @if (Model.Class.ToLower().Contains("warlock") && @Model.Level > 1)
+        {
+            <div id="eldritch-invocations-card" class="card stat-card other-stat-card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3"><div class="stat-card-content">@Model.GetEldritchInvocations()</div></div>
+                        <div class="col-md-9"><div class="stat-card-content">ELDRITCH INVOCATIONS</div></div>
+                    </div>
+                </div>
+            </div>
+        }
+        <div id="spell-attack-mod-card" class="card stat-card other-stat-card">
             <div class="card-body">
                 <div class="row">
-                    <div class="col-md-3"><div class="stat-card-content">@Model.GetWildShapeCR()</div></div>
-                    <div class="col-md-9"><div class="stat-card-content">WILD SHAPE CR @Model.GetWildShapeLimits()</div></div>
+                    <div class="col-md-3"><div class="stat-card-content">+@Model.GetSpellCasterAttackModifier()</div></div>
+                    <div class="col-md-9"><div class="stat-card-content">SPELL ATTACK MODIFIER</div></div>
                 </div>
             </div>
         </div>
-    }
-    @if (Model.Class.ToLower().Contains("rogue") && @Model.Level > 1)
-    {
-        <div id="sneak-attack-damage-card" class="card stat-card other-stat-card">
+        <div id="spell-save-dc-card" class="card stat-card other-stat-card">
             <div class="card-body">
                 <div class="row">
-                    <div class="col-md-3"><div class="stat-card-content">+@((int)((Model.Level + 1) / 2))D6</div></div>
-                    <div class="col-md-9"><div class="stat-card-content">SNEAK ATTACK DAMAGE</div></div>
+                    <div class="col-md-3"><div class="stat-card-content">+@Model.GetSpellCasterSaveDC()</div></div>
+                    <div class="col-md-9"><div class="stat-card-content">SPELL SAVE DC</div></div>
                 </div>
             </div>
         </div>
-    }
-    @if (Model.Class.ToLower().Contains("warlock") && @Model.Level > 1)
-    {
-        <div id="eldritch-invocations-card" class="card stat-card other-stat-card">
+        <div id="proficiency-bonus-card" class="card stat-card other-stat-card">
             <div class="card-body">
                 <div class="row">
-                    <div class="col-md-3"><div class="stat-card-content">@Model.GetEldritchInvocations()</div></div>
-                    <div class="col-md-9"><div class="stat-card-content">ELDRITCH INVOCATIONS</div></div>
+                    <div class="col-md-3"><div class="stat-card-content">+@Model.Proficiency_Bonus</div></div>
+                    <div class="col-md-9"><div class="stat-card-content">PROFICIENCY BONUS</div></div>
                 </div>
             </div>
         </div>
-    }
-    <div id="spell-attack-mod-card" class="card stat-card other-stat-card">
-        <div class="card-body">
-            <div class="row">
-                <div class="col-md-3"><div class="stat-card-content">+@Model.GetSpellCasterAttackModifier()</div></div>
-                <div class="col-md-9"><div class="stat-card-content">SPELL ATTACK MODIFIER</div></div>
+        <div id="initiative-bonus-card" class="card stat-card other-stat-card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3"><div class="stat-card-content">@Model.Initiative.AddSign()</div></div>
+                    <div class="col-md-9"><div class="stat-card-content">INITIATIVE BONUS</div></div>
+                </div>
+            </div>
+        </div>
+        <div id="passive-perception-card" class="card stat-card other-stat-card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3"><div class="stat-card-content">@Model.Passive_Perception</div></div>
+                    <div class="col-md-9"><div class="stat-card-content">PASSIVE PERCEPTION</div></div>
+                </div>
             </div>
         </div>
     </div>
-    <div id="spell-save-dc-card" class="card stat-card other-stat-card">
-        <div class="card-body">
-            <div class="row">
-                <div class="col-md-3"><div class="stat-card-content">+@Model.GetSpellCasterSaveDC()</div></div>
-                <div class="col-md-9"><div class="stat-card-content">SPELL SAVE DC</div></div>
-            </div>
-        </div>
-    </div>
-    <div id="proficiency-bonus-card" class="card stat-card other-stat-card">
-        <div class="card-body">
-            <div class="row">
-                <div class="col-md-3"><div class="stat-card-content">+@Model.Proficiency_Bonus</div></div>
-                <div class="col-md-9"><div class="stat-card-content">PROFICIENCY BONUS</div></div>
-            </div>
-        </div>
-    </div>
-    <div id="initiative-bonus-card" class="card stat-card other-stat-card">
-        <div class="card-body">
-            <div class="row">
-                <div class="col-md-3"><div class="stat-card-content">@Model.Initiative.AddSign()</div></div>
-                <div class="col-md-9"><div class="stat-card-content">INITIATIVE BONUS</div></div>
-            </div>
-        </div>
-    </div>
-    <div id="passive-perception-card" class="card stat-card other-stat-card">
-        <div class="card-body">
-            <div class="row">
-                <div class="col-md-3"><div class="stat-card-content">@Model.Passive_Perception</div></div>
-                <div class="col-md-9"><div class="stat-card-content">PASSIVE PERCEPTION</div></div>
-            </div>
-        </div>
-    </div>
-</div>
     <div class="grouped-stats row">
         <div id="speed-card" class="card stat-card other-stat-card col-md-6">
             <div class="card-body">

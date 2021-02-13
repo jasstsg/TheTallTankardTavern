@@ -21,3 +21,11 @@
 .charisma-background {
     background-color: #ffcc99;
 }
+
+.bloodied {
+    background-color: rgba(255, 100, 100, 0.1);
+}
+
+.unconcious{
+    background-color: rgba(255, 0, 0, 0.2);
+}
