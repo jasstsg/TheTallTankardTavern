@@ -81,6 +81,17 @@
         </div>
     }
 <div id="single-line-cards">
+    @if (Model.Class.ToLower().Contains("druid") && @Model.Level > 1)
+    {
+        <div id="wild-shape-cr-card" class="card stat-card other-stat-card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3"><div class="stat-card-content">@Model.GetWildShapeCR()</div></div>
+                    <div class="col-md-9"><div class="stat-card-content">WILD SHAPE CR @Model.GetWildShapeLimits()</div></div>
+                </div>
+            </div>
+        </div>
+    }
     @if (Model.Class.ToLower().Contains("rogue") && @Model.Level > 1)
     {
         <div id="sneak-attack-damage-card" class="card stat-card other-stat-card">

@@ -360,5 +360,43 @@ namespace TheTallTankardTavern.Helpers
 					return 0;
             }
         }
+
+		public static string GetWildShapeCR(this CharacterModel Character)
+        {
+			/*
+			if (Character.Level >= 16)
+            {
+				return "2";
+            }
+			*/
+			if (Character.Level >= 8)
+            {
+				return "1";
+			}
+			if (Character.Level >= 4)
+			{
+				return "1/2";
+			}
+			else
+            {
+				return "1/4";
+            }
+		}
+
+		public static string GetWildShapeLimits(this CharacterModel Character)
+		{
+			if (Character.Level >= 8)
+			{
+				return "";
+			}
+			if (Character.Level >= 4)
+			{
+				return "(No fly speed)";
+			}
+			else
+			{
+				return "(No fly/swim speed)";
+			}
+		}
 	}
 }
