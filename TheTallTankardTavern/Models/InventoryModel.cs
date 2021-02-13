@@ -25,11 +25,6 @@ namespace TheTallTankardTavern.Models
 			}
 		}
 
-		public bool IsEncumbered(int strengthScore)
-		{
-			return (CurrentWeight > 15 * strengthScore);
-		}
-
 		public void AddItemInstance(string itemID)
 		{
 			ItemModel Item = ItemDataContext.GetModelFromID(itemID).Clone();

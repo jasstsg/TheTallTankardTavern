@@ -5,7 +5,7 @@ using TheTallTankardTavern.Helpers;
 
 namespace TheTallTankardTavern.Models
 {
-    public class CargoModel : BaseListModel<string>, IFileDataModel
+    public class StorageModel : BaseListModel<string>, IFileDataModel
     {
 		public string ID { get; set; }
 

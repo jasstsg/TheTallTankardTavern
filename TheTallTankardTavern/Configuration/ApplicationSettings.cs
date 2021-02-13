@@ -31,12 +31,12 @@ namespace TheTallTankardTavern.Configuration
 		public static ConfigurationSettings ConfigurationSettings { get; } = new ConfigurationSettings();
 		
         public static List<BackgroundModel> BackgroundDataContext { get; private set; } = new List<BackgroundModel>();
-		public static List<CargoModel> CargoDataContext { get; private set; } = new List<CargoModel>();
 		public static List<CharacterModel> CharacterDataContext { get; private set; } = new List<CharacterModel>();
 		public static List<FeatureModel> FeatureDataContext { get; private set; } = new List<FeatureModel>();
 		public static List<ItemModel> ItemDataContext { get; private set; } = new List<ItemModel>();
 		public static List<PartyModel> PartyDataContext { get; private set; } = new List<PartyModel>();
 		public static List<SpellModel> SpellDataContext { get; private set; } = new List<SpellModel>();
+		public static List<StorageModel> StorageDataContext { get; private set; } = new List<StorageModel>();
 		public static List<UserModel> UserDataContext { get; private set; } = new List<UserModel>();
         #endregion
 
@@ -77,16 +77,16 @@ namespace TheTallTankardTavern.Configuration
 		public static void ReloadDataContext()
 		{
 			BackgroundDataContext.Clear();
-			CargoDataContext.Clear();
 			CharacterDataContext.Clear();
 			ItemDataContext.Clear();
 			FeatureDataContext.Clear();
 			PartyDataContext.Clear();
 			SpellDataContext.Clear();
+			StorageDataContext.Clear();
 			UserDataContext.Clear();
 
 			BackgroundDataContext.LoadDataContext(FOLDER.Backgrounds);
-			CargoDataContext.LoadDataContext(FOLDER.Cargo);
+			StorageDataContext.LoadDataContext(FOLDER.Storage);
 			CharacterDataContext.LoadDataContext(FOLDER.Characters);
 			ItemDataContext.LoadDataContext(FOLDER.Items);
 			FeatureDataContext.LoadDataContext(FOLDER.Features);
@@ -105,14 +105,9 @@ namespace TheTallTankardTavern.Configuration
 			return DataSerializer.JsonFileToObject<Dictionary<K, V>>(AppConfigFolder + "\\" + jsonConfigFileName + ".json");
 		}
 
-		private static void LoadDataContext<T>(this List<T> DataContext, FOLDER folder) where T : BaseModel
+		private static void LoadDataContext<T>(this List<T> DataContext, FOLDER folder) where T : IFileDataModel
 		{
 			DataContext.AddRange(JsonDataProvider.JsonFolderToDataContext<T>(folder.ToString()));
-		}
-
-		private static void LoadDataContext(this List<CargoModel> DataContext, FOLDER folder)
-		{
-			DataContext.AddRange(JsonDataProvider.JsonFolderToDataContext<CargoModel>(folder.ToString()));
 		}
 
 		private static void BackupData()

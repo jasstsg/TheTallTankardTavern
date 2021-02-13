@@ -1,0 +1,21 @@
+﻿@{
+    ViewData["Title"] = "Storage";
+}
+
+@using TheTallTankardTavern.Models
+
+@model StorageModel
+
+<style>
+    th {
+        border-bottom: 1px solid;
+    }
+
+    .table td {
+        border: none;
+    }
+</style>
+
+<div id="storage-item-management" class="row">
+    <partial name="/Views/Storage/_StorageItemsPartial.cshtml" model="Model" />
+</div>

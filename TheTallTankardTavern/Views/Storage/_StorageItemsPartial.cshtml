@@ -1,0 +1,41 @@
+﻿@addTagHelper *, TheTallTankardTavern
+
+@using TheTallTankardTavern.Models
+@using TheTallTankardTavern.Configuration
+@using TTT.Items
+
+@model StorageModel
+
+@{
+    CharacterModel CurrentCharacter = PartyDataContext.First().Members.Where(m => m.Character.Player_Name.Equals(ContextUser.Current.Username)).SingleOrDefault()?.Character;
+}
+
+<div class="col-md-6">
+    <table>
+        <tr><th colspan="2">INVENTORY (@CurrentCharacter.Inventory.CurrentWeight / @CurrentCharacter.CarryCapacity() lbs)</th></tr>
+        @if (CurrentCharacter != null)
+        {
+            @foreach (string inventoryID in CurrentCharacter.Inventory.OrderBy(s => ItemDataContext.GetModelFromID(s.Substring(0, s.IndexOf("+"))).Name))
+            {
+                ItemModel Item = new ItemModel() { InventoryID = inventoryID };
+                <tr>
+                    <td width="100px"><button class="td-action-btn" value="Store" onclick="depositItem('@CurrentCharacter.ID', '@Item.InventoryID')"></button></td>
+                    <td>@ItemDataContext.GetModelFromID(Item.ID).Name</td>
+                </tr>
+            }
+        }
+    </table>
+</div>
+<div class="col-md-6">
+    <table>
+        <tr><th colspan="2">STORAGE (@Model.CurrentWeight / @Model.MaxCapacity lbs)</th></tr>
+        @foreach (string inventoryID in Model.OrderBy(s => ItemDataContext.GetModelFromID(s.Substring(0, s.IndexOf("+"))).Name))
+        {
+            ItemModel Item = new ItemModel() { InventoryID = inventoryID };
+            <tr>
+                <td width="100px"><button class="td-action-btn" value="Take" onclick="withdrawItem('@CurrentCharacter.ID', '@Item.InventoryID')"></button></td>
+                <td>@ItemDataContext.GetModelFromID(Item.ID).Name</td>
+            </tr>
+        }
+    </table>
+</div>
