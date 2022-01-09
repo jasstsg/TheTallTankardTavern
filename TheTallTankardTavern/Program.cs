@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Session;
+using System.Net;
 
 namespace TheTallTankardTavern
 {
@@ -22,6 +23,7 @@ namespace TheTallTankardTavern
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+                    webBuilder.UseUrls("http://TheTallTankardTavern");
                 });
     }
 }

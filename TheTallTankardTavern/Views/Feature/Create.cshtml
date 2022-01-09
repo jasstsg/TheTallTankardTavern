@@ -1,4 +1,5 @@
-﻿@model TheTallTankardTavern.Models.FeatureModel
+﻿@using TheTallTankardTavern.Configuration
+@model TheTallTankardTavern.Models.FeatureModel
 @addTagHelper *, TheTallTankardTavern
 @{
     ViewData["Title"] = Model.Name;
@@ -39,6 +40,13 @@
                 <td><label asp-for="IsHomebrew"></label></td>
                 <td><input type="checkbox" asp-for="IsHomebrew" /></td>
             </tr>
+            @if (ContextUser.IsAdminOrDM)
+            {
+                <tr>
+                    <td><label asp-for="IsHidden"></label></td>
+                    <td><input type="checkbox" asp-for="IsHidden" /></td>
+                </tr>
+            }
             <tr>
                 <td><label asp-for="Desc"></label></td>
                 <td><textarea asp-for="Desc" style="width:100%" rows="10"></textarea></td>

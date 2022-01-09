@@ -25,7 +25,8 @@
   "Druid": [
     "Unspecialized",
     "Circle of the Land",
-    "Circle of the Moon"
+    "Circle of the Moon", 
+    "Circle of the Wildfire"
   ],
   "Fighter": [
     "Unspecialized",
@@ -49,7 +50,7 @@
   "Ranger": [
     "Unspecialized",
     "Beast Master",
-    "Hunter", 
+    "Hunter",
     "Primeval Guardian"
   ],
   "Rogue": [
