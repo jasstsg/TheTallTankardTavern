@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 using TheTallTankardTavern.Attributes;
+using TheTallTankardTavern.Configuration;
 using TheTallTankardTavern.Models;
 using static TheTallTankardTavern.Configuration.ApplicationSettings;
 using static TheTallTankardTavern.Configuration.Constants;
@@ -37,11 +38,18 @@ namespace TheTallTankardTavern.Controllers
                 DataContext.Where(f => f.IsMatch(searchtext)).ToList() :
                 Features = DataContext.Where(f => true);
 
+            if (!ContextUser.IsAdminOrDM)
+            {
+                Features = Features.Where(f => !f.IsHidden);
+            }
+
             switch (selectedFilter)
             {
+                case "All": break;
+                case "Hidden": Features = Features.Where(f => f.IsHidden); break;
                 case "ClassFeatures": Features = Features.Where(f => f.IsClassFeature); break;
                 case "NonClassFeatures": Features = Features.Where(f => !f.IsClassFeature); break;
-                default: break;
+                default: Features = Features.Where(f => f.Class.Equals(selectedFilter)); break;
             }
 
             ViewData["searchtext"] = searchtext;

@@ -1,4 +1,5 @@
-﻿@addTagHelper *, TheTallTankardTavern
+﻿@using TheTallTankardTavern.Configuration
+@addTagHelper *, TheTallTankardTavern
 
 
 <style>
@@ -21,13 +22,32 @@
                     <label>Filter by:</label>
                     <select name="filter-dropdown">
                         <option value="All">No Filter</option>
-                        <option value="ClassFeature">Class Features Only</option>
+                        @if (ContextUser.IsAdminOrDM)
+                        {
+                            <option value="Hidden">Hidden Features Only</option>
+                        }
                         <option value="ClassFeature">Non-Class Features Only</option>
+                        <option value="ClassFeature">Class Features Only</option>
+                        <option value="Barbarian">Barbarian Features Only</option>
+                        <option value="Bard">Bard Features Only</option>
+                        <option value="Cleric">Cleric Features Only</option>
+                        <option value="Druid">Druid Features Only</option>
+                        <option value="Fighter">Fighter Features Only</option>
+                        <option value="Monk">Monk Features Only</option>
+                        <option value="Paladin">Paladin Features Only</option>
+                        <option value="Ranger">Ranger Features Only</option>
+                        <option value="Rogue">Rogue Features Only</option>
+                        <option value="Sorcerer">Sorcerer Features Only</option>
+                        <option value="Warlock">Warlock Features Only</option>
+                        <option value="Wizard">Wizard Features Only</option>
                     </select>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-2">
                     <br>
                     <submit text="Apply Filters"></submit>
+                </div>
+                <div class="col-md-2">
+                    <br>
                     <buttonlink asp-action="Index" text="Clear Filters"></buttonlink>
                 </div>
             </div>
