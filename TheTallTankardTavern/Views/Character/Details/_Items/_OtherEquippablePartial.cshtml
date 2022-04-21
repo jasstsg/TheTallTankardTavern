@@ -12,6 +12,7 @@
             {
                 <tr data-toggle="modal" data-target="#popup-modal" data-title="@ai.Name" data-desc="@ai.PopUpText" data-traits="">
                     <td class="@(ai.IsMagic ? "item-magic" : "")">@ai.Name</td>
+                    <td>(@ai.Weight lbs)</td>
                     <td><button class="td-action-btn" value="Unequip" onclick="unequipAttunableItem('@Model.ID', '@ai.InventoryID')"></button></td>
                 </tr> 
 
