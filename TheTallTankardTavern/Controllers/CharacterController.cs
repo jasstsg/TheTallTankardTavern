@@ -299,17 +299,17 @@ namespace TheTallTankardTavern.Controllers
             return SaveAndReturnToDetailsPartialView(Character);
         }
 
-        public IActionResult UnequipMagicItem(string cid, string inventoryID)
+        public IActionResult UnequipAttunableItem(string cid, string inventoryID)
         {
             CharacterModel Character = DataContext.GetModelFromID(cid);
-            Character.Equipment.UnequipMagicItem(inventoryID);
+            Character.Equipment.UnequipAttunableItem(inventoryID);
             return SaveAndReturnToDetailsPartialView(Character);
         }
 
         public IActionResult EquipItem(string cid, string inventoryID)
         {
             CharacterModel Character = DataContext.GetModelFromID(cid);
-            Character.Equipment.TryEquip(inventoryID, Character.Inventory, Character.HasFeature(SpecialFeatures.DUAL_WIELDER));
+            Character.Equipment.TryEquip(inventoryID, Character.Inventory, Character.HasFeature(SpecialFeatures.DUAL_WIELDER), Character.Proficiency_Bonus);
             return SaveAndReturnToDetailsPartialView(Character);
         }
 

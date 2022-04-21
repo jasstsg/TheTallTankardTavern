@@ -106,12 +106,12 @@ namespace TTT.Items
         public static readonly ItemType Longbow = new ItemType("Longbow", ItemTypeCategory.Weapon, MartialRangedWeapon);
         public static readonly ItemType Net = new ItemType("Net", ItemTypeCategory.Weapon, MartialRangedWeapon);
 
+        //AttunableItems
+        public static readonly ItemType AttunableItem = new ItemType("Attunable Item", ItemTypeCategory.Attunable);
+
         //Other Weapons
         public static readonly ItemType BuffItem = new ItemType("Buff Item", ItemTypeCategory.Weapon, OtherWeapon);
         public static readonly ItemType DebuffItem = new ItemType("Debuff Item", ItemTypeCategory.Weapon, OtherWeapon);
-
-        //Other Equippable Items
-        public static readonly ItemType MagicItem = new ItemType("Magic Item", ItemTypeCategory.Equippable);
 
         public static ItemType GetItemType(string stringName)
         {
@@ -135,10 +135,10 @@ namespace TTT.Items
             return ParentItemType.HasChildType(ItemType.GetItemType(childItemTypeString));
         }
 
-        //Checks is the item type is the same, or if one is the parent type of the other
+        //Checks if the item type is the same, or if one is the parent type of the other
         public static bool Is(this ItemType itemType1, ItemType itemType2)
         {
-            return itemType1 == itemType2 || itemType1 == itemType1.ParentType || itemType1.ParentType == itemType2;
+            return itemType1 == itemType2 || itemType1 == itemType2.ParentType || itemType2.ParentType == itemType1;
         }
     }
 }

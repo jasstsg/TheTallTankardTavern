@@ -4,6 +4,7 @@
     {
         ParentType = 0x00,
         Armour,
+        Attunable,
         Equippable,
         Other,
         Shield,

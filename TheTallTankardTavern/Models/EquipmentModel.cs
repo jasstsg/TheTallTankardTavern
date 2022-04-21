@@ -4,6 +4,7 @@ using System.Linq;
 using TTT.Items;
 using TTT.Common.Abstractions;
 using TheTallTankardTavern.Helpers;
+using System.Collections.Generic;
 
 namespace TheTallTankardTavern.Models
 {
@@ -22,11 +23,7 @@ namespace TheTallTankardTavern.Models
         [JsonProperty]
         public string _offHand { get; set; } = null;
         [JsonProperty]
-        public string _attunedItem1 { get; set; } = null;
-        [JsonProperty]
-        public string _attunedItem2 { get; set; } = null;
-        [JsonProperty]
-        public string _attunedItem3 { get; set; } = null;
+        public List<string> _attunedItems { get; set; } = new List<string>();
 
         public override void Clear()
         {
@@ -36,23 +33,8 @@ namespace TheTallTankardTavern.Models
             if (Shield != null) { UnequipShield(Shield.InventoryID); }
             if (SpellCastingFocus != null) { UnequipSpellcastingFocus(SpellCastingFocus.InventoryID); }
             if (TwoHand != null) { UnequipTwoHand(TwoHand.InventoryID); }
-            if (AttunedItem1 != null) { UnequipMagicItem(AttunedItem1.InventoryID); }
-            if (AttunedItem2 != null) { UnequipMagicItem(AttunedItem2.InventoryID); }
-            if (AttunedItem3 != null) { UnequipMagicItem(AttunedItem3.InventoryID); }
+            if (AttunedItems != null) { UnequipAllAttunableItems(); }
             base.Clear();
-        }
-
-        private string EquipmentSetter(string _innerEquipmentVar, ItemModel value)
-        {
-            if (!string.IsNullOrEmpty(_innerEquipmentVar ))
-            {
-                Remove(_innerEquipmentVar);
-            }
-            if (value != null)
-            {
-                Add(value.InventoryID);
-            }
-            return value?.InventoryID;
         }
 
         private ItemModel EquipmentGetter(string _innerEquipmentVar)
@@ -64,6 +46,45 @@ namespace TheTallTankardTavern.Models
             ItemModel Item = ItemDataContext.GetModelFromID(_innerEquipmentVar.Substring(0, _innerEquipmentVar.IndexOf("+"))).Clone();
             Item.InstanceID = _innerEquipmentVar.Substring(_innerEquipmentVar.IndexOf("+") + 1);
             return Item;
+        }
+
+        private ItemModel AttunedEquipmentGetter(int index)
+        {
+            if (_attunedItems == null || !_attunedItems.Any())
+            {
+                return null;
+            }
+            ItemModel Item = ItemDataContext.GetModelFromID(_attunedItems[index].Substring(0, _attunedItems[index].IndexOf("+"))).Clone();
+            Item.InstanceID = _attunedItems[index].Substring(_attunedItems[index].IndexOf("+") + 1);
+            return Item;
+        }
+
+        private string EquipmentSetter(string _innerEquipmentVar, ItemModel value)
+        {
+            if (!string.IsNullOrEmpty(_innerEquipmentVar))
+            {
+                Remove(_innerEquipmentVar);
+            }
+            if (value != null)
+            {
+                Add(value.InventoryID);
+            }
+            return value?.InventoryID;
+        }
+
+        private string AttunedEquipmentSetter(ItemModel value)
+        {
+            if (_attunedItems == null)
+            {
+                _attunedItems = new List<string>();
+            }
+
+            if (value != null)
+            {
+                Add(value.InventoryID);
+                _attunedItems.Add(value.InventoryID);
+            }
+            return value?.InventoryID;
         }
 
         [JsonIgnore]
@@ -96,27 +117,34 @@ namespace TheTallTankardTavern.Models
             get { return EquipmentGetter(_mainHand); }
             set { _mainHand = EquipmentSetter(_mainHand, value); }
         }
+        [JsonIgnore]
         public ItemModel OffHand
         {
             get { return EquipmentGetter(_offHand); }
             set { _offHand = EquipmentSetter(_offHand, value); }
         }
-        public ItemModel AttunedItem1
+
+        [JsonIgnore]
+        public List<ItemModel> _attunedItemModels = null;
+
+        [JsonIgnore]
+        public List<ItemModel> AttunedItems
         {
-            get { return EquipmentGetter(_attunedItem1); }
-            set { _attunedItem1 = EquipmentSetter(_attunedItem1, value); }
-        }
-        public ItemModel AttunedItem2        {
-            get { return EquipmentGetter(_attunedItem2); }
-            set { _attunedItem2 = EquipmentSetter(_attunedItem2, value); }
-        }
-        public ItemModel AttunedItem3
-        {
-            get { return EquipmentGetter(_attunedItem3); }
-            set { _attunedItem3 = EquipmentSetter(_attunedItem3, value); }
+            get
+            {
+                if (_attunedItemModels == null)
+                {
+                    _attunedItemModels = new List<ItemModel>();
+                    for (int i = 0; i < _attunedItems.Count; i++)
+                    {
+                        _attunedItemModels.Add(EquipmentGetter(_attunedItems[i]));
+                    }
+                }
+                return _attunedItemModels;
+            }
         }
 
-        public bool TryEquip(string inventoryID, InventoryModel Inventory, bool isDualWielder)
+        public bool TryEquip(string inventoryID, InventoryModel Inventory, bool isDualWielder, int maxAttunedItems)
         {
             if (!Inventory.Contains(inventoryID))
             {
@@ -132,7 +160,7 @@ namespace TheTallTankardTavern.Models
                 case ItemTypeCategory.Armour: return EquipArmour(Item);
                 case ItemTypeCategory.Shield: return EquipShield(Item);
                 case ItemTypeCategory.Weapon: return EquipWeapon(Item, isDualWielder);
-                case ItemTypeCategory.Equippable: return EquipMagicItem(Item);
+                case ItemTypeCategory.Attunable: return EquipAttunableItem(Item, maxAttunedItems);
                 default: return false;
             }
         }
@@ -214,12 +242,16 @@ namespace TheTallTankardTavern.Models
             return true;
         }
 
-        public bool EquipMagicItem(ItemModel Item)
+        public bool EquipAttunableItem(ItemModel Item, int maxAtunnableItems)
         {
-            if (AttunedItem1 == null) { AttunedItem1 = Item; }
-            else if (AttunedItem2 == null) { AttunedItem2 = Item; }
-            else if (AttunedItem3 == null) { AttunedItem3 = Item; }
-            else { return false; }  //Item was not equipped
+            if (AttunedItems.Count >= maxAtunnableItems)
+            {
+                return false;
+            }
+
+            Add(Item.InventoryID);
+            _attunedItems.Add(Item.InventoryID);
+            AttunedItems.Add(Item);
             return true;
         }
 
@@ -297,30 +329,23 @@ namespace TheTallTankardTavern.Models
             return false;
         }
 
-        public bool UnequipMagicItem(string inventoryID)
+        public bool UnequipAttunableItem(string inventoryID)
         {
-            if (inventoryID.Equals(AttunedItem1.InventoryID))
+            if (Remove(inventoryID))
             {
-                AttunedItem1 = AttunedItem2?.Clone();
-                AttunedItem2 = AttunedItem3?.Clone();
-                AttunedItem3 = null;
-                Remove(inventoryID);
-                return true;
-            }
-            else if (inventoryID.Equals(AttunedItem2.InventoryID))
-            {
-                AttunedItem2 = AttunedItem3?.Clone();
-                AttunedItem3 = null;
-                Remove(inventoryID);
-                return true;
-            }
-            else if (inventoryID.Equals(AttunedItem3.InventoryID))
-            {
-                AttunedItem3 = null;
-                Remove(inventoryID);
+                _attunedItems.Remove(inventoryID);
+
+                ItemModel itemToRemove = AttunedItems.Single(item => item.InventoryID.Equals(inventoryID));
+                AttunedItems.Remove(itemToRemove);
                 return true;
             }
             return false;
+        }
+
+        public void UnequipAllAttunableItems()
+        {
+            _attunedItems.Clear();
+            AttunedItems.Clear();
         }
 
         private bool AreBothWeaponsLight(ItemModel Weapon1, ItemModel Weapon2)

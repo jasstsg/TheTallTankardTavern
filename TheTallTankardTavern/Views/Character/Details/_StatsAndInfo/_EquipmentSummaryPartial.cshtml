@@ -1,8 +1,9 @@
 ﻿@model TheTallTankardTavern.Models.CharacterModel
 @using System.Text;
+@using TTT.Items
 @addTagHelper *, TheTallTankardTavern
 
-@{ 
+@{
     EquipmentModel Equipment = Model.Equipment;
     StringBuilder sb = new StringBuilder();
     if (Equipment.Armour != null) { sb.AppendLine($"{Equipment.Armour.Name} ({Equipment.Armour.TypeAsString})"); }
@@ -11,9 +12,13 @@
     if (Equipment.TwoHand != null) { sb.AppendLine($"{Equipment.TwoHand.Name} (+{Model.GetAttackBonus(Equipment.TwoHand)} / {Model.GetDamageString(Equipment.TwoHand)})"); }
     if (Equipment.MainHand != null) { sb.AppendLine($"{Equipment.MainHand.Name} (+{Model.GetAttackBonus(Equipment.MainHand)} / {Model.GetDamageString(Equipment.MainHand)})"); }
     if (Equipment.OffHand != null) { sb.AppendLine($"{Equipment.OffHand.Name} (+{Model.GetAttackBonus(Equipment.OffHand)} / {Model.GetDamageString(Equipment.OffHand, true)})"); }
-    if (Equipment.AttunedItem1 != null) { sb.AppendLine($"{Equipment.AttunedItem1.Name} (Attuned)"); }
-    if (Equipment.AttunedItem2 != null) { sb.AppendLine($"{Equipment.AttunedItem2.Name} (Attuned)"); }
-    if (Equipment.AttunedItem3 != null) { sb.AppendLine($"{Equipment.AttunedItem3.Name} (Attuned)"); }
+    if (Equipment.AttunedItems.Any())
+    {
+        foreach (ItemModel ai in Equipment.AttunedItems)
+        {
+            sb.AppendLine($"{ai.Name} (Attuned)");
+        }
+    }
 }
 
 <style>

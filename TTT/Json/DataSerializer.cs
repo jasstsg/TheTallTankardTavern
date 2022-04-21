@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 
@@ -22,10 +23,21 @@ namespace TTT.Json
 
 		public static T JsonFileToObject<T>(string filepath)
 		{
-			using (StreamReader reader = new StreamReader(filepath))
+			try
 			{
-				return JsonStringToObject<T>(reader.ReadToEnd());
+				using (StreamReader reader = new StreamReader(filepath))
+				{
+					return JsonStringToObject<T>(reader.ReadToEnd());
+				}
 			}
+			catch (JsonSerializationException jex)
+            {
+				throw new JsonSerializationException($"Error while deserializing the json file: {filepath}", jex);
+            }
+			catch (Exception ex)
+            {
+				throw new Exception($"Unexpected error while trying to read and deserialize the json file: {filepath}", ex);
+            }
 		}
 
 		public static IEnumerable<T> JsonDirectoryToIEnumerable<T>(string directory)

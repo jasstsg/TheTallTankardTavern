@@ -64,11 +64,11 @@ function unequipOffHand(cid, inventoryID) {
     })
 }
 
-function unequipMagicItem(cid, inventoryID) {
+function unequipAttunableItem(cid, inventoryID) {
     event.stopPropagation();
-    console.log("UnequipMagicItem button pressed");
+    console.log("UnequipAttunableItem button pressed");
     $.ajax({
-        url: '/Character/UnequipMagicItem',
+        url: '/Character/UnequipAttunableItem',
         data: { cid: cid, inventoryID: inventoryID },
         dataType: 'html',
         success: function (response) { refreshCharacter(response); }

@@ -260,12 +260,6 @@ namespace TheTallTankardTavern.Models
 		public string MainHand { get { return this.Equipment._mainHand; } set { this.Equipment._mainHand = value; } }
 		[JsonIgnore]
 		public string OffHand { get { return this.Equipment._offHand; } set { this.Equipment._offHand = value; } }
-		[JsonIgnore]
-		public string AttunedItem1 { get { return this.Equipment._attunedItem1; } set { this.Equipment._attunedItem1 = value; } }
-		[JsonIgnore]
-		public string AttunedItem2 { get { return this.Equipment._attunedItem2; } set { this.Equipment._attunedItem2 = value; } }
-		[JsonIgnore]
-		public string AttunedItem3 { get { return this.Equipment._attunedItem3; } set { this.Equipment._attunedItem3 = value; } }
 
 
 		[DisplayName("Inventory")]
