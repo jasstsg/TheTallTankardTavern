@@ -14,6 +14,7 @@
             <th><label>Name</label></th>
             <th><label>Username</label></th>
             <th><label>Role</label></th>
+            <th><label>Active Character</label></th>
             <th><label>ID</label></th>
             <partial name="/Views/Shared/Custom/ActionButtons/_ColumnHeaderEditDelete.cshtml" />
         </tr>
@@ -25,6 +26,7 @@
                 <td>@u.Name</td>
                 <td>@u.Username</td>
                 <td>@u.Role</td>
+                <td>@CharacterDataContext.GetNameFromID(u.ActiveCharacterID)</td>
                 <td>@u.ID</td>
                 <partial name="/Views/Shared/Custom/ActionButtons/_ColumnEditDelete.cshtml" model="u" />
             </tr>

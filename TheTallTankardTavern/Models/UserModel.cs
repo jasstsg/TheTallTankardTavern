@@ -10,6 +10,9 @@ namespace TheTallTankardTavern.Models
 
 		public Constants.ROLES Role { get; set; }
 
+		[DisplayName("Active Character")]
+		public string ActiveCharacterID { get; set; }
+
 		[DisplayName("My Public Notepad")]
 		public string Message { get; set; }
 

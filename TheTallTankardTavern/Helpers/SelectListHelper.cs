@@ -18,6 +18,10 @@ namespace TheTallTankardTavern.Helpers
 {
 	public static class SelectListHelper
 	{
+		public static SelectList GetProfileCharacters(UserModel user)
+        {
+			return new SelectList(CharacterDataContext.Where(c => c.Player_Name.Equals(user.Username)), "ID", "Name");
+        }
 		public static SelectList GetPartyMembers()
         {
 			return new SelectList(PartyDataContext.Single().GetAllPartyMemberCharacters(), "ID", "Name");

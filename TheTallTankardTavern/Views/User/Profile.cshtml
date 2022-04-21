@@ -15,26 +15,26 @@
                 <tr>
                     <th></th>
                     <th></th>
+                    <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td><label asp-for="Name"></label></td>
-                    <td>
-                        <hidden asp-for="Name"></hidden>
-                        @Model.Name
-                    </td>
+                    <td><hidden asp-for="Name"></hidden>@Model.Name</td>
+                </tr>
+                <tr>
+                    <td><label asp-for="Role"></label></td>
+                    <td><hidden asp-for="Role"></hidden>@Model.Role</td>
                 </tr>
                 <tr>
                     <td><label asp-for="Username"></label></td>
                     <td><textbox asp-for="Username"></textbox></td>
                 </tr>
                 <tr>
-                    <td><label asp-for="Role"></label></td>
-                    <td>
-                        <hidden asp-for="Role"></hidden>
-                        @Model.Role
-                    </td>
+                    <td><label asp-for="ActiveCharacterID"></label></td>
+                    <td><select asp-for="ActiveCharacterID" asp-items="@SelectListHelper.GetProfileCharacters(Model)"></select></td>
                 </tr>
             </tbody>
         </table>
