@@ -1,5 +1,6 @@
 using System.ComponentModel;
 using TheTallTankardTavern.Configuration;
+using TheTallTankardTavern.Helpers;
 using TTT.Common.Abstractions;
 
 namespace TheTallTankardTavern.Models
@@ -17,5 +18,10 @@ namespace TheTallTankardTavern.Models
 		public string Message { get; set; }
 
 		public string MessageUpdated { get; set; }
+
+		public CharacterModel GetActiveCharacter()
+        {
+			return ApplicationSettings.CharacterDataContext.GetModelFromID(ActiveCharacterID);
+        }
 	}
 }

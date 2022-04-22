@@ -4,18 +4,15 @@
     ViewData["Title"] = Model.Name;
 }
 
-<div class="col-md-5">
+<div class="col-md-12">
     <form asp-action="Save" method="post">
         <hidden asp-for="ID"></hidden>
-        <hidden asp-for="Message"></hidden>
         <hidden asp-for="MessageUpdated"></hidden>
         <partial name="/Views/Shared/Custom/ActionButtons/_BackSavePartial.cshtml" />
         <table>
             <thead>
                 <tr>
-                    <th></th>
-                    <th></th>
-                    <th></th>
+                    <th width="150px"></th>
                     <th></th>
                 </tr>
             </thead>
@@ -35,6 +32,10 @@
                 <tr>
                     <td><label asp-for="ActiveCharacterID"></label></td>
                     <td><select asp-for="ActiveCharacterID" asp-items="@SelectListHelper.GetProfileCharacters(Model)"></select></td>
+                </tr>
+                <tr>
+                    <td><label asp-for="Message"></label></td>
+                    <td><textarea asp-for="Message" style="width:100%" rows="14"></textarea></td>
                 </tr>
             </tbody>
         </table>
