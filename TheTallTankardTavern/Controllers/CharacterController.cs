@@ -50,7 +50,7 @@ namespace TheTallTankardTavern.Controllers
                     DataContext.Save(Character, Folder);
                     return RedirectToAction("Index", "Spell");
                 case MODEL_TYPES.ITEM: 
-                    Character.Inventory.AddItemInstance(id, quantity);
+                    Character.Inventory.AddNewItemInstance(id, quantity);
                     DataContext.Save(Character, Folder);
                     return RedirectToAction("Index", "Item");
                 case MODEL_TYPES.FEATURE: 

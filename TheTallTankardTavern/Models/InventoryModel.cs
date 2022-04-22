@@ -25,18 +25,18 @@ namespace TheTallTankardTavern.Models
 			}
 		}
 
-		public void AddItemInstance(string itemID)
+		public void AddNewItemInstance(string itemID)
 		{
 			ItemModel Item = ItemDataContext.GetModelFromID(itemID).Clone();
 			Item.InstanceID = Guid.NewGuid().ToString();
 			base.Add(Item.InventoryID);
 		}
 
-		public void AddItemInstance(string itemID, int quantity)
+		public void AddNewItemInstance(string itemID, int quantity)
         {
 			for (int i = 0; i < quantity; i++)
             {
-				AddItemInstance(itemID);
+				AddNewItemInstance(itemID);
             }
         }
 

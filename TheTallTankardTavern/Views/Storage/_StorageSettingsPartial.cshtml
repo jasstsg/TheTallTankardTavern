@@ -1,0 +1,29 @@
+﻿@addTagHelper *, TheTallTankardTavern
+
+@using TheTallTankardTavern.Models
+
+@model StorageModel
+
+<div class="col-md-6">
+    <form asp-action="SaveSettings" method="post">
+        <hidden asp-for="ID"></hidden>
+        @for (int i = 0; i < Model.Inventory.Count; i++){ <hidden asp-for='Inventory[i]'></hidden> }
+        <table>
+            <tr>
+                <td><label asp-for="Name"></label></td>
+                <td><textbox asp-for="Name"></textbox></td>
+            </tr>
+            <tr>
+                <td><label asp-for="MaxCapacity"></label></td>
+                <td><numberbox asp-for="MaxCapacity"></numberbox></td>
+            </tr>
+            <tr>
+                <td><label asp-for="IsLocked"></label></td>
+                <td><input type="checkbox" asp-for="IsLocked" /></td>
+            </tr>
+            <tr>
+                <td colspan="2"><submit class="action-btn" text="Save Settings" ></submit></td>
+            </tr>
+        </table>
+    </form>
+</div>

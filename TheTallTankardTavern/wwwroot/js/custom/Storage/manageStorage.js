@@ -5,7 +5,7 @@
         url: '/Storage/DepositItem',
         data: { cid: cid, inventoryID: inventoryID },
         dataType: 'html',
-        success: function (response) { refreshStorage(response); },
+        success: function (response) { refreshStorageItems(response); },
         error: function (xhr, status, error) { logErrorInConsolve(xhr, status, error); }
     })
 }
@@ -17,12 +17,12 @@ function withdrawItem(cid, inventoryID) {
         url: '/Storage/WithdrawItem',
         data: { cid: cid, inventoryID: inventoryID },
         dataType: 'html',
-        success: function (response) { refreshStorage(response); },
+        success: function (response) { refreshStorageItems(response); },
         error: function (xhr, status, error) { logErrorInConsolve(xhr, status, error); }
     })
 }
 
-function refreshStorage(response) {
+function refreshStorageItems(response) {
     $('#storage-item-management').html(response);
 }
 

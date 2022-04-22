@@ -2,31 +2,27 @@
 using static TheTallTankardTavern.Configuration.ApplicationSettings;
 using TTT.Common.Abstractions;
 using TheTallTankardTavern.Helpers;
+using System.ComponentModel;
 
 namespace TheTallTankardTavern.Models
 {
-    public class StorageModel : BaseListModel<string>, IFileDataModel
+    public class StorageModel: IFileDataModel
     {
+		[JsonProperty]
 		public string ID { get; set; }
 
-		public string Name { get; set; } = "STORAGE";
-		
-		public bool IsLocked { get; set; } = true;
-		
-		public int MaxCapacity { get; set; } = 1500;
+		[JsonProperty]
+		public string Name { get; set; }
 
-		[JsonIgnore]
-		public int CurrentWeight
-		{
-			get
-			{
-				int weight = 0;
-				foreach (string inventoryID in this)
-				{
-					weight += ItemDataContext.GetModelFromID(inventoryID.Substring(0, inventoryID.IndexOf('+'))).Weight;
-				}
-				return weight;
-			}
-		}
+		[JsonProperty]
+		[DisplayName("Max Capacity (lbs)")]
+		public int MaxCapacity { get; set; }
+		
+		[JsonProperty]
+		[DisplayName("Disable Storage")]
+		public bool IsLocked { get; set; }
+
+		[JsonProperty]
+		public InventoryModel Inventory { get; set; } = new InventoryModel();
 	}
 }
