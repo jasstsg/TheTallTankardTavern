@@ -1,47 +1,74 @@
 ﻿@addTagHelper *, TheTallTankardTavern
 @using TheTallTankardTavern.Configuration
+@using static TheTallTankardTavern.Configuration.ApplicationSettings
 
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Dashboard";
+
+    //Users (We're hardcoding for now)
+    UserModel Tyler = UserDataContext.GetModelFromName("Tyler");
+    UserModel Aaron = UserDataContext.GetModelFromName("Aaron");
+    UserModel Alec = UserDataContext.GetModelFromName("Alec");
+    UserModel Pav = UserDataContext.GetModelFromName("Pavanjot");
+    UserModel Sam = UserDataContext.GetModelFromName("Sam");
 }
 
-<div class="row">
-    <div class="col-md-8 offset-2">
-        @if (ContextUser.IsAuthenticated)
-        {
-            <div style="text-align: center;">
-                @if (!string.IsNullOrEmpty(ContextUser.Current.ActiveCharacterID))
-                {
-                    CharacterModel ActiveCharacter = ContextUser.Current.GetActiveCharacter();
-                    <buttonlink small="false" class="action-btn-large" style="width:120px" text="@ActiveCharacter.Name"
-                                asp-controller="Character" asp-action="Details" asp-route-id="@ActiveCharacter.ID" ></buttonlink>
-                }
-                &nbsp;&nbsp;
-                <buttonlink small="false" class="action-btn-large" style="width:120px" asp-controller="Party" asp-action="Index" text="Party"></buttonlink>
-                &nbsp;&nbsp;
-                <buttonlink small="false" class="action-btn-large" style="width:120px" asp-controller="User" asp-action="Profile" text="My Profile"></buttonlink>
-            </div>
+<style>
+    html, body, .container, main, .fillspace {
+        width: 100%;
+        height: 94%;
+    }
+</style>
+
+@if (ContextUser.IsAuthenticated)
+{
+    <div class="row">
+        <div class="col-md-8 offset-2" style="text-align: center;">
+            @if (!string.IsNullOrEmpty(ContextUser.Current.ActiveCharacterID))
+            {
+                CharacterModel ActiveCharacter = ContextUser.Current.GetActiveCharacter();
+                <buttonlink small="false" class="action-btn-large" style="width:120px" text="@ActiveCharacter.Name"
+                            asp-controller="Character" asp-action="Details" asp-route-id="@ActiveCharacter.ID" ></buttonlink>
+            }
+            &nbsp;&nbsp;
+            <buttonlink small="false" class="action-btn-large" style="width:120px" asp-controller="Party" asp-action="Index" text="Party"></buttonlink>
+            &nbsp;&nbsp;
+            <buttonlink small="false" class="action-btn-large" style="width:120px" asp-controller="User" asp-action="Profile" text="My Profile"></buttonlink>
+        </div>
+    </div>
+    <br />
+    <div class="row fillspace">
+        <div class="col-md-4 fillspace">
+            <strong>@(Tyler.Username)'s Dashboard</strong>
+            <textarea style="border:solid;height:100%" readonly="readonly" asp-for="@Tyler.Message"></textarea>
+        </div>
+        <div class="col-md-4 fillspace">
+            <strong>@(Aaron.Username)'s Dashboard</strong>
+            <textarea style="border:solid;height:45%" readonly="readonly" asp-for="@Aaron.Message"></textarea>
             <br />
-            <div style="text-align:center;">
-                <strong>
-                    What do the <span class="skill-proficient">c</span>o<span class="skill-expert">l</span>o<span class="item-magic">u</span>r<span style="color:red">s</span> mean?
-                </strong>
-                <div>You are <span class="skill-proficient">proficient</span> with something.</div>
-                <div>You are an <span class="skill-expert">expert</span> at something.</div>
-                <div>Something is <span class="item-magic">magical</span>.</div>
-                <div>Something is <span style="color:red;font-weight:bold">bad</span>.</div>
-            </div>
-        }
-        else
-        {
+            <strong>@(Alec.Username)'s Dashboard</strong>
+            <textarea style="border:solid;height:45%" readonly="readonly" asp-for="@Alec.Message"></textarea>
+        </div>
+        <div class="col-md-4 fillspace">
+            <strong>@(Pav.Username)'s Dashboard</strong>
+            <textarea style="border:solid;height:45%" readonly="readonly" asp-for="@Pav.Message"></textarea>
+            <br />
+            <strong>@(Sam.Username)'s Dashboard</strong>
+            <textarea style="border:solid;height:45%" readonly="readonly" asp-for="@Sam.Message"></textarea>
+        </div>
+    </div>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-12">
             <h2 style="text-align:center">
-                Welcome to<br />
-                The Tall Tankard Tavern!
+                Welcome to The Tall Tankard Tavern!
             </h2>
             <br />
             <div style="text-align:center;">
                 <buttonlink small="false" class="action-btn-large" asp-controller="Login" asp-action="Index" text="Click here to log in!"></buttonlink>
             </div>
-        }
+        </div>
     </div>
-</div>
+}

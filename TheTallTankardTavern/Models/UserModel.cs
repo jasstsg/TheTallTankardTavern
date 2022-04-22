@@ -14,7 +14,7 @@ namespace TheTallTankardTavern.Models
 		[DisplayName("Active Character")]
 		public string ActiveCharacterID { get; set; }
 
-		[DisplayName("My Public Notepad")]
+		[DisplayName("My Dashboard Message")]
 		public string Message { get; set; }
 
 		public string MessageUpdated { get; set; }
