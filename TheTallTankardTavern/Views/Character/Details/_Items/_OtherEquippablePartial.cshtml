@@ -8,12 +8,13 @@
     <tbody>
         @if (Model.Equipment.AttunedItems.Any())
         {
-            foreach (ItemModel ai in Model.Equipment.AttunedItems)
+            foreach (string ai in Model.Equipment.AttunedItems)
             {
-                <tr data-toggle="modal" data-target="#popup-modal" data-title="@ai.Name" data-desc="@ai.PopUpText" data-traits="">
-                    <td class="@(ai.IsMagic ? "item-magic" : "")">@ai.Name</td>
-                    <td>(@ai.Weight lbs)</td>
-                    <td><button class="td-action-btn" value="Unequip" onclick="unequipAttunableItem('@Model.ID', '@ai.InventoryID')"></button></td>
+                ItemModel AttunedItem = ItemDataContext.GetModelFromInventoryID(ai);
+                <tr data-toggle="modal" data-target="#popup-modal" data-title="@AttunedItem.Name" data-desc="@AttunedItem.PopUpText" data-traits="">
+                    <td class="@(AttunedItem.IsMagic ? "item-magic" : "")">@AttunedItem.Name</td>
+                    <td>(@AttunedItem.Weight lbs)</td>
+                    <td><button class="td-action-btn" value="Unequip" onclick="unequipAttunableItem('@Model.ID', '@AttunedItem.InventoryID')"></button></td>
                 </tr> 
 
             }

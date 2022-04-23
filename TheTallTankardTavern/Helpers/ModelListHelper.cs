@@ -5,12 +5,20 @@ using TheTallTankardTavern.Configuration;
 using TTT;
 using TTT.Common.Abstractions;
 using TTT.Enumerator;
+using TTT.Items;
 using static TheTallTankardTavern.Configuration.Constants;
 
 namespace TheTallTankardTavern.Helpers
 {
 	public static class ModelListHelper
 	{
+		public static ItemModel GetModelFromInventoryID(this IEnumerable<ItemModel> ModelList, string inventoryID)
+        {
+			ItemModel Model = ModelList.GetModelFromID(inventoryID.Substring(0, inventoryID.IndexOf("+"))).Clone();
+			Model.InventoryID = inventoryID;
+			return Model;
+        }
+
 		public static T GetModelFromName<T>(this IEnumerable<T> ModelList, string name) where T : BaseModel
 		{
 			return ModelList.First((T m) => m.Name == name);

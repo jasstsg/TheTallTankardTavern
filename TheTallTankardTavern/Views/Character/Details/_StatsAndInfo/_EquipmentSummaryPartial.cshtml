@@ -14,9 +14,9 @@
     if (Equipment.OffHand != null) { sb.AppendLine($"{Equipment.OffHand.Name} (+{Model.GetAttackBonus(Equipment.OffHand)} / {Model.GetDamageString(Equipment.OffHand, true)})"); }
     if (Equipment.AttunedItems.Any())
     {
-        foreach (ItemModel ai in Equipment.AttunedItems)
+        foreach (string ai in Equipment.AttunedItems)
         {
-            sb.AppendLine($"{ai.Name} (Attuned)");
+            sb.AppendLine($"{ItemDataContext.GetModelFromInventoryID(ai).Name} (Attuned)");
         }
     }
 }

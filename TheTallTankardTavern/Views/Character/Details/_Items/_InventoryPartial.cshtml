@@ -38,11 +38,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (string inventoryID in Model.Inventory.OrderBy(i => ItemDataContext.GetModelFromID(i.Substring(0, i.IndexOf("+"))).Name))
+                    @foreach (string inventoryID in Model.Inventory.OrderBy(i => ItemDataContext.GetModelFromInventoryID(i).Name))
                     {
                         if (!Model.Equipment.Contains(inventoryID))
                         {
-                            ItemModel Item = ItemDataContext.GetModelFromID(inventoryID.Substring(0, inventoryID.IndexOf("+")));
+                            ItemModel Item = ItemDataContext.GetModelFromInventoryID(inventoryID);
                             <tr data-toggle="modal" data-target="#popup-modal" data-title="@Item.Name" data-desc="@Item.PopUpText" data-traits="">
                                 <td>
                                 @if (!Item.Is(ItemTypeCategory.Other))

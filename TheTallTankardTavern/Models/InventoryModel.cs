@@ -19,7 +19,7 @@ namespace TheTallTankardTavern.Models
 				int weight = 0;
 				foreach (string inventoryID in this)
 				{
-					weight += ItemDataContext.GetModelFromID(inventoryID.Substring(0, inventoryID.IndexOf('+'))).Weight;
+					weight += ItemDataContext.GetModelFromInventoryID(inventoryID).Weight;
 				}
 				return weight;
 			}

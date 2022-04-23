@@ -43,19 +43,8 @@ namespace TheTallTankardTavern.Models
             {
                 return null;
             }
-            ItemModel Item = ItemDataContext.GetModelFromID(_innerEquipmentVar.Substring(0, _innerEquipmentVar.IndexOf("+"))).Clone();
+            ItemModel Item = ItemDataContext.GetModelFromInventoryID(_innerEquipmentVar).Clone();
             Item.InstanceID = _innerEquipmentVar.Substring(_innerEquipmentVar.IndexOf("+") + 1);
-            return Item;
-        }
-
-        private ItemModel AttunedEquipmentGetter(int index)
-        {
-            if (_attunedItems == null || !_attunedItems.Any())
-            {
-                return null;
-            }
-            ItemModel Item = ItemDataContext.GetModelFromID(_attunedItems[index].Substring(0, _attunedItems[index].IndexOf("+"))).Clone();
-            Item.InstanceID = _attunedItems[index].Substring(_attunedItems[index].IndexOf("+") + 1);
             return Item;
         }
 
@@ -68,21 +57,6 @@ namespace TheTallTankardTavern.Models
             if (value != null)
             {
                 Add(value.InventoryID);
-            }
-            return value?.InventoryID;
-        }
-
-        private string AttunedEquipmentSetter(ItemModel value)
-        {
-            if (_attunedItems == null)
-            {
-                _attunedItems = new List<string>();
-            }
-
-            if (value != null)
-            {
-                Add(value.InventoryID);
-                _attunedItems.Add(value.InventoryID);
             }
             return value?.InventoryID;
         }
@@ -128,10 +102,12 @@ namespace TheTallTankardTavern.Models
         public List<ItemModel> _attunedItemModels = null;
 
         [JsonIgnore]
-        public List<ItemModel> AttunedItems
+        public List<string> AttunedItems
         {
             get
             {
+                return _attunedItems;
+                /*
                 if (_attunedItemModels == null)
                 {
                     _attunedItemModels = new List<ItemModel>();
@@ -141,6 +117,7 @@ namespace TheTallTankardTavern.Models
                     }
                 }
                 return _attunedItemModels;
+                */
             }
         }
 
@@ -250,8 +227,7 @@ namespace TheTallTankardTavern.Models
             }
 
             Add(Item.InventoryID);
-            _attunedItems.Add(Item.InventoryID);
-            AttunedItems.Add(Item);
+            AttunedItems.Add(Item.InventoryID);
             return true;
         }
 
@@ -333,10 +309,7 @@ namespace TheTallTankardTavern.Models
         {
             if (Remove(inventoryID))
             {
-                _attunedItems.Remove(inventoryID);
-
-                ItemModel itemToRemove = AttunedItems.Single(item => item.InventoryID.Equals(inventoryID));
-                AttunedItems.Remove(itemToRemove);
+                AttunedItems.Remove(inventoryID);
                 return true;
             }
             return false;

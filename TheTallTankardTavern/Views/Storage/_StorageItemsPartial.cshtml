@@ -32,9 +32,9 @@
         </tr>
         @if (CurrentCharacter != null)
         {
-            @foreach (string inventoryID in CurrentCharacter.Inventory.OrderBy(s => ItemDataContext.GetModelFromID(s.Substring(0, s.IndexOf("+"))).Name))
+            @foreach (string inventoryID in CurrentCharacter.Inventory.OrderBy(s => ItemDataContext.GetModelFromInventoryID(s).Name))
             {
-                ItemModel Item = ItemDataContext.GetModelFromID(inventoryID.Substring(0, inventoryID.IndexOf("+"))).Clone();
+                ItemModel Item = ItemDataContext.GetModelFromInventoryID(inventoryID).Clone();
                 Item.InventoryID = inventoryID;
                 <tr>
                     <td width="100px"><button class="td-action-btn" value="Store" onclick="depositItem('@CurrentCharacter.ID', '@Item.InventoryID')"></button></td>
@@ -56,9 +56,9 @@
                 }
             </th>
         </tr>
-        @foreach (string inventoryID in Model.Inventory.OrderBy(s => ItemDataContext.GetModelFromID(s.Substring(0, s.IndexOf("+"))).Name))
+        @foreach (string inventoryID in Model.Inventory.OrderBy(s => ItemDataContext.GetModelFromInventoryID(s).Name))
         {
-            ItemModel Item = ItemDataContext.GetModelFromID(inventoryID.Substring(0, inventoryID.IndexOf("+"))).Clone();
+            ItemModel Item = ItemDataContext.GetModelFromInventoryID(inventoryID).Clone();
             Item.InventoryID = inventoryID;
             <tr>
                 <td width="100px"><button class="td-action-btn" value="Take" onclick="withdrawItem('@CurrentCharacter.ID', '@Item.InventoryID')"></button></td>
