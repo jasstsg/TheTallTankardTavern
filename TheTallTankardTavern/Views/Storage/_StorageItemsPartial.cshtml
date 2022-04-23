@@ -17,7 +17,7 @@
                 @if (CurrentCharacter != null)
                 {
                     <span>
-                        @(CurrentCharacter.Name)'s Inventory (@CurrentCharacter.Inventory.CurrentWeight / @CurrentCharacter.CarryCapacity() lbs)
+                        <strong>@(CurrentCharacter.Name)'s Inventory (@CurrentCharacter.Inventory.CurrentWeight / @CurrentCharacter.CarryCapacity() lbs)</strong>
                         @if (CurrentCharacter.IsEncumbered())
                         {
                             <span style="color:red">ENCUMBERED! Half speed, disadvantage on STR/DEX/CON checks, attacks, and saves</span>
@@ -49,7 +49,7 @@
     <table>
         <tr>
             <th colspan="3">
-                @(Model.Name)'s Inventory (@Model.Inventory.CurrentWeight / @Model.MaxCapacity lbs)
+                <strong>@(Model.Name)'s Inventory (@Model.Inventory.CurrentWeight / @Model.MaxCapacity lbs)</strong>
                 @if (Model.Inventory.CurrentWeight > Model.MaxCapacity)
                 {
                     <span style="color:red">Storage is overweight, remove some items!</span>

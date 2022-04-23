@@ -22,14 +22,12 @@
         <div class="col-md-6">
             <buttonlink class="font-weight-bold" asp-action="Index" text="Refresh Page"></buttonlink>
         </div>
-            @if (ContextUser.IsAdminOrDM)
-            {
-                <partial name="/Views/Storage/_StorageSettingsPartial.cshtml" model="Model" />
-            }
+        @if (ContextUser.IsAdminOrDM)
+        {
+            <partial name="/Views/Storage/_StorageSettingsPartial.cshtml" model="Model" />
+        }
     </div>
-    <div class="row col-md-12">
-        <br />
-    </div>
+    <br />
     <div id="storage-item-management" class="row">
         <partial name="/Views/Storage/_StorageItemsPartial.cshtml" model="Model" />
     </div>
