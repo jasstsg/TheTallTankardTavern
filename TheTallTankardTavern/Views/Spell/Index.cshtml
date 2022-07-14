@@ -19,9 +19,7 @@
             <th><label>School</label></th>
             <th><label>Level</label></th>
             <th><label>Range</label></th>
-            <th><label>V</label></th>
-            <th><label>S</label></th>
-            <th><label>M</label></th>
+            <th><label>Comps</label></th>
             <th><label>Duration</label></th>
             <th><label>Cast Time</label></th>
             <th><label>Focus</label></th>
@@ -38,9 +36,7 @@
                 <td>@s.School</td>
                 <td>@s.Level</td>
                 <td>@s.Range</td>
-                <td>@s.V</td>
-                <td>@s.S</td>
-                <td>@s.M</td>
+                <td>@(s.Verbal_Components ? "V" : " ")@(s.Somatic_Components ? "S" : " ")@(s.Material_Components ? "M" : " ")</td>
                 <td>@s.Duration</td>
                 <td>@s.Casting_Time</td>
                 <td>@s.Concentration</td>

@@ -14,9 +14,7 @@
             <th>School</th>
             <th>Level</th>
             <th>Range</th>
-            <th>V</th>
-            <th>S</th>
-            <th>M</th>
+            <th>Comps</th>
             <th>Duration</th>
             <th>Cast Time</th>
             <th>Focus</th>
@@ -32,9 +30,7 @@
             <td>@Spell.School</td>
             <td>@Spell.Level</td>
             <td>@Spell.Range</td>
-            <td>@Spell.V</td>
-            <td>@Spell.S</td>
-            <td>@Spell.M</td>
+            <td>@(Spell.Verbal_Components ? "V" : " ")@(Spell.Somatic_Components ? "S" : " ")@(Spell.Material_Components ? "M" : " ")</td>
             <td>@Spell.Duration</td>
             <td>@Spell.Casting_Time</td>
             <td>@Spell.Concentration</td>
