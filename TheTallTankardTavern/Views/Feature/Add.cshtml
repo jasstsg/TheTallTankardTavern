@@ -10,30 +10,43 @@
 
 @{
     FeatureModel Feature = FeatureDataContext.GetModelFromID((string)ViewData["id"]);
+    CharacterModel ActiveCharacter = ContextUser.Current.GetActiveCharacter();
 }
 
-<h5>Add @Feature.Name to a Character</h5>
-<buttonlink class="font-weight-bold" asp-action="Index" text="Cancel"></buttonlink>
-<table>
-    <thead>
-        <tr>
-            <th>Player</th>
-            <th>Character</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (CharacterModel Character in ContextUser.Characters)
-        {
+
+@if (ContextUser.IsAdministrator)
+{
+    <buttonlink class="td-action-btn" asp-action="Index" text="Cancel"></buttonlink> 
+    <h5>Add Feature '@Feature.Name' to...</h5>
+    <table>
+        <thead>
             <tr>
-                <td>@Character.Player_Name</td>
-                <td>@Character.Name</td>
-                <td>
-                    <buttonlink class="td-action-btn" asp-controller="Character" asp-action="AddModel" text="Add"
-                                asp-route-cid="@Character.ID" asp-route-id="@Feature.ID" asp-route-type="@MODEL_TYPES.FEATURE">
-                    </buttonlink>
-                </td>
+                <th width="100px"></th>
+                <th>Character</th>
+                <th>Player</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (CharacterModel Character in ContextUser.Characters.OrderBy(c => c.Player_Name))
+            {
+                <tr>
+                    <td>
+                        <buttonlink class="td-action-btn" asp-controller="Character" asp-action="AddModel" text="Add"
+                                    asp-route-cid="@Character.ID" asp-route-id="@Feature.ID" asp-route-type="@MODEL_TYPES.FEATURE">
+                        </buttonlink>
+                    </td>
+                    <td>@Character.Name</td>
+                    <td>@Character.Player_Name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <h5>Add Feature <strong>'@Feature.Name'</strong> to <strong>@(ActiveCharacter?.Name)</strong>?</h5>
+    <buttonlink class="td-action-btn" asp-controller="Character" asp-action="AddModel" text="Yes"
+                asp-route-cid="@ActiveCharacter.ID" asp-route-id="@Feature.ID" asp-route-type="@MODEL_TYPES.FEATURE">
+    </buttonlink>
+    <buttonlink class="td-action-btn" asp-action="Index" text="No"></buttonlink> 
+}
