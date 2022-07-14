@@ -10,30 +10,43 @@
 
 @{
     SpellModel Spell = SpellDataContext.GetModelFromID((string)ViewData["id"]);
+    CharacterModel ActiveCharacter = ContextUser.Current.GetActiveCharacter();
 }
 
-<h5>Add @Spell.Name to a Character</h5>
-<buttonlink class="font-weight-bold" asp-action="Index" text="Cancel"></buttonlink>
-<table>
-    <thead>
-        <tr>
-            <th>Player</th>
-            <th>Character</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (CharacterModel Character in ContextUser.Characters)
-        {
+@if (ContextUser.IsAdministrator)
+{
+    <buttonlink class="td-action-btn" asp-action="Index" text="Cancel"></buttonlink> 
+    <h5>Add Spell '@Spell.Name' to...</h5>
+    <table>
+        <thead>
             <tr>
-                <td>@Character.Player_Name</td>
-                <td>@Character.Name</td>
-                <td>
-                    <buttonlink class="td-action-btn" asp-controller="Character" asp-action="AddModel" text="Add"
-                                asp-route-cid="@Character.ID" asp-route-id="@Spell.ID" asp-route-type="@MODEL_TYPES.SPELL">
-                    </buttonlink>
-                </td>
+                <th width="100px"></th>
+                <th>Character</th>
+                <th>Player</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (CharacterModel Character in ContextUser.Characters.OrderBy(c => c.Player_Name))
+            {
+                <tr>
+                    <td>
+                        <buttonlink class="td-action-btn" asp-controller="Character" asp-action="AddModel" text="Add"
+                                    asp-route-cid="@Character.ID" asp-route-id="@Spell.ID" asp-route-type="@MODEL_TYPES.SPELL">
+                        </buttonlink>
+                    </td>
+                    <td>@Character.Name</td>
+                    <td>@Character.Player_Name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <h5>Add Spell <strong>'@Spell.Name'</strong> to <strong>@(ActiveCharacter?.Name)</strong>?</h5>
+    <buttonlink class="td-action-btn" asp-controller="Character" asp-action="AddModel" text="Yes"
+                asp-route-cid="@ActiveCharacter.ID" asp-route-id="@Spell.ID" asp-route-type="@MODEL_TYPES.SPELL">
+    </buttonlink>
+    <buttonlink class="td-action-btn" asp-action="Index" text="No"></buttonlink> 
+}
+
