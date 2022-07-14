@@ -22,8 +22,7 @@
             <th><label>Comps</label></th>
             <th><label>Duration</label></th>
             <th><label>Cast Time</label></th>
-            <th><label>Focus</label></th>
-            <th><label>Ritual</label></th>
+            <th><label>Note</label></th>
             <th><label>Class</label></th>
             <partial name="/Views/Shared/Custom/ActionButtons/_ColumnHeaderAddEditDelete.cshtml" />
         </tr>
@@ -39,8 +38,7 @@
                 <td>@(s.Verbal_Components ? "V" : " ")@(s.Somatic_Components ? "S" : " ")@(s.Material_Components ? "M" : " ")</td>
                 <td>@s.Duration</td>
                 <td>@s.Casting_Time</td>
-                <td>@s.Concentration</td>
-                <td>@s.Ritual</td>
+                <td>@(s.Concentration ? (s.Ritual ? "Focus, Ritual" : "Focus") : (s.Ritual ? "Ritual" : ""))</td>
                 <td>@s.ClassStringList</td>
                 <partial name="/Views/Shared/Custom/ActionButtons/_ColumnAddEditDelete.cshtml" model="s" />
             </tr>
