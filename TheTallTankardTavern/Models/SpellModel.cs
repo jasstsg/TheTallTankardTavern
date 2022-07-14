@@ -26,6 +26,14 @@ namespace TheTallTankardTavern.Models
 		[DisplayName("Material Components")]
 		public bool Material_Components { get; set; }
 
+		[DisplayName("Materials")]
+		public string Materials { get; set; }
+
+		[DisplayName("Material Cost")]
+		public string Material_Cost { get; set; }
+
+		public bool HasMaterialCost => !string.IsNullOrEmpty(this.Material_Cost);
+
 		[DisplayName("Verbal Components")]
 		public string V { get => this.TF2YN(this.Verbal_Components); }
 

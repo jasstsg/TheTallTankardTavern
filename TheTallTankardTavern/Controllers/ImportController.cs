@@ -8,8 +8,10 @@ using TheTallTankardTavern.Configuration;
 using TheTallTankardTavern.Helpers;
 using TheTallTankardTavern.Models;
 using TTT.Json;
+using TTT.String;
 using static TheTallTankardTavern.Configuration.Constants;
 using static TheTallTankardTavern.Configuration.ApplicationSettings;
+using System.Linq;
 
 namespace TheTallTankardTavern.Controllers
 {
@@ -18,7 +20,7 @@ namespace TheTallTankardTavern.Controllers
 	{
 		private readonly string DND_5E_API_SPELLS_FILE_PATH = $"{AppConfigFolder}\\5e-SRD-Spells.json";
 		private readonly string DND_5E_API_CLASS_FEATURES_FILE_PATH = $"{AppConfigFolder}\\5e-SRD-Class-Features.json";
-
+		
 		public IActionResult Index()
 		{
 			return View("Index");
@@ -47,6 +49,10 @@ namespace TheTallTankardTavern.Controllers
 				InitializeImport(DND_5E_API_SPELLS_FILE_PATH, ImportedSpellsFolder, out List<Dnd5eApiSpellModel> ImportedSpells);
 				foreach (Dnd5eApiSpellModel spell in ImportedSpells)
 				{
+					//Check if it exists already, and if so re-use the ID to avoid breaking links
+					SpellModel ExistingSpellModel = SpellDataContext.Find(s => spell.Name.Equals(s.Name));
+					string EntityID = ExistingSpellModel?.ID ?? Guid.NewGuid().ToString();
+
 					StringBuilder DescBuilder = new StringBuilder();
 					StringBuilder HLDBuilder = new StringBuilder();
 					string[] desc2 = spell.Desc;
@@ -54,7 +60,10 @@ namespace TheTallTankardTavern.Controllers
 					{
 						DescBuilder.Append(desc);
 						DescBuilder.Append("\n");
+						
 					}
+					DescBuilder.Append($"\nMaterials: \n{(string.IsNullOrEmpty(spell.Material) ? "None." : spell.Material)}\n");
+
 					if (spell.Higher_Level != null && spell.Higher_Level.Length != 0)
 					{
 						string[] higher_Level = spell.Higher_Level;
@@ -81,9 +90,11 @@ namespace TheTallTankardTavern.Controllers
 						Subclasses.Add(subclass.Name);
 					}
 					string components = string.Join(',', spell.Components).ToUpper();
+
+					//Generate the model
 					SpellModel Spell = new SpellModel
 					{
-						ID = Guid.NewGuid().ToString(),
+						ID = EntityID,
 						Name = spell.Name,
 						Desc = DescBuilder.ToString(),
 						Higher_Level_Desc = HLDBuilder.ToString(),
@@ -91,6 +102,8 @@ namespace TheTallTankardTavern.Controllers
 						Verbal_Components = components.Contains("V"),
 						Somatic_Components = components.Contains("S"),
 						Material_Components = components.Contains("M"),
+						Materials = spell.Material,
+						Material_Cost = ParseMaterialCost(spell.Material),
 						Ritual = spell.Ritual,
 						Duration = spell.Duration,
 						Concentration = spell.Concentration,
@@ -119,6 +132,10 @@ namespace TheTallTankardTavern.Controllers
 				InitializeImport(DND_5E_API_CLASS_FEATURES_FILE_PATH, ImportedFolder, out List<Dnd5eApiFeatureModel> Imported);
 				foreach (Dnd5eApiFeatureModel model in Imported)
 				{
+					//Check if it exists already, and if so re-use the ID to avoid breaking links
+					FeatureModel ExistingFeatureModel = FeatureDataContext.Find(f => model.Name.Equals(f.Name));
+					string EntityID = ExistingFeatureModel?.ID ?? Guid.NewGuid().ToString();
+
 					StringBuilder DescBuilder = new StringBuilder();
 					string[] desc2 = model.Desc;
 					foreach (string desc in desc2)
@@ -126,9 +143,11 @@ namespace TheTallTankardTavern.Controllers
 						DescBuilder.Append(desc);
 						DescBuilder.Append("\n");
 					}
+
+					//Generate the model
 					FeatureModel Feature = new FeatureModel
 					{
-						ID = Guid.NewGuid().ToString(),
+						ID = EntityID,
 						Name = model.Name,
 						Desc = DescBuilder.ToString(),
 						Class = model.Class.Name, 
@@ -147,5 +166,22 @@ namespace TheTallTankardTavern.Controllers
 			ApplicationSettings.ReloadDataContext();
 			return Index();
 		}
+
+		private string ParseMaterialCost(string materials)
+        {
+			if (string.IsNullOrEmpty(materials) || !materials.Contains("gp"))
+            {
+				return "";
+            }
+
+			//In the dataset, cost can be like '50 gp' or '50gp'.  We want to format all of them with no space inbetween.
+			int gap = materials.IndexOf(" gp");
+			if (gap > 0)
+            {
+				materials = materials.Remove(gap, 1);
+            }
+
+			return materials.Split(' ').First(x => x.Contains("gp")).Replace("", " ", ",", ".");
+        }
 	}
 }

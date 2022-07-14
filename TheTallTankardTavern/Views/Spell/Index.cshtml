@@ -35,10 +35,10 @@
                 <td>@s.School</td>
                 <td>@s.Level</td>
                 <td>@s.Range</td>
-                <td>@(s.Verbal_Components ? "V" : " ")@(s.Somatic_Components ? "S" : " ")@(s.Material_Components ? "M" : " ")</td>
+                <td>@(s.Verbal_Components ? "V" : " ")@(s.Somatic_Components ? "S" : " ")<span class="@(s.HasMaterialCost ? "material-cost" : "")">@(s.Material_Components ? "M" : " ")</span></td>
                 <td>@s.Duration</td>
                 <td>@s.Casting_Time</td>
-                <td>@(s.Concentration ? (s.Ritual ? "Focus, Ritual" : "Focus") : (s.Ritual ? "Ritual" : ""))</td>
+                <td><span class="material-cost">@(s.Material_Cost)</span> @(s.Concentration ? (s.Ritual ? "Focus, Ritual" : "Focus") : (s.Ritual ? "Ritual" : ""))</td>
                 <td>@s.ClassStringList</td>
                 <partial name="/Views/Shared/Custom/ActionButtons/_ColumnAddEditDelete.cshtml" model="s" />
             </tr>

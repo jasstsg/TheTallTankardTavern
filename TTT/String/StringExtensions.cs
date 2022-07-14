@@ -77,5 +77,21 @@ namespace TTT.String
             }
             return true;
         }
+
+        /// <summary>
+        /// Replaces several strings with a new value
+        /// </summary>
+        /// <param name="str">The string being modified</param>
+        /// <param name="newValue">The new value that should be inserted</param>
+        /// <param name="oldValues">The old values that should be replaced by the new value</param>
+        /// <returns>The modified string</returns>
+        public static string Replace(this string str, string newValue, params string[] oldValues)
+        {
+            foreach (string value in oldValues)
+            {
+                str = str.Replace(value, newValue);
+            }
+            return str;
+        }
     }
 }

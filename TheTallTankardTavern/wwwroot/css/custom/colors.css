@@ -26,6 +26,10 @@
     background-color: rgba(255, 100, 100, 0.1);
 }
 
-.unconcious{
+.unconcious {
     background-color: rgba(255, 0, 0, 0.2);
+}
+
+.material-cost {
+    color: darkgoldenrod;
 }
