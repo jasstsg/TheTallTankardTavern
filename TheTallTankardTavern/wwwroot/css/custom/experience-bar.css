@@ -1,0 +1,20 @@
+﻿.experience-bar-container {
+    position: relative;
+    text-align: center;
+    vertical-align: middle;
+    background-color: rgba(30,30,30,1);
+    border-radius: 20px;
+}
+
+.experience-bar {
+    position: absolute;
+    background-color: rgba(255, 200, 0, 0.1);
+    border-radius: 20px;
+}
+
+.experience-bar-text {
+    position: relative;
+    color: dodgerblue;
+    opacity: 0.8;
+    font-weight: bolder;
+}

@@ -1,0 +1,7 @@
+﻿@model TheTallTankardTavern.Models.CharacterModel
+@addTagHelper *, TheTallTankardTavern
+
+<div class="experience-bar-container">
+    <div class="experience-bar" style="@($"width:{Model.NextLevelXPPercentage}%")">&nbsp;</div>
+    <div class="experience-bar-text">@Model.Experience_Points.FormatNumber() / @Model.NextLevelXP XP (@(Model.NextLevelXPPercentage)%)</div>
+</div>

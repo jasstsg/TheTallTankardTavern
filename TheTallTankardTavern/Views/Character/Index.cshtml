@@ -34,7 +34,7 @@
                     <td>@c.Race @c.Subrace.AddBraces()</td>
                     <td>@c.Class @c.Subclass.AddBraces()</td>
                     <td>@c.Alignment</td>
-                    <td style="text-align:right">@c.Experience_Points / @c.NextLevelXP XP</td>
+                    <td style="text-align:right">@c.Experience_Points.FormatNumber() / @c.NextLevelXP XP</td>
                     @if (ContextUser.IsAdministrator || ContextUser.HasUsername(c.Player_Name))
                     {
                         <td><buttonlink class="td-action-btn" asp-action="Edit" text="Edit" asp-route-id="@c.ID"></buttonlink></td>

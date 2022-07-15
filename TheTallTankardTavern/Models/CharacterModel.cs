@@ -135,11 +135,11 @@ namespace TheTallTankardTavern.Models
         }
 
 		[JsonIgnore]
-		public int NextLevelXPPercentage
+		public string NextLevelXPPercentage
 		{
 			get
 			{
-				return (int)((this.Experience_Points / int.Parse(this.NextLevelXP.Replace(",", ""))) * 100);
+				return ((this.Experience_Points / float.Parse(this.NextLevelXP.Replace(",", ""))) * 100).ToString("N0");
 			}
 		}
 

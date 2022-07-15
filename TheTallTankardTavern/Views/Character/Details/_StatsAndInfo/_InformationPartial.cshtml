@@ -30,7 +30,7 @@
                             <td>@Model.Class @Model.Subclass.AddBraces()</td>
                             <td>@Model.Alignment</td>
                             <td>@(Model.Background ?? "")</td>
-                            <td>@Model.Experience_Points / @Model.NextLevelXP XP</td>
+                            <td>@Model.Experience_Points.FormatNumber() / @Model.NextLevelXP XP</td>
                         </tr>
                     </tbody>
                 </table>
