@@ -10,12 +10,9 @@
             <th><label>Name</label></th>
             <th><label>Type</label></th>
             <th><label>Weight</label></th>
-            @*<th><label>Cost</label></th>*@
-            @*<th><label>Magic</label></th>*@
             <th><label>Attack</label></th>
             <th><label>Damage</label></th>
             <th><label>Properties</label></th>
-            @*<th></th>*@
         </tr>
     </thead>
     <tbody>
@@ -25,16 +22,11 @@
             <td><button class="td-action-btn" value="Unequip" onclick="unequipTwoHand('@Model.ID', '@Model.Equipment.TwoHand.InventoryID')"></button></td>
             <td><strong>Both Hands</strong></td>
             <td class="@(Model.Equipment.TwoHand.IsMagic ? "item-magic" : "")">@Model.Equipment.TwoHand.Name</td>
-            <td class="@(Model.IsProficientWith(Model.Equipment.TwoHand) ? "skill-proficient" : "")">
-                @Model.Equipment.TwoHand.Type
-            </td>
+            <td class="@(Model.IsProficientWith(Model.Equipment.TwoHand) ? "skill-proficient" : "")">@Model.Equipment.TwoHand.Type</td>
             <td>@Model.Equipment.TwoHand.Weight lbs</td>
-            @*<td>@Model.Equipment.TwoHand.Cost cp</td>*@
-            @*<td>@Model.Equipment.TwoHand.IsMagic</td>*@
             <td class="@(Model.IsProficientWith(Model.Equipment.TwoHand) ? "skill-proficient" : "")">+@Model.GetAttackBonus(Model.Equipment.TwoHand)</td>
             <td>@Model.GetDamageString(Model.Equipment.TwoHand)</td>
             <td>@Model.Equipment.TwoHand.Weapon.Properties.ToShortString()</td>
-            @*<td><button class="td-action-btn" value="Remove" onclick="removeItemFromEquipment('@Model.ID', '@instanceID')"></button></td>*@
         </tr>
         }
         @if (Model.Equipment.MainHand != null)
@@ -43,16 +35,11 @@
                 <td><button class="td-action-btn" value="Unequip" onclick="unequipMainHand('@Model.ID', '@Model.Equipment.MainHand.InventoryID')"></button></td>
                 <td><strong>Main Hand</strong></td>
                 <td class="@(Model.Equipment.MainHand.IsMagic ? "item-magic" : "")">@Model.Equipment.MainHand.Name</td>
-                <td class=" @(Model.IsProficientWith(Model.Equipment.MainHand) ? "skill-proficient" : "" )">
-                    @Model.Equipment.MainHand.Type
-                </td>
+                <td class=" @(Model.IsProficientWith(Model.Equipment.MainHand) ? "skill-proficient" : "" )">@Model.Equipment.MainHand.Type</td>
                 <td>@Model.Equipment.MainHand.Weight lbs</td>
-                @*<td>@Model.Equipment.MainHand.Cost cp</td>*@
-                @*<td>@Model.Equipment.MainHand.IsMagic</td>*@
                 <td class="@(Model.IsProficientWith(Model.Equipment.MainHand) ? "skill-proficient" : "")">+@Model.GetAttackBonus(Model.Equipment.MainHand)</td>
                 <td>@Model.GetDamageString(Model.Equipment.MainHand)</td>
                 <td>@Model.Equipment.MainHand.Weapon.Properties.ToShortString()</td>
-                @*<td><button class="td-action-btn" value="Remove" onclick="removeItemFromEquipment('@Model.ID', '@instanceID')"></button></td>*@
             </tr>
         }
         @if (Model.Equipment.OffHand != null)
@@ -61,16 +48,11 @@
                 <td><button class="td-action-btn" value="Unequip" onclick="unequipOffHand('@Model.ID', '@Model.Equipment.OffHand.InventoryID')"></button></td>
                 <td><strong>Off Hand</strong></td>
                 <td class="@(Model.Equipment.OffHand.IsMagic ? "item-magic" : "")">@Model.Equipment.OffHand.Name</td>
-                <td class=" @(Model.IsProficientWith(Model.Equipment.OffHand) ? "skill-proficient" : "" )">
-                    @Model.Equipment.OffHand.Type
-                </td>
+                <td class=" @(Model.IsProficientWith(Model.Equipment.OffHand) ? "skill-proficient" : "" )">@Model.Equipment.OffHand.Type</td>
                 <td>@Model.Equipment.OffHand.Weight lbs</td>
-                @*<td>@Model.Equipment.OffHand.Cost cp</td>*@
-                @*<td>@Model.Equipment.OffHand.IsMagic</td>*@
                 <td class="@(Model.IsProficientWith(Model.Equipment.OffHand) ? "skill-proficient" : "")">+@Model.GetAttackBonus(Model.Equipment.OffHand)</td>
                 <td>@Model.GetDamageString(Model.Equipment.OffHand, true)</td>
                 <td>@Model.Equipment.OffHand.Weapon.Properties.ToShortString()</td>
-                @*<td><button class="td-action-btn" value="Remove" onclick="removeItemFromEquipment('@Model.ID', '@instanceID')"></button></td>*@
             </tr>
         }
     </tbody>

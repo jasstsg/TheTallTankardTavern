@@ -138,7 +138,7 @@ namespace TTT.Items
         //Checks if the item type is the same, or if one is the parent type of the other
         public static bool Is(this ItemType itemType1, ItemType itemType2)
         {
-            return itemType1 == itemType2 || itemType1 == itemType2.ParentType || itemType2.ParentType == itemType1;
+            return itemType1 == itemType2 || itemType1 == itemType2.ParentType || itemType1.ParentType == itemType2;
         }
     }
 }

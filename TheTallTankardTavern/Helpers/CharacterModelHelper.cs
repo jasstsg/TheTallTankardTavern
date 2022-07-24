@@ -207,11 +207,13 @@ namespace TheTallTankardTavern.Helpers
 		{
 			int damage = Weapon.Weapon.Plus;
 
-			if (Weapon.Type.Is(ItemType.SimpleRangedWeapon) || Weapon.Type.Is(ItemType.MartialRangedWeapon) ||
-				Weapon.Weapon.Properties.Finesse.Enabled || Character.IsMonkAndHoldingMonkWeapon(Weapon))
+			if (Weapon.Weapon.Properties.Finesse.Enabled || Character.IsMonkAndHoldingMonkWeapon(Weapon))
+            {
+				damage += Math.Max(Character.Strength.Modifier, Character.Dexterity.Modifier);
+            }
+			else if (Weapon.Type.Is(ItemType.SimpleRangedWeapon) || Weapon.Type.Is(ItemType.MartialRangedWeapon))
 			{
-				damage += (Character.Dexterity.Modifier > Character.Strength.Modifier) ? 
-					Character.Dexterity.Modifier : Character.Strength.Modifier;
+				damage += Character.Dexterity.Modifier;
 			}
 			else if (Weapon.Type.Is(ItemType.SimpleMeleeWeapon) || Weapon.Type.Is(ItemType.MartialMeleeWeapon))
 			{
