@@ -7,6 +7,13 @@ namespace TheTallTankardTavern.Helpers
 {
 	public static class DnDMathHelper
 	{
+		public static int LevelProgressPercent(this CharacterModel c)
+        {
+			int nextLevelExp = ApplicationSettings.ConfigurationSettings.CharacterAdvancement[c.Level + 1];
+			int currentLevelExp = ApplicationSettings.ConfigurationSettings.CharacterAdvancement[c.Level];
+			return ((nextLevelExp - c.Experience_Points) * 100) / (nextLevelExp - currentLevelExp);
+		}
+
 		public static string LevelToExp(this CharacterModel c)
 		{
 			int level = c.Level + 1;

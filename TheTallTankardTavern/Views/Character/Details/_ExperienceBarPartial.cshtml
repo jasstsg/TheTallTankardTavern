@@ -1,7 +1,14 @@
 ﻿@model TheTallTankardTavern.Models.CharacterModel
 @addTagHelper *, TheTallTankardTavern
 
+@*<div class="experience-bar-container">
+    <div class="experience-bar" style="@($"width:{Model.LevelProgressPercent()}%")">&nbsp;</div>
+    <div class="experience-bar-text">@Model.Experience_Points.FormatNumber() / @Model.NextLevelXP XP (@(Model.LevelProgressPercent())%)</div>
+</div>*@
+
 <div class="experience-bar-container">
-    <div class="experience-bar" style="@($"width:{Model.NextLevelXPPercentage}%")">&nbsp;</div>
-    <div class="experience-bar-text">@Model.Experience_Points.FormatNumber() / @Model.NextLevelXP XP (@(Model.NextLevelXPPercentage)%)</div>
+    <div class="experience-bar" style="@($"width:{Model.LevelProgressPercent()}%")">&nbsp;</div>
+    <div class="experience-bar-text experience-bar-left">@ConfigurationSettings.CharacterAdvancement[Model.Level].FormatNumber() XP</div>
+    <div class="experience-bar-text experience-bar-center">@Model.Experience_Points.FormatNumber() XP (@(Model.LevelProgressPercent())%)</div>
+    <div class="experience-bar-text experience-bar-right">@ConfigurationSettings.CharacterAdvancement[Model.Level+1].FormatNumber() XP</div>
 </div>
