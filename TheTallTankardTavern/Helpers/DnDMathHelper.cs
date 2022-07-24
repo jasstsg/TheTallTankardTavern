@@ -11,7 +11,7 @@ namespace TheTallTankardTavern.Helpers
         {
 			int nextLevelExp = ApplicationSettings.ConfigurationSettings.CharacterAdvancement[c.Level + 1];
 			int currentLevelExp = ApplicationSettings.ConfigurationSettings.CharacterAdvancement[c.Level];
-			return ((nextLevelExp - c.Experience_Points) * 100) / (nextLevelExp - currentLevelExp);
+			return ((c.Experience_Points - currentLevelExp) * 100) / (nextLevelExp - currentLevelExp);
 		}
 
 		public static string LevelToExp(this CharacterModel c)
