@@ -32,7 +32,7 @@
             <td>@(Spell.Verbal_Components ? "V" : " ")@(Spell.Somatic_Components ? "S" : " ")<span class="@(Spell.HasMaterialCost ? "material-cost" : "")">@(Spell.Material_Components ? "M" : " ")</span></td>
             <td>@Spell.Duration</td>
             <td>@Spell.Casting_Time</td>
-            <td><span class="material-cost">@(Spell.Material_Cost)</span> @(Spell.Concentration ? (Spell.Ritual ? "Focus, Ritual" : "Focus") : (Spell.Ritual ? "Ritual" : ""))</td>
+            <td><span class="material-cost">@(Spell.Material_Cost)</span> @(Spell.Concentration ? (Spell.Ritual ? "Conc, Ritual" : "Conc") : (Spell.Ritual ? "Ritual" : ""))</td>
             <td><button class="td-action-btn" value="Forget" onclick="removeSpell('@Model.ID', '@Spell.ID', this)"></button></td>
         </tr>
         }

@@ -18,6 +18,21 @@
         width: 100%;
         height: 94%;
     }
+
+/* STYLES FOR TRANSPOSED DASHBOARD
+
+#dashboards {
+    height: 70vh;
+    justify-content: space-evenly;
+    display: flex;
+    flex-direction: column;
+}
+
+#dashboards .row textarea {
+    height: 22vh;
+}
+
+*/
 </style>
 
 @if (ContextUser.IsAuthenticated)
@@ -59,6 +74,40 @@
             <textarea style="border:solid;height:49%" readonly="readonly" asp-for="@Sam.Message"></textarea>
         </div>
     </div>
+
+@* HTML FOR TRANSPOSED DASHBOARD
+    
+<div id="dashboards">
+    <div class="row">
+        <div class="col-md-12">
+            <strong>@(Tyler.Username)'s Dashboard</strong>
+            <textarea style="border:solid" readonly="readonly" asp-for="@Tyler.Message"></textarea>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <strong>@(Aaron.Username)'s Dashboard</strong>
+            <textarea style="border:solid" readonly="readonly" asp-for="@Aaron.Message"></textarea>
+        </div>
+        <div class="col-md-6">
+            <strong>@(Pav.Username)'s Dashboard</strong>
+            <textarea style="border:solid" readonly="readonly" asp-for="@Pav.Message"></textarea>
+        </div>
+    </div>    
+    <div class="row">
+        <div class="col-md-6">
+            <strong>@(Alec.Username)'s Dashboard</strong>
+            <textarea style="border:solid" readonly="readonly" asp-for="@Alec.Message"></textarea>
+        </div>
+        <div class="col-md-6">
+            <strong>@(Sam.Username)'s Dashboard</strong>
+            <textarea style="border:solid" readonly="readonly" asp-for="@Sam.Message"></textarea>
+        </div>
+    </div>
+</div>
+
+*@
+
 }
 else
 {
