@@ -5,7 +5,7 @@
     ViewData["Title"] = "Give Item";
     string inventoryId = ((string)ViewData["inventoryId"]);
     inventoryId = inventoryId.Replace(" ", "+");    //Javascript GET request interprets "+" as url encoding for a " ", and so we have to swap back
-    string itemId = inventoryId.Substring(0, inventoryId.IndexOf("+"));
+    string itemId = inventoryId.ToItemID();
 }
 
 <h1>@ViewData["Title"]</h1>

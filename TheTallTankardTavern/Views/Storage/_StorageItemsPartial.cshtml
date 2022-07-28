@@ -1,5 +1,6 @@
 ﻿@addTagHelper *, TheTallTankardTavern
 
+@using System.Collections.Generic;
 @using TheTallTankardTavern.Models
 @using TheTallTankardTavern.Configuration
 @using TTT.Items
@@ -48,7 +49,7 @@
 <div class="col-md-6">
     <table>
         <tr>
-            <th colspan="3">
+            <th colspan="4">
                 <strong>@(Model.Name)'s Inventory (@Model.Inventory.CurrentWeight / @Model.MaxCapacity lbs)</strong>
                 @if (Model.Inventory.CurrentWeight > Model.MaxCapacity)
                 {
@@ -56,14 +57,26 @@
                 }
             </th>
         </tr>
-        @foreach (string inventoryID in Model.Inventory.OrderBy(s => ItemDataContext.GetModelFromInventoryID(s).Name))
+@*        @foreach (string inventoryID in Model.Inventory.OrderBy(s => ItemDataContext.GetModelFromInventoryID(s).Name))
         {
             ItemModel Item = ItemDataContext.GetModelFromInventoryID(inventoryID).Clone();
             Item.InventoryID = inventoryID;
+            
             <tr>
                 <td width="100px"><button class="td-action-btn" value="Take" onclick="withdrawItem('@CurrentCharacter.ID', '@Item.InventoryID')"></button></td>
                 <td>@Item.Name</td>
                 <td>(@Item.Weight lbs)</td>
+            </tr>
+        }*@
+        @foreach (KeyValuePair<string, int> pair in Model.Inventory.CompactInventory)
+        {
+            ItemModel Item = ItemDataContext.GetModelFromID(pair.Key);
+            string firstInstanceOfThisItem = Model.Inventory.First(iid => ItemDataContext.GetModelFromInventoryID(iid).ID.Equals(Item.ID));
+            <tr>
+                <td width="100px"><button class="td-action-btn" value="Take" onclick="withdrawItem('@CurrentCharacter.ID', '@firstInstanceOfThisItem')"></button></td>
+                <td>@Item.Name</td>
+                <td>(@Item.Weight lbs)</td>
+                <td>x @pair.Value</td>
             </tr>
         }
     </table>

@@ -127,8 +127,7 @@ namespace TheTallTankardTavern.Models
             {
                 return false;
             }
-            ItemModel Item = ItemDataContext.FirstOrDefault(
-                item => item.ID.Equals(inventoryID.Substring(0, inventoryID.IndexOf("+")))).Clone();
+            ItemModel Item = ItemDataContext.FirstOrDefault(item => item.ID.Equals(inventoryID.ToItemID())).Clone();
             Item.InventoryID = inventoryID;
 
             switch (Item.Type.Category)

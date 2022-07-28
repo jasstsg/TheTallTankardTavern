@@ -14,7 +14,7 @@ namespace TheTallTankardTavern.Helpers
 	{
 		public static ItemModel GetModelFromInventoryID(this IEnumerable<ItemModel> ModelList, string inventoryID)
         {
-			ItemModel Model = ModelList.GetModelFromID(inventoryID.Substring(0, inventoryID.IndexOf("+"))).Clone();
+			ItemModel Model = ModelList.GetModelFromID(inventoryID.ToItemID()).Clone();
 			Model.InventoryID = inventoryID;
 			return Model;
         }
