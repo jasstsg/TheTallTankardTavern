@@ -28,7 +28,7 @@
     <thead>
         <tr>
             <th>Name</th>
-            <th>Description</th>
+            @*<th>Description</th>*@
             <th>Initiative</th>
             <th colspan="2">Hit Points</th>
             <th>Temp HP</th>
@@ -47,7 +47,7 @@
             string PCHPStatus = CheckPCHP(Member.Character.Hit_Points_Remaining, Member.Character.MaxHitPoints);
             <tr class="@PCHPStatus">
                 <td>@Member.Character.Name</td>
-                <td>@Member.Character.Race @Member.Character.Class</td>
+                @*<td>@Member.Character.Race @Member.Character.Class</td>*@
                 @if (ContextUser.HasUsername(Member.Character.Player_Name) || ContextUser.IsAdministrator)
                 {
                     <td class="numeric">

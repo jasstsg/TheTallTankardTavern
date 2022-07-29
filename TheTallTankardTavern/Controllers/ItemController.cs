@@ -2,10 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 using TheTallTankardTavern.Attributes;
-using TheTallTankardTavern.Models;
-using TTT.Common;
 using TTT.Items;
-using TTT.Items.Weapons.Damage;
 using static TheTallTankardTavern.Configuration.ApplicationSettings;
 using static TheTallTankardTavern.Configuration.Constants;
 

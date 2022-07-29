@@ -6,6 +6,14 @@
     ViewData["Title"] = "Party";
 }
 
+<style>
+    ul {
+        list-style-type:none;
+        padding: 0;
+    }
+</style>
+
+
 <h1>@ViewData["Title"]</h1>
 
 <div class="row">
@@ -44,46 +52,14 @@
 </div>
 <div class="row">
     <div class="col-md-2">
-        <ul style="list-style-type:none">
+        <ul>
             <li><strong>Related Info</strong></li>
             <li><a asp-controller="Appendix" asp-action="Combat">Combat</a></li>
             <li><a href="https://www.dndbeyond.com/sources/basic-rules/appendix-a-conditions">Conditions</a></li>
+            <li><a asp-controller="Appendix" asp-action="HomebrewConditions">Homebrew Conditions</a></li>
             <li><a href="https://www.dndbeyond.com/sources/basic-rules/adventuring#ShortRest">Short Rests</a></li>
             <li><a href="https://www.dndbeyond.com/sources/basic-rules/adventuring#LongRest">Long Rests</a></li>
         </ul>
-    </div>
-    <div class="col-md-4">
-        <strong>Exhaustion</strong> <em style="font-size:small">(Reduce one level of exhaustion per long rest)</em>
-        <table>
-            <tr>
-                <th>Level</th>
-                <th>Effect</th>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>Disadvantage on ability checks</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Speed halved</td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>Disadvantage on attack rolls and saving throws</td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td>Hit point maximum halved</td>
-            </tr>
-            <tr>
-                <td>5</td>
-                <td>Speed reduced to 0</td>
-            </tr>
-            <tr>
-                <td>6</td>
-                <td>Death</td>
-            </tr>
-        </table>
     </div>
     <div class="col-md-6">
         <strong>Massive Damage</strong>

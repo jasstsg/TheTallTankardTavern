@@ -63,7 +63,6 @@ namespace TheTallTankardTavern.Models
 
 		public override bool Remove(string inventoryID)
 		{
-
 			//If the item is in the inventory, and is removed successfully, return true
 			bool inventoryRemoved = this.Contains(inventoryID) && base.Remove(inventoryID);
 

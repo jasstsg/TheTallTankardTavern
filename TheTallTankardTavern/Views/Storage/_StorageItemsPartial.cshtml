@@ -57,17 +57,6 @@
                 }
             </th>
         </tr>
-@*        @foreach (string inventoryID in Model.Inventory.OrderBy(s => ItemDataContext.GetModelFromInventoryID(s).Name))
-        {
-            ItemModel Item = ItemDataContext.GetModelFromInventoryID(inventoryID).Clone();
-            Item.InventoryID = inventoryID;
-            
-            <tr>
-                <td width="100px"><button class="td-action-btn" value="Take" onclick="withdrawItem('@CurrentCharacter.ID', '@Item.InventoryID')"></button></td>
-                <td>@Item.Name</td>
-                <td>(@Item.Weight lbs)</td>
-            </tr>
-        }*@
         @foreach (KeyValuePair<string, int> pair in Model.Inventory.CompactInventory)
         {
             ItemModel Item = ItemDataContext.GetModelFromID(pair.Key);

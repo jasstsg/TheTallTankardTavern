@@ -5,7 +5,6 @@ using System.Linq;
 using TheTallTankardTavern.Configuration;
 using TheTallTankardTavern.Helpers;
 using TheTallTankardTavern.Models;
-using TTT;
 using TTT.Common.Abstractions;
 using static TheTallTankardTavern.Configuration.Constants;
 
