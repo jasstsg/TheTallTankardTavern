@@ -44,7 +44,7 @@ namespace TheTallTankardTavern.Models
 			GenerateCompactInventory();
 		}
 
-		public void AddNewItemInstance(string itemID)
+		private void AddNewItemInstance(string itemID)
 		{
 			ItemModel Item = ItemDataContext.GetModelFromID(itemID).Clone();
 			Item.InstanceID = Guid.NewGuid().ToString();

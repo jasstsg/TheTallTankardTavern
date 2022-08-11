@@ -43,7 +43,16 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (CharacterModel Character in ContextUser.Characters)
+        <tr>
+            <td>&nbsp;</td>
+            <td>Storage</td>
+            <td>
+                <buttonlink class="td-action-btn" asp-controller="Storage" asp-action="AddItem" text="Add"
+                            asp-route-id="@Item.ID" asp-route-quantity="1" onclick="setQuantityParam(this)">
+                </buttonlink>
+            </td>
+        </tr>
+        @foreach (CharacterModel Character in ContextUser.Characters.OrderBy(c => c.Player_Name))
         {
             <tr>
                 <td>@Character.Player_Name</td>

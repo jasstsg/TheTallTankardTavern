@@ -66,6 +66,10 @@
                 <td>@Item.Name</td>
                 <td>(@Item.Weight lbs)</td>
                 <td>x @pair.Value</td>
+                @if (ContextUser.IsAdminOrDM)
+                {
+                    <td width="100px"><button class="td-action-btn" value="Remove" onclick="removeItem('@firstInstanceOfThisItem')"></button></td>
+                }
             </tr>
         }
     </table>

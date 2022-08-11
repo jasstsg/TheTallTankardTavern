@@ -69,5 +69,23 @@ namespace TheTallTankardTavern.Controllers
 
             return PartialView("_StorageItemsPartial", Storage);
         }
+
+        public IActionResult RemoveItem(string inventoryID)
+        {
+            StorageModel Storage = StorageDataContext.Single();
+            Storage.Inventory.Remove(inventoryID);
+            StorageDataContext.Save(Storage, FOLDER.Storage);
+
+            return PartialView("_StorageItemsPartial", Storage);
+        }
+
+        public IActionResult AddItem(string id, int quantity = 1)
+        {
+            StorageModel Storage = StorageDataContext.Single();
+            Storage.Inventory.AddNewItemInstance(id, quantity);
+            StorageDataContext.Save(Storage, FOLDER.Storage);
+
+            return RedirectToAction("Index", "Item");
+        }
     }
 }
