@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 using TheTallTankardTavern.Attributes;
+using TheTallTankardTavern.Helpers;
 using TTT.Items;
 using static TheTallTankardTavern.Configuration.ApplicationSettings;
 using static TheTallTankardTavern.Configuration.Constants;
@@ -39,6 +40,11 @@ namespace TheTallTankardTavern.Controllers
 			ViewData["searchtext"] = searchtext;
 
 			return View("Index", Items.OrderBy(i => i.Name).ToList());
+		}
+
+		public IActionResult Copy(string id)
+        {
+			return View("Create", DataContext.GetModelFromID(id).NewCopy());
 		}
 	}
 

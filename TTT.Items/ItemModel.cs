@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Text;
 using System.Text.Json.Serialization;
 using TTT.Common.Abstractions;
@@ -95,6 +96,15 @@ namespace TTT.Items
             Clone.Weapon = this.Weapon.Clone();
             Clone.Armour = this.Armour.Clone();
             return Clone;
+        }
+
+        public ItemModel NewCopy()
+        {
+            ItemModel NewCopy = this.Clone();
+            NewCopy.Name += " (Copy)";
+            NewCopy.InstanceID = "";
+            NewCopy.ID = Guid.NewGuid().ToString();
+            return NewCopy;
         }
     }
 }

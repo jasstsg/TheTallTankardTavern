@@ -26,7 +26,7 @@
             <th><label>Bonus</label></th>
             <th><label>Damage</label></th>
             <th><label>Properties</label></th>
-            <partial name="/Views/Shared/Custom/ActionButtons/_ColumnHeaderAddEditDelete.cshtml" />
+            <partial name="/Views/Shared/Custom/ActionButtons/_ColumnHeaderAddEditCopyDelete.cshtml" />
         </tr>
     </thead>
     <tbody>
@@ -44,7 +44,7 @@
                 <td class="@ViewHelper.Disable(!i.Is(ItemTypeCategory.Weapon))">@i.Weapon.Plus</td>
                 <td class="@ViewHelper.Disable(!i.Is(ItemTypeCategory.Weapon))">@i.Weapon.Damage.ToString()</td>
                 <td class="@ViewHelper.Disable(!i.Is(ItemTypeCategory.Weapon))">@i.Weapon.Properties.ToShortString()</td>
-                <partial name="/Views/Shared/Custom/ActionButtons/_ColumnAddEditDelete.cshtml" model="i" />
+                <partial name="/Views/Shared/Custom/ActionButtons/_ColumnAddEditCopyDelete.cshtml" model="i" />
             </tr>
         }
     </tbody>

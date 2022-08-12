@@ -12,5 +12,9 @@
 </td>
 <td>
     <buttonlink onclick="event.stopPropagation()" class="td-action-btn" 
+            asp-action="Copy" text="Copy" asp-route-id="@Model.ID"></buttonlink>
+</td>
+<td>
+    <buttonlink onclick="event.stopPropagation()" class="td-action-btn" 
             asp-action="Delete" text="Delete" asp-route-id="@Model.ID"></buttonlink>
 </td>
