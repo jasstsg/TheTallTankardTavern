@@ -97,21 +97,32 @@ namespace TheTallTankardTavern.Helpers
 
 		public static void TakeLongRest(this CharacterModel Character)
 		{
+			Character.ResetAllHealthPoints();
+			Character.ResetSpellSlots();
+			Character.ResetUniquePoints();
+		}
+
+		private static void ResetAllHealthPoints(this CharacterModel Character)
+        {
 			Character.Hit_Points_Remaining = Character.GetTotalHP();    //Reset HP
 			Character.Hit_Dice_Remaining = Character.Level;             //Reset Hit Dice
+			Character.Temp_Hit_Points = 0;								//Reset Temporary Hit Points
+		}
+
+		private static void ResetSpellSlots(this CharacterModel Character)
+		{
 			for (int i = 0; i < Character.SpellSlots.Length; i++)       //Reset Spell Slots
 			{
 				Character.SpellSlots[i] = Character.SpellSlotsMax[i];
 			}
-            Character.Temp_Hit_Points = 0;	//Reset Temporary Hit Points
-			Character.RestorePoints();		//Restore class specific points
 		}
 
-		public static void RestorePoints(this CharacterModel Character)
+		public static void ResetUniquePoints(this CharacterModel Character)
 		{
-			Character.Ki_Points = Character.Level;                      //Reset Ki Points
-			Character.Sorcery_Points = Character.Level;                 //Reset Sorcery Points
-			Character.Wild_Shapes = 2;					                //Reset wild shapes
+			Character.Lay_On_Hands_Pool = Character.Level * 5;	//Reset Lay On Hands Pool
+			Character.Ki_Points = Character.Level;				//Reset Ki Points
+			Character.Sorcery_Points = Character.Level;			//Reset Sorcery Points
+			Character.Wild_Shapes = 2;							//Reset wild shapes
 		}
 
 		public static bool HasFeature(this CharacterModel Character, FeatureModel Feature)
@@ -365,12 +376,6 @@ namespace TheTallTankardTavern.Helpers
 
 		public static string GetWildShapeCR(this CharacterModel Character)
         {
-			/*
-			if (Character.Level >= 16)
-            {
-				return "2";
-            }
-			*/
 			if (Character.Level >= 8)
             {
 				return "1";

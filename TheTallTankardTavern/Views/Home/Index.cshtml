@@ -8,7 +8,7 @@
     UserModel NullUser = new UserModel() { Username = "User Not Found", Message = "User was not found, most likely their system name was changed" };
 
     //Users (We're hardcoding for now)
-    UserModel Tyler = UserDataContext.GetModelFromName("Tyler") ?? NullUser;
+    UserModel Tyler = UserDataContext.GetModelFromName("Tyler (DM)") ?? NullUser;
     UserModel Aaron = UserDataContext.GetModelFromName("Aaron") ?? NullUser;
     UserModel Alec = UserDataContext.GetModelFromName("Alec") ?? NullUser;
     UserModel Pav = UserDataContext.GetModelFromName("Pavanjot") ?? NullUser;

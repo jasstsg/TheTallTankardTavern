@@ -31,6 +31,17 @@ function quickSaveTempHitPoints(cid, thisElement) {
     });
 };
 
+function quickSaveLayOnHandsPool(cid, thisElement) {
+    var data = {
+        cid: cid,
+        layOnHandsPool: $(thisElement).val()
+    };
+    $.post("/Character/QuickSaveLayOnHandsPool", data, function (response) {
+        showAutoSaveMessage(response.success);
+        console.log("Quick save lay on hands pool request completed with success status: " + response.success);
+    });
+};
+
 function quickSaveKiPoints(cid, thisElement) {
     var data = {
         cid: cid,

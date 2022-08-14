@@ -34,6 +34,20 @@
             </div>
         </div>
     </div>
+    @if (Model.Class.ToLower().Contains("paladin"))
+    {
+        <div id="lay-on-hands-pool" class="card stat-card other-stat-card-three-column">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-5"><div class="stat-card-label">LAY ON HANDS</div></div>
+                    <div class="col-md-2"><div class="stat-card-content"><numberbox asp-for="Lay_On_Hands_Pool" min="0" max="@Model.Level * 5" onchange="quickSaveLayOnHandsPool('@Model.ID', this)"></numberbox></div></div>
+                    <div class="col-md-2"><div class="stat-card-label">/ @(Model.Level * 5)</div></div>
+                    <div class="col-md-3"></div>
+                </div>
+            </div>
+        </div>
+    }
+
     @if (Model.Class.ToLower().Contains("monk") && @Model.Level > 1)
     {
         <div id="ki-points-card" class="card stat-card other-stat-card-three-column">

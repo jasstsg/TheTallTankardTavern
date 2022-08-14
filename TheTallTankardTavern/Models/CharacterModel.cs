@@ -223,6 +223,9 @@ namespace TheTallTankardTavern.Models
         [DisplayName("Temp Hit Points")]
 		public int Temp_Hit_Points { get; set; }
 
+		[DisplayName("Lay On Hands Pool")]
+		public int Lay_On_Hands_Pool { get; set; } = 0;
+
 		[DisplayName("Ki Points")]
 		public int Ki_Points { get; set; } = 0;
 

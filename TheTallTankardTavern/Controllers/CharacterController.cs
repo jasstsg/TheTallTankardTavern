@@ -93,11 +93,11 @@ namespace TheTallTankardTavern.Controllers
             return View("Details", Character);
         }
 
-        //For Ki Points, Sorcery Points
+        //For class specific points
         public IActionResult RestorePoints(string id)
         {
             CharacterModel Character = DataContext.GetModelFromID(id);
-            Character.RestorePoints();
+            Character.ResetUniquePoints();
             DataContext.Save(Character, Folder);
             return View("Details", Character);
         }
@@ -141,6 +141,22 @@ namespace TheTallTankardTavern.Controllers
             {
                 CharacterModel Character = CharacterDataContext.GetModelFromID(cid);
                 Character.Temp_Hit_Points = tempHitPoints;
+                CharacterDataContext.Save(Character, Folder);
+                return this.JsonSuccessTrue();
+            }
+            catch
+            {
+                return this.JsonSuccessFalse();
+            }
+        }
+
+        [HttpPost]
+        public JsonResult QuickSaveLayOnHandsPool(string cid, int layOnHandsPool)
+        {
+            try
+            {
+                CharacterModel Character = CharacterDataContext.GetModelFromID(cid);
+                Character.Lay_On_Hands_Pool = layOnHandsPool;
                 CharacterDataContext.Save(Character, Folder);
                 return this.JsonSuccessTrue();
             }
@@ -313,13 +329,6 @@ namespace TheTallTankardTavern.Controllers
             Character.Equipment.TryEquip(inventoryID, Character.Inventory, Character.HasFeature(SpecialFeatures.DUAL_WIELDER), Character.Proficiency_Bonus);
             return SaveAndReturnToDetailsPartialView(Character);
         }
-
-        //public IActionResult RemoveItemFromEquipment(string cid, string inventoryID)
-        //{
-        //    CharacterModel Character = DataContext.GetModelFromID(cid);
-        //    Character.Equipment.Unequip(inventoryID);
-        //    return SaveAndReturnToDetailsPartialView(Character);
-        //}
 
         public IActionResult RemoveItemFromInventory(string cid, string inventoryID)
         {
