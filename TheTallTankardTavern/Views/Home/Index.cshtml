@@ -5,12 +5,14 @@
 @{
     ViewData["Title"] = "Dashboard";
 
+    UserModel NullUser = new UserModel() { Username = "User Not Found", Message = "User was not found, most likely their system name was changed" };
+
     //Users (We're hardcoding for now)
-    UserModel Tyler = UserDataContext.GetModelFromName("Tyler");
-    UserModel Aaron = UserDataContext.GetModelFromName("Aaron");
-    UserModel Alec = UserDataContext.GetModelFromName("Alec");
-    UserModel Pav = UserDataContext.GetModelFromName("Pavanjot");
-    UserModel Sam = UserDataContext.GetModelFromName("Sam");
+    UserModel Tyler = UserDataContext.GetModelFromName("Tyler") ?? NullUser;
+    UserModel Aaron = UserDataContext.GetModelFromName("Aaron") ?? NullUser;
+    UserModel Alec = UserDataContext.GetModelFromName("Alec") ?? NullUser;
+    UserModel Pav = UserDataContext.GetModelFromName("Pavanjot") ?? NullUser;
+    UserModel Sam = UserDataContext.GetModelFromName("Sam") ?? NullUser;
 }
 
 <style>

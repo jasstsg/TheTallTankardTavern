@@ -21,7 +21,7 @@ namespace TheTallTankardTavern.Helpers
 
 		public static T GetModelFromName<T>(this IEnumerable<T> ModelList, string name) where T : BaseModel
 		{
-			return ModelList.First((T m) => m.Name == name);
+			return ModelList.FirstOrDefault((T m) => m.Name == name);
 		}
 
 		/// <summary>
