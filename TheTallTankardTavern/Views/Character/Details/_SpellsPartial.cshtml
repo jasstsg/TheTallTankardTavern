@@ -3,7 +3,8 @@
 
 <div id="character-spells">
     <buttonlink class="action-btn" asp-controller="Spell" asp-action="Index" text="Go to Spells"></buttonlink>
-    @if (Model.SpellSlots[0] > 0)
+
+    @if (Model.SpellSlotsMax.Any(s => s > 0))
     {    
         <div class="row">
             <div class="col-md-10">

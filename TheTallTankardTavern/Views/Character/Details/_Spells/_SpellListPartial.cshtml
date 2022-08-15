@@ -6,7 +6,7 @@
         .OrderBy(s => s.Level).ThenBy(s => s.Name);
 }
 
-<div>KNOWN SPELLS</div>
+<div>KNOWN SPELLS @Model.GetPreparedSpellsCount()</div>
 <table id="character-spells-list" table-hover="true">
     <thead>
         <tr>

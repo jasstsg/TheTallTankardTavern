@@ -1,9 +1,10 @@
 using System;
 using TheTallTankardTavern.Models;
+using static TheTallTankardTavern.Configuration.ApplicationSettings;
 using static TheTallTankardTavern.Configuration.Constants;
 using static TheTallTankardTavern.Configuration.Constants.SpecialFeatures;
 using TTT.Items;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+using System.Linq;
 
 namespace TheTallTankardTavern.Helpers
 {
@@ -405,5 +406,24 @@ namespace TheTallTankardTavern.Helpers
 				return "(No fly/swim speed)";
 			}
 		}
+
+		public static string GetPreparedSpellsCount(this CharacterModel Character)
+        {
+			int preparedSpells = Character.Spells.Where(s => SpellDataContext.GetModelFromID(s).Level > 0).Count();
+			switch (Character.Class.ToLower())
+            {
+				case "cleric":
+				case "druid":
+					return $" (Spells prepared: {preparedSpells} / {Character.Wisdom.Modifier + Character.Level})";
+				case "paladin":
+					return $" (Spells prepared: {preparedSpells} / {Character.Charisma.Modifier + (Character.Level / 2)})";
+				case "wizard":
+					return $" (Spells prepared: {preparedSpells} / {Character.Intelligence.Modifier + Character.Level})";
+				default:
+					return "";
+
+
+			}
+        }
 	}
 }
