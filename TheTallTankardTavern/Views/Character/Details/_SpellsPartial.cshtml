@@ -3,14 +3,26 @@
 
 <div id="character-spells">
     <buttonlink class="action-btn" asp-controller="Spell" asp-action="Index" text="Go to Spells"></buttonlink>
-    <div class="row">
-        <div class="col-md-10">
-            <partial name="/Views/Character/Details/_Spells/_SpellListPartial.cshtml" model="Model" />
+    @if (Model.SpellSlots[0] > 0)
+    {    
+        <div class="row">
+            <div class="col-md-10">
+                <partial name="/Views/Character/Details/_Spells/_SpellListPartial.cshtml" model="Model" />
+            </div>
+            <div class="col-md-2">
+                <partial name="/Views/Character/Details/_Spells/_SpellSlotsPartial.cshtml" model="Model" />
+            </div>
         </div>
-        <div class="col-md-2">
-            <partial name="/Views/Character/Details/_Spells/_SpellSlotsPartial.cshtml" model="Model" />
+    }
+    else
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <partial name="/Views/Character/Details/_Spells/_SpellListPartial.cshtml" model="Model" />
+            </div>
         </div>
-    </div>
+    }
+
     @if (Model.Class.ToLower().Contains("sorcerer"))
     {
     <div class="row">
