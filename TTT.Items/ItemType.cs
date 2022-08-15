@@ -140,5 +140,30 @@ namespace TTT.Items
         {
             return itemType1 == itemType2 || itemType1 == itemType2.ParentType || itemType1.ParentType == itemType2;
         }
+
+        private static bool Is(this ItemType itemType, string substringOfType)
+        {
+            return itemType.ToString().Contains(substringOfType) || itemType.ParentType.ToString().Contains(substringOfType);
+        }
+
+        public static bool IsSimple(this ItemType itemType)
+        {
+            return itemType.Is("Simple");
+        }
+
+        public static bool IsMartial(this ItemType itemType)
+        {
+            return itemType.Is("Martial");
+        }
+
+        public static bool IsMelee(this ItemType itemType)
+        {
+            return itemType.Is("Melee");
+        }
+
+        public static bool IsRanged(this ItemType itemType)
+        {
+            return itemType.Is("Ranged");
+        }
     }
 }

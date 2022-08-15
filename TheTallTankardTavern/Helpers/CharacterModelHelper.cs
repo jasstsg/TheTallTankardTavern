@@ -24,42 +24,75 @@ namespace TheTallTankardTavern.Helpers
 
 		public static int GetBaseAC(this CharacterModel Character)
 		{
-			int AC = Character.Armour_Class + Character.Dexterity.Modifier + (Character.Race.Equals("Warforged") ? 1 : 0);
-			if (Character.HasFeature(UNARMOURED_DEFENSE_BARBARIAN))
+			int AC = Character.Armour_Class + Character.Dexterity.Modifier;
+
+			//SPECIAL RULES
+
+			//1. Warforged get +1 AC
+			//AC += Character.Race.Equals("Warforged") ? Character.Proficiency_Bonus : 0; //Old WGtE style
+			AC += Character.Race.Equals("Warforged") ? 1 : 0; //New Eberron source book style
+
+			//2. Unarmoured defense features add mods based on class when not wearing armour
+			if (Character.HasFeature(UNARMOURED_DEFENSE_BARBARIAN) && Character.Equipment.Armour == null)
 			{
 				AC += Character.Constitution.Modifier;
 			}
-			else if (Character.HasFeature(UNARMOURED_DEFENSE_MONK))
+			else if (Character.HasFeature(UNARMOURED_DEFENSE_MONK) && Character.Equipment.Armour == null)
 			{
 				AC += Character.Wisdom.Modifier;
 			}
 			return AC;
 		}
 
-		public static int GetTotalAC(this CharacterModel Character)
-		{
-			int totalAC = 0;
-			if (Character.Equipment.Armour != null)
+		private static int GetArmourBonus(this CharacterModel Character)
+        {
+			int AC = Character.Equipment.Armour.Armour.ArmourClass - 10;
+			int DEX = Character.Dexterity.Modifier;
+			ItemType ArmourType = Character.Equipment.Armour.Type;
+
+			if (ArmourType.Equals(ItemType.LightArmour))
 			{
-                int AC = Character.Armour_Class + (Character.Equipment.Armour.Armour.ArmourClass - 10);
-
-                //Special rules
-                //AC += Character.Race.Equals("Warforged") ? Character.Proficiency_Bonus : 0; //Old WGtE style
-                AC += Character.Race.Equals("Warforged") ? 1 : 0; //New Eberron source book style
-
-				int DEX = Character.Dexterity.Modifier;
-				if (Character.Equipment.Armour.Type.Equals(ItemType.LightArmour)) { totalAC = AC + DEX; }
-				else if (Character.Equipment.Armour.Type.Equals(ItemType.MediumArmour)) { totalAC = AC + ((DEX <= 2) ? DEX : 2); }
-				else if (Character.Equipment.Armour.Type.Equals(ItemType.HeavyArmour)) { totalAC = AC; }
-				else { totalAC = 0; }
+				return AC + DEX;
+			}
+			else if (ArmourType.Equals(ItemType.MediumArmour))
+            {
+				return AC + ((DEX <= 2) ? DEX : 2);
+			}
+			else if (ArmourType.Equals(ItemType.HeavyArmour))
+			{
+				return AC;
 			}
 			else
             {
-				totalAC = Character.GetBaseAC();
-
-			}
-			return totalAC + (Character.Equipment.Shield != null ? Character.Equipment.Shield.Armour.ArmourClass : 0);
+				return -100;
+            }
 		}
+
+		public static int GetTotalAC(this CharacterModel Character)
+		{
+			int totalAC = Character.GetBaseAC();
+
+			if (Character.Equipment.Armour != null)
+			{
+				//Subtract the DEX mod to remove it from the base AC, then add the correct amount based on the armour.
+				totalAC += Character.GetArmourBonus() - Character.Dexterity.Modifier;
+			}
+
+			//SPECIAL RULES
+
+			//1. Using a shield
+			totalAC += Character.Equipment.Shield != null ? Character.Equipment.Shield.Armour.ArmourClass : 0;
+
+			//2. Dual wielders get +1 AC while dual wielding melee weapons in each hand
+			totalAC += (Character.HasFeature(SpecialFeatures.DUAL_WIELDER) && Character.Equipment.IsDualWielding()) ? 1 : 0;
+
+			return totalAC;
+		}
+
+		private static bool IsDualWielding(this EquipmentModel Equipment)
+        {
+			return (Equipment.OffHand?.Type.IsMelee() ?? false) && (Equipment.MainHand?.Type.IsMelee() ?? false);
+        }
 
 		public static void GetMaxSpellSlots(this CharacterModel Character)
 		{
