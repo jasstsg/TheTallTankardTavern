@@ -3,6 +3,10 @@
 @using TheTallTankardTavern.Helpers
 @using static TheTallTankardTavern.Helpers.ViewHelper
 
+@{
+    bool isEncumbered = Model.IsEncumbered();
+}
+
 <div id="character-other-stats">
     <div id="hit-points-card" class="card stat-card other-stat-card-three-column">
         <div class="card-body">
@@ -172,12 +176,12 @@
     </div>
     <div class="grouped-stats row">
         <div id="speed-card" class="card stat-card other-stat-card col-md-6">
-            <div class="card-body">
+            <div class="card-body @CheckEncumberance(isEncumbered)">
                 <div class="stat-card-label-header">SPEED</div>
                 <div class="stat-card-content">
                     @Model.Speed
                     <strong style="color:red">
-                        @if (Model.IsEncumbered())
+                        @if (isEncumbered)
                         {<span> / 2</span>}
                         @if (Model.IsArmourTooHeavy(Model.Equipment.Armour))
                         {<span> - 10ft</span>}
@@ -194,4 +198,12 @@
             </div>
         </div>
     </div>
+    @if (isEncumbered)
+    {
+        <div>
+            <strong style="color:red">
+                You are encumbered! See items page for details.
+            </strong>
+        </div>
+    }
 </div>

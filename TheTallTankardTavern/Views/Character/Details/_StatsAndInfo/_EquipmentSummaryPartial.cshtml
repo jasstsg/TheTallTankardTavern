@@ -1,4 +1,5 @@
 ﻿@model TheTallTankardTavern.Models.CharacterModel
+@using static TheTallTankardTavern.Helpers.ViewHelper
 @using System.Text;
 @using TTT.Items
 @addTagHelper *, TheTallTankardTavern
@@ -29,7 +30,7 @@
 
 <div id="character-equipment" class="card stat-card">
     <div class="stat-card-label">EQUIPMENT SUMMARY</div>
-    <div class="card-body">
+    <div class="card-body @CheckEncumberance(Model.IsEncumbered())">
         <div class="stat-card-content">
             <textarea class="readonly-textarea" readonly="readonly" rows="9">@sb.ToString()</textarea>
         </div>

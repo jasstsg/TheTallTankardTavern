@@ -11,9 +11,13 @@
 
 .stat-card .card-body {
     text-align: center;
-    padding: 0px;
     border: 1px solid var(--custom-light-grey);
+    padding: 0px;
     border-radius: 0.5em;
+}
+
+.card-body-border-red {
+    border: 1px solid red !important;
 }
 
 .card-body > .row {

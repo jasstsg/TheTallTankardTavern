@@ -186,7 +186,7 @@ namespace TheTallTankardTavern.Helpers
 			Character.SpellSlotsMax = maxSpellSlots;
 		}
 
-		private static int GetHitDieValue(this CharacterModel Character)
+		public static int GetHitDieValue(this CharacterModel Character)
 		{
 			switch (Character.Class)
 			{

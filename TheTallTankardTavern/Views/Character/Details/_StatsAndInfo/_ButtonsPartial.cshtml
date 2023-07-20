@@ -7,7 +7,7 @@
             <buttonlink class="action-btn" asp-action="TakeLongRest" asp-route-id="@Model.ID" text="LONG REST"></buttonlink>
         </div>
         <div class="col-md-6">
-            <buttonlink class=" action-btn" asp-action="UseHitDie" asp-route-id="@Model.ID" text="USE HIT DIE"></buttonlink>
+            <buttonlink class=" action-btn" asp-action="UseHitDie" asp-route-id="@Model.ID" text="USE HIT DIE (+@(Model.GetHitDieValue())HP)"></buttonlink>
         </div>
     </div>
 </div>

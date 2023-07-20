@@ -38,5 +38,10 @@ namespace TheTallTankardTavern.Helpers
                 return "unconcious";
             }
         }
+
+        public static string CheckEncumberance(bool isEncumbered)
+        {
+            return isEncumbered ? "card-body-border-red" : "";
+        }
     }
 }

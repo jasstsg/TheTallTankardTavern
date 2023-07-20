@@ -4,9 +4,13 @@
 @using static TheTallTankardTavern.Configuration.Constants.SKILL_CATEGORY
 @addTagHelper *, TheTallTankardTavern
 
+@{
+    bool isEncumbered = Model.IsEncumbered();
+}
+
 <div id="character-stats">
     <div id="strength-card" class="card stat-card">
-        <div class="card-body">
+        <div class="card-body @CheckEncumberance(isEncumbered)">
             <div class="row">
                 <div class="col-md-4 stat-score-card">
                     <div class="stat-card-label">STR</div>
@@ -20,7 +24,7 @@
         </div>
     </div>
     <div id="dexterity-card" class="card stat-card">
-        <div class="card-body">
+        <div class="card-body @CheckEncumberance(isEncumbered)">
             <div class="row">
                 <div class="col-md-4 stat-score-card">
                     <div class="stat-card-label">DEX</div>
@@ -36,7 +40,7 @@
         </div>
     </div>
     <div id="constitution-card" class="card stat-card">
-        <div class="card-body">
+        <div class="card-body @CheckEncumberance(isEncumbered)">
             <div class="row">
                 <div class="col-md-4 stat-score-card">
                     <div class="stat-card-label">CON</div>
