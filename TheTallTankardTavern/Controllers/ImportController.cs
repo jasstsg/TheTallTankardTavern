@@ -92,6 +92,7 @@ namespace TheTallTankardTavern.Controllers
 					string components = string.Join(',', spell.Components).ToUpper();
 
 					//Generate the model
+					bool isConsumed;
 					SpellModel Spell = new SpellModel
 					{
 						ID = EntityID,
@@ -103,7 +104,8 @@ namespace TheTallTankardTavern.Controllers
 						Somatic_Components = components.Contains("S"),
 						Material_Components = components.Contains("M"),
 						Materials = spell.Material,
-						Material_Cost = ParseMaterialCost(spell.Material),
+						Material_Cost = ParseMaterialCost(spell.Material, out isConsumed),
+						Material_Consumed = isConsumed,
 						Ritual = spell.Ritual,
 						Duration = spell.Duration,
 						Concentration = spell.Concentration,
@@ -167,15 +169,21 @@ namespace TheTallTankardTavern.Controllers
 			return Index();
 		}
 
-		private string ParseMaterialCost(string materials)
+		private string ParseMaterialCost(string materials, out bool isConsumed)
         {
+
+			// If it has no material component return an empty string
 			if (string.IsNullOrEmpty(materials) || !materials.Contains("gp"))
             {
-				return "";
+                isConsumed = false;
+                return "";
             }
 
-			//In the dataset, cost can be like '50 gp' or '50gp'.  We want to format all of them with no space inbetween.
-			int gap = materials.IndexOf(" gp");
+			// Check if the spells consumes the material compoents
+            isConsumed = materials.Contains("spell consumes", StringComparison.OrdinalIgnoreCase);
+
+            //In the dataset, cost can be like '50 gp' or '50gp'.  We want to format all of them with no space inbetween.
+            int gap = materials.IndexOf(" gp");
 			if (gap > 0)
             {
 				materials = materials.Remove(gap, 1);

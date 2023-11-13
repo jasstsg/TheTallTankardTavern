@@ -12,14 +12,36 @@ namespace TheTallTankardTavern.Helpers
 	{
 		private static readonly int SPELL_LEVELS = SPELL_SLOTS.FULL_CASTER.GetLength(1);
 
-		public static int GetTotalHP(this CharacterModel Character)
+        /// <summary>
+        /// How to calculate total HP
+        /// =========================
+        /// 
+        /// Variables
+        /// ---------
+        /// n = Character level
+        /// HP = Total hit points
+		/// 
+        /// Formula
+        /// -------
+        /// HP = (Hit Die Total) + (CON Mod) + (n-1)*[(Hit Die Avg) + (CON Mod)] + <Bonuses>
+		/// 
+		/// Possible Bonuses
+		/// ----------------
+		/// - 2 x n (if character has the 'Tough' Feature
+		/// 
+        /// </summary>
+        public static int GetTotalHP(this CharacterModel Character)
 		{
-			//n = Character Level
-			//HP = (Hit Die Total) + (CON Mod) + (n-1)*[(Hit Die Avg) + (CON Mod)]
 			string hitDie = Character.GetHitDice();
 			int hitDieValue = int.Parse(hitDie.Substring(hitDie.IndexOf("D") + 1));
 			int hitDieAvg = (hitDieValue / 2) + 1;
-			return hitDieValue + Character.Constitution.Modifier + ((Character.Level - 1) * (hitDieAvg + Character.Constitution.Modifier));
+
+			int totalHP = 0;
+			totalHP += hitDieValue + Character.Constitution.Modifier;							// Starting HP at level 1
+			totalHP += (Character.Level - 1) * (hitDieAvg + Character.Constitution.Modifier);   // HP for level 2+
+			totalHP += Character.HasFeature(TOUGH) ? (Character.Level * 2) : 0;					// Bonus from 'Tough' feat
+
+            return totalHP;
 		}
 
 		public static int GetBaseAC(this CharacterModel Character)

@@ -1,4 +1,7 @@
-﻿using static TheTallTankardTavern.Configuration.Constants;
+﻿using Microsoft.AspNetCore.Html;
+using System.Text;
+using TheTallTankardTavern.Models;
+using static TheTallTankardTavern.Configuration.Constants;
 
 namespace TheTallTankardTavern.Helpers
 {
@@ -42,6 +45,41 @@ namespace TheTallTankardTavern.Helpers
         public static string CheckEncumberance(bool isEncumbered)
         {
             return isEncumbered ? "card-body-border-red" : "";
+        }
+
+        public static HtmlString SpellComponents(SpellModel spell)
+        {
+            StringBuilder comps = new StringBuilder();
+
+            if (spell.Verbal_Components)
+            {
+                comps.Append("V");
+            }
+            
+            if (spell.Somatic_Components)
+            {
+                comps.Append("S");
+            }
+            
+            if (spell.Material_Components)
+            {
+                if (spell.HasMaterialCost)
+                {
+                    comps.Append("<span class='material-cost'>M");
+                    if (spell.Material_Consumed)
+                    {
+                        comps.Append("↻");
+                    }
+                    comps.Append("</span>");
+                }
+                else
+                {
+                    comps.Append("M");
+                }
+            }
+
+            return new HtmlString(comps.ToString());
+            //< td >@(Spell.Verbal_Components ? "V" : " ")@(Spell.Somatic_Components ? "S" : " ") < span class="@(Spell.HasMaterialCost ? "material-cost" : "")">@(Spell.Material_Components? "M" : " ")</span></td>
         }
     }
 }

@@ -34,6 +34,9 @@ namespace TheTallTankardTavern.Models
 
 		public bool HasMaterialCost => !string.IsNullOrEmpty(this.Material_Cost);
 
+		[DisplayName("Material Consumed")]
+		public bool Material_Consumed { get; set; }
+
 		[DisplayName("Verbal Components")]
 		public string V { get => this.TF2YN(this.Verbal_Components); }
 
@@ -110,7 +113,7 @@ namespace TheTallTankardTavern.Models
 				StringBuilder sb = new StringBuilder();
 				foreach (string clsStr in this.Classes)
 				{
-					sb.Append($"{clsStr.Substring(0, 3).ToUpper()}, ");
+					sb.Append($"{clsStr.Trim().Substring(0, 3).ToUpper()}, ");
 				}
 				return sb.ToString().Substring(0, sb.Length - 2);
 			}

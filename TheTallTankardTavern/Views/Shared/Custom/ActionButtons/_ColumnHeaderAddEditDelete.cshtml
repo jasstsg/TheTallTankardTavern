@@ -1,3 +1,8 @@
-﻿<th class="td-action-btn">&nbsp;</th>
+﻿@using TheTallTankardTavern.Configuration
+
 <th class="td-action-btn">&nbsp;</th>
-<th class="td-action-btn">&nbsp;</th>
+@if (ContextUser.IsAdminOrDM)
+{
+    <th class="td-action-btn">&nbsp;</th>
+    <th class="td-action-btn">&nbsp;</th>
+}

@@ -129,29 +129,11 @@ namespace TheTallTankardTavern.Configuration
 
         public static class SpecialFeatures
         {
-            private static IEnumerable<FeatureModel> UNARMOURED_DEFENSE_FEATURES
-            {
-                get  { return FeatureDataContext.Where(f => f.Name.Contains("Unarmored Defense")); }
-            }
-            public static FeatureModel UNARMOURED_DEFENSE_BARBARIAN
-            {
-                get
-                {
-                    return UNARMOURED_DEFENSE_FEATURES.First(f => f.Class.Contains("Barbarian"));
-                }
-            }
-            public static FeatureModel UNARMOURED_DEFENSE_MONK
-            {
-                get
-                {
-                    return UNARMOURED_DEFENSE_FEATURES.First(f => f.Class.Contains("Monk"));
-                }
-
-            }
-            public static FeatureModel DUAL_WIELDER
-            {
-                get { return FeatureDataContext.SingleOrDefault(f => f.Name.Contains("Dual Wielder")); }
-            }
+            private static IEnumerable<FeatureModel> UNARMOURED_DEFENSE_FEATURES => FeatureDataContext.Where(f => f.Name.Contains("Unarmored Defense"));
+            public static FeatureModel UNARMOURED_DEFENSE_BARBARIAN => UNARMOURED_DEFENSE_FEATURES.First(f => f.Class.Contains("Barbarian"));
+            public static FeatureModel UNARMOURED_DEFENSE_MONK => UNARMOURED_DEFENSE_FEATURES.First(f => f.Class.Contains("Monk"));
+            public static FeatureModel DUAL_WIELDER => FeatureDataContext.SingleOrDefault(f => f.Name.Contains("Dual Wielder"));
+            public static FeatureModel TOUGH => FeatureDataContext.SingleOrDefault(f => f.Name.Equals("Tough"));
         }
         public static class ITEM_TYPES
         {
