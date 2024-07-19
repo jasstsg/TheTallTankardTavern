@@ -13,6 +13,7 @@
     UserModel Alec = UserDataContext.GetModelFromName("Alec") ?? NullUser;
     UserModel Pav = UserDataContext.GetModelFromName("Pavanjot") ?? NullUser;
     UserModel Sam = UserDataContext.GetModelFromName("Sam") ?? NullUser;
+    UserModel Noah = UserDataContext.GetModelFromName("Noah") ?? NullUser;
 }
 
 <style>
@@ -61,7 +62,9 @@
     <div class="row fillspace">
         <div class="col-md-4 fillspace">
             <strong>@(Tyler.Username)'s Dashboard</strong>
-            <textarea style="border:solid;height:100%" readonly="readonly" asp-for="@Tyler.Message"></textarea>
+            <textarea style="border:solid;height:49%" readonly="readonly" asp-for="@Tyler.Message"></textarea>
+            <strong>@(Noah.Username)'s Dashboard</strong>
+            <textarea style="border:solid;height:49%" readonly="readonly" asp-for="@Noah.Message"></textarea>
         </div>
         <div class="col-md-4 fillspace">
             <strong>@(Aaron.Username)'s Dashboard</strong>

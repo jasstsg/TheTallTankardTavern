@@ -13,6 +13,7 @@
 <div class="nav nav-tabs">
     <a id="character-stats-and-info-tab" class="nav-item nav-link active" data-toggle="tab" href="#character-stats-and-info"><strong>Stats &amp; Info</strong></a>
     <a id="character-items-tab" class="nav-item nav-link" data-toggle="tab" href="#character-items"><strong>Items</strong></a>
+    <a id="character-tattoos-tab" class="nav-item nav-link" data-toggle="tab" href="#character-tattoos"><strong>Tattoos</strong></a>
     <a id="character-spells-tab" class="nav-item nav-link" data-toggle="tab" href="#character-spells"><strong>Spells</strong></a>
     <a id="character-features-tab" class="nav-item nav-link" data-toggle="tab" href="#character-features"><strong>Features</strong></a>
     <a id="character-background-tab" class="nav-item nav-link" data-toggle="tab" href="#character-background"><strong>Background &amp; Bio</strong></a>
@@ -25,6 +26,9 @@
     </div>
     <div id="character-items" class="tab-pane">
         <partial name="/Views/Character/Details/_ItemsPartial.cshtml" model="Model" />
+    </div>
+    <div id="character-tattoos" class="tab-pane">
+        <partial name="/Views/Character/Details/_TattoosPartial.cshtml" model="Model" />
     </div>
     <div id="character-spells" class="tab-pane">
         <partial name="/Views/Character/Details/_SpellsPartial.cshtml" model="Model" />

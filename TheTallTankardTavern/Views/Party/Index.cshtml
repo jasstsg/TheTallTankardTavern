@@ -1,85 +1,38 @@
 ﻿@addTagHelper *, TheTallTankardTavern
-@model TheTallTankardTavern.Models.PartyModel
+@model IEnumerable<TheTallTankardTavern.Models.PartyModel>
 @using TheTallTankardTavern.Configuration
 
 @{
-    ViewData["Title"] = "Party";
+    ViewData["Title"] = "Parties";
 }
 
-<style>
-    ul {
-        list-style-type:none;
-        padding: 0;
+<partial name="/Views/Shared/Custom/ActionButtons/_CreatePartial.cshtml" />
+
+@{
+    if (Model == null || Model.Count() < 1)
+    {
+        <h3>None of your characters have joined any parties.</h3>
     }
-</style>
-
-
-<h1>@ViewData["Title"]</h1>
-
-<div class="row">
-    <div class="col-md-3">
-        <strong>Date (See <a asp-controller="Appendix" asp-action="Calendar">Calendar</a>):</strong>
-        @if (ContextUser.IsAdminOrDM)
-        {
-            <textbox style="font-style:italic" asp-for="Date" oninput="quickSaveDate(this)"></textbox>
-        }
-        else
-        {
-            <label style="font-style:italic;font-weight:normal;font-size:small">@Model.Date</label>
-        }
-    </div>
-    <div class="col-md-5">
-        <strong><a href="https://onedrive.live.com/view.aspx?resid=73768C612996B132!1197&authkey=!AEJCJe-JOaEhEQE">SHARED CHARACTER INFO</a></strong>
-        &nbsp;&nbsp;
-        <buttonlink class="font-weight-bold" asp-action="Index" text="Refresh Page"></buttonlink>
-        &nbsp;&nbsp;
-        @if (ContextUser.IsAdminOrDM)
-        {
-            <buttonlink class="font-weight-bold" asp-action="ResetInitiative" text="Reset Initiative"></buttonlink>
-            <span>&nbsp;&nbsp;</span>
-        }
-        <em id="auto-save-message"></em>
-    </div>
-    <div class="col-md-4">
-        <partial name="/Views/Party/_PartyMemberAdd.cshtml" model="Model" />
-    </div>
-</div>
-<br />
-<div class="row" id="party">
-    <div class="col-md-12">
-        <partial name="/Views/Party/_PartyTable.cshtml" model="Model" />
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-2">
-        <ul>
-            <li><strong>Related Info</strong></li>
-            <li><a asp-controller="Appendix" asp-action="Combat">Combat</a></li>
-            <li><a href="https://www.dndbeyond.com/sources/basic-rules/appendix-a-conditions">Conditions</a></li>
-            <li><a asp-controller="Appendix" asp-action="HomebrewConditions">Homebrew Conditions</a></li>
-            <li><a href="https://www.dndbeyond.com/sources/basic-rules/adventuring#ShortRest">Short Rests</a></li>
-            <li><a href="https://www.dndbeyond.com/sources/basic-rules/adventuring#LongRest">Long Rests</a></li>
-        </ul>
-    </div>
-    <div class="col-md-6">
-        <strong>Massive Damage</strong>
-        <div style="font-size:small">
-            A creature takes massive damage when dealt a large amount of damage in a single blow.<br />
-            If a creature is hit with a lethal blow, ignore the consequences for serious damage.<br />
-            The creature that must immediately make a CON save to beat all that apply:
-        </div>
-        <br />
-        <div style="font-size:small;font-style:italic">
-            <strong>Serious Damage (50% of creature's total HP)</strong>
-            <ul>
-                <li>DC 15: The creature must roll on the <a asp-controller="Appendix" asp-action="MassiveDamage">Massive Damage Table</a> and take the Serious result.</li>
-                <li>DC 17: The creature gains one level of exhaustion.</li>
-            </ul>
-            <strong>Lethal Damage (80% of creature's total HP)</strong>
-            <ul>
-                <li>DC 18: The creature must roll on the <a asp-controller="Appendix" asp-action="MassiveDamage">Massive Damage Table</a> and take the Lethal result.</li>
-                <li>DC 20: The creature gains one level of exhaustion.</li>
-            </ul>
-        </div>
-    </div>
-</div>
+    else
+    {
+        <table table-hover="true">
+            <thead>
+                <tr>
+                    <th><label>Party</label></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (PartyModel p in Model)
+                {
+                    <tr onclick="goTo('Party', 'Details', '@p.ID')">
+                        <td>@p.Name</td>
+                        <td><buttonlink class="td-action-btn" asp-action="Edit" text="Edit" asp-route-id="@p.ID"></buttonlink></td>
+                        <td><buttonlink class="td-action-btn" asp-action="Delete" text="Delete" asp-route-id="@p.ID"></buttonlink></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+}

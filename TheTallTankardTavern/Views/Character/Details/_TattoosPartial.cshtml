@@ -1,0 +1,107 @@
+﻿@model TheTallTankardTavern.Models.CharacterModel
+@addTagHelper *, TheTallTankardTavern
+
+@{
+    int[,] clickableSquares = new int[,]
+    {
+        {}
+    };
+}
+
+<style>
+    div .table td {
+        border: none;
+    }
+    .box {
+        line-height: 50px;
+    }
+    .clickable {
+        border: solid;
+        border-width: 1px;
+        border-color: gray;
+        border-radius: 5px;
+    }
+</style>
+
+<div>
+    Tattoos
+</div>
+<div>
+    <table>
+        <tr>
+            <td><div class="box">&nbsp;</div></td>
+            <td><div class="box">&nbsp;</div></td>
+            <td><div class="box">&nbsp;</div></td>
+            <td><div class="box">&nbsp;</div></td>
+            <td><div class="box clickable">&nbsp;</div></td>
+            <td><div class="box clickable">&nbsp;</div></td>
+            <td><div class="box">&nbsp;</div></td>
+            <td><div class="box">&nbsp;</div></td>
+            <td><div class="box">&nbsp;</div></td>
+            <td><div class="box">&nbsp;</div></td>
+        </tr>
+        <tr><td colspan="10"><div class="box">&nbsp;</div></td></tr>
+        <tr>
+            <td><div class="box clickable">&nbsp;</div></td>
+            <td><div class="box clickable">&nbsp;</div></td>
+            <td><div class="box clickable">&nbsp;</div></td>
+            <td><div class="box clickable">&nbsp;</div></td>
+            <td><div class="box clickable">&nbsp;</div></td>
+            <td><div class="box clickable">&nbsp;</div></td>
+            <td><div class="box clickable">&nbsp;</div></td>
+            <td><div class="box clickable">&nbsp;</div></td>
+            <td><div class="box clickable">&nbsp;</div></td>
+            <td><div class="box clickable">&nbsp;</div></td>
+        </tr>
+        <tr>
+            <td><div class="box">&nbsp;</div></td>
+            <td><div class="box clickable">&nbsp;</div></td>
+            <td><div class="box clickable">&nbsp;</div></td>
+            <td><div class="box clickable">&nbsp;</div></td>
+            <td><div class="box clickable">&nbsp;</div></td>
+            <td><div class="box clickable">&nbsp;</div></td>
+            <td><div class="box clickable">&nbsp;</div></td>
+            <td><div class="box clickable">&nbsp;</div></td>
+            <td><div class="box clickable">&nbsp;</div></td>
+            <td><div class="box">&nbsp;</div></td>
+        </tr>
+        <tr><td colspan="10"><div class="box">&nbsp;</div></td></tr>
+        <tr>
+            <td><div class="box">&nbsp;</div></td>
+            <td><div class="box">&nbsp;</div></td>
+            <td><div class="box">&nbsp;</div></td>
+            <td><div class="box clickable">&nbsp;</div></td>
+            <td><div class="box clickable">&nbsp;</div></td>
+            <td><div class="box clickable">&nbsp;</div></td>
+            <td><div class="box clickable">&nbsp;</div></td>
+            <td><div class="box">&nbsp;</div></td>
+            <td><div class="box">&nbsp;</div></td>
+            <td><div class="box">&nbsp;</div></td>
+        </tr>
+        <tr>
+            <td><div class="box">&nbsp;</div></td>
+            <td><div class="box">&nbsp;</div></td>
+            <td><div class="box">&nbsp;</div></td>
+            <td><div class="box clickable">&nbsp;</div></td>
+            <td><div class="box clickable">&nbsp;</div></td>
+            <td><div class="box clickable">&nbsp;</div></td>
+            <td><div class="box clickable">&nbsp;</div></td>
+            <td><div class="box">&nbsp;</div></td>
+            <td><div class="box">&nbsp;</div></td>
+            <td><div class="box">&nbsp;</div></td>
+        </tr>
+        <tr><td colspan="10"><div class="box">&nbsp;</div></td></tr>
+        <tr>
+            <td><div class="box">&nbsp;</div></td>
+            <td><div class="box">&nbsp;</div></td>
+            <td><div class="box clickable">&nbsp;</div></td>
+            <td><div class="box">&nbsp;</div></td>
+            <td><div class="box">&nbsp;</div></td>
+            <td><div class="box">&nbsp;</div></td>
+            <td><div class="box">&nbsp;</div></td>
+            <td><div class="box clickable">&nbsp;</div></td>
+            <td><div class="box">&nbsp;</div></td>
+            <td><div class="box">&nbsp;</div></td>
+        </tr>
+    </table>
+</div>

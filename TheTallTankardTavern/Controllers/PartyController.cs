@@ -6,6 +6,8 @@ using static TheTallTankardTavern.Configuration.ApplicationSettings;
 using static TheTallTankardTavern.Configuration.Constants;
 using System;
 using TheTallTankardTavern.Attributes;
+using TheTallTankardTavern.Configuration;
+using System.Collections.Generic;
 
 namespace TheTallTankardTavern.Controllers
 {
@@ -13,6 +15,17 @@ namespace TheTallTankardTavern.Controllers
     public class PartyController : Controller
     {
         public IActionResult Index()
+        {
+            bool isAdminOrDM = ContextUser.IsAdminOrDM;
+            List<PartyModel> Parties = isAdminOrDM ? PartyDataContext : ContextUser.Current.Parties;
+            if (!isAdminOrDM && Parties.Count() == 1)
+            {
+                return View("Details", Parties.Single());
+            }
+            return View(Parties?.OrderBy(x => x.Name));
+        }
+
+        public IActionResult Details()
         {
             return View(PartyDataContext.SingleOrDefault() ?? new PartyModel());
         }
