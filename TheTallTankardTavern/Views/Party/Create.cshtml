@@ -1,0 +1,27 @@
+﻿@model TheTallTankardTavern.Models.PartyModel
+@addTagHelper *, TheTallTankardTavern
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<form asp-action="Save" method="post">
+    <hidden asp-for="ID"></hidden>
+    <partial name="/Views/Shared/Custom/ActionButtons/_BackSavePartial.cshtml" />
+    <table>
+        <thead>
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><label asp-for="Name"></label></td>
+                <td><textbox asp-for="Name"></textbox></td>
+            </tr>
+        </tbody>
+    </table>
+</form>
+

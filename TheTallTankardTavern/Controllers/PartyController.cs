@@ -14,25 +14,74 @@ namespace TheTallTankardTavern.Controllers
     [Authenticated]
     public class PartyController : Controller
     {
+        public IEnumerable<PartyModel> Parties
+        {
+            get
+            {
+                return ContextUser.IsAdminOrDM ? PartyDataContext : ContextUser.Current.Parties;
+            }
+        }
+
         public IActionResult Index()
         {
-            bool isAdminOrDM = ContextUser.IsAdminOrDM;
-            List<PartyModel> Parties = isAdminOrDM ? PartyDataContext : ContextUser.Current.Parties;
-            if (!isAdminOrDM && Parties.Count() == 1)
+            if (!ContextUser.IsAdminOrDM && Parties.Count() == 1)
             {
                 return View("Details", Parties.Single());
             }
             return View(Parties?.OrderBy(x => x.Name));
         }
 
-        public IActionResult Details()
+        public IActionResult Create()
         {
-            return View(PartyDataContext.SingleOrDefault() ?? new PartyModel());
+            return View("Create", new PartyModel()
+            {
+                ID = Guid.NewGuid().ToString()
+            });
         }
 
-        public IActionResult ReloadPartyTable()
+        public IActionResult Edit(string id)
         {
-            return PartialView("_PartyTable", PartyDataContext.Single());
+            return View("Create", PartyDataContext.GetModelFromID(id));
+        }
+
+        [HttpPost]
+        public IActionResult Save(PartyModel Model, string submit)
+        {
+            PartyModel SavedModel = PartyDataContext.Save(Model, FOLDER.Party);
+            switch (submit)
+            {
+                case TAGHELPER.SUBMIT_TEXT.SAVE_AND_CONTINUE:  
+                    return RedirectToAction("Edit", new { id = SavedModel.ID });
+                case TAGHELPER.SUBMIT_TEXT.SAVE_AND_FINISH:
+                default:
+                    return ControllerHelper.ViewExists(this, "Details") ?
+                        RedirectToAction("Details", new { id = SavedModel.ID }) : RedirectToAction("Index");
+            }
+        }
+
+        public IActionResult Details(string id)
+        {
+            return View(PartyDataContext.GetModelFromID(id));
+        }
+
+        public IActionResult Delete(string id)
+        {
+            return View("Delete", new PartyModel() { ID = id });
+        }
+
+        [HttpPost]
+        public IActionResult Delete(PartyModel Model)
+        {
+            if (PartyDataContext.GetModelFromID(Model.ID).Name.Equals(Model.Name))
+            {
+                PartyDataContext.Delete(Model.ID, FOLDER.Party);
+                return View("Index", Parties);
+            }
+            else
+            {
+                ViewData["msg"] = "The typed name did not match.";
+                return Delete(Model.ID);
+            }
         }
 
         [HttpPost]
@@ -51,9 +100,10 @@ namespace TheTallTankardTavern.Controllers
 
             PartyDataContext.Save(Party, FOLDER.Party);
 
-            return View("Index", Party);
+            return View("Details", Party);
         }
 
+        // Not used
         public IActionResult Remove(string cid)
         {
             PartyModel Party = PartyDataContext.Single();
@@ -64,11 +114,11 @@ namespace TheTallTankardTavern.Controllers
         }
 
         [HttpPost]
-        public JsonResult QuickSaveMemberInitiative(string cid, int initiative)
+        public JsonResult QuickSaveMemberInitiative(string id, string cid, int initiative)
         {
             try
             {
-                PartyModel Party = PartyDataContext.Single();
+                PartyModel Party = PartyDataContext.GetModelFromID(id);
                 Party.Members.Find(m => m.CharacterId.Equals(cid)).Initiative = initiative;
                 PartyDataContext.Save(Party, FOLDER.Party);
                 return this.JsonSuccessTrue();
@@ -80,11 +130,11 @@ namespace TheTallTankardTavern.Controllers
         }
 
         [HttpPost]
-        public JsonResult QuickSaveDate(string date)
+        public JsonResult QuickSaveDate(string id, string date)
         {
             try
             {
-                PartyModel Party = PartyDataContext.Single();
+                PartyModel Party = PartyDataContext.GetModelFromID(id);
                 Party.Date = date;
                 PartyDataContext.Save(Party, FOLDER.Party);
                 return this.JsonSuccessTrue();
@@ -95,24 +145,24 @@ namespace TheTallTankardTavern.Controllers
             }
         }
 
-        public IActionResult ResetInitiative()
+        public IActionResult ResetInitiative(string id)
         {
-            PartyModel Party = PartyDataContext.Single();
+            PartyModel Party = PartyDataContext.GetModelFromID(id);
             foreach (MemberModel Member in Party.Members)
             {
                 Member.Initiative = 0;
             }
             PartyDataContext.Save(Party, FOLDER.Party);
 
-            return View("Index", Party);
+            return View("Details", Party);
         }
 
         [HttpPost]
-        public IActionResult QuickSaveConditions(string cid, string conditions)
+        public IActionResult QuickSaveConditions(string id, string cid, string conditions)
         {
             try
             {
-                PartyModel Party = PartyDataContext.Single();
+                PartyModel Party = PartyDataContext.GetModelFromID(id);
                 MemberModel Member = Party.Members.Where(m => m.CharacterId == cid).Single();
                 Member.Conditions = conditions;
                 PartyDataContext.Save(Party, FOLDER.Party);
@@ -122,6 +172,11 @@ namespace TheTallTankardTavern.Controllers
             {
                 return this.JsonSuccessFalse();
             }
+        }
+
+        public IActionResult ReloadPartyTable(string id)
+        {
+            return PartialView("_PartyTable", PartyDataContext.GetModelFromID(id));
         }
     }
 }

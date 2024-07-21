@@ -27,6 +27,7 @@ function quickSaveTempHitPoints(cid, thisElement) {
     };
     $.post("/Character/QuickSaveTemporaryHitPoints", data, function (response) {
         showAutoSaveMessage(response.success);
+        console.log(JSON.stringify(data));
         console.log("Quick save temporary hit points request completed with success status: " + response.success);
     });
 };

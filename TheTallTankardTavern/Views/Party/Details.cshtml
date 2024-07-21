@@ -3,7 +3,7 @@
 @using TheTallTankardTavern.Configuration
 
 @{
-    ViewData["Title"] = "Party";
+    ViewData["Title"] = Model.Name;
 }
 
 <style>
@@ -21,7 +21,7 @@
         <strong>Date (See <a asp-controller="Appendix" asp-action="Calendar">Calendar</a>):</strong>
         @if (ContextUser.IsAdminOrDM)
         {
-            <textbox style="font-style:italic" asp-for="Date" oninput="quickSaveDate(this)"></textbox>
+            <textbox style="font-style:italic" asp-for="Date" oninput="quickSaveDate('@Model.ID', this)"></textbox>
         }
         else
         {
@@ -31,11 +31,11 @@
     <div class="col-md-5">
         <strong><a href="https://onedrive.live.com/view.aspx?resid=73768C612996B132!1197&authkey=!AEJCJe-JOaEhEQE">SHARED CHARACTER INFO</a></strong>
         &nbsp;&nbsp;
-        <buttonlink class="font-weight-bold" asp-action="Index" text="Refresh Page"></buttonlink>
+        <buttonlink class="font-weight-bold" asp-action="Details" asp-route-id="@Model.ID" text="Refresh Page"></buttonlink>
         &nbsp;&nbsp;
         @if (ContextUser.IsAdminOrDM)
         {
-            <buttonlink class="font-weight-bold" asp-action="ResetInitiative" text="Reset Initiative"></buttonlink>
+            <buttonlink class="font-weight-bold" asp-action="ResetInitiative" asp-route-id="@Model.ID" text="Reset Initiative"></buttonlink>
             <span>&nbsp;&nbsp;</span>
         }
         <em id="auto-save-message"></em>

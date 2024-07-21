@@ -1,5 +1,6 @@
-﻿function quickSaveMemberInitiative(cid, thisElement) {
+﻿function quickSaveMemberInitiative(id, cid, thisElement) {
     var data = {
+        id: id,
         cid: cid,
         initiative: $(thisElement).val()
     };
@@ -9,8 +10,9 @@
     });
 };
 
-function quickSaveDate(thisElement) {
+function quickSaveDate(id, thisElement) {
     var data = {
+        id: id,
         date: $(thisElement).val()
     };
     $.post("/Party/QuickSaveDate", data, function (response) {
@@ -19,10 +21,10 @@ function quickSaveDate(thisElement) {
     });
 };
 
-function reloadPartyTable() {
+function reloadPartyTable(id) {
     console.log('reloading party table...')
     $.ajax({
-        url: '/Party/ReloadPartyTable', 
+        url: '/Party/ReloadPartyTable/' + id, 
         success: function (data) {
             console.log('reload succeeded!');
             $('#party-table').html(data);
@@ -33,9 +35,10 @@ function reloadPartyTable() {
     })
 }
 
-function quickSavePartyMemberHitPoints(cid, thisElement) {
+function quickSavePartyMemberHitPoints(id, cid, thisElement) {
     //Save hit points
     var data = {
+        id: id, 
         cid: cid,
         hitPointsRemaining: $(thisElement).val()
     };
@@ -45,12 +48,13 @@ function quickSavePartyMemberHitPoints(cid, thisElement) {
 
         if (response.success) {
             //Reload table
-            reloadPartyTable();
+            reloadPartyTable(id);
         }
     });
 };
-function quickSavePartyMemberConditions(cid, thisElement) {
+function quickSavePartyMemberConditions(id, cid, thisElement) {
     var data = {
+        id: id, 
         cid: cid,
         conditions: $(thisElement).val()
     };
@@ -60,7 +64,7 @@ function quickSavePartyMemberConditions(cid, thisElement) {
 
         if (response.success) {
             //Reload table
-            reloadPartyTable();
+            reloadPartyTable(id);
         }
     });
 };
